@@ -1,0 +1,73 @@
+plugins {
+    id "com.android.application"
+    id "org.jetbrains.kotlin.android"
+    id "kotlin-kapt"
+    id "dagger.hilt.android.plugin"
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "com.example.contactlensremainderapp"
+        minSdk 24
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion composeVersion
+        kotlinCompilerVersion '1.5.21'
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+
+dependencies {
+
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.5.31"
+
+    implementation appDependencies.core
+    implementation appDependencies.ui
+    implementation appDependencies.appcompat
+    implementation appDependencies.material
+    implementation appDependencies.composeMaterial
+    implementation appDependencies.preview
+    implementation appDependencies.lifecycleRuntime
+    implementation appDependencies.activity
+
+    implementation lifecycleDependencies.lifecyclViewModelCompose
+
+    implementation navigationDependencies.navigation
+
+    implementation diDependencies.hiltAndroid
+    kapt diDependencies.hiltAndroidCompiler
+    implementation diDependencies.hiltLifecycleViewModel
+    kapt diDependencies.hiltCompiler
+    implementation diDependencies.hiltNavigationCompose
+}

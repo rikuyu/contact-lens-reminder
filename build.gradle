@@ -1,0 +1,62 @@
+buildscript {
+    ext {
+        gradleVersion = "7.0.4"
+        kotlinGradlePluginVersion = "1.5.31"
+        composeVersion = "1.0.5"
+        compatVersion = "1.4.0"
+        material = "1.4.0"
+        coreVersion = "1.7.0"
+        lifecycleRuntimeVersion = "2.4.0"
+        activityVersion = "1.3.1"
+
+        appDependencies = [
+                core            : "androidx.core:core-ktx:$coreVersion",
+                ui              : "androidx.compose.ui:ui:$composeVersion",
+                material        : "com.google.android.material:material:$material",
+                appcompat       : "androidx.appcompat:appcompat:$compatVersion",
+                composeMaterial : "androidx.compose.material:material:$composeVersion",
+                preview         : "androidx.compose.ui:ui-tooling-preview:$composeVersion",
+                lifecycleRuntime: "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleRuntimeVersion",
+                activity        : "androidx.activity:activity-compose:$activityVersion"
+        ]
+
+        lifecycleVersion = "2.4.0"
+
+        lifecycleDependencies = [
+                lifecyclViewModelCompose: "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVersion"
+        ]
+
+        navigationVersion = "2.4.0"
+
+        navigationDependencies = [
+                navigation: "androidx.navigation:navigation-compose:$navigationVersion-rc01"
+        ]
+
+        hiltVersion = "1.0.0"
+        hiltAndroidVersion = "2.38.1"
+
+        diDependencies = [
+                hiltAndroid           : "com.google.dagger:hilt-android:$hiltAndroidVersion",
+                hiltAndroidCompiler   : "com.google.dagger:hilt-android-compiler:$hiltAndroidVersion",
+                hiltLifecycleViewModel: "androidx.hilt:hilt-lifecycle-viewmodel:$hiltVersion-alpha01",
+                hiltCompiler          : "androidx.hilt:hilt-compiler:$hiltVersion",
+                hiltNavigationCompose : "androidx.hilt:hilt-navigation-compose:$hiltVersion-rc01"
+        ]
+    }
+
+    dependencies {
+        classpath "com.android.tools.build:gradle:$gradleVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinGradlePluginVersion"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hiltAndroidVersion"
+    }
+}
+
+plugins {
+    id 'com.android.application' version '7.1.0-beta05' apply false
+    id 'com.android.library' version '7.1.0-beta05' apply false
+    id 'org.jetbrains.kotlin.android' version '1.5.21' apply false
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
