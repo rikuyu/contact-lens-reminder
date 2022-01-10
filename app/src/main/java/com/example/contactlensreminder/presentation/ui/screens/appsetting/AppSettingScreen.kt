@@ -8,7 +8,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 import com.example.contactlensreminder.R
-import com.example.contactlensreminder.presentation.Routes
+import com.example.contactlensreminder.presentation.util.Routes
 import com.example.contactlensreminder.presentation.ui.theme.CleanBlue
 
 @Composable

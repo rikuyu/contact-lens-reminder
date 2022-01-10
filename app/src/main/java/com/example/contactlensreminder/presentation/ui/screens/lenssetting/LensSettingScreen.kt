@@ -1,82 +1,358 @@
 package com.example.contactlensreminder.presentation.ui.screens.lenssetting
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.contactlensreminder.presentation.Routes
+import com.example.contactlensreminder.presentation.ui.theme.CleanBlue
+import com.example.contactlensreminder.presentation.ui.theme.LightBlue
+import com.example.contactlensreminder.presentation.util.Routes
+import com.example.contactlensreminder.presentation.util.SimpleDivider
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun LensSettingScreen(
-    navController: NavController
+    navController: NavController,
+    textColor: Color = Color.Black,
+    fontSize: TextUnit = 18.sp
 ) {
-    val list = listOf("btn1", "btn2", "btn3")
 
-    var selectedIndex by remember {
+    var pickerValue by remember { mutableStateOf(0) }
+    var leftEyePower by remember { mutableStateOf(-3.00) }
+    var rightEyePower by remember { mutableStateOf(-3.00) }
+
+    val decideNotifyDaysState = remember {
+        MutableTransitionState(false).apply {
+            targetState = false
+        }
+    }
+    val decideLensPeriodState = remember {
+        MutableTransitionState(false).apply {
+            targetState = false
+        }
+    }
+
+    val lensPowerList = mutableListOf(-3.00)
+    repeat(20) {
+        lensPowerList.add(lensPowerList[0] - (0.25 * (it + 1)))
+    }
+
+    var notifyType by remember {
         mutableStateOf(0)
     }
 
-    Column {
-        Button(onClick = { navController.navigate(Routes.TOP) }) {
-        }
-        Row(modifier = Modifier.fillMaxWidth()) {
-            list.forEachIndexed { index, item ->
-                val selected = selectedIndex == index
+    var periodType by remember {
+        mutableStateOf(0)
+    }
 
-                val border = if (selected) BorderStroke(
-                    width = 1.dp,
-                    color = MaterialTheme.colors.primary
-                ) else ButtonDefaults.outlinedBorder
+    val showDecideLensPeriodForm: (index: Int) -> Unit = {
+        periodType = it
+        decideLensPeriodState.targetState = periodType == 2
+    }
 
-                val shape = when (index) {
-                    0 -> RoundedCornerShape(
-                        topStart = 4.dp,
-                        bottomStart = 4.dp,
-                        topEnd = 0.dp,
-                        bottomEnd = 0.dp
+    var isChangeLensPower by remember {
+        mutableStateOf(true)
+    }
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(text = "コンタクトレンズ設定")
+                },
+                navigationIcon = {
+                    IconButton(onClick = { navController.navigate(Routes.TOP) }) {
+                        Icon(Icons.Filled.ArrowBack, "backIcon")
+                    }
+                },
+                contentColor = Color.White,
+                backgroundColor = CleanBlue
+            )
+        },
+        content = {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.White)
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(20.dp)
+                        .background(Color.White)
+                )
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(all = 12.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "期間", color = textColor,
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(start = 12.dp),
+                        fontSize = fontSize
                     )
-                    list.size - 1 -> RoundedCornerShape(
-                        topStart = 0.dp, bottomStart = 0.dp,
-                        topEnd = 4.dp,
-                        bottomEnd = 4.dp
-                    )
-                    else -> CutCornerShape(0.dp)
-                }
+                    listOf("2Weeks", "1Month", "Other").forEachIndexed { index, item ->
+                        val selected = periodType == index
 
-                val zIndex = if (selected) 1f else 0f
+                        val shape = when (index) {
+                            0 -> RoundedCornerShape(
+                                topStart = 4.dp,
+                                bottomStart = 4.dp,
+                                topEnd = 0.dp,
+                                bottomEnd = 0.dp
+                            )
+                            2 -> RoundedCornerShape(
+                                topStart = 0.dp,
+                                bottomStart = 0.dp,
+                                topEnd = 4.dp,
+                                bottomEnd = 4.dp
+                            )
+                            else -> CutCornerShape(0.dp)
+                        }
 
-                val buttonModifier = when (index) {
-                    0 -> Modifier.zIndex(zIndex)
-                    else -> {
-                        val offset = -1 * index
-                        Modifier
-                            .offset(x = offset.dp)
-                            .zIndex(zIndex)
+                        OutlinedButton(
+                            onClick = { showDecideLensPeriodForm(index) },
+                            shape = shape,
+                            colors = ButtonDefaults.textButtonColors(backgroundColor = if (selected) CleanBlue else Color.Transparent),
+                            border = BorderStroke(
+                                width = 1.dp,
+                                color = CleanBlue
+                            )
+                        ) {
+                            Text(text = item, color = if (selected) Color.White else CleanBlue)
+                        }
                     }
                 }
-
-                val colors = ButtonDefaults.outlinedButtonColors(
-                    backgroundColor = if (selected) MaterialTheme.colors.primary.copy(alpha = 0.12f)
-                    else MaterialTheme.colors.surface,
-                    contentColor = if (selected) MaterialTheme.colors.primary else Color.DarkGray
-                )
-                OutlinedButton(
-                    onClick = { selectedIndex = index },
-                    border = border,
-                    shape = shape,
-                    colors = colors,
-                    modifier = buttonModifier.weight(1f)
+                SimpleDivider()
+                AnimatedVisibility(visibleState = decideLensPeriodState) {
+                    Column(
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(all = 12.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = "レンズの交換日数", color = textColor,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .weight(1f)
+                                    .padding(12.dp),
+                                fontSize = fontSize
+                            )
+                            DaysPicker(
+                                value = pickerValue,
+                                onValueChange = { pickerValue = it },
+                                range = 1..31
+                            )
+                        }
+                        SimpleDivider()
+                    }
+                }
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(all = 12.dp),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(item)
+                    Text(
+                        text = "通知",
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(start = 12.dp),
+                        color = textColor, fontSize = fontSize
+                    )
+                    Switch(
+                        checked = decideNotifyDaysState.targetState,
+                        modifier = Modifier
+                            .size(40.dp)
+                            .padding(end = 12.dp),
+                        onCheckedChange = {
+                            decideNotifyDaysState.targetState = !decideNotifyDaysState.currentState
+                        },
+                        colors = SwitchDefaults.colors(
+                            checkedThumbColor = CleanBlue,
+                            checkedTrackColor = CleanBlue,
+                            uncheckedThumbColor = LightBlue,
+                            uncheckedTrackColor = LightBlue
+                        )
+                    )
+                }
+                SimpleDivider()
+                AnimatedVisibility(visibleState = decideNotifyDaysState) {
+                    Column(
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(all = 12.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = "通知日", color = textColor,
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .padding(start = 12.dp),
+                                fontSize = fontSize
+                            )
+                            listOf("前日", "当日").forEachIndexed { index, item ->
+                                val selected = notifyType == index
+
+                                val shape = when (index) {
+                                    0 -> RoundedCornerShape(
+                                        topStart = 4.dp,
+                                        bottomStart = 4.dp,
+                                        topEnd = 0.dp,
+                                        bottomEnd = 0.dp
+                                    )
+                                    1 -> RoundedCornerShape(
+                                        topStart = 0.dp,
+                                        bottomStart = 0.dp,
+                                        topEnd = 4.dp,
+                                        bottomEnd = 4.dp
+                                    )
+                                    else -> CutCornerShape(0.dp)
+                                }
+
+                                OutlinedButton(
+                                    onClick = { notifyType = index },
+                                    shape = shape,
+                                    colors = ButtonDefaults.textButtonColors(backgroundColor = if (selected) CleanBlue else Color.Transparent),
+                                    border = BorderStroke(
+                                        width = 1.dp,
+                                        color = CleanBlue
+                                    )
+                                ) {
+                                    Text(
+                                        text = item,
+                                        color = if (selected) Color.White else CleanBlue
+                                    )
+                                }
+                            }
+                        }
+                        SimpleDivider()
+                    }
+                }
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(all = 12.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "度数",
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(start = 12.dp),
+                        color = textColor, fontSize = fontSize
+                    )
+                    Row(
+                        modifier = Modifier
+                            .weight(3f),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(text = "左", color = textColor, fontSize = fontSize)
+
+                        if (isChangeLensPower) {
+                            LensPowerPicker(
+                                value = leftEyePower,
+                                range = lensPowerList,
+                                onValueChange = {
+                                    leftEyePower = it
+                                }
+                            )
+                        } else {
+                            Text(
+                                text = leftEyePower.toString(),
+                                color = textColor,
+                                fontSize = fontSize
+                            )
+                        }
+                        Text(text = "右", color = textColor, fontSize = fontSize)
+                        if (isChangeLensPower) {
+                            LensPowerPicker(
+                                value = rightEyePower,
+                                range = lensPowerList,
+                                onValueChange = {
+                                    rightEyePower = it
+                                }
+                            )
+                        } else {
+                            Text(
+                                text = rightEyePower.toString(),
+                                color = textColor,
+                                fontSize = fontSize
+                            )
+                        }
+                        Button(
+                            onClick = { isChangeLensPower = !isChangeLensPower },
+                            colors = ButtonDefaults.textButtonColors(
+                                backgroundColor = CleanBlue,
+                                contentColor = Color.White,
+                                disabledContentColor = Color.LightGray
+                            ),
+                            modifier = Modifier.padding(start = 4.dp),
+                            shape = RoundedCornerShape(30)
+                        ) {
+                            if (isChangeLensPower) {
+                                Text(text = "OK", fontSize = fontSize)
+                            } else {
+                                Icon(
+                                    imageVector = Icons.Default.Refresh,
+                                    contentDescription = null,
+                                    tint = Color.White
+                                )
+                            }
+                        }
+                    }
+                }
+                SimpleDivider()
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(all = 12.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Button(
+                        onClick = { },
+                        colors = ButtonDefaults.textButtonColors(
+                            backgroundColor = CleanBlue,
+                            contentColor = Color.White,
+                            disabledContentColor = Color.LightGray
+                        ),
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(horizontal = 10.dp, vertical = 10.dp),
+                        shape = RoundedCornerShape(20)
+                    ) {
+                        Text(text = "OK", fontSize = fontSize)
+                    }
                 }
             }
         }
-    }
+    )
 }

@@ -1,4 +1,4 @@
-package com.example.contactlensreminder.presentation
+package com.example.contactlensreminder.presentation.util
 
 object Routes {
     const val TOP = "top"

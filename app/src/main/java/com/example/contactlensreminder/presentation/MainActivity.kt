@@ -10,6 +10,7 @@ import com.example.contactlensreminder.presentation.ui.screens.appsetting.AppSet
 import com.example.contactlensreminder.presentation.ui.screens.lenssetting.LensSettingScreen
 import com.example.contactlensreminder.presentation.ui.screens.top.TopScreen
 import com.example.contactlensreminder.presentation.ui.theme.ContactLensReminderTheme
+import com.example.contactlensreminder.presentation.util.Routes
 
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,10 +26,10 @@ class MainActivity : ComponentActivity() {
                         TopScreen(navController)
                     }
                     composable(Routes.LENS_SETTING) {
-                        AppSettingScreen(navController)
+                        LensSettingScreen(navController)
                     }
                     composable(Routes.APP_SETTING) {
-                        LensSettingScreen(navController)
+                        AppSettingScreen(navController)
                     }
                 }
             }

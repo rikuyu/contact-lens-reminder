@@ -1,39 +1,36 @@
 package com.example.contactlensreminder.presentation.ui.screens.top
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import com.example.contactlensreminder.R
-import com.example.contactlensreminder.presentation.Routes
 import com.example.contactlensreminder.presentation.ui.screens.appsetting.RemainingDaysBar
 import com.example.contactlensreminder.presentation.ui.theme.CleanBlue
-import com.example.contactlensreminder.presentation.ui.theme.LightBlue
+import com.example.contactlensreminder.presentation.ui.theme.Gray
+import com.example.contactlensreminder.presentation.util.Routes
 
 @Composable
 fun TopScreen(
     navController: NavController
 ) {
 
-    var selectedIndex by remember {
-        mutableStateOf(0)
-    }
-
-    Column {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White)
+    ) {
         Spacer(
             modifier = Modifier
                 .height(8.dp)
@@ -45,72 +42,18 @@ fun TopScreen(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Spacer(modifier = Modifier.weight(7f))
-            IconButton(onClick = { navController.navigate(Routes.APP_SETTING) }, modifier = Modifier.weight(1f)) {
-            Icon(
-                imageVector = Icons.Default.Settings,
-                contentDescription = null,
-                tint = Color.LightGray,
-                modifier = Modifier.size(30.dp, 30.dp)
-            )
-        }
-            Spacer(modifier = Modifier.size(12.dp))
-        }
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Color.White)
-        ) {
-            Spacer(modifier = Modifier.weight(1f))
-            listOf("2Weeks", "1Month").forEachIndexed { index, item ->
-                val selected = selectedIndex == index
-
-                val shape = when (index) {
-                    0 -> RoundedCornerShape(
-                        topStart = 4.dp,
-                        bottomStart = 4.dp,
-                        topEnd = 0.dp,
-                        bottomEnd = 0.dp
-                    )
-                    1 -> RoundedCornerShape(
-                        topStart = 0.dp,
-                        bottomStart = 0.dp,
-                        topEnd = 4.dp,
-                        bottomEnd = 4.dp
-                    )
-                    else -> CutCornerShape(0.dp)
-                }
-
-                val zIndex = if (selected) 1f else 0f
-
-                val buttonModifier = when (index) {
-                    0 -> Modifier.zIndex(zIndex)
-                    else -> {
-                        val offset = -1 * index
-                        Modifier
-                            .offset(x = offset.dp)
-                            .zIndex(zIndex)
-                    }
-                }
-
-                val border = if (selected) BorderStroke(
-                    width = 1.dp,
-                    color = CleanBlue
-                ) else ButtonDefaults.outlinedBorder
-
-                val colors =
-                    ButtonDefaults.textButtonColors(backgroundColor = if (selected) CleanBlue else Color.Transparent)
-
-                OutlinedButton(
-                    onClick = { selectedIndex = index },
-                    shape = shape,
-                    colors = colors,
-                    border = border,
-                    modifier = buttonModifier.weight(1f)
-                ) {
-                    Text(text = item, color = if (selected) Color.White else CleanBlue)
-                }
+            IconButton(
+                onClick = { navController.navigate(Routes.APP_SETTING) },
+                modifier = Modifier.weight(1f)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Settings,
+                    contentDescription = null,
+                    tint = Gray,
+                    modifier = Modifier.size(36.dp, 36.dp)
+                )
             }
-            Spacer(modifier = Modifier.weight(1f))
+            Spacer(modifier = Modifier.size(12.dp))
         }
         Spacer(
             modifier = Modifier
@@ -138,7 +81,7 @@ fun TopScreen(
                 onClick = { /*TODO*/ },
                 modifier = Modifier.size(240.dp, 60.dp),
                 colors = ButtonDefaults.textButtonColors(
-                    backgroundColor = LightBlue,
+                    backgroundColor = CleanBlue,
                     contentColor = Color.White,
                     disabledContentColor = Color.LightGray
                 ),
@@ -165,7 +108,7 @@ fun TopScreen(
                 onClick = { navController.navigate(Routes.LENS_SETTING) },
                 modifier = Modifier.size(240.dp, 60.dp),
                 colors = ButtonDefaults.textButtonColors(
-                    backgroundColor = LightBlue,
+                    backgroundColor = CleanBlue,
                     contentColor = Color.White,
                     disabledContentColor = Color.LightGray
                 ),
@@ -181,6 +124,10 @@ fun TopScreen(
                 Text(text = "レンズの設定", fontSize = 18.sp)
             }
         }
-        Spacer(modifier = Modifier.height(60.dp))
+        Spacer(
+            modifier = Modifier
+                .height(60.dp)
+                .background(Color.White)
+        )
     }
 }

@@ -72,6 +72,8 @@ dependencies {
 
     implementation navigationDependencies.navigation
 
+    implementation uiDependencies.numberPicker
+
     implementation diDependencies.hiltAndroid
     kapt diDependencies.hiltAndroidCompiler
     implementation diDependencies.hiltLifecycleViewModel
