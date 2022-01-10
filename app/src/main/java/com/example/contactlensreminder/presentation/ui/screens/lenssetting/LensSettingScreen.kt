@@ -2,7 +2,6 @@ package com.example.contactlensreminder.presentation.ui.screens.lenssetting
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -22,6 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.contactlensreminder.presentation.ui.theme.CleanBlue
 import com.example.contactlensreminder.presentation.ui.theme.LightBlue
+import com.example.contactlensreminder.presentation.ui.theme.SmoothGray
 import com.example.contactlensreminder.presentation.util.Routes
 import com.example.contactlensreminder.presentation.util.SimpleDivider
 
@@ -34,18 +34,15 @@ fun LensSettingScreen(
 ) {
 
     var pickerValue by remember { mutableStateOf(0) }
-    var leftEyePower by remember { mutableStateOf(-3.00) }
-    var rightEyePower by remember { mutableStateOf(-3.00) }
+    var leftEyePower by remember { mutableStateOf(-4.00) }
+    var rightEyePower by remember { mutableStateOf(-4.00) }
 
     val decideNotifyDaysState = remember {
-        MutableTransitionState(false).apply {
-            targetState = false
-        }
+        mutableStateOf(true)
     }
+
     val decideLensPeriodState = remember {
-        MutableTransitionState(false).apply {
-            targetState = false
-        }
+        mutableStateOf(false)
     }
 
     val lensPowerList = mutableListOf(-3.00)
@@ -63,11 +60,11 @@ fun LensSettingScreen(
 
     val showDecideLensPeriodForm: (index: Int) -> Unit = {
         periodType = it
-        decideLensPeriodState.targetState = periodType == 2
+        decideLensPeriodState.value = periodType == 2
     }
 
     var isChangeLensPower by remember {
-        mutableStateOf(true)
+        mutableStateOf(false)
     }
 
     Scaffold(
@@ -81,25 +78,27 @@ fun LensSettingScreen(
                         Icon(Icons.Filled.ArrowBack, "backIcon")
                     }
                 },
-                contentColor = Color.White,
                 backgroundColor = CleanBlue
             )
         },
         content = {
             Column(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color.White)
+                    .fillMaxWidth()
+                    .background(SmoothGray)
             ) {
+                SimpleDivider()
                 Spacer(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(20.dp)
-                        .background(Color.White)
+                        .background(SmoothGray)
                 )
+                SimpleDivider()
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .background(Color.White)
                         .padding(all = 12.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -143,9 +142,11 @@ fun LensSettingScreen(
                     }
                 }
                 SimpleDivider()
-                AnimatedVisibility(visibleState = decideLensPeriodState) {
+                AnimatedVisibility(visible = decideLensPeriodState.value) {
                     Column(
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(Color.White)
                     ) {
                         Row(
                             modifier = Modifier
@@ -173,6 +174,7 @@ fun LensSettingScreen(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .background(Color.White)
                         .padding(all = 12.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -184,12 +186,12 @@ fun LensSettingScreen(
                         color = textColor, fontSize = fontSize
                     )
                     Switch(
-                        checked = decideNotifyDaysState.targetState,
+                        checked = decideNotifyDaysState.value,
                         modifier = Modifier
                             .size(40.dp)
                             .padding(end = 12.dp),
                         onCheckedChange = {
-                            decideNotifyDaysState.targetState = !decideNotifyDaysState.currentState
+                            decideNotifyDaysState.value = !decideNotifyDaysState.value
                         },
                         colors = SwitchDefaults.colors(
                             checkedThumbColor = CleanBlue,
@@ -200,9 +202,11 @@ fun LensSettingScreen(
                     )
                 }
                 SimpleDivider()
-                AnimatedVisibility(visibleState = decideNotifyDaysState) {
+                AnimatedVisibility(visible = decideNotifyDaysState.value) {
                     Column(
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(Color.White)
                     ) {
                         Row(
                             modifier = Modifier
@@ -258,6 +262,7 @@ fun LensSettingScreen(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .background(Color.White)
                         .padding(all = 12.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -315,7 +320,7 @@ fun LensSettingScreen(
                                 disabledContentColor = Color.LightGray
                             ),
                             modifier = Modifier.padding(start = 4.dp),
-                            shape = RoundedCornerShape(30)
+                            shape = RoundedCornerShape(20)
                         ) {
                             if (isChangeLensPower) {
                                 Text(text = "OK", fontSize = fontSize)
@@ -333,6 +338,7 @@ fun LensSettingScreen(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .background(Color.White)
                         .padding(all = 12.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
