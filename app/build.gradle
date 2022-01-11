@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.contactlensremainderapp"
-        minSdk 24
+        minSdk 26
         targetSdk 31
         versionCode 1
         versionName "1.0"
@@ -68,11 +68,13 @@ dependencies {
     testImplementation testDependencies.coreTesting
     testImplementation testDependencies.truth
 
-    implementation lifecycleDependencies.lifecyclViewModelCompose
-
     implementation navigationDependencies.navigation
 
+    implementation uiDependencies.lifecyclViewModelCompose
     implementation uiDependencies.numberPicker
+
+    implementation workerDependencies.workRuntimeKtx
+    implementation workerDependencies.workRuntime
 
     implementation diDependencies.hiltAndroid
     kapt diDependencies.hiltAndroidCompiler

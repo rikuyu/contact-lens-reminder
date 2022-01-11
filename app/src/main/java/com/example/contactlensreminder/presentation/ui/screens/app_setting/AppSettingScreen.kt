@@ -1,5 +1,4 @@
-package com.example.contactlensreminder.presentation.ui.screens.appsetting
-
+package com.example.contactlensreminder.presentation.ui.screens.app_setting
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -11,8 +10,10 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.contactlensreminder.R
 import com.example.contactlensreminder.presentation.ui.theme.CleanBlue
 import com.example.contactlensreminder.presentation.ui.theme.SmoothGray
 import com.example.contactlensreminder.presentation.util.Routes
@@ -23,17 +24,24 @@ fun AppSettingScreen(
     navController: NavController
 ) {
 
-    val list = listOf("プライバシーポリシー", "ヘルプ", "利用規約", "バージョン 1.0.1")
+    val list = listOf(
+        stringResource(id = R.string.privacy_policy),
+        stringResource(id = R.string.help),
+        stringResource(
+            id = R.string.terms_of_service
+        ),
+        stringResource(id = R.string.version, "1.0.1")
+    )
 
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = "このアプリについて")
+                    Text(text = stringResource(id = R.string.app_setting_screen_title))
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.navigate(Routes.TOP) }) {
-                        Icon(Icons.Filled.ArrowBack, "backIcon")
+                        Icon(Icons.Filled.ArrowBack, null)
                     }
                 },
                 contentColor = Color.White,

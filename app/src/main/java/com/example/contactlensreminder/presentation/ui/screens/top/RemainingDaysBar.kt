@@ -1,4 +1,4 @@
-package com.example.contactlensreminder.presentation.ui.screens.appsetting
+package com.example.contactlensreminder.presentation.ui.screens.top
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -21,6 +22,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.contactlensreminder.R
 import com.example.contactlensreminder.presentation.ui.theme.CleanBlue
 import com.example.contactlensreminder.presentation.ui.theme.LightBlue
 
@@ -80,7 +82,7 @@ fun RemainingDaysBar(
                             fontSize = supportTextFontSize
                         )
                     ) {
-                        append("残り")
+                        append(stringResource(R.string.remain))
                     }
                     withStyle(
                         style = SpanStyle(
@@ -96,16 +98,16 @@ fun RemainingDaysBar(
                             fontSize = supportTextFontSize
                         )
                     ) {
-                        append("日")
+                        append(stringResource(id = R.string.day))
                     }
-                    append("\n\n")
+                    append(stringResource(id = R.string.new_line))
                     withStyle(
                         style = SpanStyle(
                             color = supportTextColor,
                             fontSize = periodTextFontSize
                         )
                     ) {
-                        append("レンズ交換日  ")
+                        append(stringResource(id = R.string.change_message))
                     }
                     withStyle(
                         style = SpanStyle(
