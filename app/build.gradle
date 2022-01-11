@@ -70,8 +70,9 @@ dependencies {
 
     implementation navigationDependencies.navigation
 
-    implementation uiDependencies.lifecyclViewModelCompose
+    implementation uiDependencies.materialDialogs
     implementation uiDependencies.numberPicker
+    implementation uiDependencies.lifecyclViewModelCompose
 
     implementation workerDependencies.workRuntimeKtx
     implementation workerDependencies.workRuntime

@@ -50,14 +50,26 @@ class SharedPreferencesManager {
 
     fun getNotificationDay(context: Context): Int {
         return getSharedPreferences(context).getInt(
-            SharedPreferencesKey.STORED_NOTIFY_DAY,
+            SharedPreferencesKey.STORED_NOTIFICATION_DAY,
             0
         )
     }
 
     fun saveNotificationDay(context: Context, notificationDay: Int) {
         getSharedPreferences(context).edit()
-            .putInt(SharedPreferencesKey.STORED_NOTIFY_DAY, notificationDay).apply()
+            .putInt(SharedPreferencesKey.STORED_NOTIFICATION_DAY, notificationDay).apply()
+    }
+
+    fun getNotificationTime(context: Context): String? {
+        return getSharedPreferences(context).getString(
+            SharedPreferencesKey.STORED_NOTIFICATION_TIME,
+            null
+        )
+    }
+
+    fun saveNotificationTime(context: Context, notificationTime: String) {
+        getSharedPreferences(context).edit()
+            .putString(SharedPreferencesKey.STORED_NOTIFICATION_TIME, notificationTime).apply()
     }
 
     fun getLeftContactLensPower(context: Context): String? {

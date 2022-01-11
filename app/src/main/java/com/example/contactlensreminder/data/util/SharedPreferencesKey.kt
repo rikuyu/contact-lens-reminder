@@ -15,7 +15,10 @@ object SharedPreferencesKey {
     const val STORED_IS_USE_NOTIFICATION = "is_use_notification"
 
     // 通知するのは前日か当日か
-    const val STORED_NOTIFY_DAY = "notify_day"
+    const val STORED_NOTIFICATION_DAY = "notification_day"
+
+    // 通知時刻
+    const val STORED_NOTIFICATION_TIME = "notification_time"
 
     // 左目の度数
     const val STORED_LEFT_CONTACT_LENS_POWER = "left_contact_lens_power"

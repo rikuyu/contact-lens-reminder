@@ -20,10 +20,12 @@ buildscript {
                 activity        : "androidx.activity:activity-compose:$activityVersion"
         ]
 
+        materialDialogs = "0.6.2"
         numberPicker = "0.0.11"
         lifecycleVersion = "2.4.0"
 
         uiDependencies = [
+                materialDialogs         : "io.github.vanpra.compose-material-dialogs:datetime:$materialDialogs",
                 numberPicker            : "com.chargemap.compose:numberpicker:$numberPicker",
                 lifecyclViewModelCompose: "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVersion"
         ]
@@ -32,7 +34,7 @@ buildscript {
 
         workerDependencies = [
                 workRuntimeKtx: "androidx.work:work-runtime-ktx:$workManagerVersion",
-                workRuntime: "androidx.work:work-runtime:$workManagerVersion"
+                workRuntime   : "androidx.work:work-runtime:$workManagerVersion"
         ]
 
         navigationVersion = "2.4.0"

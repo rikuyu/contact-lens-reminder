@@ -1,9 +1,15 @@
 package com.example.contactlensreminder.presentation.di
 
 import android.content.Context
-import com.example.contactlensreminder.data.repository.MainRepositoryImpl
-import com.example.contactlensreminder.domain.repository.MainRepository
-import com.example.contactlensreminder.domain.usecase.setting.*
+import com.example.contactlensreminder.data.repository.ReminderRepositoryImpl
+import com.example.contactlensreminder.data.repository.SettingRepositoryImpl
+import com.example.contactlensreminder.domain.repository.ReminderRepository
+import com.example.contactlensreminder.domain.repository.SettingRepository
+import com.example.contactlensreminder.domain.usecase.reminder.ReminderUseCase
+import com.example.contactlensreminder.domain.usecase.reminder.SetReminder
+import com.example.contactlensreminder.domain.usecase.setting.GetAllSetting
+import com.example.contactlensreminder.domain.usecase.setting.LensSettingUseCase
+import com.example.contactlensreminder.domain.usecase.setting.SaveAllSetting
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,16 +23,28 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRepository(@ApplicationContext context: Context): MainRepository =
-        MainRepositoryImpl(context)
+    fun provideSettingRepository(@ApplicationContext context: Context): SettingRepository =
+        SettingRepositoryImpl(context)
 
     @Provides
     @Singleton
-    fun provideLensSettingUseCase(repository: MainRepository): LensSettingUseCase {
+    fun provideLensSettingUseCase(repository: SettingRepository): LensSettingUseCase {
         return LensSettingUseCase(
             saveAllSetting = SaveAllSetting(repository),
-            getAllSetting = GetAllSetting(repository),
-            saveLensPower = SaveLensPower(repository)
+            getAllSetting = GetAllSetting(repository)
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideRemindereRepository(@ApplicationContext context: Context): ReminderRepository =
+        ReminderRepositoryImpl(context)
+
+    @Provides
+    @Singleton
+    fun provideReminderUseCase(repository: ReminderRepository): ReminderUseCase {
+        return ReminderUseCase(
+            setReminder = SetReminder(repository)
         )
     }
 }

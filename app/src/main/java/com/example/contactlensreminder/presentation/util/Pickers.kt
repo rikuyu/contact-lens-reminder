@@ -1,4 +1,4 @@
-package com.example.contactlensreminder.presentation.ui.screens.lens_setting
+package com.example.contactlensreminder.presentation.screens.lens_setting
 
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.runtime.Composable
@@ -6,7 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import com.chargemap.compose.numberpicker.ListItemPicker
-import com.example.contactlensreminder.presentation.ui.theme.CleanBlue
+import com.example.contactlensreminder.presentation.theme.CleanBlue
 
 @Composable
 fun LensPowerPicker(

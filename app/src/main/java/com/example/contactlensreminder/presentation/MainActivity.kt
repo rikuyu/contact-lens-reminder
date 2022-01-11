@@ -8,10 +8,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.contactlensreminder.presentation.ui.screens.app_setting.AppSettingScreen
-import com.example.contactlensreminder.presentation.ui.screens.lens_setting.LensSettingScreen
-import com.example.contactlensreminder.presentation.ui.screens.top.TopScreen
-import com.example.contactlensreminder.presentation.ui.theme.ContactLensReminderTheme
+import com.example.contactlensreminder.presentation.screens.app_setting.AppSettingScreen
+import com.example.contactlensreminder.presentation.screens.lens_setting.LensSettingScreen
+import com.example.contactlensreminder.presentation.screens.top.TopScreen
+import com.example.contactlensreminder.presentation.theme.ContactLensReminderTheme
 import com.example.contactlensreminder.presentation.util.Routes
 
 import dagger.hilt.android.AndroidEntryPoint
