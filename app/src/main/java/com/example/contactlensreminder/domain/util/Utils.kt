@@ -1,4 +1,4 @@
-package com.example.contactlensreminder.presentation.util
+package com.example.contactlensreminder.domain.util
 
 import java.text.SimpleDateFormat
 import java.time.ZoneId

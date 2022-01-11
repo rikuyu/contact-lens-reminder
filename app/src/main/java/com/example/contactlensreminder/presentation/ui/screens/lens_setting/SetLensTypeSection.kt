@@ -26,7 +26,7 @@ fun SetLensTypeSection(
     textColor: Color = Color.Black,
     fontSize: TextUnit = 18.sp,
     lensType: Int,
-    showDecideLensPeriodForm: (index: Int) -> Unit
+    onClick: (Int) -> Unit
 ) {
     Row(
         modifier = modifier
@@ -65,7 +65,7 @@ fun SetLensTypeSection(
                 else -> CutCornerShape(0.dp)
             }
             OutlinedButton(
-                onClick = { showDecideLensPeriodForm(index) },
+                onClick = { onClick(index) },
                 shape = shape,
                 colors = ButtonDefaults.textButtonColors(
                     backgroundColor = if (selected) CleanBlue else Color.Transparent

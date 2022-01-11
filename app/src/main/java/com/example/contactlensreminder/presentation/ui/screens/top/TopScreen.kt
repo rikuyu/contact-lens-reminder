@@ -18,7 +18,9 @@ import com.example.contactlensreminder.presentation.util.SimpleSpacer
 
 @Composable
 fun TopScreen(
-    navController: NavController
+    navController: NavController,
+    period: Int,
+    remainingDays: Int
 ) {
     Column(
         modifier = Modifier
@@ -44,7 +46,14 @@ fun TopScreen(
             }
             Spacer(modifier = Modifier.size(12.dp))
         }
-        SimpleSpacer(height = 16.dp)
+        SimpleSpacer(height = 8.dp)
+        LensPeriodTextSection(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.White),
+            period = period
+        )
+        SimpleSpacer(height = 4.dp)
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
@@ -52,7 +61,10 @@ fun TopScreen(
                 .weight(3f)
                 .background(Color.White)
         ) {
-            RemainingDaysBar(days = 5f)
+            RemainingDaysBar(
+                period = period,
+                days = remainingDays.toFloat()
+            )
         }
         LensChanageButtonSection(
             modifier = Modifier

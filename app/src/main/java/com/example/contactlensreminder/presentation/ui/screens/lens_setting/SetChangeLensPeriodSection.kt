@@ -28,7 +28,7 @@ fun SetChangeLensPeriodSection(
     textColor: Color = Color.Black,
     fontSize: TextUnit = 18.sp,
     period: Int,
-    setPeriod: (Int) -> Unit
+    setLensPeriod: (Int) -> Unit
 ) {
     var isShowLensPeriodPicker by remember { mutableStateOf(false) }
 
@@ -47,7 +47,7 @@ fun SetChangeLensPeriodSection(
             if (isShowLensPeriodPicker) {
                 DaysPicker(
                     value = period,
-                    onValueChange = { setPeriod(it) },
+                    onValueChange = { setLensPeriod(it) },
                     range = 1..31
                 )
             } else {

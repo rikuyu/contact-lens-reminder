@@ -36,11 +36,13 @@ fun LensSettingScreen(
 
     val settingValue = viewModel.setting.value
 
-    var isUseNotification by remember { mutableStateOf(settingValue.isUseNotification) }
-
     var lensType by remember { mutableStateOf(settingValue.lensType) }
 
+    var isUseNotification by remember { mutableStateOf(settingValue.isUseNotification) }
+
     var lensPeriod by remember { mutableStateOf(settingValue.lensPeriod) }
+
+    var temporaryLensPeriod by remember { mutableStateOf(lensPeriod) }
 
     var notificationType by remember { mutableStateOf(settingValue.notificationDay) }
 
@@ -51,6 +53,20 @@ fun LensSettingScreen(
     var isShowLensPeriodPicker by remember { mutableStateOf(settingValue.lensType == 2) }
 
     var isShowLensPowerPicker by remember { mutableStateOf(false) }
+
+    val setLensPeriod: (Int) -> Unit = { type ->
+        when (type) {
+            0 -> {
+                temporaryLensPeriod = lensPeriod
+                lensPeriod = 14
+            }
+            1 -> {
+                temporaryLensPeriod = lensPeriod
+                lensPeriod = 31
+            }
+            2 -> lensPeriod = temporaryLensPeriod
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -63,8 +79,7 @@ fun LensSettingScreen(
                 },
                 navigationIcon = {
                     IconButton(onClick = {
-                        navController.navigate(Routes.TOP)
-                        viewModel.onEvent(LensEvent.SaveSetting)
+                        navController.navigate("${Routes.TOP}/$lensPeriod/14")
                     }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
@@ -94,8 +109,10 @@ fun LensSettingScreen(
                         modifier = Modifier.fillMaxWidth(),
                         lensType = lensType
                     ) {
+                        setLensPeriod(it)
                         lensType = it
                         viewModel.onEvent(LensEvent.LensType(it))
+                        viewModel.onEvent(LensEvent.LensPeriod(it))
                         isShowLensPeriodPicker = lensType == 2
                     }
                     AnimatedVisibility(visible = !isShowLensPeriodPicker) { SimpleDivider() }
@@ -103,7 +120,7 @@ fun LensSettingScreen(
                         SetChangeLensPeriodSection(
                             modifier = Modifier.fillMaxWidth(),
                             period = lensPeriod,
-                            setPeriod = {
+                            setLensPeriod = {
                                 lensPeriod = it
                                 viewModel.onEvent(LensEvent.LensPeriod(it))
                             }
@@ -147,6 +164,7 @@ fun LensSettingScreen(
                     SimpleDivider()
                 }
                 SetSettingButton(modifier = Modifier.fillMaxWidth()) {
+                    isShowLensPeriodPicker = false
                     isShowLensPowerPicker = false
                     Toast.makeText(
                         context,
@@ -154,7 +172,7 @@ fun LensSettingScreen(
                         Toast.LENGTH_SHORT
                     ).show()
                     viewModel.onEvent(LensEvent.SaveSetting)
-                    navController.navigate(Routes.TOP)
+                    navController.navigate("${Routes.TOP}/$lensPeriod/3")
                 }
             }
         }

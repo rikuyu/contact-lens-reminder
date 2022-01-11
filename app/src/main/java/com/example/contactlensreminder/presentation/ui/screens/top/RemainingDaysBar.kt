@@ -28,6 +28,7 @@ import com.example.contactlensreminder.presentation.ui.theme.LightBlue
 
 @Composable
 fun RemainingDaysBar(
+    period: Int,
     days: Float,
     remainingDaysTextFontSize: TextUnit = 36.sp,
     supportTextFontSize: TextUnit = 24.sp,
@@ -66,7 +67,7 @@ fun RemainingDaysBar(
             drawArc(
                 color = color,
                 startAngle = -90f,
-                sweepAngle = daysRemaining.value * (360 / 7),
+                sweepAngle = daysRemaining.value * (360 / period),
                 useCenter = false,
                 style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
             )

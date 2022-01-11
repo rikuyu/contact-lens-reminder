@@ -1,6 +1,5 @@
 package com.example.contactlensreminder.presentation
 
-import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -19,7 +18,6 @@ class MainViewModel @Inject constructor(
 
     init {
         _setting.value = useCase.getAllSetting.invoke()
-        Log.d("AAAAAAAAAA", "getAllSetting")
     }
 
     fun onEvent(event: LensEvent) {
@@ -28,37 +26,31 @@ class MainViewModel @Inject constructor(
                 _setting.value = setting.value.copy(
                     lensType = event.lensType
                 )
-                Log.d("AAAAAAAAAA", "${event.lensType}")
             }
             is LensEvent.LensPeriod -> {
                 _setting.value = setting.value.copy(
                     lensPeriod = event.lensPeriod
                 )
-                Log.d("AAAAAAAAAA", "${event.lensPeriod}")
             }
             is LensEvent.IsUseNotification -> {
                 _setting.value = setting.value.copy(
                     isUseNotification = event.isUseNotification
                 )
-                Log.d("AAAAAAAAAA", "${event.isUseNotification}")
             }
             is LensEvent.NotificationDay -> {
                 _setting.value = setting.value.copy(
                     notificationDay = event.notificationType
                 )
-                Log.d("AAAAAAAAAA", "${event.notificationType}")
             }
             is LensEvent.LeftLensPower -> {
                 _setting.value = setting.value.copy(
                     leftLensPower = event.leftLensPower
                 )
-                Log.d("AAAAAAAAAA", "${event.leftLensPower}")
             }
             is LensEvent.RightLensPower -> {
                 _setting.value = setting.value.copy(
                     rightLensPower = event.rightLensPower
                 )
-                Log.d("AAAAAAAAAA", "${event.rightLensPower}")
             }
             is LensEvent.SaveLensPower -> {
                 useCase.saveLensPower(
@@ -66,9 +58,7 @@ class MainViewModel @Inject constructor(
                     setting.value.rightLensPower
                 )
             }
-            is LensEvent.SaveSetting -> {
-                useCase.setAllSetting(setting.value)
-            }
+            is LensEvent.SaveSetting -> useCase.saveAllSetting(setting.value)
         }
     }
 }
