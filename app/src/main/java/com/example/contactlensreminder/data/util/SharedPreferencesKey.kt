@@ -1,4 +1,4 @@
-package com.example.contactlensreminder.presentation.util
+package com.example.contactlensreminder.data.util
 
 object SharedPreferencesKey {
 
@@ -16,4 +16,10 @@ object SharedPreferencesKey {
 
     // 通知するのは前日か当日か
     const val STORED_NOTIFY_DAY = "notify_day"
+
+    // 左目の度数
+    const val STORED_LEFT_CONTACT_LENS_POWER = "left_contact_lens_power"
+
+    // 右目の度数
+    const val STORED_RIGHT_CONTACT_LENS_POWER = "right_contact_lens_power"
 }

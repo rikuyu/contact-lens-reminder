@@ -22,17 +22,18 @@ import com.example.contactlensreminder.presentation.ui.theme.CleanBlue
 @Composable
 fun SetSettingButton(
     modifier: Modifier,
-    fontSize: TextUnit = 18.sp
+    fontSize: TextUnit = 18.sp,
+    onClick: () -> Unit
 ) {
     Row(
         modifier = modifier
             .background(Color.White)
-            .padding(all = 12.dp),
+            .padding(start = 12.dp, end = 12.dp, top = 12.dp, bottom = 24.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
         Button(
-            onClick = { },
+            onClick = onClick,
             colors = ButtonDefaults.textButtonColors(
                 backgroundColor = CleanBlue,
                 contentColor = Color.White,
@@ -44,6 +45,7 @@ fun SetSettingButton(
             shape = RoundedCornerShape(20)
         ) {
             Text(
+                modifier = Modifier.padding(vertical = 4.dp),
                 text = stringResource(id = R.string.ok),
                 fontSize = fontSize
             )

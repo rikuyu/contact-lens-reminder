@@ -10,13 +10,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 
 @Composable
-fun SimpleSpacer(
-    height: Dp
-) {
+fun SimpleSpacer(height: Dp, color: Color = Color.White) {
     Spacer(
         modifier = Modifier
             .fillMaxWidth()
             .height(height)
-            .background(Color.White)
+            .background(color)
     )
 }

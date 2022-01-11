@@ -4,7 +4,7 @@
     <!-- TopScreen -->
     <string name="remain">残り</string>
     <string name="day">日</string>
-    <string name="change_message">レンズ交換日  </string>
+    <string name="change_message">レンズ交換日</string>
     <string name="lens_change">レンズの交換</string>
     <string name="lens_setting">レンズの設定</string>
     <string name="new_line">\n\n</string>
@@ -15,15 +15,16 @@
     <string name="notification_day_title">通知日</string>
     <string name="before_day">前日</string>
     <string name="on_the_day">当日</string>
-    <string name="lens_change_period">レンズの交換日数</string>
     <string name="lens_power">度数</string>
     <string name="left">左</string>
     <string name="right">右</string>
     <string name="ok">OK</string>
-    <string name="period">期間</string>
+    <string name="lens_period">日</string>
+    <string name="period">使用期間</string>
     <string name="two_weeks">2Weeks</string>
     <string name="one_month">1Month</string>
     <string name="other">Other</string>
+    <string name="toast_message">設定が保存されました</string>
 
     <!-- AppSettingScreen -->
     <string name="app_setting_screen_title">このアプリについて</string>

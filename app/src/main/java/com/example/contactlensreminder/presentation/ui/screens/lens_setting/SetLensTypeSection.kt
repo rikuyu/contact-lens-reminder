@@ -25,13 +25,13 @@ fun SetLensTypeSection(
     modifier: Modifier,
     textColor: Color = Color.Black,
     fontSize: TextUnit = 18.sp,
-    periodType: Int,
+    lensType: Int,
     showDecideLensPeriodForm: (index: Int) -> Unit
 ) {
     Row(
         modifier = modifier
             .background(Color.White)
-            .padding(all = 12.dp),
+            .padding(top = 14.dp, bottom = 14.dp, end = 12.dp, start = 2.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
@@ -47,7 +47,7 @@ fun SetLensTypeSection(
             stringResource(id = R.string.one_month),
             stringResource(id = R.string.other)
         ).forEachIndexed { index, item ->
-            val selected = periodType == index
+            val selected = lensType == index
 
             val shape = when (index) {
                 0 -> RoundedCornerShape(
@@ -70,12 +70,18 @@ fun SetLensTypeSection(
                 colors = ButtonDefaults.textButtonColors(
                     backgroundColor = if (selected) CleanBlue else Color.Transparent
                 ),
+                modifier = Modifier.padding(vertical = 2.dp),
                 border = BorderStroke(
                     width = 1.dp,
                     color = CleanBlue
                 )
             ) {
-                Text(text = item, color = if (selected) Color.White else CleanBlue)
+                Text(
+                    text = item,
+                    color = if (selected) Color.White else CleanBlue,
+                    modifier = Modifier.padding(vertical = 2.dp),
+                    fontSize = 16.sp
+                )
             }
         }
     }

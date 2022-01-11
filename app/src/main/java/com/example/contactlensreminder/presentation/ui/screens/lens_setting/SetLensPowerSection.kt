@@ -2,6 +2,7 @@ package com.example.contactlensreminder.presentation.ui.screens.lens_setting
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,24 +22,30 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.contactlensreminder.R
 import com.example.contactlensreminder.presentation.ui.theme.CleanBlue
+import com.example.contactlensreminder.presentation.ui.theme.PaleBlue
 
 @Composable
 fun SetLensPowerSection(
     modifier: Modifier,
     textColor: Color = Color.Black,
-    fontSize: TextUnit = 18.sp
+    fontSize: TextUnit = 18.sp,
+    leftLensPower: Double,
+    setLeftLensPower: (Double) -> Unit,
+    rightLensPower: Double,
+    setRightLensPower: (Double) -> Unit,
+    saveLensPower: () -> Unit,
+    isShowLensPowerPicker: Boolean,
+    changeIsShowPowerPicker: () -> Unit
 ) {
-    var leftEyePower by remember { mutableStateOf(-4.00) }
-    var rightEyePower by remember { mutableStateOf(-4.00) }
-
-    var isShowLensPowerPicker by remember {
-        mutableStateOf(false)
+    val onClick: () -> Unit = {
+        changeIsShowPowerPicker()
+        saveLensPower()
     }
 
     Row(
         modifier = modifier
             .background(Color.White)
-            .padding(all = 12.dp),
+            .padding(top = 12.dp, bottom = 12.dp, end = 12.dp, start = 2.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
@@ -56,23 +63,21 @@ fun SetLensPowerSection(
             SetOneLensPowerItem(
                 textColor = textColor,
                 fontSize = fontSize,
-                lensPower = leftEyePower,
+                lensPower = leftLensPower,
                 eye = stringResource(id = R.string.left),
-                isShowLensPowerPicker = isShowLensPowerPicker
-            ) {
-                leftEyePower = it
-            }
+                isShowLensPowerPicker = isShowLensPowerPicker,
+                setLensPower = { setLeftLensPower(it) }
+            )
             SetOneLensPowerItem(
                 textColor = textColor,
                 fontSize = fontSize,
-                lensPower = rightEyePower,
+                lensPower = rightLensPower,
                 eye = stringResource(id = R.string.right),
-                isShowLensPowerPicker = isShowLensPowerPicker
-            ) {
-                rightEyePower = it
-            }
+                isShowLensPowerPicker = isShowLensPowerPicker,
+                setLensPower = { setRightLensPower(it) }
+            )
             Button(
-                onClick = { isShowLensPowerPicker = !isShowLensPowerPicker },
+                onClick = onClick,
                 colors = ButtonDefaults.textButtonColors(
                     backgroundColor = CleanBlue,
                     contentColor = Color.White,
@@ -102,28 +107,36 @@ fun SetLensPowerSection(
 fun SetOneLensPowerItem(
     textColor: Color,
     fontSize: TextUnit,
-    lensPower: Double,
     eye: String,
     isShowLensPowerPicker: Boolean,
-    onValueChange: (power: Double) -> Unit,
+    lensPower: Double,
+    setLensPower: (Double) -> Unit,
 ) {
     val lensPowerList = mutableListOf(-3.00)
+
     repeat(20) {
         lensPowerList.add(lensPowerList[0] - (0.25 * (it + 1)))
     }
 
     Text(text = eye, color = textColor, fontSize = fontSize)
+
     if (isShowLensPowerPicker) {
         LensPowerPicker(
             value = lensPower,
             range = lensPowerList,
-            onValueChange = onValueChange
+            onValueChange = setLensPower
         )
     } else {
-        Text(
-            text = lensPower.toString(),
-            color = textColor,
-            fontSize = fontSize
-        )
+        Box(
+            modifier = Modifier
+                .background(PaleBlue, shape = RoundedCornerShape(20))
+                .padding(vertical = 8.dp, horizontal = 10.dp)
+        ) {
+            Text(
+                text = lensPower.toString(),
+                color = textColor,
+                fontSize = 20.sp
+            )
+        }
     }
 }

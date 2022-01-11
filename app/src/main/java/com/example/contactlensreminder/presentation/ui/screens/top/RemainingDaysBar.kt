@@ -39,9 +39,7 @@ fun RemainingDaysBar(
     animDuration: Int = 1500,
     animDelay: Int = 0
 ) {
-    var animationPlayed by remember {
-        mutableStateOf(false)
-    }
+    var animationPlayed by remember { mutableStateOf(false) }
 
     val daysRemaining =
         animateFloatAsState(
@@ -109,6 +107,7 @@ fun RemainingDaysBar(
                     ) {
                         append(stringResource(id = R.string.change_message))
                     }
+                    append(" ")
                     withStyle(
                         style = SpanStyle(
                             color = supportTextColor,

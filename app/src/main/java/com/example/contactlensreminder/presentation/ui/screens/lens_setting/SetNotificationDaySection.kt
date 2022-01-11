@@ -26,17 +26,15 @@ import com.example.contactlensreminder.presentation.util.SimpleDivider
 fun SetNotificationDaySection(
     modifier: Modifier = Modifier,
     textColor: Color = Color.Black,
-    fontSize: TextUnit = 18.sp
+    fontSize: TextUnit = 18.sp,
+    notificationType: Int,
+    setNotificationType: (Int) -> Unit
 ) {
-    var notifyType by remember {
-        mutableStateOf(0)
-    }
-
     Column(
         modifier = modifier.background(Color.White)
     ) {
         Row(
-            modifier = modifier.padding(all = 12.dp),
+            modifier = modifier.padding(top = 12.dp, bottom = 12.dp, end = 12.dp, start = 2.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
@@ -47,10 +45,10 @@ fun SetNotificationDaySection(
                 fontSize = fontSize
             )
             listOf(
-                stringResource(id = R.string.before_day),
-                stringResource(id = R.string.on_the_day)
+                stringResource(id = R.string.on_the_day),
+                stringResource(id = R.string.before_day)
             ).forEachIndexed { index, item ->
-                val selected = notifyType == index
+                val selected = notificationType == index
 
                 val shape = when (index) {
                     0 -> RoundedCornerShape(
@@ -69,7 +67,7 @@ fun SetNotificationDaySection(
                 }
 
                 OutlinedButton(
-                    onClick = { notifyType = index },
+                    onClick = { setNotificationType(index) },
                     shape = shape,
                     colors = ButtonDefaults.textButtonColors(
                         backgroundColor = if (selected) CleanBlue else Color.Transparent
@@ -81,7 +79,9 @@ fun SetNotificationDaySection(
                 ) {
                     Text(
                         text = item,
-                        color = if (selected) Color.White else CleanBlue
+                        color = if (selected) Color.White else CleanBlue,
+                        modifier = Modifier.padding(vertical = 2.dp),
+                        fontSize = 16.sp
                     )
                 }
             }

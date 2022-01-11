@@ -18,6 +18,7 @@ import com.example.contactlensreminder.presentation.ui.theme.CleanBlue
 import com.example.contactlensreminder.presentation.ui.theme.SmoothGray
 import com.example.contactlensreminder.presentation.util.Routes
 import com.example.contactlensreminder.presentation.util.SimpleDivider
+import com.example.contactlensreminder.presentation.util.SimpleSpacer
 
 @Composable
 fun AppSettingScreen(
@@ -54,6 +55,8 @@ fun AppSettingScreen(
                 .fillMaxSize()
                 .background(SmoothGray)
         ) {
+            item { SimpleSpacer(height = 20.dp, color = SmoothGray) }
+            item { SimpleDivider() }
             items(list) { item ->
                 Column(
                     modifier = Modifier
@@ -63,7 +66,7 @@ fun AppSettingScreen(
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(all = 12.dp)
+                            .padding(all = 16.dp)
                     ) {
                         Text(text = item, color = Color.Black)
                     }

@@ -24,13 +24,13 @@ fun SetUseNotification(
     modifier: Modifier = Modifier,
     textColor: Color = Color.Black,
     fontSize: TextUnit = 18.sp,
-    decideIsUseNotification: Boolean,
+    isUseNotification: Boolean,
     changeSwitch: () -> Unit
 ) {
     Row(
         modifier = modifier
             .background(Color.White)
-            .padding(all = 12.dp),
+            .padding(top = 12.dp, bottom = 12.dp, end = 12.dp, start = 2.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
@@ -41,7 +41,7 @@ fun SetUseNotification(
             color = textColor, fontSize = fontSize
         )
         Switch(
-            checked = decideIsUseNotification,
+            checked = isUseNotification,
             modifier = Modifier
                 .size(40.dp)
                 .padding(end = 12.dp),
