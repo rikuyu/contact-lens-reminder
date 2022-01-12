@@ -1,4 +1,4 @@
-package com.example.contactlensreminder.presentation.screens.top
+package com.example.contactlensreminder.presentation.screens.top.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

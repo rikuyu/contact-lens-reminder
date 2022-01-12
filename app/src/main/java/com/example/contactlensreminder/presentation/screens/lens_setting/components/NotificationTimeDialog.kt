@@ -1,4 +1,4 @@
-package com.example.contactlensreminder.presentation.screens.lens_setting
+package com.example.contactlensreminder.presentation.screens.lens_setting.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource

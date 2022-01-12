@@ -1,4 +1,4 @@
-package com.example.contactlensreminder.presentation.screens.top
+package com.example.contactlensreminder.presentation.screens.top.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
@@ -23,10 +23,12 @@ import com.example.contactlensreminder.R
 import com.example.contactlensreminder.presentation.theme.CleanBlue
 
 @Composable
-fun LensChangeButtonSection(
+fun HandleReminderButtonSection(
     modifier: Modifier,
     isUsingContactLens: Boolean,
-    changeIsUsingContactLens: () -> Unit
+    changeIsUsingContactLens: () -> Unit,
+    startReminderEvent: () -> Unit,
+    stopReminderEvent: () -> Unit
 ) {
     Box(
         modifier = modifier,

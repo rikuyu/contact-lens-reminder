@@ -1,4 +1,4 @@
-package com.example.contactlensreminder.presentation.screens.lens_setting
+package com.example.contactlensreminder.presentation.screens.lens_setting.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
@@ -34,7 +34,7 @@ fun SetIsUseNotification(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = stringResource(id = R.string.notification_title),
+            text = stringResource(id = R.string.notification),
             modifier = Modifier
                 .weight(1f)
                 .padding(start = 12.dp),

@@ -1,4 +1,4 @@
-package com.example.contactlensreminder.presentation.screens.lens_setting
+package com.example.contactlensreminder.presentation.screens.lens_setting.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background

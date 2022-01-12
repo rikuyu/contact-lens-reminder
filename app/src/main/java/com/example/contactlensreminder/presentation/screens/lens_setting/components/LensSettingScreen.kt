@@ -1,4 +1,4 @@
-package com.example.contactlensreminder.presentation.screens.lens_setting
+package com.example.contactlensreminder.presentation.screens.lens_setting.components
 
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
@@ -18,6 +18,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.contactlensreminder.R
+import com.example.contactlensreminder.presentation.screens.lens_setting.SettingEvent
+import com.example.contactlensreminder.presentation.screens.lens_setting.SettingViewModel
 import com.example.contactlensreminder.presentation.theme.CleanBlue
 import com.example.contactlensreminder.presentation.theme.SmoothGray
 import com.example.contactlensreminder.presentation.util.Routes
@@ -78,9 +80,7 @@ fun LensSettingScreen(
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = {
-                        navController.navigate("${Routes.TOP}/$lensPeriod/14")
-                    }) {
+                    IconButton(onClick = { navController.navigate(Routes.TOP) }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = null,
@@ -174,13 +174,14 @@ fun LensSettingScreen(
                 SetSettingButton(modifier = Modifier.fillMaxWidth()) {
                     isShowLensPeriodPicker = false
                     isShowLensPowerPicker = false
+
                     Toast.makeText(
                         context,
                         context.getString(R.string.toast_message),
                         Toast.LENGTH_SHORT
                     ).show()
                     viewModel.onEvent(SettingEvent.SaveSetting)
-                    navController.navigate("${Routes.TOP}/$lensPeriod/3")
+                    navController.navigate(Routes.TOP)
                 }
             }
         }

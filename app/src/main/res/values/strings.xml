@@ -5,6 +5,7 @@
     <string name="remain">残り</string>
     <string name="day">日</string>
     <string name="change_message">レンズ交換日</string>
+    <string name="time_message">通知時刻</string>
     <string name="start">スタート</string>
     <string name="lens_change">レンズの交換</string>
     <string name="lens_setting">レンズの設定</string>
@@ -12,7 +13,7 @@
 
     <!-- LensSettingScreen -->
     <string name="lens_setting_screen_title">コンタクトレンズ設定</string>
-    <string name="notification_title">通知</string>
+    <string name="notification">通知</string>
     <string name="notification_day_title">通知日</string>
     <string name="before_day">前日</string>
     <string name="on_the_day">当日</string>
@@ -35,5 +36,9 @@
     <string name="help">ヘルプ</string>
     <string name="terms_of_service">利用規約</string>
     <string name="version">バージョン %s</string>
+
+    <!-- Notification -->
+    <string name="notification_title">プライバシーポリシー</string>
+    <string name="notification_content">ヘルプ</string>
 
 </resources>

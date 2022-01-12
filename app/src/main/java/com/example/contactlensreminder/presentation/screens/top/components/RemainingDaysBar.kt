@@ -1,4 +1,4 @@
-package com.example.contactlensreminder.presentation.screens.top
+package com.example.contactlensreminder.presentation.screens.top.components
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -25,11 +25,13 @@ import androidx.compose.ui.unit.sp
 import com.example.contactlensreminder.R
 import com.example.contactlensreminder.presentation.theme.CleanBlue
 import com.example.contactlensreminder.presentation.theme.LightBlue
+import com.example.contactlensreminder.presentation.util.getExpirationDate
 
 @Composable
 fun RemainingDaysBar(
-    period: Int,
-    days: Float,
+    lensPeriod: Int,
+    notificationTime: String,
+    lensElapsedDays: Int,
     remainingDaysTextFontSize: TextUnit = 36.sp,
     supportTextFontSize: TextUnit = 24.sp,
     periodTextFontSize: TextUnit = 16.sp,
@@ -44,7 +46,7 @@ fun RemainingDaysBar(
 
     val daysRemaining =
         animateFloatAsState(
-            targetValue = if (animationPlayed) days else 0f,
+            targetValue = if (animationPlayed) lensElapsedDays.toFloat() else 0f,
             animationSpec = tween(
                 durationMillis = animDuration,
                 delayMillis = animDelay
@@ -67,7 +69,7 @@ fun RemainingDaysBar(
             drawArc(
                 color = color,
                 startAngle = -90f,
-                sweepAngle = daysRemaining.value * (360 / period),
+                sweepAngle = daysRemaining.value * (360 / lensPeriod),
                 useCenter = false,
                 style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
             )
@@ -89,7 +91,7 @@ fun RemainingDaysBar(
                             fontSize = remainingDaysTextFontSize
                         )
                     ) {
-                        append(days.toInt().toString())
+                        append(lensElapsedDays.toInt().toString())
                     }
                     withStyle(
                         style = SpanStyle(
@@ -115,7 +117,25 @@ fun RemainingDaysBar(
                             fontSize = periodTextFontSize
                         )
                     ) {
-                        append("2022/1/20")
+                        append(getExpirationDate(lensElapsedDays))
+                    }
+                    append(stringResource(id = R.string.new_line))
+                    withStyle(
+                        style = SpanStyle(
+                            color = supportTextColor,
+                            fontSize = periodTextFontSize
+                        )
+                    ) {
+                        append(stringResource(id = R.string.time_message))
+                    }
+                    append(" ")
+                    withStyle(
+                        style = SpanStyle(
+                            color = supportTextColor,
+                            fontSize = periodTextFontSize
+                        )
+                    ) {
+                        append(notificationTime)
                     }
                 }
             },

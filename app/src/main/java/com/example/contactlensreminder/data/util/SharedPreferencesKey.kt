@@ -11,6 +11,9 @@ object SharedPreferencesKey {
     // Other だったときの日数
     const val STORED_CONTACT_LENS_PERIOD = "contact_lens_period"
 
+    // 経過日数
+    const val STORED_CONTACT_LENS_ELAPSED_DAYS = "contact_lens_elapsed_days"
+
     // 通知をするかどうか
     const val STORED_IS_USE_NOTIFICATION = "is_use_notification"
 

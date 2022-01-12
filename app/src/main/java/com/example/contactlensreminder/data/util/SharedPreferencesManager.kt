@@ -36,6 +36,18 @@ class SharedPreferencesManager {
             .putInt(SharedPreferencesKey.STORED_CONTACT_LENS_PERIOD, period).apply()
     }
 
+    fun getContactLensElapsedDays(context: Context): Int {
+        return getSharedPreferences(context).getInt(
+            SharedPreferencesKey.STORED_CONTACT_LENS_ELAPSED_DAYS,
+            14
+        )
+    }
+
+    fun saveContactLensElapsedDays(context: Context, elapsedDays: Int) {
+        getSharedPreferences(context).edit()
+            .putInt(SharedPreferencesKey.STORED_CONTACT_LENS_ELAPSED_DAYS, elapsedDays).apply()
+    }
+
     fun getIsUseNotification(context: Context): Boolean {
         return getSharedPreferences(context).getBoolean(
             SharedPreferencesKey.STORED_IS_USE_NOTIFICATION,

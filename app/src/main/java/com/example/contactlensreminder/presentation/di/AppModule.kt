@@ -5,7 +5,9 @@ import com.example.contactlensreminder.data.repository.ReminderRepositoryImpl
 import com.example.contactlensreminder.data.repository.SettingRepositoryImpl
 import com.example.contactlensreminder.domain.repository.ReminderRepository
 import com.example.contactlensreminder.domain.repository.SettingRepository
+import com.example.contactlensreminder.domain.usecase.reminder.GetReminderSetting
 import com.example.contactlensreminder.domain.usecase.reminder.ReminderUseCase
+import com.example.contactlensreminder.domain.usecase.reminder.SetNotificationData
 import com.example.contactlensreminder.domain.usecase.reminder.SetReminder
 import com.example.contactlensreminder.domain.usecase.setting.GetAllSetting
 import com.example.contactlensreminder.domain.usecase.setting.LensSettingUseCase
@@ -37,14 +39,16 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRemindereRepository(@ApplicationContext context: Context): ReminderRepository =
+    fun provideReminderRepository(@ApplicationContext context: Context): ReminderRepository =
         ReminderRepositoryImpl(context)
 
     @Provides
     @Singleton
     fun provideReminderUseCase(repository: ReminderRepository): ReminderUseCase {
         return ReminderUseCase(
-            setReminder = SetReminder(repository)
+            setNotificationData = SetNotificationData(repository),
+            setReminder = SetReminder(repository),
+            getReminderSetting = GetReminderSetting(repository)
         )
     }
 }

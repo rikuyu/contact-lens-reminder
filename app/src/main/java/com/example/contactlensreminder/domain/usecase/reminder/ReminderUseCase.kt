@@ -1,5 +1,7 @@
 package com.example.contactlensreminder.domain.usecase.reminder
 
 data class ReminderUseCase(
-    val setReminder: SetReminder
+    val setNotificationData: SetNotificationData,
+    val setReminder: SetReminder,
+    val getReminderSetting: GetReminderSetting
 )

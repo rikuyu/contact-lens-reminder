@@ -62,6 +62,7 @@ dependencies {
     implementation appDependencies.preview
     implementation appDependencies.lifecycleRuntime
     implementation appDependencies.activity
+    // implementation appDependencies.supportCompat
 
     testImplementation testDependencies.junitKtx
     testImplementation testDependencies.coreKtx

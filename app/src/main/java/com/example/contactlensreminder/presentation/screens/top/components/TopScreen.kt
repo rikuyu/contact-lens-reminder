@@ -1,4 +1,4 @@
-package com.example.contactlensreminder.presentation.screens.top
+package com.example.contactlensreminder.presentation.screens.top.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -11,7 +11,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.contactlensreminder.presentation.screens.top.ReminderEvent
+import com.example.contactlensreminder.presentation.screens.top.ReminderViewModel
 import com.example.contactlensreminder.presentation.theme.Gray
 import com.example.contactlensreminder.presentation.util.Routes
 import com.example.contactlensreminder.presentation.util.SimpleSpacer
@@ -19,10 +22,17 @@ import com.example.contactlensreminder.presentation.util.SimpleSpacer
 @Composable
 fun TopScreen(
     navController: NavController,
-    period: Int,
-    remainingDays: Int
+    viewModel: ReminderViewModel = hiltViewModel()
 ) {
+    val reminderValue = viewModel.reminder.value
+
     var isUsingContactLens by remember { mutableStateOf(false) }
+
+    val lensPeriod by remember { mutableStateOf(reminderValue.lensPeriod) }
+
+    val lensElapsedDays by remember { mutableStateOf(reminderValue.elapsedDays) }
+
+    val notificationTime by remember { mutableStateOf(reminderValue.notificationTime) }
 
     Column(
         modifier = Modifier
@@ -53,7 +63,7 @@ fun TopScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Color.White),
-            period = period
+            period = lensPeriod
         )
         SimpleSpacer(height = 4.dp)
         Box(
@@ -64,19 +74,21 @@ fun TopScreen(
                 .background(Color.White)
         ) {
             RemainingDaysBar(
-                period = period,
-                days = remainingDays.toFloat()
+                lensPeriod = lensPeriod,
+                notificationTime = notificationTime,
+                lensElapsedDays = lensElapsedDays
             )
         }
-        LensChangeButtonSection(
+        HandleReminderButtonSection(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
                 .background(Color.White),
-            isUsingContactLens = isUsingContactLens
-        ) {
-            isUsingContactLens = !isUsingContactLens
-        }
+            isUsingContactLens = isUsingContactLens,
+            changeIsUsingContactLens = { isUsingContactLens = !isUsingContactLens },
+            startReminderEvent = { viewModel.onEvent(ReminderEvent.ReminderStart) },
+            stopReminderEvent = { }
+        )
         LensSettingButtonSection(
             modifier = Modifier
                 .fillMaxWidth()
