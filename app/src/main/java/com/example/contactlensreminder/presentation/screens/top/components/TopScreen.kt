@@ -1,5 +1,6 @@
 package com.example.contactlensreminder.presentation.screens.top.components
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
@@ -10,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -24,9 +26,11 @@ fun TopScreen(
     navController: NavController,
     viewModel: ReminderViewModel = hiltViewModel()
 ) {
+    val context = LocalContext.current
+
     val reminderValue = viewModel.reminder.value
 
-    var isUsingContactLens by remember { mutableStateOf(false) }
+    var isUsingContactLens by remember { mutableStateOf(reminderValue.isUsingContactLens) }
 
     val lensPeriod by remember { mutableStateOf(reminderValue.lensPeriod) }
 
@@ -75,7 +79,7 @@ fun TopScreen(
         ) {
             RemainingDaysBar(
                 lensPeriod = lensPeriod,
-                notificationTime = notificationTime,
+                // notificationTime = notificationTime,
                 lensElapsedDays = lensElapsedDays
             )
         }
@@ -86,8 +90,24 @@ fun TopScreen(
                 .background(Color.White),
             isUsingContactLens = isUsingContactLens,
             changeIsUsingContactLens = { isUsingContactLens = !isUsingContactLens },
-            startReminderEvent = { viewModel.onEvent(ReminderEvent.ReminderStart) },
-            stopReminderEvent = { }
+            startReminderEvent = {
+                viewModel.onEvent(
+                    ReminderEvent.StartReminder(
+                        lensPeriod = lensPeriod,
+                        notificationTime = notificationTime,
+                        elapsedDays = lensElapsedDays,
+                        isUsingContactLens = isUsingContactLens
+                    )
+                )
+            },
+            stopReminderEvent = {
+                Toast.makeText(
+                    context,
+                    "Stop",
+                    Toast.LENGTH_SHORT
+                ).show()
+                viewModel.onEvent(ReminderEvent.CancelReminder)
+            }
         )
         LensSettingButtonSection(
             modifier = Modifier

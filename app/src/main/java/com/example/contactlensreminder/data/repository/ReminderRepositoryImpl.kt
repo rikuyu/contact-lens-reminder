@@ -4,33 +4,42 @@ import android.content.Context
 import com.example.contactlensreminder.data.util.SharedPreferencesManager
 import com.example.contactlensreminder.domain.repository.ReminderRepository
 import com.example.contactlensreminder.domain.util.NotificationWorkManagerService
-import com.example.contactlensreminder.domain.util.getLocalHour
 import com.example.contactlensreminder.presentation.screens.top.ReminderValue
 
-class ReminderRepositoryImpl(private val context: Context) : ReminderRepository {
+class ReminderRepositoryImpl(
+    private val workManagerService: NotificationWorkManagerService,
+    private val sharedPreferencesManager: SharedPreferencesManager
+) : ReminderRepository {
 
-    private val workManagerService: NotificationWorkManagerService = NotificationWorkManagerService(context)
-
-    private val sharedPreferencesManager: SharedPreferencesManager = SharedPreferencesManager()
-
-    override fun setNotificationData(reminderValue: ReminderValue) {
-        val currentTime = getLocalHour()
-        workManagerService.setNotificationTime(
-            lensPeriod = reminderValue.lensPeriod,
-            notificationTime = reminderValue.notificationTime,
-            currentTimeHour = currentTime
-        )
+    override fun saveReminderSetting(reminderValue: ReminderValue) {
+        workManagerService.setNotificationTime(notificationDay = reminderValue.lensPeriod)
+        sharedPreferencesManager.apply {
+            saveContactLensElapsedDays(reminderValue.elapsedDays)
+            saveContactLensPeriod(reminderValue.lensPeriod)
+            saveNotificationTime(reminderValue.notificationTime)
+            saveIsUsingContactLens(reminderValue.isUsingContactLens)
+        }
     }
 
-    override fun setReminder() {
+    override fun startReminder() {
+        workManagerService.setNotificationWork()
     }
 
     override fun getReminderSetting(): ReminderValue {
-        val lensPeriod = sharedPreferencesManager.getContactLensPeriod(context)
-        val notificationTime = sharedPreferencesManager.getNotificationTime(context) ?: "7:00"
+        val lensPeriod = sharedPreferencesManager.getContactLensPeriod()
+        val notificationTime = sharedPreferencesManager.getNotificationTime() ?: "7:00"
+        val elapsedDays = sharedPreferencesManager.getContactLensElapsedDays()
+        val isUsingContactLens = sharedPreferencesManager.getIsUsingContactLens()
+
         return ReminderValue(
             lensPeriod = lensPeriod,
-            notificationTime = notificationTime
+            notificationTime = notificationTime,
+            elapsedDays = elapsedDays,
+            isUsingContactLens = isUsingContactLens
         )
+    }
+
+    override fun cancelReminder() {
+        workManagerService.cancelNotification()
     }
 }

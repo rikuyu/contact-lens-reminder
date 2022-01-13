@@ -6,6 +6,8 @@ import android.content.Context
 import android.graphics.BitmapFactory
 import androidx.core.app.NotificationCompat
 import com.example.contactlensreminder.R
+import java.text.SimpleDateFormat
+import java.util.*
 
 class NotificationService(val context: Context) {
 
@@ -20,10 +22,9 @@ class NotificationService(val context: Context) {
         .setContentTitle(R.string.notification.toString())
         .setContentText(R.string.terms_of_service.toString())
         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-        .setAutoCancel(true)
         .setWhen(System.currentTimeMillis())
 
-    fun createChannel() {
+    private fun createChannel() {
         // Build.VERSION.SDK_INT >= Build.VERSION_CODES.O always true. min SDK 26
         val channel = NotificationChannel(
             CHANNEL_ID,
@@ -36,6 +37,7 @@ class NotificationService(val context: Context) {
     }
 
     fun showNotification() {
+        createChannel()
         notificationManager.notify(1, notificationBuilder.build())
     }
 

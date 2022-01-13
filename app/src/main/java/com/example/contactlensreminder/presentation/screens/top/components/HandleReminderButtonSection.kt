@@ -30,12 +30,22 @@ fun HandleReminderButtonSection(
     startReminderEvent: () -> Unit,
     stopReminderEvent: () -> Unit
 ) {
+    val onClick: () -> Unit = {
+        if (isUsingContactLens) {
+            changeIsUsingContactLens()
+            stopReminderEvent()
+        } else {
+            changeIsUsingContactLens()
+            startReminderEvent()
+        }
+    }
+
     Box(
         modifier = modifier,
         contentAlignment = Alignment.Center
     ) {
         Button(
-            onClick = changeIsUsingContactLens,
+            onClick = onClick,
             modifier = Modifier.size(240.dp, 60.dp),
             colors = ButtonDefaults.textButtonColors(
                 backgroundColor = CleanBlue,

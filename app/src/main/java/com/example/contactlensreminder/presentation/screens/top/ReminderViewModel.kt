@@ -22,12 +22,12 @@ class ReminderViewModel @Inject constructor(
 
     fun onEvent(event: ReminderEvent) {
         when (event) {
-            ReminderEvent.ReminderStart -> {
-                reminderUseCase.setNotificationData(reminder.value)
-                reminderUseCase.setReminder.invoke()
+            is ReminderEvent.StartReminder -> {
+                _reminder.value = reminder.value
+                reminderUseCase.saveReminderSetting(reminder.value)
+                reminderUseCase.startReminder.invoke()
             }
-            ReminderEvent.ReminderTerminate -> {
-            }
+            is ReminderEvent.CancelReminder -> reminderUseCase.cancelReminder.invoke()
         }
     }
 }

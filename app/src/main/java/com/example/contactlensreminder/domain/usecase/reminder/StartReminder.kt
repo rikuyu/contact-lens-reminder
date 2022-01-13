@@ -2,10 +2,10 @@ package com.example.contactlensreminder.domain.usecase.reminder
 
 import com.example.contactlensreminder.domain.repository.ReminderRepository
 
-class SetReminder(
+class StartReminder(
     private val repository: ReminderRepository
 ) {
     operator fun invoke() {
-        repository.setReminder()
+        repository.startReminder()
     }
 }

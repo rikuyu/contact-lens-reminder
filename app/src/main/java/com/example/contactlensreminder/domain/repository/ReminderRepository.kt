@@ -4,9 +4,11 @@ import com.example.contactlensreminder.presentation.screens.top.ReminderValue
 
 interface ReminderRepository {
 
-    fun setNotificationData(reminderValue: ReminderValue)
+    fun saveReminderSetting(reminderValue: ReminderValue)
 
-    fun setReminder()
+    fun startReminder()
 
     fun getReminderSetting(): ReminderValue
+
+    fun cancelReminder()
 }

@@ -1,13 +1,11 @@
 package com.example.contactlensreminder.data.repository
 
-import android.content.Context
 import com.example.contactlensreminder.data.util.SharedPreferencesManager
 import com.example.contactlensreminder.domain.repository.SettingRepository
 import com.example.contactlensreminder.presentation.screens.lens_setting.SettingValue
 
-class SettingRepositoryImpl(private val context: Context) : SettingRepository {
-
-    private val sharedPreferencesManager: SharedPreferencesManager = SharedPreferencesManager()
+class SettingRepositoryImpl(private val sharedPreferencesManager: SharedPreferencesManager) :
+    SettingRepository {
 
     override fun saveAllSetting(settingValue: SettingValue) {
         val lensType = settingValue.lensType
@@ -19,26 +17,26 @@ class SettingRepositoryImpl(private val context: Context) : SettingRepository {
         val rightLensPower = settingValue.rightLensPower
 
         sharedPreferencesManager.apply {
-            saveContactLensType(context, lensType)
-            saveContactLensPeriod(context, lensPeriod)
-            saveIsUseNotification(context, isUseNotification)
-            saveNotificationDay(context, notificationDay)
-            saveNotificationTime(context, notificationTime)
-            saveLeftContactLensPower(context, leftLensPower.toString())
-            saveRightContactLensPower(context, rightLensPower.toString())
+            saveContactLensType(lensType)
+            saveContactLensPeriod(lensPeriod)
+            saveIsUseNotification(isUseNotification)
+            saveNotificationDay(notificationDay)
+            saveNotificationTime(notificationTime)
+            saveLeftContactLensPower(leftLensPower.toString())
+            saveRightContactLensPower(rightLensPower.toString())
         }
     }
 
     override fun getAllSetting(): SettingValue {
-        val lensType = sharedPreferencesManager.getContactLensType(context)
-        val lensPeriod = sharedPreferencesManager.getContactLensPeriod(context)
-        val isUseNotification = sharedPreferencesManager.getIsUseNotification(context)
-        val notificationDay = sharedPreferencesManager.getNotificationDay(context)
-        val notificationTime = sharedPreferencesManager.getNotificationTime(context) ?: "7:00"
+        val lensType = sharedPreferencesManager.getContactLensType()
+        val lensPeriod = sharedPreferencesManager.getContactLensPeriod()
+        val isUseNotification = sharedPreferencesManager.getIsUseNotification()
+        val notificationDay = sharedPreferencesManager.getNotificationDay()
+        val notificationTime = sharedPreferencesManager.getNotificationTime() ?: "7:00"
         val leftLensPower =
-            sharedPreferencesManager.getLeftContactLensPower(context)?.toDouble() ?: -4.00
+            sharedPreferencesManager.getLeftContactLensPower()?.toDouble() ?: -4.00
         val rightLensPower =
-            sharedPreferencesManager.getRightContactLensPower(context)?.toDouble() ?: -4.00
+            sharedPreferencesManager.getRightContactLensPower()?.toDouble() ?: -4.00
 
         return SettingValue(
             lensType = lensType,

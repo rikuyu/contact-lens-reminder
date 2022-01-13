@@ -30,7 +30,7 @@ import com.example.contactlensreminder.presentation.util.getExpirationDate
 @Composable
 fun RemainingDaysBar(
     lensPeriod: Int,
-    notificationTime: String,
+//    notificationTime: String,
     lensElapsedDays: Int,
     remainingDaysTextFontSize: TextUnit = 36.sp,
     supportTextFontSize: TextUnit = 24.sp,
@@ -119,24 +119,24 @@ fun RemainingDaysBar(
                     ) {
                         append(getExpirationDate(lensElapsedDays))
                     }
-                    append(stringResource(id = R.string.new_line))
-                    withStyle(
-                        style = SpanStyle(
-                            color = supportTextColor,
-                            fontSize = periodTextFontSize
-                        )
-                    ) {
-                        append(stringResource(id = R.string.time_message))
-                    }
-                    append(" ")
-                    withStyle(
-                        style = SpanStyle(
-                            color = supportTextColor,
-                            fontSize = periodTextFontSize
-                        )
-                    ) {
-                        append(notificationTime)
-                    }
+//                    append(stringResource(id = R.string.new_line))
+//                    withStyle(
+//                        style = SpanStyle(
+//                            color = supportTextColor,
+//                            fontSize = periodTextFontSize
+//                        )
+//                    ) {
+//                        append(stringResource(id = R.string.time_message))
+//                    }
+//                    append(" ")
+//                    withStyle(
+//                        style = SpanStyle(
+//                            color = supportTextColor,
+//                            fontSize = periodTextFontSize
+//                        )
+//                    ) {
+//                        append(notificationTime)
+//                    }
                 }
             },
             textAlign = TextAlign.Center

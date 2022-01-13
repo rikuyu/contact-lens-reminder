@@ -143,13 +143,13 @@ fun LensSettingScreen(
                                 notificationType = it
                                 viewModel.onEvent(SettingEvent.NotificationDay(it))
                             }
-                            SetNotificationSection(
-                                modifier = Modifier.fillMaxWidth(),
-                                notificationTime = notificationTime
-                            ) {
-                                notificationTime = it
-                                viewModel.onEvent(SettingEvent.NotificationTime(it))
-                            }
+//                            SetNotificationSection(
+//                                modifier = Modifier.fillMaxWidth(),
+//                                notificationTime = notificationTime
+//                            ) {
+//                                notificationTime = it
+//                                viewModel.onEvent(SettingEvent.NotificationTime(it))
+//                            }
                         }
                     }
                     SetLensPowerSection(
