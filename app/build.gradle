@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.contactlensremainderapp"
-        minSdk 24
+        minSdk 26
         targetSdk 31
         versionCode 1
         versionName "1.0"
@@ -48,9 +48,11 @@ android {
     }
 }
 
-dependencies {
+configurations {
+    ktlint
+}
 
-    implementation "org.jetbrains.kotlin:kotlin-reflect:1.5.31"
+dependencies {
 
     implementation appDependencies.core
     implementation appDependencies.ui
@@ -60,14 +62,43 @@ dependencies {
     implementation appDependencies.preview
     implementation appDependencies.lifecycleRuntime
     implementation appDependencies.activity
+    // implementation appDependencies.supportCompat
 
-    implementation lifecycleDependencies.lifecyclViewModelCompose
+    testImplementation testDependencies.junitKtx
+    testImplementation testDependencies.coreKtx
+    testImplementation testDependencies.coreTesting
+    testImplementation testDependencies.truth
 
     implementation navigationDependencies.navigation
+
+    implementation uiDependencies.materialDialogs
+    implementation uiDependencies.numberPicker
+    implementation uiDependencies.lifecyclViewModelCompose
+
+    implementation workerDependencies.workRuntimeKtx
+    implementation workerDependencies.workRuntime
 
     implementation diDependencies.hiltAndroid
     kapt diDependencies.hiltAndroidCompiler
     implementation diDependencies.hiltLifecycleViewModel
     kapt diDependencies.hiltCompiler
     implementation diDependencies.hiltNavigationCompose
+
+    ktlint("com.pinterest:ktlint:0.42.1")
+}
+
+task ktlint(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    classpath = configurations.ktlint
+    main = "com.pinterest.ktlint.Main"
+    args "--android", "--color", "--reporter=plain", "--reporter=checkstyle,output=${buildDir}/reports/ktlint-result.xml", "src/**/*.kt"
+    ignoreExitValue true
+}
+check.dependsOn ktlint
+
+task ktlintFormat(type: JavaExec, group: "formatting") {
+    description = "Fix Kotlin code style deviations."
+    classpath = configurations.ktlint
+    main = "com.pinterest.ktlint.Main"
+    args "-F", "src/**/*.kt"
 }

@@ -6,23 +6,33 @@ import androidx.activity.compose.setContent
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.contactlensreminder.presentation.Routes
-import com.example.contactlensreminder.presentation.ui.setting.TopScreen
-import com.example.contactlensreminder.presentation.ui.theme.ContactLensReminderTheme
-import com.example.contactlensreminder.presentation.ui.top.SettingScreen
+import com.example.contactlensreminder.presentation.screens.app_setting.components.AppSettingScreen
+import com.example.contactlensreminder.presentation.screens.lens_setting.components.LensSettingScreen
+import com.example.contactlensreminder.presentation.screens.top.components.TopScreen
+import com.example.contactlensreminder.presentation.theme.ContactLensReminderTheme
+import com.example.contactlensreminder.presentation.util.Routes
 
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ContactLensReminderTheme {
                 val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = Routes.TOP) {
-                    composable(Routes.TOP) {
-                        TopScreen()
+                NavHost(
+                    navController = navController,
+                    startDestination = Routes.TOP
+                ) {
+                    composable(route = Routes.TOP) { backStackEntry ->
+                        TopScreen(navController)
                     }
-                    composable(Routes.SETTING) {
-                        SettingScreen()
+                    composable(route = Routes.LENS_SETTING) {
+                        LensSettingScreen(navController)
+                    }
+                    composable(route = Routes.APP_SETTING) {
+                        AppSettingScreen(navController)
                     }
                 }
             }
