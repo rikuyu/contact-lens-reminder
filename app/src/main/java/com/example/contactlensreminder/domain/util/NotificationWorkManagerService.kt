@@ -1,7 +1,6 @@
 package com.example.contactlensreminder.domain.util
 
 import android.content.Context
-import android.util.Log
 import androidx.work.*
 import java.util.concurrent.TimeUnit
 import kotlin.properties.Delegates

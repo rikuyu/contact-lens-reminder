@@ -18,7 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.contactlensreminder.R
-import com.example.contactlensreminder.presentation.theme.CleanBlue
+import com.example.contactlensreminder.presentation.theme.SkyBlue
 
 @Composable
 fun LensSettingButtonSection(
@@ -33,7 +33,7 @@ fun LensSettingButtonSection(
             onClick = { navigate() },
             modifier = Modifier.size(240.dp, 60.dp),
             colors = ButtonDefaults.textButtonColors(
-                backgroundColor = CleanBlue,
+                backgroundColor = SkyBlue,
                 contentColor = Color.White,
                 disabledContentColor = Color.LightGray
             ),

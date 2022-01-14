@@ -24,7 +24,9 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideSettingRepository(sharedPreferencesManager: SharedPreferencesManager): SettingRepository =
+    fun provideSettingRepository(
+        sharedPreferencesManager: SharedPreferencesManager
+    ): SettingRepository =
         SettingRepositoryImpl(sharedPreferencesManager)
 
     @Provides
@@ -38,12 +40,16 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNotificationWorkManagerService(@ApplicationContext context: Context): NotificationWorkManagerService =
+    fun provideNotificationWorkManagerService(
+        @ApplicationContext context: Context
+    ): NotificationWorkManagerService =
         NotificationWorkManagerService(context)
 
     @Provides
     @Singleton
-    fun provideSharedPreferencesManager(@ApplicationContext context: Context): SharedPreferencesManager =
+    fun provideSharedPreferencesManager(
+        @ApplicationContext context: Context
+    ): SharedPreferencesManager =
         SharedPreferencesManager(context)
 
     @Provides

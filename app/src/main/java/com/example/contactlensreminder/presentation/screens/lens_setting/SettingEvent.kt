@@ -10,7 +10,9 @@ sealed class SettingEvent {
 
     data class NotificationDay(val notificationType: Int) : SettingEvent()
 
-    data class NotificationTime(val notificationTime: String) : SettingEvent()
+    data class NotificationTimeHour(val notificationTimeHour: Int) : SettingEvent()
+
+    data class NotificationTimeMinute(val notificationTimeMinute: Int) : SettingEvent()
 
     data class LeftPower(val leftLensPower: Double) : SettingEvent()
 

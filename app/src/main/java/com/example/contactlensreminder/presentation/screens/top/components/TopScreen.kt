@@ -36,7 +36,9 @@ fun TopScreen(
 
     val lensElapsedDays by remember { mutableStateOf(reminderValue.elapsedDays) }
 
-    val notificationTime by remember { mutableStateOf(reminderValue.notificationTime) }
+    val notificationTimeHour by remember { mutableStateOf(reminderValue.notificationTimeHour) }
+
+    val notificationTimeMinute by remember { mutableStateOf(reminderValue.notificationTimeMinute) }
 
     Column(
         modifier = Modifier
@@ -79,7 +81,8 @@ fun TopScreen(
         ) {
             RemainingDaysBar(
                 lensPeriod = lensPeriod,
-                // notificationTime = notificationTime,
+                notificationTimeHour = notificationTimeHour,
+                notificationTimeMinute = notificationTimeMinute,
                 lensElapsedDays = lensElapsedDays
             )
         }
@@ -94,7 +97,8 @@ fun TopScreen(
                 viewModel.onEvent(
                     ReminderEvent.StartReminder(
                         lensPeriod = lensPeriod,
-                        notificationTime = notificationTime,
+                        notificationTimeHour = notificationTimeHour,
+                        notificationTimeMinute = notificationTimeMinute,
                         elapsedDays = lensElapsedDays,
                         isUsingContactLens = isUsingContactLens
                     )

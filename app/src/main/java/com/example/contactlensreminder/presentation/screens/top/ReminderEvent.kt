@@ -5,7 +5,8 @@ sealed class ReminderEvent {
     data class StartReminder(
         val lensPeriod: Int,
         val elapsedDays: Int,
-        val notificationTime: String,
+        val notificationTimeHour: Int,
+        val notificationTimeMinute: Int,
         val isUsingContactLens: Boolean
     ) : ReminderEvent()
 

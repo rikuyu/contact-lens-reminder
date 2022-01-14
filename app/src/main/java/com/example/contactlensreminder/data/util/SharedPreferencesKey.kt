@@ -23,8 +23,11 @@ object SharedPreferencesKey {
     // 通知するのは前日か当日か
     const val STORED_NOTIFICATION_DAY = "notification_day"
 
-    // 通知時刻
-    const val STORED_NOTIFICATION_TIME = "notification_time"
+    // 通知時刻（時）
+    const val STORED_NOTIFICATION_TIME_HOUR = "notification_time_hour"
+
+    // 通知時刻（分）
+    const val STORED_NOTIFICATION_TIME_MINUTE = "notification_time_minute"
 
     // 左目の度数
     const val STORED_LEFT_CONTACT_LENS_POWER = "left_contact_lens_power"

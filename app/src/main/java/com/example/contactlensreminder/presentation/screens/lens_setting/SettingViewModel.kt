@@ -42,9 +42,14 @@ class SettingViewModel @Inject constructor(
                     notificationDay = event.notificationType
                 )
             }
-            is SettingEvent.NotificationTime -> {
+            is SettingEvent.NotificationTimeHour -> {
                 _setting.value = setting.value.copy(
-                    notificationTime = event.notificationTime
+                    notificationTimeHour = event.notificationTimeHour
+                )
+            }
+            is SettingEvent.NotificationTimeMinute -> {
+                _setting.value = setting.value.copy(
+                    notificationTimeMinute = event.notificationTimeMinute
                 )
             }
             is SettingEvent.LeftPower -> {

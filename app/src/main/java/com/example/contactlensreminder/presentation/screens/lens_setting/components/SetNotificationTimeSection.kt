@@ -1,7 +1,10 @@
 package com.example.contactlensreminder.presentation.screens.lens_setting.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -24,12 +27,14 @@ import com.example.contactlensreminder.presentation.theme.PaleBlue
 import com.example.contactlensreminder.presentation.util.SimpleDivider
 
 @Composable
-fun SetLensPeriodSection(
+fun SetNotificationTimeSection(
     modifier: Modifier = Modifier,
     textColor: Color = Color.Black,
     fontSize: TextUnit = 18.sp,
-    period: Int,
-    setLensPeriod: (Int) -> Unit
+    notificationTimeHour: Int,
+    notificationTimeMinute: Int,
+    setNotificationTimeHour: (Int) -> Unit,
+    setNotificationTimeMinute: (Int) -> Unit
 ) {
     var isShowLensPeriodPicker by remember { mutableStateOf(false) }
 
@@ -37,19 +42,29 @@ fun SetLensPeriodSection(
         modifier = modifier.background(Color.White)
     ) {
         Row(
-            modifier = modifier.padding(top = 0.dp, bottom = 14.dp, end = 12.dp, start = 2.dp),
+            modifier = modifier.padding(top = 12.dp, bottom = 12.dp, end = 12.dp, start = 2.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Spacer(
+            Text(
+                text = stringResource(id = R.string.notification_time),
+                color = textColor,
+                fontSize = 20.sp,
                 modifier = Modifier
                     .weight(1f)
+                    .padding(start = 10.dp)
                     .background(Color.White)
             )
             if (isShowLensPeriodPicker) {
                 NumberPicker(
-                    value = period,
-                    onValueChange = { setLensPeriod(it) },
-                    range = 1..31
+                    value = notificationTimeHour,
+                    onValueChange = { setNotificationTimeHour(it) },
+                    range = 1..24
+                )
+                Text(text = " : ")
+                NumberPicker(
+                    value = notificationTimeMinute,
+                    onValueChange = { setNotificationTimeMinute(it) },
+                    range = List(4) { it * 15 }
                 )
             } else {
                 Box(
@@ -59,15 +74,20 @@ fun SetLensPeriodSection(
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
-                            text = period.toString(),
+                            text = notificationTimeHour.toString(),
                             color = textColor,
                             fontSize = 20.sp
                         )
                         Text(
-                            text = stringResource(id = R.string.lens_period),
+                            text = stringResource(id = R.string.time_div),
                             color = textColor,
                             fontSize = fontSize,
-                            modifier = Modifier.padding(start = 4.dp)
+                            modifier = Modifier.padding(horizontal = 4.dp)
+                        )
+                        Text(
+                            text = notificationTimeMinute.toString(),
+                            color = textColor,
+                            fontSize = 20.sp
                         )
                     }
                 }

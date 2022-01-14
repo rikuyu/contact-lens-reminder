@@ -30,26 +30,3 @@ fun LensPowerPicker(
         textStyle = textStyle
     )
 }
-
-@Composable
-fun DaysPicker(
-    modifier: Modifier = Modifier,
-    label: (Int) -> String = {
-        it.toString()
-    },
-    value: Int,
-    onValueChange: (Int) -> Unit,
-    dividersColor: Color = CleanBlue,
-    range: Iterable<Int>,
-    textStyle: TextStyle = LocalTextStyle.current.copy(color = Color.Black),
-) {
-    ListItemPicker(
-        modifier = modifier,
-        label = label,
-        value = value,
-        onValueChange = onValueChange,
-        dividersColor = dividersColor,
-        list = range.toList(),
-        textStyle = textStyle
-    )
-}

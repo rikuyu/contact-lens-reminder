@@ -85,16 +85,29 @@ class SharedPreferencesManager(private val context: Context) {
             .putInt(SharedPreferencesKey.STORED_NOTIFICATION_DAY, notificationDay).apply()
     }
 
-    fun getNotificationTime(): String? {
-        return getSharedPreferences().getString(
-            SharedPreferencesKey.STORED_NOTIFICATION_TIME,
-            null
+    fun getNotificationTimeHour(): Int {
+        return getSharedPreferences().getInt(
+            SharedPreferencesKey.STORED_NOTIFICATION_TIME_HOUR,
+            9
         )
     }
 
-    fun saveNotificationTime(notificationTime: String) {
+    fun saveNotificationTimeHour(notificationTime: Int) {
         getSharedPreferences().edit()
-            .putString(SharedPreferencesKey.STORED_NOTIFICATION_TIME, notificationTime).apply()
+            .putInt(SharedPreferencesKey.STORED_NOTIFICATION_TIME_HOUR, notificationTime).apply()
+    }
+
+    fun getNotificationTimeMinute(): Int {
+        return getSharedPreferences().getInt(
+            SharedPreferencesKey.STORED_NOTIFICATION_TIME_MINUTE,
+            15
+        )
+    }
+
+    fun saveNotificationTimeMinute(notificationTime: Int) {
+        getSharedPreferences().edit()
+            .putInt(SharedPreferencesKey.STORED_NOTIFICATION_TIME_MINUTE, notificationTime)
+            .apply()
     }
 
     fun getLeftContactLensPower(): String? {

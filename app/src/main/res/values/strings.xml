@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ContactLensReminder</string>
+    <string name="app_name">レンズ交換</string>
 
     <!-- TopScreen -->
     <string name="remain">残り</string>
@@ -10,6 +10,7 @@
     <string name="lens_change">レンズの交換</string>
     <string name="lens_setting">レンズの設定</string>
     <string name="new_line">\n\n</string>
+    <string name="time_div">:</string>
 
     <!-- LensSettingScreen -->
     <string name="lens_setting_screen_title">コンタクトレンズ設定</string>

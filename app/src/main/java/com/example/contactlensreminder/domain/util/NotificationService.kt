@@ -6,7 +6,6 @@ import android.content.Context
 import android.graphics.BitmapFactory
 import androidx.core.app.NotificationCompat
 import com.example.contactlensreminder.R
-import java.text.SimpleDateFormat
 import java.util.*
 
 class NotificationService(val context: Context) {

@@ -12,7 +12,8 @@ class SettingRepositoryImpl(private val sharedPreferencesManager: SharedPreferen
         val lensPeriod = settingValue.lensPeriod
         val isUseNotification = settingValue.isUseNotification
         val notificationDay = settingValue.notificationDay
-        val notificationTime = settingValue.notificationTime
+        val notificationTimeHour = settingValue.notificationTimeHour
+        val notificationTimeMinute = settingValue.notificationTimeMinute
         val leftLensPower = settingValue.leftLensPower
         val rightLensPower = settingValue.rightLensPower
 
@@ -21,7 +22,8 @@ class SettingRepositoryImpl(private val sharedPreferencesManager: SharedPreferen
             saveContactLensPeriod(lensPeriod)
             saveIsUseNotification(isUseNotification)
             saveNotificationDay(notificationDay)
-            saveNotificationTime(notificationTime)
+            saveNotificationTimeHour(notificationTimeHour)
+            saveNotificationTimeMinute(notificationTimeMinute)
             saveLeftContactLensPower(leftLensPower.toString())
             saveRightContactLensPower(rightLensPower.toString())
         }
@@ -32,7 +34,8 @@ class SettingRepositoryImpl(private val sharedPreferencesManager: SharedPreferen
         val lensPeriod = sharedPreferencesManager.getContactLensPeriod()
         val isUseNotification = sharedPreferencesManager.getIsUseNotification()
         val notificationDay = sharedPreferencesManager.getNotificationDay()
-        val notificationTime = sharedPreferencesManager.getNotificationTime() ?: "7:00"
+        val notificationTimeHour = sharedPreferencesManager.getNotificationTimeHour()
+        val notificationTimeMinute = sharedPreferencesManager.getNotificationTimeMinute()
         val leftLensPower =
             sharedPreferencesManager.getLeftContactLensPower()?.toDouble() ?: -4.00
         val rightLensPower =
@@ -43,7 +46,8 @@ class SettingRepositoryImpl(private val sharedPreferencesManager: SharedPreferen
             lensPeriod = lensPeriod,
             isUseNotification = isUseNotification,
             notificationDay = notificationDay,
-            notificationTime = notificationTime,
+            notificationTimeHour = notificationTimeHour,
+            notificationTimeMinute = notificationTimeMinute,
             leftLensPower = leftLensPower,
             rightLensPower = rightLensPower
         )

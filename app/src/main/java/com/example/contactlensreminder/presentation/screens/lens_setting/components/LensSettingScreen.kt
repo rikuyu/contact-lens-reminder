@@ -46,7 +46,9 @@ fun LensSettingScreen(
 
     var notificationType by remember { mutableStateOf(settingValue.notificationDay) }
 
-    var notificationTime by remember { mutableStateOf(settingValue.notificationTime) }
+    var notificationTimeHour by remember { mutableStateOf(settingValue.notificationTimeHour) }
+
+    var notificationTimeMinute by remember { mutableStateOf(settingValue.notificationTimeMinute) }
 
     var leftLensPower by remember { mutableStateOf(settingValue.leftLensPower) }
 
@@ -143,13 +145,19 @@ fun LensSettingScreen(
                                 notificationType = it
                                 viewModel.onEvent(SettingEvent.NotificationDay(it))
                             }
-//                            SetNotificationSection(
-//                                modifier = Modifier.fillMaxWidth(),
-//                                notificationTime = notificationTime
-//                            ) {
-//                                notificationTime = it
-//                                viewModel.onEvent(SettingEvent.NotificationTime(it))
-//                            }
+                            SetNotificationTimeSection(
+                                modifier = Modifier.fillMaxWidth(),
+                                notificationTimeHour = notificationTimeHour,
+                                setNotificationTimeHour = {
+                                    notificationTimeHour = it
+                                    viewModel.onEvent(SettingEvent.Period(it))
+                                },
+                                notificationTimeMinute = notificationTimeMinute,
+                                setNotificationTimeMinute = {
+                                    notificationTimeMinute = it
+                                    viewModel.onEvent(SettingEvent.Period(it))
+                                }
+                            )
                         }
                     }
                     SetLensPowerSection(
