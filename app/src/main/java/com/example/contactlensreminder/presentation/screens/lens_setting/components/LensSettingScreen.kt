@@ -52,6 +52,8 @@ fun LensSettingScreen(
 
     var leftLensPower by remember { mutableStateOf(settingValue.leftLensPower) }
 
+    var isShowLensPowerSection by remember { mutableStateOf(settingValue.isShowLensPowerSection) }
+
     var rightLensPower by remember { mutableStateOf(settingValue.rightLensPower) }
 
     var isShowLensPeriodPicker by remember { mutableStateOf(settingValue.lensType == 2) }
@@ -128,8 +130,9 @@ fun LensSettingScreen(
                             }
                         )
                     }
-                    SetIsUseNotification(
+                    ToggleButtonSection(
                         modifier = Modifier.fillMaxWidth(),
+                        text = stringResource(id = R.string.notification),
                         isUseNotification = isUseNotification
                     ) {
                         isUseNotification = !isUseNotification
@@ -160,29 +163,38 @@ fun LensSettingScreen(
                             )
                         }
                     }
-                    SetLensPowerSection(
+                    ToggleButtonSection(
                         modifier = Modifier.fillMaxWidth(),
-                        leftLensPower = leftLensPower,
-                        setLeftLensPower = {
-                            leftLensPower = it
-                            viewModel.onEvent(SettingEvent.LeftPower(it))
-                        },
-                        rightLensPower = rightLensPower,
-                        setRightLensPower = {
-                            rightLensPower = it
-                            viewModel.onEvent(SettingEvent.RightPower(it))
-                        },
-                        isShowLensPowerPicker = isShowLensPowerPicker,
-                        changeIsShowPowerPicker = {
-                            isShowLensPowerPicker = !isShowLensPowerPicker
-                        }
-                    )
+                        text = stringResource(id = R.string.lens_power),
+                        isUseNotification = isShowLensPowerSection
+                    ) {
+                        isShowLensPowerSection = !isShowLensPowerSection
+                        viewModel.onEvent(SettingEvent.IsShowLensPowerSection(isShowLensPowerSection))
+                    }
                     SimpleDivider()
+                    AnimatedVisibility(visible = isShowLensPowerSection) {
+                        SetLensPowerSection(
+                            modifier = Modifier.fillMaxWidth(),
+                            leftLensPower = leftLensPower,
+                            setLeftLensPower = {
+                                leftLensPower = it
+                                viewModel.onEvent(SettingEvent.LeftPower(it))
+                            },
+                            rightLensPower = rightLensPower,
+                            setRightLensPower = {
+                                rightLensPower = it
+                                viewModel.onEvent(SettingEvent.RightPower(it))
+                            },
+                            isShowLensPowerPicker = isShowLensPowerPicker,
+                            changeIsShowPowerPicker = {
+                                isShowLensPowerPicker = !isShowLensPowerPicker
+                            }
+                        )
+                    }
                 }
                 SetSettingButton(modifier = Modifier.fillMaxWidth()) {
                     isShowLensPeriodPicker = false
                     isShowLensPowerPicker = false
-
                     Toast.makeText(
                         context,
                         context.getString(R.string.toast_message),

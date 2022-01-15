@@ -14,6 +14,7 @@ class SettingRepositoryImpl(private val sharedPreferencesManager: SharedPreferen
         val notificationDay = settingValue.notificationDay
         val notificationTimeHour = settingValue.notificationTimeHour
         val notificationTimeMinute = settingValue.notificationTimeMinute
+        val isShowLensPowerSection = settingValue.isShowLensPowerSection
         val leftLensPower = settingValue.leftLensPower
         val rightLensPower = settingValue.rightLensPower
 
@@ -24,6 +25,7 @@ class SettingRepositoryImpl(private val sharedPreferencesManager: SharedPreferen
             saveNotificationDay(notificationDay)
             saveNotificationTimeHour(notificationTimeHour)
             saveNotificationTimeMinute(notificationTimeMinute)
+            saveIsShowContactLensPowerSection(isShowLensPowerSection)
             saveLeftContactLensPower(leftLensPower.toString())
             saveRightContactLensPower(rightLensPower.toString())
         }
@@ -36,6 +38,7 @@ class SettingRepositoryImpl(private val sharedPreferencesManager: SharedPreferen
         val notificationDay = sharedPreferencesManager.getNotificationDay()
         val notificationTimeHour = sharedPreferencesManager.getNotificationTimeHour()
         val notificationTimeMinute = sharedPreferencesManager.getNotificationTimeMinute()
+        val isShowLensPowerSection = sharedPreferencesManager.getIsShowContactLensPowerSection()
         val leftLensPower =
             sharedPreferencesManager.getLeftContactLensPower()?.toDouble() ?: -4.00
         val rightLensPower =
@@ -48,6 +51,7 @@ class SettingRepositoryImpl(private val sharedPreferencesManager: SharedPreferen
             notificationDay = notificationDay,
             notificationTimeHour = notificationTimeHour,
             notificationTimeMinute = notificationTimeMinute,
+            isShowLensPowerSection = isShowLensPowerSection,
             leftLensPower = leftLensPower,
             rightLensPower = rightLensPower
         )

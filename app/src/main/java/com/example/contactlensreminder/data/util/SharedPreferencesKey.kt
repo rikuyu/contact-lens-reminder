@@ -29,6 +29,9 @@ object SharedPreferencesKey {
     // 通知時刻（分）
     const val STORED_NOTIFICATION_TIME_MINUTE = "notification_time_minute"
 
+    // コンタクトレンズの度数を決める項目を表示するかどうか
+    const val STORED_IS_SHOW_CONTACT_LENS_POWER_SECTION = "is_show_contact_lens_power_section"
+
     // 左目の度数
     const val STORED_LEFT_CONTACT_LENS_POWER = "left_contact_lens_power"
 

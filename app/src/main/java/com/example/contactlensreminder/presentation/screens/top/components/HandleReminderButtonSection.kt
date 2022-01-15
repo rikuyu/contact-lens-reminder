@@ -26,18 +26,13 @@ import com.example.contactlensreminder.presentation.theme.SkyBlue
 fun HandleReminderButtonSection(
     modifier: Modifier,
     isUsingContactLens: Boolean,
-    changeIsUsingContactLens: () -> Unit,
-    startReminderEvent: () -> Unit,
-    stopReminderEvent: () -> Unit
+    startReminderEvent: (Boolean) -> Unit,
+    stopReminderEvent: (Boolean) -> Unit
 ) {
-    val onClick: () -> Unit = {
-        if (isUsingContactLens) {
-            changeIsUsingContactLens()
-            stopReminderEvent()
-        } else {
-            changeIsUsingContactLens()
-            startReminderEvent()
-        }
+    val onClick: (Boolean) -> Unit = if (!isUsingContactLens) {
+        { startReminderEvent(!it) }
+    } else {
+        { stopReminderEvent(!it) }
     }
 
     Box(
@@ -45,7 +40,7 @@ fun HandleReminderButtonSection(
         contentAlignment = Alignment.Center
     ) {
         Button(
-            onClick = onClick,
+            onClick = { onClick(isUsingContactLens) },
             modifier = Modifier.size(240.dp, 60.dp),
             colors = ButtonDefaults.textButtonColors(
                 backgroundColor = SkyBlue,

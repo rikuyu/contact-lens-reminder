@@ -14,6 +14,8 @@ sealed class SettingEvent {
 
     data class NotificationTimeMinute(val notificationTimeMinute: Int) : SettingEvent()
 
+    data class IsShowLensPowerSection(val isShowLensPowerSection: Boolean) : SettingEvent()
+
     data class LeftPower(val leftLensPower: Double) : SettingEvent()
 
     data class RightPower(val rightLensPower: Double) : SettingEvent()

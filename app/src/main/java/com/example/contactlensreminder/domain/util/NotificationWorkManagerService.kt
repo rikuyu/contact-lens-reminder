@@ -1,7 +1,9 @@
 package com.example.contactlensreminder.domain.util
 
 import android.content.Context
-import androidx.work.*
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.WorkRequest
 import java.util.concurrent.TimeUnit
 import kotlin.properties.Delegates
 
@@ -11,16 +13,16 @@ class NotificationWorkManagerService(context: Context) {
 
     private var notificationDay by Delegates.notNull<Long>()
 
-    lateinit var notificationWork: WorkRequest
+    private var notificationWork: WorkRequest =
+        OneTimeWorkRequestBuilder<NotificationWorker>().apply {
+            setInitialDelay(15, TimeUnit.MINUTES)
+        }.build()
 
     fun setNotificationTime(notificationDay: Int) {
         this@NotificationWorkManagerService.notificationDay = notificationDay.toLong()
     }
 
     fun setNotificationWork() {
-        notificationWork = OneTimeWorkRequestBuilder<NotificationWorker>().apply {
-            setInitialDelay(notificationDay, TimeUnit.MINUTES)
-        }.build()
         manager.enqueue(notificationWork)
     }
 

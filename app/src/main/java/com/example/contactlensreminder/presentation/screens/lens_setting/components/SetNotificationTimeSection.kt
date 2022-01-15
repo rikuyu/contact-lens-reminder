@@ -6,10 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.runtime.*
@@ -58,13 +55,15 @@ fun SetNotificationTimeSection(
                 NumberPicker(
                     value = notificationTimeHour,
                     onValueChange = { setNotificationTimeHour(it) },
-                    range = 1..24
+                    range = 1..24,
+                    textStyle = LocalTextStyle.current.copy(color = Color.Black)
                 )
                 Text(text = " : ")
                 NumberPicker(
                     value = notificationTimeMinute,
                     onValueChange = { setNotificationTimeMinute(it) },
-                    range = List(4) { it * 15 }
+                    range = List(4) { it * 15 },
+                    textStyle = LocalTextStyle.current.copy(color = Color.Black)
                 )
             } else {
                 Box(

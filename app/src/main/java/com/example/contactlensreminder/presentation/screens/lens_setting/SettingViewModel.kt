@@ -1,5 +1,6 @@
 package com.example.contactlensreminder.presentation.screens.lens_setting
 
+import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -33,6 +34,7 @@ class SettingViewModel @Inject constructor(
                 )
             }
             is SettingEvent.IsUseNotification -> {
+                Log.d("TAGTAGAAT", "s ${event.isUseNotification}")
                 _setting.value = setting.value.copy(
                     isUseNotification = event.isUseNotification
                 )
@@ -52,6 +54,11 @@ class SettingViewModel @Inject constructor(
                     notificationTimeMinute = event.notificationTimeMinute
                 )
             }
+            is SettingEvent.IsShowLensPowerSection -> {
+                _setting.value = setting.value.copy(
+                    isShowLensPowerSection = event.isShowLensPowerSection
+                )
+            }
             is SettingEvent.LeftPower -> {
                 _setting.value = setting.value.copy(
                     leftLensPower = event.leftLensPower
@@ -62,7 +69,9 @@ class SettingViewModel @Inject constructor(
                     rightLensPower = event.rightLensPower
                 )
             }
-            is SettingEvent.SaveSetting -> lensSettingUseCase.saveAllSetting(setting.value)
+            is SettingEvent.SaveSetting -> {
+                lensSettingUseCase.saveAllSetting(setting.value)
+            }
         }
     }
 }

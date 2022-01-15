@@ -7,6 +7,7 @@ data class SettingValue(
     val notificationDay: Int = 1,
     val notificationTimeHour: Int = 9,
     val notificationTimeMinute: Int = 15,
+    val isShowLensPowerSection: Boolean = false,
     val leftLensPower: Double = -4.00,
     val rightLensPower: Double = -4.00
 )

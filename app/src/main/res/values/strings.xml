@@ -39,7 +39,7 @@
     <string name="version">バージョン %s</string>
 
     <!-- Notification -->
-    <string name="notification_title">プライバシーポリシー</string>
-    <string name="notification_content">ヘルプ</string>
+    <string name="notification_title">レンズ交換の日です！</string>
+    <string name="notification_content">コンタクトレンズを正しく使い、目の健康を守りましょう！</string>
 
 </resources>

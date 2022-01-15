@@ -11,17 +11,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.contactlensreminder.R
 import com.example.contactlensreminder.presentation.theme.CleanBlue
 import com.example.contactlensreminder.presentation.theme.LightBlue
 
 @Composable
-fun SetIsUseNotification(
+fun ToggleButtonSection(
     modifier: Modifier = Modifier,
+    text: String,
     textColor: Color = Color.Black,
     fontSize: TextUnit = 18.sp,
     isUseNotification: Boolean,
@@ -34,7 +33,7 @@ fun SetIsUseNotification(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = stringResource(id = R.string.notification),
+            text = text,
             modifier = Modifier
                 .weight(1f)
                 .padding(start = 12.dp),
