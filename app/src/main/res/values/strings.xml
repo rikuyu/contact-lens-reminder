@@ -11,6 +11,7 @@
     <string name="lens_setting">レンズの設定</string>
     <string name="new_line">\n\n</string>
     <string name="time_div">:</string>
+    <string name="alert_toast_message">レンジ使用中は設定を変更できません</string>
 
     <!-- LensSettingScreen -->
     <string name="lens_setting_screen_title">コンタクトレンズ設定</string>
@@ -29,7 +30,7 @@
     <string name="two_weeks">2Weeks</string>
     <string name="one_month">1Month</string>
     <string name="other">Other</string>
-    <string name="toast_message">設定が保存されました</string>
+    <string name="success_save_setting">設定が保存されました</string>
 
     <!-- AppSettingScreen -->
     <string name="app_setting_screen_title">このアプリについて</string>

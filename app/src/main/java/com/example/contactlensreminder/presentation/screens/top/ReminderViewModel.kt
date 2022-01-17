@@ -21,19 +21,15 @@ class ReminderViewModel @Inject constructor(
     }
 
     fun onEvent(event: ReminderEvent) {
+        _reminder.value = reminder.value.copy(
+            isUsingContactLens = event.reminderValue.isUsingContactLens
+        )
+        reminderUseCase.saveReminderSetting(reminder.value)
         when (event) {
             is ReminderEvent.StartReminder -> {
-                _reminder.value = reminder.value.copy(
-                    isUsingContactLens = event.reminderValue.isUsingContactLens
-                )
-                reminderUseCase.saveReminderSetting(reminder.value)
                 reminderUseCase.startReminder.invoke()
             }
             is ReminderEvent.CancelReminder -> {
-                _reminder.value = reminder.value.copy(
-                    isUsingContactLens = event.reminderValue.isUsingContactLens
-                )
-                reminderUseCase.saveReminderSetting(reminder.value)
                 reminderUseCase.cancelReminder.invoke()
             }
         }

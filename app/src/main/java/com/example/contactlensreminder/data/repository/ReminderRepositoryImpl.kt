@@ -3,15 +3,21 @@ package com.example.contactlensreminder.data.repository
 import com.example.contactlensreminder.data.util.SharedPreferencesManager
 import com.example.contactlensreminder.domain.repository.ReminderRepository
 import com.example.contactlensreminder.domain.util.NotificationWorkManagerService
+import com.example.contactlensreminder.domain.util.WaitWorkManagerService
 import com.example.contactlensreminder.presentation.screens.top.ReminderValue
 
 class ReminderRepositoryImpl(
-    private val workManagerService: NotificationWorkManagerService,
+    private val waitWorkManagerService: WaitWorkManagerService,
+    private val notificationWorkManagerService: NotificationWorkManagerService,
     private val sharedPreferencesManager: SharedPreferencesManager
 ) : ReminderRepository {
 
     override fun saveReminderSetting(reminderValue: ReminderValue) {
-        workManagerService.setNotificationTime(notificationDay = reminderValue.lensPeriod)
+        waitWorkManagerService.initWaitWork(
+            notificationDay = reminderValue.lensPeriod,
+            notificationTimeHour = reminderValue.notificationTimeHour,
+            notificationTimeMinutes = reminderValue.notificationTimeMinute
+        )
         sharedPreferencesManager.apply {
             saveContactLensElapsedDays(reminderValue.elapsedDays)
             saveContactLensPeriod(reminderValue.lensPeriod)
@@ -22,7 +28,7 @@ class ReminderRepositoryImpl(
     }
 
     override fun startReminder() {
-        workManagerService.setNotificationWork()
+        waitWorkManagerService.startWaitWork()
     }
 
     override fun getReminderSetting(): ReminderValue {
@@ -42,6 +48,7 @@ class ReminderRepositoryImpl(
     }
 
     override fun cancelReminder() {
-        workManagerService.cancelNotification()
+        waitWorkManagerService.cancelWaitWork()
+        notificationWorkManagerService.cancelNotificationWork()
     }
 }

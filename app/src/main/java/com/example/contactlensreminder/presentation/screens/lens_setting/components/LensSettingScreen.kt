@@ -197,7 +197,7 @@ fun LensSettingScreen(
                     isShowLensPowerPicker = false
                     Toast.makeText(
                         context,
-                        context.getString(R.string.toast_message),
+                        context.getString(R.string.success_save_setting),
                         Toast.LENGTH_SHORT
                     ).show()
                     viewModel.onEvent(SettingEvent.SaveSetting)

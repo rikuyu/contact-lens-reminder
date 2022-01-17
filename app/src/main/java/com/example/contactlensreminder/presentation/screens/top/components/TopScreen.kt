@@ -15,6 +15,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.contactlensreminder.R
 import com.example.contactlensreminder.presentation.screens.top.ReminderEvent
 import com.example.contactlensreminder.presentation.screens.top.ReminderValue
 import com.example.contactlensreminder.presentation.screens.top.ReminderViewModel
@@ -131,10 +132,17 @@ fun TopScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
-                .background(Color.White)
-        ) {
-            navController.navigate(Routes.LENS_SETTING)
-        }
+                .background(Color.White),
+            showAlertToast = {
+                Toast.makeText(
+                    context,
+                    context.getString(R.string.alert_toast_message),
+                    Toast.LENGTH_SHORT
+                ).show()
+            },
+            isUsingContactLens = isUsingContactLens,
+            navigate = { navController.navigate(Routes.LENS_SETTING) }
+        )
         SimpleSpacer(height = 60.dp)
     }
 }

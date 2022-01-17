@@ -11,6 +11,7 @@ import com.example.contactlensreminder.domain.usecase.setting.GetAllSetting
 import com.example.contactlensreminder.domain.usecase.setting.LensSettingUseCase
 import com.example.contactlensreminder.domain.usecase.setting.SaveAllSetting
 import com.example.contactlensreminder.domain.util.NotificationWorkManagerService
+import com.example.contactlensreminder.domain.util.WaitWorkManagerService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -40,6 +41,13 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideWaitWorkManagerService(
+        @ApplicationContext context: Context
+    ): WaitWorkManagerService =
+        WaitWorkManagerService(context)
+
+    @Provides
+    @Singleton
     fun provideNotificationWorkManagerService(
         @ApplicationContext context: Context
     ): NotificationWorkManagerService =
@@ -55,10 +63,14 @@ object AppModule {
     @Provides
     @Singleton
     fun provideReminderRepository(
+        waitWorkManagerService: WaitWorkManagerService,
         notificationWorkManagerService: NotificationWorkManagerService,
         sharedPreferencesManager: SharedPreferencesManager
-    ): ReminderRepository =
-        ReminderRepositoryImpl(notificationWorkManagerService, sharedPreferencesManager)
+    ): ReminderRepository = ReminderRepositoryImpl(
+        waitWorkManagerService = waitWorkManagerService,
+        notificationWorkManagerService = notificationWorkManagerService,
+        sharedPreferencesManager = sharedPreferencesManager
+    )
 
     @Provides
     @Singleton
