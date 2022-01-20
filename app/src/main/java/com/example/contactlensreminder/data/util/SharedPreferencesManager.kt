@@ -8,7 +8,7 @@ class SharedPreferencesManager(private val context: Context) {
     // SharedPreferencesインスタンスの取得
     private fun getSharedPreferences(): SharedPreferences {
         return context.getSharedPreferences(
-            SharedPreferencesKey.SHARED_PPREFERENCE_FILE_NAME,
+            SharedPreferencesKey.SHARED_PREFERENCE_FILE_NAME,
             Context.MODE_PRIVATE
         )
     }

@@ -2,7 +2,7 @@ package com.example.contactlensreminder.data.repository
 
 import com.example.contactlensreminder.data.util.SharedPreferencesManager
 import com.example.contactlensreminder.domain.repository.SettingRepository
-import com.example.contactlensreminder.presentation.screens.lens_setting.SettingValue
+import com.example.contactlensreminder.domain.SettingValue
 
 class SettingRepositoryImpl(private val sharedPreferencesManager: SharedPreferencesManager) :
     SettingRepository {
@@ -17,6 +17,7 @@ class SettingRepositoryImpl(private val sharedPreferencesManager: SharedPreferen
         val isShowLensPowerSection = settingValue.isShowLensPowerSection
         val leftLensPower = settingValue.leftLensPower
         val rightLensPower = settingValue.rightLensPower
+        val elapsedDays = settingValue.lensPeriod
 
         sharedPreferencesManager.apply {
             saveContactLensType(lensType)
@@ -28,6 +29,7 @@ class SettingRepositoryImpl(private val sharedPreferencesManager: SharedPreferen
             saveIsShowContactLensPowerSection(isShowLensPowerSection)
             saveLeftContactLensPower(leftLensPower.toString())
             saveRightContactLensPower(rightLensPower.toString())
+            saveContactLensElapsedDays(elapsedDays)
         }
     }
 

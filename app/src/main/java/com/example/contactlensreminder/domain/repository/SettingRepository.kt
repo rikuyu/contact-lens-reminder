@@ -1,6 +1,6 @@
 package com.example.contactlensreminder.domain.repository
 
-import com.example.contactlensreminder.presentation.screens.lens_setting.SettingValue
+import com.example.contactlensreminder.domain.SettingValue
 
 interface SettingRepository {
 

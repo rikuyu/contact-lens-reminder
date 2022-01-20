@@ -153,12 +153,12 @@ fun LensSettingScreen(
                                 notificationTimeHour = notificationTimeHour,
                                 setNotificationTimeHour = {
                                     notificationTimeHour = it
-                                    viewModel.onEvent(SettingEvent.Period(it))
+                                    viewModel.onEvent(SettingEvent.NotificationTimeHour(it))
                                 },
                                 notificationTimeMinute = notificationTimeMinute,
                                 setNotificationTimeMinute = {
                                     notificationTimeMinute = it
-                                    viewModel.onEvent(SettingEvent.Period(it))
+                                    viewModel.onEvent(SettingEvent.NotificationTimeMinute(it))
                                 }
                             )
                         }
@@ -169,7 +169,9 @@ fun LensSettingScreen(
                         isUseNotification = isShowLensPowerSection
                     ) {
                         isShowLensPowerSection = !isShowLensPowerSection
-                        viewModel.onEvent(SettingEvent.IsShowLensPowerSection(isShowLensPowerSection))
+                        viewModel.onEvent(
+                            SettingEvent.IsShowLensPowerSection(isShowLensPowerSection)
+                        )
                     }
                     SimpleDivider()
                     AnimatedVisibility(visible = isShowLensPowerSection) {

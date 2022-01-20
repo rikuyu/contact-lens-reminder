@@ -1,4 +1,4 @@
-package com.example.contactlensreminder.presentation.screens.lens_setting
+package com.example.contactlensreminder.domain
 
 data class SettingValue(
     val lensType: Int = 0,

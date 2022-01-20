@@ -1,4 +1,4 @@
-package com.example.contactlensreminder.domain.util
+package com.example.contactlensreminder.data.util
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

@@ -2,22 +2,25 @@ package com.example.contactlensreminder.data.repository
 
 import com.example.contactlensreminder.data.util.SharedPreferencesManager
 import com.example.contactlensreminder.domain.repository.ReminderRepository
-import com.example.contactlensreminder.domain.util.NotificationWorkManagerService
-import com.example.contactlensreminder.domain.util.WaitWorkManagerService
-import com.example.contactlensreminder.presentation.screens.top.ReminderValue
+import com.example.contactlensreminder.data.util.NotificationWorkManagerService
+import com.example.contactlensreminder.data.util.TickDownWorkManagerService
+import com.example.contactlensreminder.data.util.WaitWorkManagerService
+import com.example.contactlensreminder.domain.ReminderValue
 
 class ReminderRepositoryImpl(
     private val waitWorkManagerService: WaitWorkManagerService,
     private val notificationWorkManagerService: NotificationWorkManagerService,
+    private val tickDownWorkManagerService: TickDownWorkManagerService,
     private val sharedPreferencesManager: SharedPreferencesManager
 ) : ReminderRepository {
 
     override fun saveReminderSetting(reminderValue: ReminderValue) {
-        waitWorkManagerService.initWaitWork(
+        waitWorkManagerService.initWaitMinutesWork(
             notificationDay = reminderValue.lensPeriod,
             notificationTimeHour = reminderValue.notificationTimeHour,
             notificationTimeMinutes = reminderValue.notificationTimeMinute
         )
+        tickDownWorkManagerService.initTickDownWork()
         sharedPreferencesManager.apply {
             saveContactLensElapsedDays(reminderValue.elapsedDays)
             saveContactLensPeriod(reminderValue.lensPeriod)
@@ -28,7 +31,8 @@ class ReminderRepositoryImpl(
     }
 
     override fun startReminder() {
-        waitWorkManagerService.startWaitWork()
+        waitWorkManagerService.startWaitMinutesWork()
+        tickDownWorkManagerService.startTickDownWork()
     }
 
     override fun getReminderSetting(): ReminderValue {
@@ -50,5 +54,6 @@ class ReminderRepositoryImpl(
     override fun cancelReminder() {
         waitWorkManagerService.cancelWaitWork()
         notificationWorkManagerService.cancelNotificationWork()
+        tickDownWorkManagerService.cancelTickDownWork()
     }
 }

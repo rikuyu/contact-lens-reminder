@@ -1,6 +1,7 @@
 package com.example.contactlensreminder.presentation.screens.app_setting.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -24,13 +25,10 @@ import com.example.contactlensreminder.presentation.util.SimpleSpacer
 fun AppSettingScreen(
     navController: NavController
 ) {
-
     val list = listOf(
         stringResource(id = R.string.privacy_policy),
         stringResource(id = R.string.help),
-        stringResource(
-            id = R.string.terms_of_service
-        ),
+        stringResource(id = R.string.terms_of_service),
         stringResource(id = R.string.version, "1.0.1")
     )
 
@@ -66,6 +64,7 @@ fun AppSettingScreen(
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
+                            .clickable { }
                             .padding(all = 16.dp)
                     ) {
                         Text(text = item, color = Color.Black)

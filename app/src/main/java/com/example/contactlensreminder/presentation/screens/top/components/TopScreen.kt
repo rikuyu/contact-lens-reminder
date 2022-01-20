@@ -5,19 +5,18 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.contactlensreminder.R
 import com.example.contactlensreminder.presentation.screens.top.ReminderEvent
-import com.example.contactlensreminder.presentation.screens.top.ReminderValue
+import com.example.contactlensreminder.domain.ReminderValue
 import com.example.contactlensreminder.presentation.screens.top.ReminderViewModel
 import com.example.contactlensreminder.presentation.theme.Gray
 import com.example.contactlensreminder.presentation.util.Routes
@@ -58,7 +57,7 @@ fun TopScreen(
                 modifier = Modifier.weight(1f)
             ) {
                 Icon(
-                    imageVector = Icons.Default.Settings,
+                    painter = painterResource(id = R.drawable.ic_help),
                     contentDescription = null,
                     tint = Gray,
                     modifier = Modifier.size(36.dp, 36.dp)

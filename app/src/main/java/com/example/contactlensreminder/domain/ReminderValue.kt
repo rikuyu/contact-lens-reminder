@@ -1,4 +1,4 @@
-package com.example.contactlensreminder.presentation.screens.top
+package com.example.contactlensreminder.domain
 
 data class ReminderValue(
     val lensPeriod: Int = 14,

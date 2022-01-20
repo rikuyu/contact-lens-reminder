@@ -3,7 +3,7 @@ package com.example.contactlensreminder.data.util
 object SharedPreferencesKey {
 
     // SharedPreferenceのデータ保存ファイル名
-    const val SHARED_PPREFERENCE_FILE_NAME = "profile_data"
+    const val SHARED_PREFERENCE_FILE_NAME = "profile_data"
 
     // コンタクトレンズの種類（2Weeks, 1Month, Other）
     const val STORED_CONTACT_LENS_TYPE = "contact_lens_type"

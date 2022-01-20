@@ -1,6 +1,7 @@
 package com.example.contactlensreminder.presentation.screens.lens_setting.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -29,6 +30,7 @@ fun ToggleButtonSection(
     Row(
         modifier = modifier
             .background(Color.White)
+            .clickable { changeSwitch() }
             .padding(top = 12.dp, bottom = 12.dp, end = 12.dp, start = 2.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {

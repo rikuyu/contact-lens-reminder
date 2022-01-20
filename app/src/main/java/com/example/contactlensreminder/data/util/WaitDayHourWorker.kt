@@ -1,10 +1,10 @@
-package com.example.contactlensreminder.domain.util
+package com.example.contactlensreminder.data.util
 
 import android.content.Context
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 
-class WaitWorker(val context: Context, params: WorkerParameters) : Worker(context, params) {
+class WaitDayHourWorker(val context: Context, params: WorkerParameters) : Worker(context, params) {
 
     private val notificationWorkManagerService: NotificationWorkManagerService =
         NotificationWorkManagerService(context)

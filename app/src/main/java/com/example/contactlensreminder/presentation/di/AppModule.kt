@@ -10,8 +10,9 @@ import com.example.contactlensreminder.domain.usecase.reminder.*
 import com.example.contactlensreminder.domain.usecase.setting.GetAllSetting
 import com.example.contactlensreminder.domain.usecase.setting.LensSettingUseCase
 import com.example.contactlensreminder.domain.usecase.setting.SaveAllSetting
-import com.example.contactlensreminder.domain.util.NotificationWorkManagerService
-import com.example.contactlensreminder.domain.util.WaitWorkManagerService
+import com.example.contactlensreminder.data.util.NotificationWorkManagerService
+import com.example.contactlensreminder.data.util.TickDownWorkManagerService
+import com.example.contactlensreminder.data.util.WaitWorkManagerService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -55,6 +56,13 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideTickDownWorkManagerService(
+        @ApplicationContext context: Context
+    ): TickDownWorkManagerService =
+        TickDownWorkManagerService(context)
+
+    @Provides
+    @Singleton
     fun provideSharedPreferencesManager(
         @ApplicationContext context: Context
     ): SharedPreferencesManager =
@@ -65,10 +73,12 @@ object AppModule {
     fun provideReminderRepository(
         waitWorkManagerService: WaitWorkManagerService,
         notificationWorkManagerService: NotificationWorkManagerService,
-        sharedPreferencesManager: SharedPreferencesManager
+        sharedPreferencesManager: SharedPreferencesManager,
+        tickDownWorkManagerService: TickDownWorkManagerService
     ): ReminderRepository = ReminderRepositoryImpl(
         waitWorkManagerService = waitWorkManagerService,
         notificationWorkManagerService = notificationWorkManagerService,
+        tickDownWorkManagerService = tickDownWorkManagerService,
         sharedPreferencesManager = sharedPreferencesManager
     )
 

@@ -1,4 +1,4 @@
-package com.example.contactlensreminder.domain.util
+package com.example.contactlensreminder.data.util
 
 import android.content.Context
 import androidx.work.ExistingWorkPolicy
@@ -13,9 +13,7 @@ class NotificationWorkManagerService(context: Context) {
 
     private lateinit var notificationWork: OneTimeWorkRequest
 
-    fun initNotificationWork(
-        notificationTimeMinutes: Long
-    ) {
+    fun initNotificationWork(notificationTimeMinutes: Long) {
         notificationWork = OneTimeWorkRequestBuilder<NotificationWorker>().apply {
             setInitialDelay(notificationTimeMinutes, TimeUnit.MINUTES)
         }.build()
