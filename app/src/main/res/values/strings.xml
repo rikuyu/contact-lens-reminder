@@ -45,8 +45,9 @@
     <string name="notification_content">コンタクトレンズを正しく使い、目の健康を守りましょう！</string>
 
     <!-- レンズ交換確認ダイアログ -->
-    <string name="dialog_content">本当にレンズを交換しますか（リマインダーはキャンセルされます）</string>
+    <string name="dialog_title">本当にレンズを交換しますか？</string>
+    <string name="dialog_content">リマインダーはキャンセルされます</string>
     <string name="btn_cancel">キャンセル</string>
-    <string name="btn_ok">交換</string>
+    <string name="btn_ok">OK</string>
 
 </resources>

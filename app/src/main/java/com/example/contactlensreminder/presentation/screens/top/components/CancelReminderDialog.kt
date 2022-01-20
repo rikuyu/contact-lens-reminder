@@ -16,10 +16,11 @@ fun CancelReminderDialog(
     if (dialogState) {
         AlertDialog(
             onDismissRequest = { },
+            title = {
+                Text(text = stringResource(id = R.string.dialog_title))
+            },
             text = {
-                Text(
-                    text = stringResource(id = R.string.dialog_content)
-                )
+                Text(text = stringResource(id = R.string.dialog_content))
             },
             confirmButton = {
                 TextButton(
@@ -33,13 +34,11 @@ fun CancelReminderDialog(
             },
             dismissButton = {
                 TextButton(
-                    onClick = {
-                        changeDialogState(false)
-                    }
+                    onClick = { changeDialogState(false) }
                 ) {
                     Text(text = stringResource(id = R.string.btn_cancel))
                 }
-            },
+            }
         )
     }
 }
