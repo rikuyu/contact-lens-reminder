@@ -4,6 +4,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import com.example.contactlensreminder.domain.ReminderValue
 import com.example.contactlensreminder.domain.usecase.reminder.ReminderUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -21,13 +22,17 @@ class ReminderViewModel @Inject constructor(
     }
 
     fun onEvent(event: ReminderEvent) {
+        _reminder.value = reminder.value.copy(
+            isUsingContactLens = event.reminderValue.isUsingContactLens
+        )
+        reminderUseCase.saveReminderSetting(reminder.value)
         when (event) {
             is ReminderEvent.StartReminder -> {
-                _reminder.value = reminder.value
-                reminderUseCase.saveReminderSetting(reminder.value)
-                reminderUseCase.startReminder.invoke()
+                reminderUseCase.startReminder(reminder.value.lensPeriod)
             }
-            is ReminderEvent.CancelReminder -> reminderUseCase.cancelReminder.invoke()
+            is ReminderEvent.CancelReminder -> {
+                reminderUseCase.cancelReminder.invoke()
+            }
         }
     }
 }

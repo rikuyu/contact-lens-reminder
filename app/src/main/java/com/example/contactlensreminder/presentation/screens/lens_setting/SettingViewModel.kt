@@ -4,6 +4,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import com.example.contactlensreminder.domain.SettingValue
 import com.example.contactlensreminder.domain.usecase.setting.LensSettingUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -42,9 +43,19 @@ class SettingViewModel @Inject constructor(
                     notificationDay = event.notificationType
                 )
             }
-            is SettingEvent.NotificationTime -> {
+            is SettingEvent.NotificationTimeHour -> {
                 _setting.value = setting.value.copy(
-                    notificationTime = event.notificationTime
+                    notificationTimeHour = event.notificationTimeHour
+                )
+            }
+            is SettingEvent.NotificationTimeMinute -> {
+                _setting.value = setting.value.copy(
+                    notificationTimeMinute = event.notificationTimeMinute
+                )
+            }
+            is SettingEvent.IsShowLensPowerSection -> {
+                _setting.value = setting.value.copy(
+                    isShowLensPowerSection = event.isShowLensPowerSection
                 )
             }
             is SettingEvent.LeftPower -> {
@@ -57,7 +68,9 @@ class SettingViewModel @Inject constructor(
                     rightLensPower = event.rightLensPower
                 )
             }
-            is SettingEvent.SaveSetting -> lensSettingUseCase.saveAllSetting(setting.value)
+            is SettingEvent.SaveSetting -> {
+                lensSettingUseCase.saveAllSetting(setting.value)
+            }
         }
     }
 }

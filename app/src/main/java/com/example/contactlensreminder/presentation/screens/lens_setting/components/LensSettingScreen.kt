@@ -46,9 +46,13 @@ fun LensSettingScreen(
 
     var notificationType by remember { mutableStateOf(settingValue.notificationDay) }
 
-    var notificationTime by remember { mutableStateOf(settingValue.notificationTime) }
+    var notificationTimeHour by remember { mutableStateOf(settingValue.notificationTimeHour) }
+
+    var notificationTimeMinute by remember { mutableStateOf(settingValue.notificationTimeMinute) }
 
     var leftLensPower by remember { mutableStateOf(settingValue.leftLensPower) }
+
+    var isShowLensPowerSection by remember { mutableStateOf(settingValue.isShowLensPowerSection) }
 
     var rightLensPower by remember { mutableStateOf(settingValue.rightLensPower) }
 
@@ -126,8 +130,9 @@ fun LensSettingScreen(
                             }
                         )
                     }
-                    SetIsUseNotification(
+                    ToggleButtonSection(
                         modifier = Modifier.fillMaxWidth(),
+                        text = stringResource(id = R.string.notification),
                         isUseNotification = isUseNotification
                     ) {
                         isUseNotification = !isUseNotification
@@ -143,41 +148,58 @@ fun LensSettingScreen(
                                 notificationType = it
                                 viewModel.onEvent(SettingEvent.NotificationDay(it))
                             }
-//                            SetNotificationSection(
-//                                modifier = Modifier.fillMaxWidth(),
-//                                notificationTime = notificationTime
-//                            ) {
-//                                notificationTime = it
-//                                viewModel.onEvent(SettingEvent.NotificationTime(it))
-//                            }
+                            SetNotificationTimeSection(
+                                modifier = Modifier.fillMaxWidth(),
+                                notificationTimeHour = notificationTimeHour,
+                                setNotificationTimeHour = {
+                                    notificationTimeHour = it
+                                    viewModel.onEvent(SettingEvent.NotificationTimeHour(it))
+                                },
+                                notificationTimeMinute = notificationTimeMinute,
+                                setNotificationTimeMinute = {
+                                    notificationTimeMinute = it
+                                    viewModel.onEvent(SettingEvent.NotificationTimeMinute(it))
+                                }
+                            )
                         }
                     }
-                    SetLensPowerSection(
+                    ToggleButtonSection(
                         modifier = Modifier.fillMaxWidth(),
-                        leftLensPower = leftLensPower,
-                        setLeftLensPower = {
-                            leftLensPower = it
-                            viewModel.onEvent(SettingEvent.LeftPower(it))
-                        },
-                        rightLensPower = rightLensPower,
-                        setRightLensPower = {
-                            rightLensPower = it
-                            viewModel.onEvent(SettingEvent.RightPower(it))
-                        },
-                        isShowLensPowerPicker = isShowLensPowerPicker,
-                        changeIsShowPowerPicker = {
-                            isShowLensPowerPicker = !isShowLensPowerPicker
-                        }
-                    )
+                        text = stringResource(id = R.string.lens_power),
+                        isUseNotification = isShowLensPowerSection
+                    ) {
+                        isShowLensPowerSection = !isShowLensPowerSection
+                        viewModel.onEvent(
+                            SettingEvent.IsShowLensPowerSection(isShowLensPowerSection)
+                        )
+                    }
                     SimpleDivider()
+                    AnimatedVisibility(visible = isShowLensPowerSection) {
+                        SetLensPowerSection(
+                            modifier = Modifier.fillMaxWidth(),
+                            leftLensPower = leftLensPower,
+                            setLeftLensPower = {
+                                leftLensPower = it
+                                viewModel.onEvent(SettingEvent.LeftPower(it))
+                            },
+                            rightLensPower = rightLensPower,
+                            setRightLensPower = {
+                                rightLensPower = it
+                                viewModel.onEvent(SettingEvent.RightPower(it))
+                            },
+                            isShowLensPowerPicker = isShowLensPowerPicker,
+                            changeIsShowPowerPicker = {
+                                isShowLensPowerPicker = !isShowLensPowerPicker
+                            }
+                        )
+                    }
                 }
                 SetSettingButton(modifier = Modifier.fillMaxWidth()) {
                     isShowLensPeriodPicker = false
                     isShowLensPowerPicker = false
-
                     Toast.makeText(
                         context,
-                        context.getString(R.string.toast_message),
+                        context.getString(R.string.success_save_setting),
                         Toast.LENGTH_SHORT
                     ).show()
                     viewModel.onEvent(SettingEvent.SaveSetting)

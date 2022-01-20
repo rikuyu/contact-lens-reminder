@@ -1,6 +1,7 @@
 package com.example.contactlensreminder.presentation.screens.lens_setting.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -11,17 +12,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.contactlensreminder.R
 import com.example.contactlensreminder.presentation.theme.CleanBlue
 import com.example.contactlensreminder.presentation.theme.LightBlue
 
 @Composable
-fun SetIsUseNotification(
+fun ToggleButtonSection(
     modifier: Modifier = Modifier,
+    text: String,
     textColor: Color = Color.Black,
     fontSize: TextUnit = 18.sp,
     isUseNotification: Boolean,
@@ -30,11 +30,12 @@ fun SetIsUseNotification(
     Row(
         modifier = modifier
             .background(Color.White)
+            .clickable { changeSwitch() }
             .padding(top = 12.dp, bottom = 12.dp, end = 12.dp, start = 2.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = stringResource(id = R.string.notification),
+            text = text,
             modifier = Modifier
                 .weight(1f)
                 .padding(start = 12.dp),

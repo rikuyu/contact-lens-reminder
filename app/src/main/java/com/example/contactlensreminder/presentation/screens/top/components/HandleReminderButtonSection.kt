@@ -20,24 +20,19 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.contactlensreminder.R
-import com.example.contactlensreminder.presentation.theme.CleanBlue
+import com.example.contactlensreminder.presentation.theme.SkyBlue
 
 @Composable
 fun HandleReminderButtonSection(
     modifier: Modifier,
     isUsingContactLens: Boolean,
-    changeIsUsingContactLens: () -> Unit,
-    startReminderEvent: () -> Unit,
-    stopReminderEvent: () -> Unit
+    startReminder: (Boolean) -> Unit,
+    openDialog: () -> Unit
 ) {
-    val onClick: () -> Unit = {
-        if (isUsingContactLens) {
-            changeIsUsingContactLens()
-            stopReminderEvent()
-        } else {
-            changeIsUsingContactLens()
-            startReminderEvent()
-        }
+    val onClick: (Boolean) -> Unit = if (!isUsingContactLens) {
+        { startReminder(!it) }
+    } else {
+        { openDialog() }
     }
 
     Box(
@@ -45,10 +40,10 @@ fun HandleReminderButtonSection(
         contentAlignment = Alignment.Center
     ) {
         Button(
-            onClick = onClick,
+            onClick = { onClick(isUsingContactLens) },
             modifier = Modifier.size(240.dp, 60.dp),
             colors = ButtonDefaults.textButtonColors(
-                backgroundColor = CleanBlue,
+                backgroundColor = SkyBlue,
                 contentColor = Color.White,
                 disabledContentColor = Color.LightGray
             ),

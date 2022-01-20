@@ -1,26 +1,501 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.contactlensreminder">
 
     <application
+        android:name=".presentation.ContactLensReminderApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:name=".presentation.ContactLensReminderApp"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ContactLensReminder">
+
         <activity
             android:name=".presentation.MainActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.ContactLensReminder"
+            tools:ignore="LockedOrientationActivity" />
+
+        <!-- Default -->
+        <activity-alias
+            android:name=".DefaultAlias"
+            android:enabled="true"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher"
+            android:roundIcon="@mipmap/ic_launcher_round"
             android:label="@string/app_name"
-            android:theme="@style/Theme.ContactLensReminder">
+            android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity-alias>
+
+        <!-- 期限切れ -->
+        <activity-alias
+            android:name=".ExpiredAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_expired"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 0 -->
+        <activity-alias
+            android:name=".ZeroAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_0"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 1 -->
+        <activity-alias
+            android:name=".OneAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_1"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 2 -->
+        <activity-alias
+            android:name=".TwoAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_2"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 3 -->
+        <activity-alias
+            android:name=".ThreeAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_3"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 4 -->
+        <activity-alias
+            android:name=".FourAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_4"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 5 -->
+        <activity-alias
+            android:name=".FiveAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_5"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 6 -->
+        <activity-alias
+            android:name=".SixAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_6"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 7 -->
+        <activity-alias
+            android:name=".SevenAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_7"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 8 -->
+        <activity-alias
+            android:name=".EightAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_8"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 9 -->
+        <activity-alias
+            android:name=".NineAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_9"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 10 -->
+        <activity-alias
+            android:name=".TenAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_10"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 11 -->
+        <activity-alias
+            android:name=".ElevenAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_11"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 12 -->
+        <activity-alias
+            android:name=".TwelveAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_12"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 13 -->
+        <activity-alias
+            android:name=".ThirteenAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_13"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 14 -->
+        <activity-alias
+            android:name=".FourteenAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_14"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 15 -->
+        <activity-alias
+            android:name=".FifteenAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_15"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 16 -->
+        <activity-alias
+            android:name=".SixteenAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_16"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 17 -->
+        <activity-alias
+            android:name=".SeventeenAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_17"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 18 -->
+        <activity-alias
+            android:name=".EighteenAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_18"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 19 -->
+        <activity-alias
+            android:name=".NineteenAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_19"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 20 -->
+        <activity-alias
+            android:name=".TwentyAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_20"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 21 -->
+        <activity-alias
+            android:name=".TwentyOneAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_21"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 22 -->
+        <activity-alias
+            android:name=".TwentyTwoAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_21"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 23 -->
+        <activity-alias
+            android:name=".TwentyThreeAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_22"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 24 -->
+        <activity-alias
+            android:name=".TwentyFourAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_24"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 25 -->
+        <activity-alias
+            android:name=".TwentyFiveAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_25"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 26 -->
+        <activity-alias
+            android:name=".TwentySixAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_26"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 27 -->
+        <activity-alias
+            android:name=".TwentySevenAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_27"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 28 -->
+        <activity-alias
+            android:name=".TwentyEightAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_28"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 29 -->
+        <activity-alias
+            android:name=".TwentyNineAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_29"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 30 -->
+        <activity-alias
+            android:name=".ThirtyAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_30"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 31 -->
+        <activity-alias
+            android:name=".ThirtyOneAlias"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@drawable/icon_31"
+            android:label="@string/app_name"
+            android:targetActivity=".presentation.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
     </application>
 
 </manifest>

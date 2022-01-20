@@ -1,7 +1,6 @@
-package com.example.contactlensreminder.domain.util
+package com.example.contactlensreminder.data.workmanager
 
 import android.content.Context
-import android.util.Log
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 
@@ -10,7 +9,6 @@ class NotificationWorker(val context: Context, params: WorkerParameters) : Worke
     private val notificationService: NotificationService = NotificationService(context)
 
     override fun doWork(): Result {
-        Log.d("AAAAAAAAAAAAA", "worker")
         notificationService.showNotification()
         return Result.success()
     }

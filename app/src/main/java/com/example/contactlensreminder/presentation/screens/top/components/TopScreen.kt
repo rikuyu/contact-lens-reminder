@@ -5,19 +5,20 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.contactlensreminder.R
+import com.example.contactlensreminder.domain.ReminderValue
 import com.example.contactlensreminder.presentation.screens.top.ReminderEvent
 import com.example.contactlensreminder.presentation.screens.top.ReminderViewModel
-import com.example.contactlensreminder.presentation.theme.Gray
+import com.example.contactlensreminder.presentation.theme.LightBlue
 import com.example.contactlensreminder.presentation.util.Routes
 import com.example.contactlensreminder.presentation.util.SimpleSpacer
 
@@ -36,7 +37,11 @@ fun TopScreen(
 
     val lensElapsedDays by remember { mutableStateOf(reminderValue.elapsedDays) }
 
-    val notificationTime by remember { mutableStateOf(reminderValue.notificationTime) }
+    val notificationTimeHour by remember { mutableStateOf(reminderValue.notificationTimeHour) }
+
+    val notificationTimeMinute by remember { mutableStateOf(reminderValue.notificationTimeMinute) }
+
+    var dialogState by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -54,9 +59,9 @@ fun TopScreen(
                 modifier = Modifier.weight(1f)
             ) {
                 Icon(
-                    imageVector = Icons.Default.Settings,
+                    painter = painterResource(id = R.drawable.ic_help),
                     contentDescription = null,
-                    tint = Gray,
+                    tint = LightBlue,
                     modifier = Modifier.size(36.dp, 36.dp)
                 )
             }
@@ -79,7 +84,8 @@ fun TopScreen(
         ) {
             RemainingDaysBar(
                 lensPeriod = lensPeriod,
-                // notificationTime = notificationTime,
+                notificationTimeHour = notificationTimeHour,
+                notificationTimeMinute = notificationTimeMinute,
                 lensElapsedDays = lensElapsedDays
             )
         }
@@ -89,34 +95,58 @@ fun TopScreen(
                 .weight(1f)
                 .background(Color.White),
             isUsingContactLens = isUsingContactLens,
-            changeIsUsingContactLens = { isUsingContactLens = !isUsingContactLens },
-            startReminderEvent = {
+            startReminder = {
+                isUsingContactLens = it
                 viewModel.onEvent(
                     ReminderEvent.StartReminder(
-                        lensPeriod = lensPeriod,
-                        notificationTime = notificationTime,
-                        elapsedDays = lensElapsedDays,
-                        isUsingContactLens = isUsingContactLens
+                        ReminderValue(
+                            lensPeriod = lensPeriod,
+                            notificationTimeHour = notificationTimeHour,
+                            notificationTimeMinute = notificationTimeMinute,
+                            elapsedDays = lensElapsedDays,
+                            isUsingContactLens = it
+                        )
                     )
                 )
             },
-            stopReminderEvent = {
-                Toast.makeText(
-                    context,
-                    "Stop",
-                    Toast.LENGTH_SHORT
-                ).show()
-                viewModel.onEvent(ReminderEvent.CancelReminder)
-            }
+            openDialog = { dialogState = true }
         )
+        CancelReminderDialog(
+            dialogState = dialogState,
+            changeDialogState = { dialogState = it }
+        ) {
+            isUsingContactLens = it
+            viewModel.onEvent(
+                ReminderEvent.CancelReminder(
+                    ReminderValue(
+                        lensPeriod = lensPeriod,
+                        notificationTimeHour = notificationTimeHour,
+                        notificationTimeMinute = notificationTimeMinute,
+                        elapsedDays = lensElapsedDays,
+                        isUsingContactLens = it
+                    )
+                )
+            )
+            Toast.makeText(
+                context,
+                context.getString(R.string.confirm_reminder_message),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
         LensSettingButtonSection(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
-                .background(Color.White)
-        ) {
-            navController.navigate(Routes.LENS_SETTING)
-        }
-        SimpleSpacer(height = 60.dp)
+                .background(Color.White),
+            showAlertToast = {
+                Toast.makeText(
+                    context,
+                    context.getString(R.string.alert_toast_message),
+                    Toast.LENGTH_SHORT
+                ).show()
+            },
+            isUsingContactLens = isUsingContactLens,
+            navigate = { navController.navigate(Routes.LENS_SETTING) }
+        )
     }
 }

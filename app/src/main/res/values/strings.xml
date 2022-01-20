@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ContactLensReminder</string>
+    <string name="app_name">レンズ交換</string>
 
     <!-- TopScreen -->
     <string name="remain">残り</string>
@@ -10,6 +10,9 @@
     <string name="lens_change">レンズの交換</string>
     <string name="lens_setting">レンズの設定</string>
     <string name="new_line">\n\n</string>
+    <string name="time_div">:</string>
+    <string name="alert_toast_message">レンジ使用中は設定を変更できません</string>
+    <string name="confirm_reminder_message">リマインダーがリセットされました</string>
 
     <!-- LensSettingScreen -->
     <string name="lens_setting_screen_title">コンタクトレンズ設定</string>
@@ -28,7 +31,7 @@
     <string name="two_weeks">2Weeks</string>
     <string name="one_month">1Month</string>
     <string name="other">Other</string>
-    <string name="toast_message">設定が保存されました</string>
+    <string name="success_save_setting">設定が保存されました</string>
 
     <!-- AppSettingScreen -->
     <string name="app_setting_screen_title">このアプリについて</string>
@@ -38,7 +41,13 @@
     <string name="version">バージョン %s</string>
 
     <!-- Notification -->
-    <string name="notification_title">プライバシーポリシー</string>
-    <string name="notification_content">ヘルプ</string>
+    <string name="notification_title">レンズ交換の日です！</string>
+    <string name="notification_content">コンタクトレンズを正しく使い、目の健康を守りましょう！</string>
+
+    <!-- レンズ交換確認ダイアログ -->
+    <string name="dialog_title">本当にレンズを交換しますか？</string>
+    <string name="dialog_content">リマインダーはキャンセルされます</string>
+    <string name="btn_cancel">キャンセル</string>
+    <string name="btn_ok">OK</string>
 
 </resources>

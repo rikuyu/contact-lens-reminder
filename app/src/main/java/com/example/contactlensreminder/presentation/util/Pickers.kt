@@ -1,4 +1,4 @@
-package com.example.contactlensreminder.presentation.screens.lens_setting
+package com.example.contactlensreminder.presentation.util
 
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.runtime.Composable
@@ -18,29 +18,6 @@ fun LensPowerPicker(
     onValueChange: (Double) -> Unit,
     dividersColor: Color = CleanBlue,
     range: List<Double>,
-    textStyle: TextStyle = LocalTextStyle.current.copy(color = Color.Black),
-) {
-    ListItemPicker(
-        modifier = modifier,
-        label = label,
-        value = value,
-        onValueChange = onValueChange,
-        dividersColor = dividersColor,
-        list = range.toList(),
-        textStyle = textStyle
-    )
-}
-
-@Composable
-fun DaysPicker(
-    modifier: Modifier = Modifier,
-    label: (Int) -> String = {
-        it.toString()
-    },
-    value: Int,
-    onValueChange: (Int) -> Unit,
-    dividersColor: Color = CleanBlue,
-    range: Iterable<Int>,
     textStyle: TextStyle = LocalTextStyle.current.copy(color = Color.Black),
 ) {
     ListItemPicker(

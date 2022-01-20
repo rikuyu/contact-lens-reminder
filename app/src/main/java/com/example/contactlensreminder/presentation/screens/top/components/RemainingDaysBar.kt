@@ -30,7 +30,8 @@ import com.example.contactlensreminder.presentation.util.getExpirationDate
 @Composable
 fun RemainingDaysBar(
     lensPeriod: Int,
-//    notificationTime: String,
+    notificationTimeHour: Int,
+    notificationTimeMinute: Int,
     lensElapsedDays: Int,
     remainingDaysTextFontSize: TextUnit = 36.sp,
     supportTextFontSize: TextUnit = 24.sp,
@@ -91,7 +92,7 @@ fun RemainingDaysBar(
                             fontSize = remainingDaysTextFontSize
                         )
                     ) {
-                        append(lensElapsedDays.toInt().toString())
+                        append(lensElapsedDays.toString())
                     }
                     withStyle(
                         style = SpanStyle(
@@ -119,24 +120,26 @@ fun RemainingDaysBar(
                     ) {
                         append(getExpirationDate(lensElapsedDays))
                     }
-//                    append(stringResource(id = R.string.new_line))
-//                    withStyle(
-//                        style = SpanStyle(
-//                            color = supportTextColor,
-//                            fontSize = periodTextFontSize
-//                        )
-//                    ) {
-//                        append(stringResource(id = R.string.time_message))
-//                    }
-//                    append(" ")
-//                    withStyle(
-//                        style = SpanStyle(
-//                            color = supportTextColor,
-//                            fontSize = periodTextFontSize
-//                        )
-//                    ) {
-//                        append(notificationTime)
-//                    }
+                    append(stringResource(id = R.string.new_line))
+                    withStyle(
+                        style = SpanStyle(
+                            color = supportTextColor,
+                            fontSize = periodTextFontSize
+                        )
+                    ) {
+                        append(stringResource(id = R.string.time_message))
+                    }
+                    append(" ")
+                    withStyle(
+                        style = SpanStyle(
+                            color = supportTextColor,
+                            fontSize = periodTextFontSize
+                        )
+                    ) {
+                        append(notificationTimeHour.toString())
+                        append(stringResource(id = R.string.time_div))
+                        append(notificationTimeMinute.toString())
+                    }
                 }
             },
             textAlign = TextAlign.Center

@@ -5,13 +5,15 @@ import android.content.SharedPreferences
 
 class SharedPreferencesManager(private val context: Context) {
 
+    // SharedPreferencesインスタンスの取得
     private fun getSharedPreferences(): SharedPreferences {
         return context.getSharedPreferences(
-            SharedPreferencesKey.SHARED_PPREFERENCE_FILE_NAME,
+            SharedPreferencesKey.SHARED_PREFERENCE_FILE_NAME,
             Context.MODE_PRIVATE
         )
     }
 
+    // コンタクトレンズの種類
     fun getContactLensType(): Int {
         return getSharedPreferences().getInt(
             SharedPreferencesKey.STORED_CONTACT_LENS_TYPE,
@@ -24,6 +26,7 @@ class SharedPreferencesManager(private val context: Context) {
             .putInt(SharedPreferencesKey.STORED_CONTACT_LENS_TYPE, lensType).apply()
     }
 
+    // コンタクトレンズの使用期間
     fun getContactLensPeriod(): Int {
         return getSharedPreferences().getInt(
             SharedPreferencesKey.STORED_CONTACT_LENS_PERIOD,
@@ -36,6 +39,7 @@ class SharedPreferencesManager(private val context: Context) {
             .putInt(SharedPreferencesKey.STORED_CONTACT_LENS_PERIOD, period).apply()
     }
 
+    // コンタクトレンズを使用中かどうか（リマインダー機能中か）
     fun getIsUsingContactLens(): Boolean {
         return getSharedPreferences().getBoolean(
             SharedPreferencesKey.STORED_IS_USING_CONTACT_LENS,
@@ -49,6 +53,7 @@ class SharedPreferencesManager(private val context: Context) {
             .apply()
     }
 
+    // コンタクトレンズの残り日数
     fun getContactLensElapsedDays(): Int {
         return getSharedPreferences().getInt(
             SharedPreferencesKey.STORED_CONTACT_LENS_ELAPSED_DAYS,
@@ -61,6 +66,7 @@ class SharedPreferencesManager(private val context: Context) {
             .putInt(SharedPreferencesKey.STORED_CONTACT_LENS_ELAPSED_DAYS, elapsedDays).apply()
     }
 
+    // 通知機能を使うかどうか
     fun getIsUseNotification(): Boolean {
         return getSharedPreferences().getBoolean(
             SharedPreferencesKey.STORED_IS_USE_NOTIFICATION,
@@ -73,6 +79,7 @@ class SharedPreferencesManager(private val context: Context) {
             .putBoolean(SharedPreferencesKey.STORED_IS_USE_NOTIFICATION, isUseNotification).apply()
     }
 
+    // 通知するのは前日か当日か
     fun getNotificationDay(): Int {
         return getSharedPreferences().getInt(
             SharedPreferencesKey.STORED_NOTIFICATION_DAY,
@@ -85,18 +92,50 @@ class SharedPreferencesManager(private val context: Context) {
             .putInt(SharedPreferencesKey.STORED_NOTIFICATION_DAY, notificationDay).apply()
     }
 
-    fun getNotificationTime(): String? {
-        return getSharedPreferences().getString(
-            SharedPreferencesKey.STORED_NOTIFICATION_TIME,
-            null
+    // 通知時刻（時）
+    fun getNotificationTimeHour(): Int {
+        return getSharedPreferences().getInt(
+            SharedPreferencesKey.STORED_NOTIFICATION_TIME_HOUR,
+            9
         )
     }
 
-    fun saveNotificationTime(notificationTime: String) {
+    fun saveNotificationTimeHour(notificationTime: Int) {
         getSharedPreferences().edit()
-            .putString(SharedPreferencesKey.STORED_NOTIFICATION_TIME, notificationTime).apply()
+            .putInt(SharedPreferencesKey.STORED_NOTIFICATION_TIME_HOUR, notificationTime).apply()
     }
 
+    // 通知時刻（分）
+    fun getNotificationTimeMinute(): Int {
+        return getSharedPreferences().getInt(
+            SharedPreferencesKey.STORED_NOTIFICATION_TIME_MINUTE,
+            15
+        )
+    }
+
+    fun saveNotificationTimeMinute(notificationTime: Int) {
+        getSharedPreferences().edit()
+            .putInt(SharedPreferencesKey.STORED_NOTIFICATION_TIME_MINUTE, notificationTime)
+            .apply()
+    }
+
+    // コンタクトレンズの度数設定項目を表示するかどうか
+    fun getIsShowContactLensPowerSection(): Boolean {
+        return getSharedPreferences().getBoolean(
+            SharedPreferencesKey.STORED_IS_SHOW_CONTACT_LENS_POWER_SECTION,
+            true
+        )
+    }
+
+    fun saveIsShowContactLensPowerSection(isUseNotification: Boolean) {
+        getSharedPreferences().edit()
+            .putBoolean(
+                SharedPreferencesKey.STORED_IS_SHOW_CONTACT_LENS_POWER_SECTION,
+                isUseNotification
+            ).apply()
+    }
+
+    // コンタクトレンズの度数（左）
     fun getLeftContactLensPower(): String? {
         return getSharedPreferences().getString(
             SharedPreferencesKey.STORED_LEFT_CONTACT_LENS_POWER,
@@ -109,6 +148,7 @@ class SharedPreferencesManager(private val context: Context) {
             .putString(SharedPreferencesKey.STORED_LEFT_CONTACT_LENS_POWER, lensPower).apply()
     }
 
+    // コンタクトレンズの度数（右）
     fun getRightContactLensPower(): String? {
         return getSharedPreferences().getString(
             SharedPreferencesKey.STORED_RIGHT_CONTACT_LENS_POWER,

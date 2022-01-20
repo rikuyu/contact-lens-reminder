@@ -3,10 +3,7 @@ package com.example.contactlensreminder.presentation.screens.lens_setting.compon
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.runtime.*
@@ -17,8 +14,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.chargemap.compose.numberpicker.NumberPicker
 import com.example.contactlensreminder.R
-import com.example.contactlensreminder.presentation.screens.lens_setting.DaysPicker
 import com.example.contactlensreminder.presentation.theme.CleanBlue
 import com.example.contactlensreminder.presentation.theme.PaleBlue
 import com.example.contactlensreminder.presentation.util.SimpleDivider
@@ -46,10 +43,11 @@ fun SetLensPeriodSection(
                     .background(Color.White)
             )
             if (isShowLensPeriodPicker) {
-                DaysPicker(
+                NumberPicker(
                     value = period,
                     onValueChange = { setLensPeriod(it) },
-                    range = 1..31
+                    range = 1..31,
+                    textStyle = LocalTextStyle.current.copy(color = Color.Black)
                 )
             } else {
                 Box(

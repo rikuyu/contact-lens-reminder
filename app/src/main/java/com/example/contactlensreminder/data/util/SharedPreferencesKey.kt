@@ -3,7 +3,7 @@ package com.example.contactlensreminder.data.util
 object SharedPreferencesKey {
 
     // SharedPreferenceのデータ保存ファイル名
-    const val SHARED_PPREFERENCE_FILE_NAME = "profile_data"
+    const val SHARED_PREFERENCE_FILE_NAME = "profile_data"
 
     // コンタクトレンズの種類（2Weeks, 1Month, Other）
     const val STORED_CONTACT_LENS_TYPE = "contact_lens_type"
@@ -23,8 +23,14 @@ object SharedPreferencesKey {
     // 通知するのは前日か当日か
     const val STORED_NOTIFICATION_DAY = "notification_day"
 
-    // 通知時刻
-    const val STORED_NOTIFICATION_TIME = "notification_time"
+    // 通知時刻（時）
+    const val STORED_NOTIFICATION_TIME_HOUR = "notification_time_hour"
+
+    // 通知時刻（分）
+    const val STORED_NOTIFICATION_TIME_MINUTE = "notification_time_minute"
+
+    // コンタクトレンズの度数を決める項目を表示するかどうか
+    const val STORED_IS_SHOW_CONTACT_LENS_POWER_SECTION = "is_show_contact_lens_power_section"
 
     // 左目の度数
     const val STORED_LEFT_CONTACT_LENS_POWER = "left_contact_lens_power"

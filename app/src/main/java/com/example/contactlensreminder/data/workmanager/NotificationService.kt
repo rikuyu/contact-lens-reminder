@@ -1,13 +1,13 @@
-package com.example.contactlensreminder.domain.util
+package com.example.contactlensreminder.data.workmanager
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.graphics.BitmapFactory
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationCompat.VISIBILITY_PUBLIC
+import androidx.core.content.ContextCompat
 import com.example.contactlensreminder.R
-import java.text.SimpleDateFormat
-import java.util.*
 
 class NotificationService(val context: Context) {
 
@@ -15,17 +15,19 @@ class NotificationService(val context: Context) {
         context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
     private var notificationBuilder = NotificationCompat.Builder(context, CHANNEL_ID)
-        .setSmallIcon(R.drawable.ic_water_drop)
+        // .setSmallIcon(R.drawable.ic_water_drop)
         .setLargeIcon(
             BitmapFactory.decodeResource(context.resources, R.drawable.ic_water_drop)
         )
-        .setContentTitle(R.string.notification.toString())
-        .setContentText(R.string.terms_of_service.toString())
+        .setColor(ContextCompat.getColor(context, R.color.light_blue))
+        .setContentTitle(context.getString(R.string.notification_title))
+        .setContentText(context.getString(R.string.notification_title))
         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-        .setWhen(System.currentTimeMillis())
+        .setVisibility(VISIBILITY_PUBLIC)
+        .setAutoCancel(true)
 
+    // Build.VERSION.SDK_INT >= Build.VERSION_CODES.O always true. min SDK 26
     private fun createChannel() {
-        // Build.VERSION.SDK_INT >= Build.VERSION_CODES.O always true. min SDK 26
         val channel = NotificationChannel(
             CHANNEL_ID,
             CHANNEL_NAME,

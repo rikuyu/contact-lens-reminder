@@ -18,24 +18,34 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.contactlensreminder.R
-import com.example.contactlensreminder.presentation.theme.CleanBlue
+import com.example.contactlensreminder.presentation.theme.SkyBlue
 
 @Composable
 fun LensSettingButtonSection(
     modifier: Modifier,
+    isUsingContactLens: Boolean,
+    showAlertToast: () -> Unit,
     navigate: () -> Unit
 ) {
+    val onClick: () -> Unit = {
+        if (isUsingContactLens) {
+            showAlertToast()
+        } else {
+            navigate()
+        }
+    }
+
     Box(
         modifier = modifier,
         contentAlignment = Alignment.Center
     ) {
         Button(
-            onClick = { navigate() },
+            onClick = onClick,
             modifier = Modifier.size(240.dp, 60.dp),
             colors = ButtonDefaults.textButtonColors(
-                backgroundColor = CleanBlue,
+                backgroundColor = if (!isUsingContactLens) SkyBlue else Color.LightGray,
                 contentColor = Color.White,
-                disabledContentColor = Color.LightGray
+                disabledContentColor = Color.White
             ),
             shape = RoundedCornerShape(30)
         ) {

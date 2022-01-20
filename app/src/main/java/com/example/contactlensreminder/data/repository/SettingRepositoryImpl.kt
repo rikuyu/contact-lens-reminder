@@ -2,7 +2,7 @@ package com.example.contactlensreminder.data.repository
 
 import com.example.contactlensreminder.data.util.SharedPreferencesManager
 import com.example.contactlensreminder.domain.repository.SettingRepository
-import com.example.contactlensreminder.presentation.screens.lens_setting.SettingValue
+import com.example.contactlensreminder.domain.SettingValue
 
 class SettingRepositoryImpl(private val sharedPreferencesManager: SharedPreferencesManager) :
     SettingRepository {
@@ -12,18 +12,24 @@ class SettingRepositoryImpl(private val sharedPreferencesManager: SharedPreferen
         val lensPeriod = settingValue.lensPeriod
         val isUseNotification = settingValue.isUseNotification
         val notificationDay = settingValue.notificationDay
-        val notificationTime = settingValue.notificationTime
+        val notificationTimeHour = settingValue.notificationTimeHour
+        val notificationTimeMinute = settingValue.notificationTimeMinute
+        val isShowLensPowerSection = settingValue.isShowLensPowerSection
         val leftLensPower = settingValue.leftLensPower
         val rightLensPower = settingValue.rightLensPower
+        val elapsedDays = settingValue.lensPeriod
 
         sharedPreferencesManager.apply {
             saveContactLensType(lensType)
             saveContactLensPeriod(lensPeriod)
             saveIsUseNotification(isUseNotification)
             saveNotificationDay(notificationDay)
-            saveNotificationTime(notificationTime)
+            saveNotificationTimeHour(notificationTimeHour)
+            saveNotificationTimeMinute(notificationTimeMinute)
+            saveIsShowContactLensPowerSection(isShowLensPowerSection)
             saveLeftContactLensPower(leftLensPower.toString())
             saveRightContactLensPower(rightLensPower.toString())
+            saveContactLensElapsedDays(elapsedDays)
         }
     }
 
@@ -32,7 +38,9 @@ class SettingRepositoryImpl(private val sharedPreferencesManager: SharedPreferen
         val lensPeriod = sharedPreferencesManager.getContactLensPeriod()
         val isUseNotification = sharedPreferencesManager.getIsUseNotification()
         val notificationDay = sharedPreferencesManager.getNotificationDay()
-        val notificationTime = sharedPreferencesManager.getNotificationTime() ?: "7:00"
+        val notificationTimeHour = sharedPreferencesManager.getNotificationTimeHour()
+        val notificationTimeMinute = sharedPreferencesManager.getNotificationTimeMinute()
+        val isShowLensPowerSection = sharedPreferencesManager.getIsShowContactLensPowerSection()
         val leftLensPower =
             sharedPreferencesManager.getLeftContactLensPower()?.toDouble() ?: -4.00
         val rightLensPower =
@@ -43,7 +51,9 @@ class SettingRepositoryImpl(private val sharedPreferencesManager: SharedPreferen
             lensPeriod = lensPeriod,
             isUseNotification = isUseNotification,
             notificationDay = notificationDay,
-            notificationTime = notificationTime,
+            notificationTimeHour = notificationTimeHour,
+            notificationTimeMinute = notificationTimeMinute,
+            isShowLensPowerSection = isShowLensPowerSection,
             leftLensPower = leftLensPower,
             rightLensPower = rightLensPower
         )

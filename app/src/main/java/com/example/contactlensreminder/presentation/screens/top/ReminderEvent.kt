@@ -1,13 +1,14 @@
 package com.example.contactlensreminder.presentation.screens.top
 
-sealed class ReminderEvent {
+import com.example.contactlensreminder.domain.ReminderValue
+
+sealed class ReminderEvent(val reminderValue: ReminderValue) {
 
     data class StartReminder(
-        val lensPeriod: Int,
-        val elapsedDays: Int,
-        val notificationTime: String,
-        val isUsingContactLens: Boolean
-    ) : ReminderEvent()
+        val data: ReminderValue
+    ) : ReminderEvent(data)
 
-    object CancelReminder : ReminderEvent()
+    data class CancelReminder(
+        val data: ReminderValue
+    ) : ReminderEvent(data)
 }
