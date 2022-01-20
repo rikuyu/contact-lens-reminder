@@ -12,6 +12,7 @@
     <string name="new_line">\n\n</string>
     <string name="time_div">:</string>
     <string name="alert_toast_message">レンジ使用中は設定を変更できません</string>
+    <string name="confirm_reminder_message">リマインダーがリセットされました</string>
 
     <!-- LensSettingScreen -->
     <string name="lens_setting_screen_title">コンタクトレンズ設定</string>
@@ -42,5 +43,10 @@
     <!-- Notification -->
     <string name="notification_title">レンズ交換の日です！</string>
     <string name="notification_content">コンタクトレンズを正しく使い、目の健康を守りましょう！</string>
+
+    <!-- レンズ交換確認ダイアログ -->
+    <string name="dialog_content">本当にレンズを交換しますか（リマインダーはキャンセルされます）</string>
+    <string name="btn_cancel">キャンセル</string>
+    <string name="btn_ok">交換</string>
 
 </resources>

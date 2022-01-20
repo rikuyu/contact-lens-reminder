@@ -1,15 +1,17 @@
-package com.example.contactlensreminder.data.util
+package com.example.contactlensreminder.data.workmanager
 
 import android.content.Context
 import androidx.work.Worker
 import androidx.work.WorkerParameters
+import com.example.contactlensreminder.data.util.ChangeAppIconService
+import com.example.contactlensreminder.data.util.SharedPreferencesManager
 
 class TickDownWorker(val context: Context, params: WorkerParameters) : Worker(context, params) {
 
     private val sharedPreferencesManager: SharedPreferencesManager =
         SharedPreferencesManager(context)
 
-    private val changeAppIcon: ChangeAppIcon = ChangeAppIcon(context)
+    private val changeAppIconService: ChangeAppIconService = ChangeAppIconService(context)
 
     override fun doWork(): Result {
 
@@ -18,8 +20,7 @@ class TickDownWorker(val context: Context, params: WorkerParameters) : Worker(co
         sharedPreferencesManager.saveContactLensElapsedDays(after)
 
         val isUsingContactLens = sharedPreferencesManager.getIsUsingContactLens()
-
-        changeAppIcon.changeAppIcon(context, isUsingContactLens, after)
+        changeAppIconService.changeAppIcon(context, isUsingContactLens, after)
 
         return Result.success()
     }

@@ -26,13 +26,13 @@ import com.example.contactlensreminder.presentation.theme.SkyBlue
 fun HandleReminderButtonSection(
     modifier: Modifier,
     isUsingContactLens: Boolean,
-    startReminderEvent: (Boolean) -> Unit,
-    stopReminderEvent: (Boolean) -> Unit
+    startReminder: (Boolean) -> Unit,
+    openDialog: () -> Unit
 ) {
     val onClick: (Boolean) -> Unit = if (!isUsingContactLens) {
-        { startReminderEvent(!it) }
+        { startReminder(!it) }
     } else {
-        { stopReminderEvent(!it) }
+        { openDialog() }
     }
 
     Box(

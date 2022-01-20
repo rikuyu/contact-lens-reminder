@@ -4,7 +4,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.pm.PackageManager
 
-class ChangeAppIcon(val context: Context) {
+class ChangeAppIconService(val context: Context) {
 
     private val packageManager: PackageManager = context.packageManager
 

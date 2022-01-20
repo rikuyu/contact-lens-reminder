@@ -28,7 +28,7 @@ class ReminderViewModel @Inject constructor(
         reminderUseCase.saveReminderSetting(reminder.value)
         when (event) {
             is ReminderEvent.StartReminder -> {
-                reminderUseCase.startReminder.invoke()
+                reminderUseCase.startReminder(reminder.value.lensPeriod)
             }
             is ReminderEvent.CancelReminder -> {
                 reminderUseCase.cancelReminder.invoke()

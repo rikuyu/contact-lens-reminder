@@ -6,7 +6,7 @@ interface ReminderRepository {
 
     fun saveReminderSetting(reminderValue: ReminderValue)
 
-    fun startReminder()
+    fun startReminder(lensPeriod: Int)
 
     fun getReminderSetting(): ReminderValue
 

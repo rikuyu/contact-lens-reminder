@@ -2,9 +2,9 @@ package com.example.contactlensreminder.data.repository
 
 import com.example.contactlensreminder.data.util.SharedPreferencesManager
 import com.example.contactlensreminder.domain.repository.ReminderRepository
-import com.example.contactlensreminder.data.util.NotificationWorkManagerService
-import com.example.contactlensreminder.data.util.TickDownWorkManagerService
-import com.example.contactlensreminder.data.util.WaitWorkManagerService
+import com.example.contactlensreminder.data.workmanager.NotificationWorkManagerService
+import com.example.contactlensreminder.data.workmanager.TickDownWorkManagerService
+import com.example.contactlensreminder.data.workmanager.WaitWorkManagerService
 import com.example.contactlensreminder.domain.ReminderValue
 
 class ReminderRepositoryImpl(
@@ -30,9 +30,9 @@ class ReminderRepositoryImpl(
         }
     }
 
-    override fun startReminder() {
+    override fun startReminder(lensPeriod: Int) {
         waitWorkManagerService.startWaitMinutesWork()
-        tickDownWorkManagerService.startTickDownWork()
+        tickDownWorkManagerService.startTickDownWork(lensPeriod)
     }
 
     override fun getReminderSetting(): ReminderValue {

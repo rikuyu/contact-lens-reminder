@@ -15,10 +15,10 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.contactlensreminder.R
-import com.example.contactlensreminder.presentation.screens.top.ReminderEvent
 import com.example.contactlensreminder.domain.ReminderValue
+import com.example.contactlensreminder.presentation.screens.top.ReminderEvent
 import com.example.contactlensreminder.presentation.screens.top.ReminderViewModel
-import com.example.contactlensreminder.presentation.theme.Gray
+import com.example.contactlensreminder.presentation.theme.LightBlue
 import com.example.contactlensreminder.presentation.util.Routes
 import com.example.contactlensreminder.presentation.util.SimpleSpacer
 
@@ -41,6 +41,8 @@ fun TopScreen(
 
     val notificationTimeMinute by remember { mutableStateOf(reminderValue.notificationTimeMinute) }
 
+    var dialogState by remember { mutableStateOf(false) }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -59,7 +61,7 @@ fun TopScreen(
                 Icon(
                     painter = painterResource(id = R.drawable.ic_help),
                     contentDescription = null,
-                    tint = Gray,
+                    tint = LightBlue,
                     modifier = Modifier.size(36.dp, 36.dp)
                 )
             }
@@ -93,7 +95,7 @@ fun TopScreen(
                 .weight(1f)
                 .background(Color.White),
             isUsingContactLens = isUsingContactLens,
-            startReminderEvent = {
+            startReminder = {
                 isUsingContactLens = it
                 viewModel.onEvent(
                     ReminderEvent.StartReminder(
@@ -107,26 +109,30 @@ fun TopScreen(
                     )
                 )
             },
-            stopReminderEvent = {
-                isUsingContactLens = it
-                viewModel.onEvent(
-                    ReminderEvent.CancelReminder(
-                        ReminderValue(
-                            lensPeriod = lensPeriod,
-                            notificationTimeHour = notificationTimeHour,
-                            notificationTimeMinute = notificationTimeMinute,
-                            elapsedDays = lensElapsedDays,
-                            isUsingContactLens = it
-                        )
+            openDialog = { dialogState = true }
+        )
+        CancelReminderDialog(
+            dialogState = dialogState,
+            changeDialogState = { dialogState = it }
+        ) {
+            isUsingContactLens = it
+            viewModel.onEvent(
+                ReminderEvent.CancelReminder(
+                    ReminderValue(
+                        lensPeriod = lensPeriod,
+                        notificationTimeHour = notificationTimeHour,
+                        notificationTimeMinute = notificationTimeMinute,
+                        elapsedDays = lensElapsedDays,
+                        isUsingContactLens = it
                     )
                 )
-                Toast.makeText(
-                    context,
-                    "Stop",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        )
+            )
+            Toast.makeText(
+                context,
+                context.getString(R.string.confirm_reminder_message),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
         LensSettingButtonSection(
             modifier = Modifier
                 .fillMaxWidth()
@@ -142,6 +148,5 @@ fun TopScreen(
             isUsingContactLens = isUsingContactLens,
             navigate = { navController.navigate(Routes.LENS_SETTING) }
         )
-        SimpleSpacer(height = 60.dp)
     }
 }
