@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.sp
 import com.example.contactlensreminder.R
 import com.example.contactlensreminder.presentation.theme.CleanBlue
 import com.example.contactlensreminder.presentation.theme.LightBlue
+import com.example.contactlensreminder.presentation.theme.LightRed
 import com.example.contactlensreminder.presentation.util.getExpirationDate
 
 @Composable
@@ -61,16 +62,16 @@ fun RemainingDaysBar(
     Box(contentAlignment = Alignment.Center, modifier = Modifier.size(radius * 2f)) {
         Canvas(modifier = Modifier.size(radius * 2f)) {
             drawArc(
-                color = LightBlue,
+                color = if (lensElapsedDays >= 0) LightBlue else LightRed,
                 startAngle = 0f,
                 sweepAngle = 360f,
                 useCenter = false,
                 style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
             )
             drawArc(
-                color = color,
+                color = if (lensElapsedDays >= 0) color else Color.Red,
                 startAngle = -90f,
-                sweepAngle = daysRemaining.value * (360 / lensPeriod),
+                sweepAngle = if (lensElapsedDays >= 0) daysRemaining.value * (360 / lensPeriod) + 5f else 360f,
                 useCenter = false,
                 style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
             )
@@ -88,7 +89,7 @@ fun RemainingDaysBar(
                     }
                     withStyle(
                         style = SpanStyle(
-                            color = color,
+                            color = if (lensElapsedDays >= 0) color else Color.Red,
                             fontSize = remainingDaysTextFontSize
                         )
                     ) {

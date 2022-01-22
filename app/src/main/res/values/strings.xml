@@ -11,7 +11,7 @@
     <string name="lens_setting">レンズの設定</string>
     <string name="new_line">\n\n</string>
     <string name="time_div">:</string>
-    <string name="alert_toast_message">レンジ使用中は設定を変更できません</string>
+    <string name="alert_toast_message">レンズ使用中は設定を変更できません</string>
     <string name="confirm_reminder_message">リマインダーがリセットされました</string>
 
     <!-- LensSettingScreen -->
@@ -35,9 +35,9 @@
 
     <!-- AppSettingScreen -->
     <string name="app_setting_screen_title">このアプリについて</string>
-    <string name="privacy_policy">プライバシーポリシー</string>
-    <string name="help">ヘルプ</string>
     <string name="terms_of_service">利用規約</string>
+    <string name="help">ヘルプ（使い方）</string>
+    <string name="inquiry">お問い合わせ</string>
     <string name="version">バージョン %s</string>
 
     <!-- Notification -->
@@ -49,5 +49,37 @@
     <string name="dialog_content">リマインダーはキャンセルされます</string>
     <string name="btn_cancel">キャンセル</string>
     <string name="btn_ok">OK</string>
+
+    <!-- 利用規約 -->
+    <string name="title_1">第1条　本アプリの内容</string>
+    <string name="content_1">本アプリとは、現在使用しているこのスマートフォン用アプリケーション（以下「本アプリ」といいます。）「コンタクトレンズ交換リマインダー」をいいます。</string>
+    <string name="title_2">第2条　規約への同意</string>
+    <string name="content_2">お客さまは、本規約に同意のうえ、本アプリの利用を行うものとします。</string>
+    <string name="title_3">第3条　権利の帰属等</string>
+    <string name="content_3_1">1．本アプリの著作権その他本アプリに関する一切の権利は、本アプリ開発者（以下「開発者」）または開発者が許諾を受ける権利者に帰属します。</string>
+    <string name="content_3_2">2．お客さまは、開発者指定の用途に限り、本アプリを使用できるものとします。なお、本アプリ開発者から請求があった場合、お客さまは、すみやかに本アプリの使用を中止し、または本アプリをお客さまのスマートフォンから削除するものとします。</string>
+    <string name="content_3_3">3．お客さまは、本アプリ、および本サービスにおいてお客さまのスマートフォンにダウンロードされた情報の転載・複製・転送・改変またはリバースエンジニアリング等を自ら行ってはならないものとし、また、第三者に当該行為を行わせてはならないものとします。</string>
+    <string name="title_4">第4条　本アプリ提供の休止、変更等</string>
+    <string name="content_4">開発者は、お客さまの承諾およびお客さまへの通知なしに、いつでも本アプリ提供の一時休止または終了、本サービスの内容変更および本アプリの改変等を行うことができるものとします。</string>
+    <string name="title_5">第5条　免責事項等</string>
+    <string name="content_5_1">1．本アプリの瑕疵、本アプリの動作に係る不具合（表示情報の誤謬・逸脱を含みます。）、本アプリがスマートフォンに与える影響およびお客さまが本アプリを正常に利用できないことにより被る不利益、データ消失の不利益、その他一切の不利益について、開発者は一切その責任を負いません。</string>
+    <string name="content_5_2">2．前項のほか、次の各号に定める場合における本アプリの利用不能、ならびにこれによって生じた損害について、開発者は、一切の責任を負いません。</string>
+    <string name="content_5_2_1">（1）天災地変、裁判所等の公的機関の措置等のやむをえない事由が生じた場合</string>
+    <string name="content_5_2_2">（2）当社が相当と認める安全対策を講じたにもかかわらず、通信回線またはシステム等に障害が生じた場合</string>
+    <string name="content_5_2_3">（3）指紋認証やパスコード認証等が不正に実行された場合</string>
+    <string name="content_5_2_4">（4）当社以外の第三者の責に帰すべき事由による場合</string>
+    <string name="content_5_3">3．お客さまが本アプリを使用して情報のアップロード、ダウンロードその他の授受を行った場合、お客さまは、当該情報の授受を電磁的方法により行うことを当社に対して同意したものとします。</string>
+    <string name="title_6">第6条　利用環境の整備等</string>
+    <string name="content_6_1">1．お客さまは、本アプリの使用（本アプリのダウンロードを含みます。）に必要となる通信機器、ソフトウェア、通信回線その他の環境を、お客さまの責任と負担において準備するものとします。</string>
+    <string name="content_6_2">2．本アプリの使用（本アプリのダウンロードを含みます。）に伴い発生する通信料は、お客さまの負担とします。</string>
+    <string name="content_6_3">3．お客さまは、開発者が提供する情報を参考にして、自己の利用環境に応じ、コンピューター・ウイルスの感染、不正アクセスおよび情報漏洩の防止等の適切な情報セキュリティを保持するものとします。</string>
+    <string name="content_6_4">4．お客さまは、本アプリをインストールしたスマートフォンを処分する場合、その他本アプリの使用を終了する場合、本アプリを必ず削除するものとします。</string>
+    <string name="title_7">第7条　規約の準用</string>
+    <string name="content_7">本アプリに関して、本規約に定めのない事項については、開発者の他の規約の定めを準用します。</string>
+    <string name="title_8">第8条　規約の変更</string>
+    <string name="content_8_1">1．本規約の各条項その他の条件は、金融情勢その他状況の変化等相応の事由があると認められる場合には、民法548条の4の規定に基づき、変更するものとします。</string>
+    <string name="content_8_2">2．前項の変更は、変更を行う旨、変更後の規定の内容、その効力発生時期を、インターネット、またはその他相当の方法で公表することにより周知します。</string>
+    <string name="content_8_3">3．前二項の変更は、公表の際に定める適用開始日から適用されるものとし、公表の日から適用開始日までは変更の内容に応じて相当の期間をおくものとします。</string>
+    <string name="title_that_all">以上</string>
 
 </resources>

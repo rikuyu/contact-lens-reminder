@@ -18,7 +18,7 @@ class TickDownWorkManagerService(val context: Context) {
 
     fun initTickDownWork() {
         reminderWork = PeriodicWorkRequestBuilder<TickDownWorker>(
-            24, TimeUnit.HOURS
+            1, TimeUnit.DAYS
         ).apply { setInitialDelay(1, TimeUnit.DAYS) }.build()
     }
 

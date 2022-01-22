@@ -1,4 +1,4 @@
-package com.example.contactlensreminder.presentation.di
+package com.example.contactlensreminder.data.di
 
 import android.content.Context
 import com.example.contactlensreminder.data.repository.ReminderRepositoryImpl

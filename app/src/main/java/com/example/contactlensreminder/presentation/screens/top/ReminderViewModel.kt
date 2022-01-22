@@ -31,6 +31,10 @@ class ReminderViewModel @Inject constructor(
                 reminderUseCase.startReminder(reminder.value.lensPeriod)
             }
             is ReminderEvent.CancelReminder -> {
+                _reminder.value = reminder.value.copy(
+                    elapsedDays = event.reminderValue.lensPeriod
+                )
+                reminderUseCase.saveReminderSetting(reminder.value)
                 reminderUseCase.cancelReminder.invoke()
             }
         }
