@@ -1,7 +1,6 @@
 package com.example.contactlensreminder.presentation.screens.lens_setting.components
 
 import android.content.Context
-import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
@@ -19,6 +18,7 @@ import androidx.compose.ui.unit.sp
 import com.example.contactlensreminder.R
 import com.example.contactlensreminder.presentation.theme.CleanBlue
 import com.example.contactlensreminder.presentation.theme.LightBlue
+import com.example.contactlensreminder.presentation.util.makeNotificationSettingIntent
 
 @Composable
 fun ToggleButtonSection(
@@ -72,14 +72,4 @@ fun ToggleButtonSection(
             )
         )
     }
-}
-
-fun makeNotificationSettingIntent(context: Context): Intent {
-    val intent = Intent()
-    intent.action = android.provider.Settings.ACTION_APP_NOTIFICATION_SETTINGS
-    intent.putExtra("app_package", context.packageName)
-    intent.putExtra("app_uid", context.applicationInfo.uid)
-    intent.putExtra("android.provider.extra.APP_PACKAGE", context.packageName)
-
-    return intent
 }
