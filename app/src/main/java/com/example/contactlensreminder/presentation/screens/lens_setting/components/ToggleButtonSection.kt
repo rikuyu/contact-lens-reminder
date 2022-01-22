@@ -1,30 +1,34 @@
 package com.example.contactlensreminder.presentation.screens.lens_setting.components
 
+import android.content.Context
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Switch
-import androidx.compose.material.SwitchDefaults
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.contactlensreminder.R
 import com.example.contactlensreminder.presentation.theme.CleanBlue
 import com.example.contactlensreminder.presentation.theme.LightBlue
 
 @Composable
 fun ToggleButtonSection(
+    context: Context,
     modifier: Modifier = Modifier,
     text: String,
     textColor: Color = Color.Black,
     fontSize: TextUnit = 18.sp,
-    isUseNotification: Boolean,
+    flag: Boolean,
+    isShowIcon: Boolean,
     changeSwitch: () -> Unit
 ) {
     Row(
@@ -41,8 +45,21 @@ fun ToggleButtonSection(
                 .padding(start = 12.dp),
             color = textColor, fontSize = fontSize
         )
+        if (isShowIcon) {
+            IconButton(
+                onClick = { context.startActivity(makeNotificationSettingIntent(context)) },
+                modifier = Modifier.padding(end = 14.dp)
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_notifications),
+                    contentDescription = null,
+                    tint = LightBlue,
+                    modifier = Modifier.size(33.dp, 33.dp)
+                )
+            }
+        }
         Switch(
-            checked = isUseNotification,
+            checked = flag,
             modifier = Modifier
                 .size(40.dp)
                 .padding(end = 12.dp),
@@ -55,4 +72,14 @@ fun ToggleButtonSection(
             )
         )
     }
+}
+
+fun makeNotificationSettingIntent(context: Context): Intent {
+    val intent = Intent()
+    intent.action = android.provider.Settings.ACTION_APP_NOTIFICATION_SETTINGS
+    intent.putExtra("app_package", context.packageName)
+    intent.putExtra("app_uid", context.applicationInfo.uid)
+    intent.putExtra("android.provider.extra.APP_PACKAGE", context.packageName)
+
+    return intent
 }

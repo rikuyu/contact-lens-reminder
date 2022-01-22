@@ -131,9 +131,11 @@ fun LensSettingScreen(
                         )
                     }
                     ToggleButtonSection(
+                        context = context,
                         modifier = Modifier.fillMaxWidth(),
                         text = stringResource(id = R.string.notification),
-                        isUseNotification = isUseNotification
+                        isShowIcon = true,
+                        flag = isUseNotification
                     ) {
                         isUseNotification = !isUseNotification
                         viewModel.onEvent(SettingEvent.IsUseNotification(isUseNotification))
@@ -164,9 +166,11 @@ fun LensSettingScreen(
                         }
                     }
                     ToggleButtonSection(
+                        context = context,
                         modifier = Modifier.fillMaxWidth(),
                         text = stringResource(id = R.string.lens_power),
-                        isUseNotification = isShowLensPowerSection
+                        isShowIcon = false,
+                        flag = isShowLensPowerSection
                     ) {
                         isShowLensPowerSection = !isShowLensPowerSection
                         viewModel.onEvent(
