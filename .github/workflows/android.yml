@@ -32,8 +32,11 @@ jobs:
           gem install bundler
           bundle install
 
-      - name: run ktlintCheck
-        run: ./gradlew ktlintCheck
+      - name: run ktlint
+        run: ./gradlew ktlint
+
+      - name: run Android lint
+        run: ./gradlew lint
 
       - name: run danger
         env:
