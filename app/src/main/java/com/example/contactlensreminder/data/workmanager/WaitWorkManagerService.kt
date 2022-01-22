@@ -16,15 +16,17 @@ class WaitWorkManagerService(context: Context) {
     private lateinit var waitDayHourWork: OneTimeWorkRequest
 
     fun initWaitMinutesWork(
-        notificationDay: Int,
+        notificationPeriod: Int,
         notificationTimeHour: Int,
-        notificationTimeMinutes: Int
+        notificationTimeMinutes: Int,
+        notificationDay: Int
     ) {
         val now = ZonedDateTime.of(LocalDateTime.now(), ZoneId.systemDefault())
         val waitMinutes = (60 - now.minute).toLong()
         val adjustHour = (24 - now.hour).toLong()
 
-        val waitDayHour = ((notificationDay - 1) * 24 + notificationTimeHour + adjustHour).toLong()
+        val waitDayHour =
+            ((notificationPeriod - 1 - notificationDay) * 24 + notificationTimeHour + adjustHour)
 
         val waitDayHouData = Data.Builder().apply {
             putLong(WAIT_TIME_DAY_HOUR_KEY, waitDayHour)

@@ -6,7 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.contactlensreminder.presentation.screens.app_setting.components.AppSettingScreen
+import com.example.contactlensreminder.presentation.screens.app_setting.inquiry.component.ContactUsScreen
+import com.example.contactlensreminder.presentation.screens.app_setting.main_screen.components.AppSettingScreen
+import com.example.contactlensreminder.presentation.screens.app_setting.terms_of_service.component.TermsOfService
 import com.example.contactlensreminder.presentation.screens.lens_setting.components.LensSettingScreen
 import com.example.contactlensreminder.presentation.screens.top.components.TopScreen
 import com.example.contactlensreminder.presentation.theme.ContactLensReminderTheme
@@ -25,7 +27,7 @@ class MainActivity : ComponentActivity() {
                     navController = navController,
                     startDestination = Routes.TOP
                 ) {
-                    composable(route = Routes.TOP) { backStackEntry ->
+                    composable(route = Routes.TOP) {
                         TopScreen(navController)
                     }
                     composable(route = Routes.LENS_SETTING) {
@@ -33,6 +35,15 @@ class MainActivity : ComponentActivity() {
                     }
                     composable(route = Routes.APP_SETTING) {
                         AppSettingScreen(navController)
+                    }
+                    composable(route = Routes.TERMS_OF_SERVICE) {
+                        TermsOfService(navController)
+                    }
+                    composable(route = Routes.HELP) {
+
+                    }
+                    composable(route = Routes.INQUIRY) {
+                        ContactUsScreen()
                     }
                 }
             }

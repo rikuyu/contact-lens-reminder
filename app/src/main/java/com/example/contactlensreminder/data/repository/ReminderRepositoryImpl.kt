@@ -1,11 +1,11 @@
 package com.example.contactlensreminder.data.repository
 
 import com.example.contactlensreminder.data.util.SharedPreferencesManager
-import com.example.contactlensreminder.domain.repository.ReminderRepository
 import com.example.contactlensreminder.data.workmanager.NotificationWorkManagerService
 import com.example.contactlensreminder.data.workmanager.TickDownWorkManagerService
 import com.example.contactlensreminder.data.workmanager.WaitWorkManagerService
 import com.example.contactlensreminder.domain.ReminderValue
+import com.example.contactlensreminder.domain.repository.ReminderRepository
 
 class ReminderRepositoryImpl(
     private val waitWorkManagerService: WaitWorkManagerService,
@@ -15,12 +15,15 @@ class ReminderRepositoryImpl(
 ) : ReminderRepository {
 
     override fun saveReminderSetting(reminderValue: ReminderValue) {
-        waitWorkManagerService.initWaitMinutesWork(
-            notificationDay = reminderValue.lensPeriod,
-            notificationTimeHour = reminderValue.notificationTimeHour,
-            notificationTimeMinutes = reminderValue.notificationTimeMinute
-        )
-        tickDownWorkManagerService.initTickDownWork()
+        if (sharedPreferencesManager.getIsUseNotification()) {
+            waitWorkManagerService.initWaitMinutesWork(
+                notificationPeriod = reminderValue.lensPeriod,
+                notificationTimeHour = reminderValue.notificationTimeHour,
+                notificationTimeMinutes = reminderValue.notificationTimeMinute,
+                notificationDay = sharedPreferencesManager.getNotificationDay()
+            )
+            tickDownWorkManagerService.initTickDownWork()
+        }
         sharedPreferencesManager.apply {
             saveContactLensElapsedDays(reminderValue.elapsedDays)
             saveContactLensPeriod(reminderValue.lensPeriod)
@@ -31,8 +34,10 @@ class ReminderRepositoryImpl(
     }
 
     override fun startReminder(lensPeriod: Int) {
-        waitWorkManagerService.startWaitMinutesWork()
-        tickDownWorkManagerService.startTickDownWork(lensPeriod)
+        if (sharedPreferencesManager.getIsUseNotification()) {
+            waitWorkManagerService.startWaitMinutesWork()
+            tickDownWorkManagerService.startTickDownWork(lensPeriod)
+        }
     }
 
     override fun getReminderSetting(): ReminderValue {

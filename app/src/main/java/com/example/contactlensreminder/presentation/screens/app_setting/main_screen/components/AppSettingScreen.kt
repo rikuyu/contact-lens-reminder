@@ -1,5 +1,7 @@
-package com.example.contactlensreminder.presentation.screens.app_setting.components
+package com.example.contactlensreminder.presentation.screens.app_setting.main_screen.components
 
+import android.content.Context
+import android.content.pm.PackageManager
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -11,10 +13,12 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.contactlensreminder.R
+import com.example.contactlensreminder.presentation.screens.app_setting.AppSettingSection
 import com.example.contactlensreminder.presentation.theme.CleanBlue
 import com.example.contactlensreminder.presentation.theme.SmoothGray
 import com.example.contactlensreminder.presentation.util.Routes
@@ -25,11 +29,11 @@ import com.example.contactlensreminder.presentation.util.SimpleSpacer
 fun AppSettingScreen(
     navController: NavController
 ) {
-    val list = listOf(
-        stringResource(id = R.string.privacy_policy),
-        stringResource(id = R.string.help),
-        stringResource(id = R.string.terms_of_service),
-        stringResource(id = R.string.version, "1.0.1")
+    val sectionList = listOf(
+        AppSettingSection(stringResource(id = R.string.terms_of_service), Routes.TERMS_OF_SERVICE),
+        AppSettingSection(stringResource(id = R.string.help), Routes.HELP),
+        AppSettingSection(stringResource(id = R.string.inquiry), Routes.INQUIRY),
+        AppSettingSection(stringResource(id = R.string.version, getVersionName(LocalContext.current)), null)
     )
 
     Scaffold(
@@ -55,7 +59,7 @@ fun AppSettingScreen(
         ) {
             item { SimpleSpacer(height = 20.dp, color = SmoothGray) }
             item { SimpleDivider() }
-            items(list) { item ->
+            items(sectionList) { item ->
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -64,14 +68,26 @@ fun AppSettingScreen(
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .clickable { }
+                            .clickable { item.route?.let { navController.navigate(it) } }
                             .padding(all = 16.dp)
                     ) {
-                        Text(text = item, color = Color.Black)
+                        Text(text = item.title, color = Color.Black)
                     }
                     SimpleDivider()
                 }
             }
         }
     }
+}
+
+fun getVersionName(context: Context): String {
+    val pm = context.packageManager
+    var versionName = ""
+    try {
+        val packageInfo = pm.getPackageInfo(context.packageName, 0)
+        versionName = packageInfo.versionName
+    } catch (e: PackageManager.NameNotFoundException) {
+        e.printStackTrace()
+    }
+    return versionName
 }
