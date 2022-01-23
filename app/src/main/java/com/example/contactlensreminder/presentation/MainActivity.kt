@@ -40,10 +40,9 @@ class MainActivity : ComponentActivity() {
                         TermsOfService(navController)
                     }
                     composable(route = Routes.HELP) {
-
                     }
                     composable(route = Routes.INQUIRY) {
-                        ContactUsScreen()
+                        ContactUsScreen(navController)
                     }
                 }
             }

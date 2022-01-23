@@ -50,6 +50,10 @@
     <string name="btn_cancel">キャンセル</string>
     <string name="btn_ok">OK</string>
 
+    <!-- お問い合わせ -->
+    <string name="network_error_message_1">お問い合わせするには</string>
+    <string name="network_error_message_2">ネットワークに接続してください</string>
+
     <!-- 利用規約 -->
     <string name="title_1">第1条　本アプリの内容</string>
     <string name="content_1">本アプリとは、現在使用しているこのスマートフォン用アプリケーション（以下「本アプリ」といいます。）「コンタクトレンズ交換リマインダー」をいいます。</string>

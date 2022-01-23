@@ -194,6 +194,13 @@ fun TermsOfService(navController: NavHostController) {
                     color = Color.Black
                 )
             }
+            item {
+                Text(
+                    text = stringResource(id = R.string.content_5_3),
+                    fontSize = 16.sp,
+                    color = Color.Black
+                )
+            }
             item { SimpleSpacer(height = 14.dp) }
             // 6条
             item {
@@ -278,13 +285,6 @@ fun TermsOfService(navController: NavHostController) {
             item {
                 Text(
                     text = stringResource(id = R.string.content_8_2),
-                    fontSize = 14.sp,
-                    color = Color.Black
-                )
-            }
-            item {
-                Text(
-                    text = stringResource(id = R.string.content_8_3),
                     fontSize = 14.sp,
                     color = Color.Black
                 )

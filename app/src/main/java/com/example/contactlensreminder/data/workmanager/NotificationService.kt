@@ -21,7 +21,7 @@ class NotificationService(val context: Context) {
         )
         .setColor(ContextCompat.getColor(context, R.color.light_blue))
         .setContentTitle(context.getString(R.string.notification_title))
-        .setContentText(context.getString(R.string.notification_title))
+        .setContentText(context.getString(R.string.notification_content))
         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
         .setVisibility(VISIBILITY_PUBLIC)
         .setAutoCancel(true)
