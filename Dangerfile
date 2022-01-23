@@ -16,4 +16,4 @@ fail("fit left in tests") if `grep -r fit specs/ `.length > 1
 checkstyle_format.base_path = Dir.pwd
 checkstyle_format.report 'app/build/reports/ktlint-result.xml'
 
-lgtm.check_lgtm https_image_only: true
+lgtm.check_lgtm

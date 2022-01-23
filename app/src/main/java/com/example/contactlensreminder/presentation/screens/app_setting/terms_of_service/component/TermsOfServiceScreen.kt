@@ -289,13 +289,6 @@ fun TermsOfService(navController: NavHostController) {
                     color = Color.Black
                 )
             }
-            item {
-                Text(
-                    text = stringResource(id = R.string.content_8_3),
-                    fontSize = 14.sp,
-                    color = Color.Black
-                )
-            }
             item { SimpleSpacer(height = 14.dp) }
             item {
                 Text(
