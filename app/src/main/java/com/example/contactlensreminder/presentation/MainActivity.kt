@@ -23,11 +23,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             ContactLensReminderTheme {
                 val navController = rememberNavController()
-                            NavHost(
+                NavHost(
                     navController = navController,
                     startDestination = Routes.TOP
                 ) {
-                    composable(route             = Routes.TOP) {
+                    composable(route = Routes.TOP) {
                         TopScreen(navController)
                     }
                     composable(route = Routes.LENS_SETTING) {
