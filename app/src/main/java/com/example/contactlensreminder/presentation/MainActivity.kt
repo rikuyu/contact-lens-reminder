@@ -21,8 +21,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ContactLensReminderTheme {
-                val navController = rememberNavController()
+                                ContactLensReminderTheme {
+                val navController                = rememberNavController()
                 NavHost(
                     navController = navController,
                     startDestination = Routes.TOP
@@ -39,10 +39,10 @@ class MainActivity : ComponentActivity() {
                     composable(route = Routes.TERMS_OF_SERVICE) {
                         TermsOfService(navController)
                     }
-                    composable(route = Routes.HELP) {
+                    composable(route =                  Routes.HELP) {
                     }
                     composable(route = Routes.INQUIRY) {
-                        ContactUsScreen(navController)
+                                        ContactUsScreen(navController)
                     }
                 }
             }
