@@ -16,9 +16,4 @@ fail("fit left in tests") if `grep -r fit specs/ `.length > 1
 checkstyle_format.base_path = Dir.pwd
 checkstyle_format.report 'app/build/reports/ktlint-result.xml'
 
-# android lint
-android_lint.filtering = true
-android_lint.report_file = "app/build/reports/android-lint.xml"
-android_lint.lint(inline_mode: true)
-
 lgtm.check_lgtm https_image_only: true
