@@ -37,6 +37,7 @@
     <string name="app_setting_screen_title">このアプリについて</string>
     <string name="terms_of_service">利用規約</string>
     <string name="help">ヘルプ（使い方）</string>
+    <string name="notification_setting">通知設定</string>
     <string name="inquiry">お問い合わせ</string>
     <string name="version">バージョン %s</string>
 
