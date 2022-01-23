@@ -30,8 +30,7 @@ import com.example.contactlensreminder.presentation.util.checkNetworkConnection
 @Composable
 fun ContactUsScreen(navController: NavController) {
 
-    val url =
-        "https://docs.google.com/forms/d/e/1FAIpQLScyhLuzmtG6fcmLzJ0lEC4pXHU5KwrCW7Le_K1_P41pnfP10g/viewform"
+    val formId = "1FAIpQLScyhLuzmtG6fcmLzJ0lEC4pXHU5KwrCW7Le_K1_P41pnfP10g"
 
     val isNetworkConnected = checkNetworkConnection(LocalContext.current)
 
@@ -67,7 +66,7 @@ fun ContactUsScreen(navController: NavController) {
                                 visibility.value = true
                             }
                         }
-                        webView.loadUrl(url)
+                        webView.loadUrl("https://docs.google.com/forms/d/e/$formId/viewform")
                     }
                 )
                 if (!visibility.value) {
