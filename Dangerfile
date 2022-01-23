@@ -12,27 +12,13 @@ warn("Big PR") if git.lines_of_code > 500
 fail("fdescribe left in tests") if `grep -r fdescribe specs/ `.length > 1
 fail("fit left in tests") if `grep -r fit specs/ `.length > 1
 
-# # ktlint
-# checkstyle_format.base_path = Dir.pwd
-# checkstyle_format.report 'app/build/reports/ktlint/ktlint-main.xml'
-#
-# # android lint
-# android_lint.filtering = true
-# android_lint.report_file = "app/build/reports/android-lint/android-lint.xml"
-# android_lint.lint(inline_mode: true)
-
 # ktlint
-Dir.glob("**//build/reports/ktlint-results.xml").each { |report|
-    checkstyle_format.base_path = Dir.pwd
-    checkstyle_format.report report.to_s
-}
+checkstyle_format.base_path = Dir.pwd
+checkstyle_format.report 'app/build/reports/ktlint-result.xml'
 
-# Android Lint
-Dir.glob("**//build/reports/lint-results*.xml").each { |report|
-    android_lint.skip_gradle_task = true
-    android_lint.report_file = report.to_s
-    android_lint.filtering = true
-    android_lint.lint(inline_mode: true)
-}
+# android lint
+android_lint.filtering = true
+android_lint.report_file = "app/build/reports/android-lint.xml"
+android_lint.lint(inline_mode: true)
 
 lgtm.check_lgtm https_image_only: true

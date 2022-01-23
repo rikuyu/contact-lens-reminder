@@ -41,7 +41,7 @@
             android:name=".ExpiredAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_expired"
+            android:icon="@mipmap/icon_expired"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -55,7 +55,7 @@
             android:name=".ZeroAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_0"
+            android:icon="@mipmap/icon_0"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -69,7 +69,7 @@
             android:name=".OneAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_1"
+            android:icon="@mipmap/icon_1"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -83,7 +83,7 @@
             android:name=".TwoAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_2"
+            android:icon="@mipmap/icon_2"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -97,7 +97,7 @@
             android:name=".ThreeAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_3"
+            android:icon="@mipmap/icon_3"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -111,7 +111,7 @@
             android:name=".FourAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_4"
+            android:icon="@mipmap/icon_4"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -125,7 +125,7 @@
             android:name=".FiveAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_5"
+            android:icon="@mipmap/icon_5"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -139,7 +139,7 @@
             android:name=".SixAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_6"
+            android:icon="@mipmap/icon_6"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -153,7 +153,7 @@
             android:name=".SevenAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_7"
+            android:icon="@mipmap/icon_7"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -167,7 +167,7 @@
             android:name=".EightAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_8"
+            android:icon="@mipmap/icon_8"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -181,7 +181,7 @@
             android:name=".NineAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_9"
+            android:icon="@mipmap/icon_9"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -195,7 +195,7 @@
             android:name=".TenAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_10"
+            android:icon="@mipmap/icon_10"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -209,7 +209,7 @@
             android:name=".ElevenAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_11"
+            android:icon="@mipmap/icon_11"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -223,7 +223,7 @@
             android:name=".TwelveAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_12"
+            android:icon="@mipmap/icon_12"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -237,7 +237,7 @@
             android:name=".ThirteenAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_13"
+            android:icon="@mipmap/icon_13"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -251,7 +251,7 @@
             android:name=".FourteenAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_14"
+            android:icon="@mipmap/icon_14"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -265,7 +265,7 @@
             android:name=".FifteenAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_15"
+            android:icon="@mipmap/icon_15"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -279,7 +279,7 @@
             android:name=".SixteenAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_16"
+            android:icon="@mipmap/icon_16"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -293,7 +293,7 @@
             android:name=".SeventeenAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_17"
+            android:icon="@mipmap/icon_17"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -307,7 +307,7 @@
             android:name=".EighteenAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_18"
+            android:icon="@mipmap/icon_18"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -321,7 +321,7 @@
             android:name=".NineteenAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_19"
+            android:icon="@mipmap/icon_19"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -335,7 +335,7 @@
             android:name=".TwentyAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_20"
+            android:icon="@mipmap/icon_20"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -349,7 +349,7 @@
             android:name=".TwentyOneAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_21"
+            android:icon="@mipmap/icon_21"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -363,7 +363,7 @@
             android:name=".TwentyTwoAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_21"
+            android:icon="@mipmap/icon_21"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -377,7 +377,7 @@
             android:name=".TwentyThreeAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_22"
+            android:icon="@mipmap/icon_22"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -391,7 +391,7 @@
             android:name=".TwentyFourAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_24"
+            android:icon="@mipmap/icon_24"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -405,7 +405,7 @@
             android:name=".TwentyFiveAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_25"
+            android:icon="@mipmap/icon_25"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -419,7 +419,7 @@
             android:name=".TwentySixAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_26"
+            android:icon="@mipmap/icon_26"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -433,7 +433,7 @@
             android:name=".TwentySevenAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_27"
+            android:icon="@mipmap/icon_27"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -447,7 +447,7 @@
             android:name=".TwentyEightAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_28"
+            android:icon="@mipmap/icon_28"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -461,7 +461,7 @@
             android:name=".TwentyNineAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_29"
+            android:icon="@mipmap/icon_29"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -475,7 +475,7 @@
             android:name=".ThirtyAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_30"
+            android:icon="@mipmap/icon_30"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -489,7 +489,7 @@
             android:name=".ThirtyOneAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@drawable/icon_31"
+            android:icon="@mipmap/icon_31"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
