@@ -50,19 +50,19 @@
             </intent-filter>
         </activity-alias>
 
-        <!-- 0 -->
-        <activity-alias
-            android:name=".ZeroAlias"
-            android:enabled="false"
-            android:exported="true"
-            android:icon="@mipmap/icon_0"
-            android:label="@string/app_name"
-            android:targetActivity=".presentation.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity-alias>
+<!--        &lt;!&ndash; 0 &ndash;&gt;-->
+<!--        <activity-alias-->
+<!--            android:name=".ZeroAlias"-->
+<!--            android:enabled="false"-->
+<!--            android:exported="true"-->
+<!--            android:icon="@mipmap/icon_0"-->
+<!--            android:label="@string/app_name"-->
+<!--            android:targetActivity=".presentation.MainActivity">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity-alias>-->
 
         <!-- 1 -->
         <activity-alias

@@ -1,4 +1,4 @@
-package com.example.contactlensreminder.presentation.screens.app_setting.terms_of_service.component
+package com.example.contactlensreminder.presentation.screens.app_setting.terms_of_service_screen.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,7 +22,7 @@ import com.example.contactlensreminder.presentation.util.SimpleDivider
 import com.example.contactlensreminder.presentation.util.SimpleSpacer
 
 @Composable
-fun TermsOfService(navController: NavHostController) {
+fun TermsOfServiceScreen(navController: NavHostController) {
     Scaffold(
         topBar = {
             TopAppBar(

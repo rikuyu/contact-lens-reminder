@@ -22,17 +22,18 @@ class TickDownWorkManagerService(val context: Context) {
         ).apply { setInitialDelay(1, TimeUnit.DAYS) }.build()
     }
 
-    fun startTickDownWork(lensPeriod: Int) {
+    fun startTickDownWork(elapsedDays: Int) {
         manager.enqueueUniquePeriodicWork(
             TICK_DOWN_QUEUE,
             ExistingPeriodicWorkPolicy.REPLACE,
             reminderWork
         )
-        changeAppIconService.changeAppIcon(context, true, lensPeriod)
+        changeAppIconService.changeAppIcon(context, true, elapsedDays)
     }
 
     fun cancelTickDownWork() {
         manager.cancelAllWork()
+        changeAppIconService.changeAppIcon(context, false, null)
     }
 
     companion object {

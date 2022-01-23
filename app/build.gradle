@@ -65,7 +65,6 @@ dependencies {
     implementation appDependencies.preview
     implementation appDependencies.lifecycleRuntime
     implementation appDependencies.activity
-    // implementation appDependencies.supportCompat
 
     testImplementation testDependencies.junitKtx
     testImplementation testDependencies.coreKtx
@@ -77,6 +76,8 @@ dependencies {
     implementation uiDependencies.materialDialogs
     implementation uiDependencies.numberPicker
     implementation uiDependencies.lifecyclViewModelCompose
+    implementation uiDependencies.pager
+    implementation uiDependencies.pagerIndicator
 
     implementation workerDependencies.workRuntimeKtx
     implementation workerDependencies.workRuntime

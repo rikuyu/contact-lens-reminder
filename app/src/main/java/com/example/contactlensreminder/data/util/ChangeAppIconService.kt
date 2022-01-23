@@ -11,10 +11,9 @@ class ChangeAppIconService(val context: Context) {
     private val enabled = PackageManager.COMPONENT_ENABLED_STATE_ENABLED
     private val disabled = PackageManager.COMPONENT_ENABLED_STATE_DISABLED
 
-    private val DONT_KILL_APP = PackageManager.DONT_KILL_APP
+    private val dontKillApp = PackageManager.DONT_KILL_APP
 
     private val lensPeriodClassList: List<String> = listOf(
-        "ZeroAlias",
         "OneAlias",
         "TwoAlias",
         "ThreeAlias",
@@ -50,26 +49,26 @@ class ChangeAppIconService(val context: Context) {
         "ExpiredAlias"
     )
 
-    fun changeAppIcon(context: Context, isUsingContactLens: Boolean, lensPeriod: Int) {
-        if (isUsingContactLens) {
+    fun changeAppIcon(context: Context, isUsingContactLens: Boolean, lensPeriod: Int?) {
+        if (isUsingContactLens && lensPeriod != null) {
             lensPeriodClassList.forEachIndexed { index, alias ->
                 val cls = "com.example.contactlensreminder.$alias"
                 when {
                     index == lensPeriod -> {
                         packageManager.setComponentEnabledSetting(
-                            ComponentName(context, cls), enabled, DONT_KILL_APP
+                            ComponentName(context, cls), enabled, dontKillApp
                         )
                     }
-                    lensPeriod < 0 -> {
+                    lensPeriod < 1 -> {
                         packageManager.setComponentEnabledSetting(
                             ComponentName(context, lensPeriodClassList.last()),
                             enabled,
-                            DONT_KILL_APP
+                            dontKillApp
                         )
                     }
                     else -> {
                         packageManager.setComponentEnabledSetting(
-                            ComponentName(context, cls), disabled, DONT_KILL_APP
+                            ComponentName(context, cls), disabled, dontKillApp
                         )
                     }
                 }
@@ -80,11 +79,11 @@ class ChangeAppIconService(val context: Context) {
                 // DefaultAlias
                 if (index == lensPeriodClassList.size - 2) {
                     packageManager.setComponentEnabledSetting(
-                        ComponentName(context, cls), enabled, DONT_KILL_APP
+                        ComponentName(context, cls), enabled, dontKillApp
                     )
                 } else {
                     packageManager.setComponentEnabledSetting(
-                        ComponentName(context, cls), disabled, DONT_KILL_APP
+                        ComponentName(context, cls), disabled, dontKillApp
                     )
                 }
             }

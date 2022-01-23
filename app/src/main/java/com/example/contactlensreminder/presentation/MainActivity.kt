@@ -7,8 +7,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.contactlensreminder.presentation.screens.app_setting.inquiry.component.ContactUsScreen
+import com.example.contactlensreminder.presentation.screens.app_setting.instruction_screen.component.InstructionScreen
 import com.example.contactlensreminder.presentation.screens.app_setting.main_screen.components.AppSettingScreen
-import com.example.contactlensreminder.presentation.screens.app_setting.terms_of_service.component.TermsOfService
+import com.example.contactlensreminder.presentation.screens.app_setting.terms_of_service_screen.component.TermsOfServiceScreen
 import com.example.contactlensreminder.presentation.screens.lens_setting.components.LensSettingScreen
 import com.example.contactlensreminder.presentation.screens.top.components.TopScreen
 import com.example.contactlensreminder.presentation.theme.ContactLensReminderTheme
@@ -37,9 +38,10 @@ class MainActivity : ComponentActivity() {
                         AppSettingScreen(navController)
                     }
                     composable(route = Routes.TERMS_OF_SERVICE) {
-                        TermsOfService(navController)
+                        TermsOfServiceScreen(navController)
                     }
                     composable(route = Routes.HELP) {
+                        InstructionScreen(navController)
                     }
                     composable(route = Routes.INQUIRY) {
                         ContactUsScreen(navController)

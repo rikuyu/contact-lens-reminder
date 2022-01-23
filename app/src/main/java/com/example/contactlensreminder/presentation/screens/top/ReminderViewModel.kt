@@ -23,18 +23,15 @@ class ReminderViewModel @Inject constructor(
 
     fun onEvent(event: ReminderEvent) {
         _reminder.value = reminder.value.copy(
-            isUsingContactLens = event.reminderValue.isUsingContactLens
+            isUsingContactLens = event.reminderValue.isUsingContactLens,
+            elapsedDays = event.reminderValue.lensPeriod
         )
         reminderUseCase.saveReminderSetting(reminder.value)
         when (event) {
             is ReminderEvent.StartReminder -> {
-                reminderUseCase.startReminder(reminder.value.lensPeriod)
+                reminderUseCase.startReminder(reminder.value.elapsedDays)
             }
             is ReminderEvent.CancelReminder -> {
-                _reminder.value = reminder.value.copy(
-                    elapsedDays = event.reminderValue.lensPeriod
-                )
-                reminderUseCase.saveReminderSetting(reminder.value)
                 reminderUseCase.cancelReminder.invoke()
             }
         }

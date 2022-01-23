@@ -15,15 +15,6 @@ class ReminderRepositoryImpl(
 ) : ReminderRepository {
 
     override fun saveReminderSetting(reminderValue: ReminderValue) {
-        if (sharedPreferencesManager.getIsUseNotification()) {
-            waitWorkManagerService.initWaitMinutesWork(
-                notificationPeriod = reminderValue.lensPeriod,
-                notificationTimeHour = reminderValue.notificationTimeHour,
-                notificationTimeMinutes = reminderValue.notificationTimeMinute,
-                notificationDay = sharedPreferencesManager.getNotificationDay()
-            )
-            tickDownWorkManagerService.initTickDownWork()
-        }
         sharedPreferencesManager.apply {
             saveContactLensElapsedDays(reminderValue.elapsedDays)
             saveContactLensPeriod(reminderValue.lensPeriod)
@@ -31,12 +22,23 @@ class ReminderRepositoryImpl(
             saveNotificationTimeMinute(reminderValue.notificationTimeMinute)
             saveIsUsingContactLens(reminderValue.isUsingContactLens)
         }
+        if (sharedPreferencesManager.getIsUseNotification() && sharedPreferencesManager.getIsUsingContactLens()) {
+            waitWorkManagerService.initWaitMinutesWork(
+                notificationPeriod = reminderValue.lensPeriod,
+                notificationTimeHour = reminderValue.notificationTimeHour,
+                notificationTimeMinutes = reminderValue.notificationTimeMinute,
+                notificationDay = sharedPreferencesManager.getNotificationDay()
+            )
+        }
+        if (sharedPreferencesManager.getIsUsingContactLens()) {
+            tickDownWorkManagerService.initTickDownWork()
+        }
     }
 
-    override fun startReminder(lensPeriod: Int) {
+    override fun startReminder(elapsedDays: Int) {
         if (sharedPreferencesManager.getIsUseNotification()) {
             waitWorkManagerService.startWaitMinutesWork()
-            tickDownWorkManagerService.startTickDownWork(lensPeriod)
+            tickDownWorkManagerService.startTickDownWork(elapsedDays)
         }
     }
 

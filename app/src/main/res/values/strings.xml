@@ -43,13 +43,18 @@
 
     <!-- Notification -->
     <string name="notification_title">レンズ交換の日です！</string>
-    <string name="notification_content">コンタクトレンズを正しく使い、目の健康を守りましょう！</string>
+    <string name="notification_content">目の健康を守りましょう！</string>
 
     <!-- レンズ交換確認ダイアログ -->
     <string name="dialog_title">本当にレンズを交換しますか？</string>
     <string name="dialog_content">リマインダーはキャンセルされます</string>
     <string name="btn_cancel">キャンセル</string>
     <string name="btn_ok">OK</string>
+
+    <!-- ヘルプ（使い方） -->
+    <string name="help_1">STEP 1</string>
+    <string name="help_2">STEP 2</string>
+    <string name="help_3">STEP 3</string>
 
     <!-- お問い合わせ -->
     <string name="network_error_message_1">お問い合わせするには</string>

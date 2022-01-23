@@ -15,7 +15,7 @@ class NotificationService(val context: Context) {
         context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
     private var notificationBuilder = NotificationCompat.Builder(context, CHANNEL_ID)
-        // .setSmallIcon(R.drawable.ic_water_drop)
+        .setSmallIcon(R.drawable.ic_water_drop)
         .setLargeIcon(
             BitmapFactory.decodeResource(context.resources, R.drawable.ic_water_drop)
         )
@@ -44,8 +44,8 @@ class NotificationService(val context: Context) {
     }
 
     companion object {
-        private val CHANNEL_ID = "contact_lens_reminder_channel_id"
-        private val CHANNEL_NAME = "contact_lens_reminder_channel_name"
-        private val CHANNEL_DESCRIPTION = "contact_lens_reminder_channel_description "
+        private const val CHANNEL_ID = "contact_lens_reminder_channel_id"
+        private const val CHANNEL_NAME = "contact_lens_reminder_channel_name"
+        private const val CHANNEL_DESCRIPTION = "contact_lens_reminder_channel_description "
     }
 }
