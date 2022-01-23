@@ -3,7 +3,6 @@ package com.example.contactlensreminder.presentation.screens.app_setting.inquiry
 import android.graphics.Bitmap
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -86,9 +85,10 @@ fun ContactUsScreen(navController: NavController) {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.app_icon),
-                    modifier = Modifier.size(80.dp),
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_wifi_off),
+                    modifier = Modifier.size(60.dp),
+                    tint = SkyBlue,
                     contentDescription = null
                 )
                 Text(
