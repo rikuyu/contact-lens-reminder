@@ -1,17 +1,16 @@
 package com.example.contactlensreminder.data.repository
 
 import com.example.contactlensreminder.data.util.SharedPreferencesManager
-import com.example.contactlensreminder.data.workmanager.NotificationWorkManagerService
+import com.example.contactlensreminder.data.workmanager.AlarmManagerService
 import com.example.contactlensreminder.data.workmanager.TickDownWorkManagerService
-import com.example.contactlensreminder.data.workmanager.WaitWorkManagerService
 import com.example.contactlensreminder.domain.ReminderValue
 import com.example.contactlensreminder.domain.repository.ReminderRepository
+import com.example.contactlensreminder.presentation.util.getExpirationDate
 
 class ReminderRepositoryImpl(
-    private val waitWorkManagerService: WaitWorkManagerService,
-    private val notificationWorkManagerService: NotificationWorkManagerService,
     private val tickDownWorkManagerService: TickDownWorkManagerService,
-    private val sharedPreferencesManager: SharedPreferencesManager
+    private val sharedPreferencesManager: SharedPreferencesManager,
+    private val alarmManagerService: AlarmManagerService
 ) : ReminderRepository {
 
     override fun saveReminderSetting(reminderValue: ReminderValue) {
@@ -21,14 +20,7 @@ class ReminderRepositoryImpl(
             saveNotificationTimeHour(reminderValue.notificationTimeHour)
             saveNotificationTimeMinute(reminderValue.notificationTimeMinute)
             saveIsUsingContactLens(reminderValue.isUsingContactLens)
-        }
-        if (sharedPreferencesManager.getIsUseNotification() && sharedPreferencesManager.getIsUsingContactLens()) {
-            waitWorkManagerService.initWaitMinutesWork(
-                notificationPeriod = reminderValue.lensPeriod,
-                notificationTimeHour = reminderValue.notificationTimeHour,
-                notificationTimeMinutes = reminderValue.notificationTimeMinute,
-                notificationDay = sharedPreferencesManager.getNotificationDay()
-            )
+            saveLensExchangeDay(getExpirationDate(reminderValue.lensPeriod))
         }
         if (sharedPreferencesManager.getIsUsingContactLens()) {
             tickDownWorkManagerService.initTickDownWork()
@@ -37,7 +29,7 @@ class ReminderRepositoryImpl(
 
     override fun startReminder(elapsedDays: Int) {
         if (sharedPreferencesManager.getIsUseNotification()) {
-            waitWorkManagerService.startWaitMinutesWork()
+            alarmManagerService.initAlarm()
             tickDownWorkManagerService.startTickDownWork(elapsedDays)
         }
     }
@@ -49,9 +41,11 @@ class ReminderRepositoryImpl(
         val elapsedDays = sharedPreferencesManager.getContactLensElapsedDays()
         val isUsingContactLens = sharedPreferencesManager.getIsUsingContactLens()
         val isUseNotification = sharedPreferencesManager.getIsUseNotification()
+        val exchangeDay = sharedPreferencesManager.getLensExchangeDay() ?: getExpirationDate(lensPeriod)
 
         return ReminderValue(
             lensPeriod = lensPeriod,
+            exchangeDay = exchangeDay,
             notificationTimeHour = notificationTimeHour,
             notificationTimeMinute = notificationTimeMinute,
             elapsedDays = elapsedDays,
@@ -61,8 +55,9 @@ class ReminderRepositoryImpl(
     }
 
     override fun cancelReminder() {
-        waitWorkManagerService.cancelWaitWork()
-        notificationWorkManagerService.cancelNotificationWork()
+        if (sharedPreferencesManager.getIsUseNotification()) {
+            alarmManagerService.cancelAlarm()
+        }
         tickDownWorkManagerService.cancelTickDownWork()
     }
 }

@@ -37,4 +37,7 @@ object SharedPreferencesKey {
 
     // 右目の度数
     const val STORED_RIGHT_CONTACT_LENS_POWER = "right_contact_lens_power"
+
+    // レンズ交換日
+    const val STORED_CONTACT_LENS_EXCHANGE_DAY = "contact_lens_exchange_day"
 }

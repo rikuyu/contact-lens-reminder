@@ -3,10 +3,9 @@ package com.example.contactlensreminder.data.di
 import android.content.Context
 import com.example.contactlensreminder.data.repository.ReminderRepositoryImpl
 import com.example.contactlensreminder.data.repository.SettingRepositoryImpl
-import com.example.contactlensreminder.data.workmanager.NotificationWorkManagerService
 import com.example.contactlensreminder.data.util.SharedPreferencesManager
+import com.example.contactlensreminder.data.workmanager.AlarmManagerService
 import com.example.contactlensreminder.data.workmanager.TickDownWorkManagerService
-import com.example.contactlensreminder.data.workmanager.WaitWorkManagerService
 import com.example.contactlensreminder.domain.repository.ReminderRepository
 import com.example.contactlensreminder.domain.repository.SettingRepository
 import com.example.contactlensreminder.domain.usecase.reminder.*
@@ -42,24 +41,17 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideWaitWorkManagerService(
-        @ApplicationContext context: Context
-    ): WaitWorkManagerService =
-        WaitWorkManagerService(context)
-
-    @Provides
-    @Singleton
-    fun provideNotificationWorkManagerService(
-        @ApplicationContext context: Context
-    ): NotificationWorkManagerService =
-        NotificationWorkManagerService(context)
-
-    @Provides
-    @Singleton
     fun provideTickDownWorkManagerService(
         @ApplicationContext context: Context
     ): TickDownWorkManagerService =
         TickDownWorkManagerService(context)
+
+    @Provides
+    @Singleton
+    fun provideAlarmManagerService(
+        @ApplicationContext context: Context,
+        sharedPreferencesManager: SharedPreferencesManager
+    ): AlarmManagerService = AlarmManagerService(context, sharedPreferencesManager)
 
     @Provides
     @Singleton
@@ -71,15 +63,13 @@ object AppModule {
     @Provides
     @Singleton
     fun provideReminderRepository(
-        waitWorkManagerService: WaitWorkManagerService,
-        notificationWorkManagerService: NotificationWorkManagerService,
         sharedPreferencesManager: SharedPreferencesManager,
-        tickDownWorkManagerService: TickDownWorkManagerService
+        tickDownWorkManagerService: TickDownWorkManagerService,
+        alarmManagerService: AlarmManagerService
     ): ReminderRepository = ReminderRepositoryImpl(
-        waitWorkManagerService = waitWorkManagerService,
-        notificationWorkManagerService = notificationWorkManagerService,
         tickDownWorkManagerService = tickDownWorkManagerService,
-        sharedPreferencesManager = sharedPreferencesManager
+        sharedPreferencesManager = sharedPreferencesManager,
+        alarmManagerService = alarmManagerService
     )
 
     @Provides

@@ -26,7 +26,6 @@ import com.example.contactlensreminder.R
 import com.example.contactlensreminder.presentation.theme.CleanBlue
 import com.example.contactlensreminder.presentation.theme.LightBlue
 import com.example.contactlensreminder.presentation.theme.LightRed
-import com.example.contactlensreminder.presentation.util.getExpirationDate
 
 @Composable
 fun RemainingDaysBar(
@@ -34,6 +33,7 @@ fun RemainingDaysBar(
     notificationTimeHour: Int,
     notificationTimeMinute: Int,
     lensElapsedDays: Int,
+    exchangeDay: String,
     isUseNotification: Boolean,
     remainingDaysTextFontSize: TextUnit = 36.sp,
     supportTextFontSize: TextUnit = 24.sp,
@@ -120,7 +120,7 @@ fun RemainingDaysBar(
                             fontSize = periodTextFontSize
                         )
                     ) {
-                        append(getExpirationDate(lensElapsedDays))
+                        append(exchangeDay)
                     }
                     if (isUseNotification) {
                         append(stringResource(id = R.string.new_line))

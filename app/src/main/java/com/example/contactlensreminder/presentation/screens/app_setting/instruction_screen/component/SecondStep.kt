@@ -1,7 +1,10 @@
 package com.example.contactlensreminder.presentation.screens.app_setting.instruction_screen.component
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -14,13 +17,12 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.contactlensreminder.R
+import com.example.contactlensreminder.presentation.util.SimpleSpacer
 
 @Composable
-fun StepTwo(modifier: Modifier) {
+fun SecondStep(modifier: Modifier) {
     LazyColumn(modifier.fillMaxSize()) {
-        item {
-            TitleSection(title = stringResource(id = R.string.step_2_1))
-        }
+        item { TitleSection(title = stringResource(id = R.string.step_2_1)) }
         item {
             Section(
                 painter = painterResource(id = R.drawable.day),
@@ -36,24 +38,21 @@ fun StepTwo(modifier: Modifier) {
                 description = stringResource(id = R.string.step_2_4)
             )
         }
-        item {
-            TitleSection(title = stringResource(id = R.string.step_2_5))
-        }
+        item { TitleSection(title = stringResource(id = R.string.step_2_5)) }
         item {
             Section(
                 painter = painterResource(id = R.drawable.power),
                 description = stringResource(id = R.string.step_2_6)
             )
         }
-        item {
-            TitleSection(title = stringResource(id = R.string.step_2_7))
-        }
+        item { TitleSection(title = stringResource(id = R.string.step_2_7)) }
         item {
             Section(
                 painter = painterResource(id = R.drawable.save_btn),
                 description = stringResource(id = R.string.step_2_8)
             )
         }
+        item { SimpleSpacer(height = 20.dp) }
     }
 }
 

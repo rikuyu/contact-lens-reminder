@@ -27,9 +27,7 @@ fun OtherScreen(
     val screenWidth = LocalConfiguration.current.screenWidthDp
 
     LazyColumn(modifier.fillMaxSize()) {
-        item {
-            TitleSection(title = stringResource(id = R.string.step_4_1))
-        }
+        item { TitleSection(title = stringResource(id = R.string.step_4_1)) }
         item {
             Row {
                 Image(
@@ -49,9 +47,7 @@ fun OtherScreen(
                 )
             }
         }
-        item {
-            TitleSection(title = stringResource(id = R.string.step_4_3))
-        }
+        item { TitleSection(title = stringResource(id = R.string.step_4_3)) }
         item {
             Row {
                 Image(
@@ -71,9 +67,7 @@ fun OtherScreen(
                 )
             }
         }
-        item {
-            TitleSection(title = stringResource(id = R.string.step_4_5))
-        }
+        item { TitleSection(title = stringResource(id = R.string.step_4_5)) }
         item {
             Row {
                 Image(

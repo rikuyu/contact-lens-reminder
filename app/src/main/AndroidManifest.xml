@@ -4,6 +4,7 @@
     package="com.example.contactlensreminder">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 
     <application
         android:name=".presentation.ContactLensReminderApp"
@@ -20,6 +21,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.ContactLensReminder"
             tools:ignore="LockedOrientationActivity" />
+
+        <receiver
+            android:name=".data.workmanager.AlarmBroadcastReceiver"
+            android:exported="false"/>
 
         <!-- Default -->
         <activity-alias

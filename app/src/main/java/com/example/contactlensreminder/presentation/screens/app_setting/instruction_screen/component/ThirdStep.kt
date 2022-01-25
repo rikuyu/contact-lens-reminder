@@ -19,9 +19,10 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.contactlensreminder.R
+import com.example.contactlensreminder.presentation.util.SimpleSpacer
 
 @Composable
-fun StepOne(
+fun ThirdStep(
     modifier: Modifier,
     textColor: Color = Color.Black,
     descFontSize: TextUnit = 14.sp
@@ -29,13 +30,11 @@ fun StepOne(
     val screenWidth = LocalConfiguration.current.screenWidthDp
 
     LazyColumn(modifier.fillMaxSize()) {
-        item {
-            TitleSection(title = stringResource(id = R.string.step_1_1))
-        }
+        item { TitleSection(title = stringResource(id = R.string.step_3_1)) }
         item {
             Row {
                 Image(
-                    painter = painterResource(id = R.drawable.top_screen_1),
+                    painter = painterResource(id = R.drawable.top_screen_3),
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
                     alignment = Alignment.Center,
@@ -45,19 +44,17 @@ fun StepOne(
                 )
                 Text(
                     modifier = Modifier.padding(top = 10.dp),
-                    text = stringResource(id = R.string.step_1_2),
+                    text = stringResource(id = R.string.step_3_2),
                     fontSize = descFontSize,
                     color = textColor
                 )
             }
         }
-        item {
-            TitleSection(title = stringResource(id = R.string.step_1_3))
-        }
+        item { TitleSection(title = stringResource(id = R.string.step_3_3)) }
         item {
             Row {
                 Image(
-                    painter = painterResource(id = R.drawable.setting_screen),
+                    painter = painterResource(id = R.drawable.top_screen_2),
                     contentDescription = null,
                     contentScale = ContentScale.Fit,
                     alignment = Alignment.TopStart,
@@ -67,11 +64,20 @@ fun StepOne(
                 )
                 Text(
                     modifier = Modifier.padding(top = 10.dp),
-                    text = stringResource(id = R.string.step_1_4),
+                    text = stringResource(id = R.string.step_3_4),
                     fontSize = descFontSize,
                     color = textColor
                 )
             }
         }
+        item {
+            Text(
+                modifier = Modifier.padding(top = 16.dp, start = 8.dp),
+                text = stringResource(id = R.string.step_3_5),
+                fontSize = descFontSize,
+                color = textColor
+            )
+        }
+        item { SimpleSpacer(height = 20.dp) }
     }
 }
