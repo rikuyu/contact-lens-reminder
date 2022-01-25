@@ -31,15 +31,19 @@ fun TopScreen(
 
     val reminderValue = viewModel.reminder.value
 
-    var isUsingContactLens by remember { mutableStateOf(reminderValue.isUsingContactLens) }
+    val isUseNotification by remember { mutableStateOf(reminderValue.isUseNotification) }
 
     val lensPeriod by remember { mutableStateOf(reminderValue.lensPeriod) }
 
     val lensElapsedDays by remember { mutableStateOf(reminderValue.elapsedDays) }
 
+    val exchangeDay by remember { mutableStateOf(reminderValue.exchangeDay) }
+
     val notificationTimeHour by remember { mutableStateOf(reminderValue.notificationTimeHour) }
 
     val notificationTimeMinute by remember { mutableStateOf(reminderValue.notificationTimeMinute) }
+
+    var isUsingContactLens by remember { mutableStateOf(reminderValue.isUsingContactLens) }
 
     var dialogState by remember { mutableStateOf(false) }
 
@@ -84,9 +88,11 @@ fun TopScreen(
         ) {
             RemainingDaysBar(
                 lensPeriod = lensPeriod,
+                exchangeDay = exchangeDay,
                 notificationTimeHour = notificationTimeHour,
                 notificationTimeMinute = notificationTimeMinute,
-                lensElapsedDays = lensElapsedDays
+                lensElapsedDays = lensElapsedDays,
+                isUseNotification = isUseNotification
             )
         }
         HandleReminderButtonSection(

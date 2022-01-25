@@ -5,7 +5,7 @@ import com.example.contactlensreminder.domain.repository.ReminderRepository
 class StartReminder(
     private val repository: ReminderRepository
 ) {
-    operator fun invoke(lensPeriod: Int) {
-        repository.startReminder(lensPeriod)
+    operator fun invoke(elapsedDays: Int) {
+        repository.startReminder(elapsedDays)
     }
 }

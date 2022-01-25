@@ -70,7 +70,7 @@ class SharedPreferencesManager(private val context: Context) {
     fun getIsUseNotification(): Boolean {
         return getSharedPreferences().getBoolean(
             SharedPreferencesKey.STORED_IS_USE_NOTIFICATION,
-            true
+            false
         )
     }
 
@@ -159,5 +159,18 @@ class SharedPreferencesManager(private val context: Context) {
     fun saveRightContactLensPower(lensPower: String) {
         getSharedPreferences().edit()
             .putString(SharedPreferencesKey.STORED_RIGHT_CONTACT_LENS_POWER, lensPower).apply()
+    }
+
+    // レンズ交換日
+    fun getLensExchangeDay(): String? {
+        return getSharedPreferences().getString(
+            SharedPreferencesKey.STORED_CONTACT_LENS_EXCHANGE_DAY,
+            null
+        )
+    }
+
+    fun saveLensExchangeDay(exchangeDay: String) {
+        getSharedPreferences().edit()
+            .putString(SharedPreferencesKey.STORED_CONTACT_LENS_EXCHANGE_DAY, exchangeDay).apply()
     }
 }

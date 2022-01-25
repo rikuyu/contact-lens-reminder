@@ -7,14 +7,14 @@ import android.content.pm.PackageManager
 class ChangeAppIconService(val context: Context) {
 
     private val packageManager: PackageManager = context.packageManager
-
     private val enabled = PackageManager.COMPONENT_ENABLED_STATE_ENABLED
     private val disabled = PackageManager.COMPONENT_ENABLED_STATE_DISABLED
+    private val dontKillApp = PackageManager.DONT_KILL_APP
+    private val pkg = "com.example.contactlensreminder."
+    private val defaultIcon = pkg + "DefaultAlias"
+    private val expiredIcon = pkg + "ExpiredAlias"
 
-    private val DONT_KILL_APP = PackageManager.DONT_KILL_APP
-
-    private val lensPeriodClassList: List<String> = listOf(
-        "ZeroAlias",
+    private val aliasList: List<String> = listOf(
         "OneAlias",
         "TwoAlias",
         "ThreeAlias",
@@ -45,49 +45,53 @@ class ChangeAppIconService(val context: Context) {
         "TwentyEightAlias",
         "TwentyNineAlias",
         "ThirtyAlias",
-        "ThirtyOneAlias",
-        "DefaultAlias",
-        "ExpiredAlias"
+        "ThirtyOneAlias"
     )
 
-    fun changeAppIcon(context: Context, isUsingContactLens: Boolean, lensPeriod: Int) {
-        if (isUsingContactLens) {
-            lensPeriodClassList.forEachIndexed { index, alias ->
-                val cls = "com.example.contactlensreminder.$alias"
+    fun changeAppIcon(context: Context, isUsingContactLens: Boolean, lensElapsedDays: Int?) {
+        if (isUsingContactLens && lensElapsedDays != null) {
+            aliasList.forEachIndexed { index, alias ->
                 when {
-                    index == lensPeriod -> {
+                    lensElapsedDays - 1 < 0 -> {
                         packageManager.setComponentEnabledSetting(
-                            ComponentName(context, cls), enabled, DONT_KILL_APP
+                            ComponentName(context, expiredIcon),
+                            enabled,
+                            dontKillApp
+                        )
+                        packageManager.setComponentEnabledSetting(
+                            ComponentName(context, defaultIcon), disabled, dontKillApp
                         )
                     }
-                    lensPeriod < 0 -> {
+                    index == lensElapsedDays - 1 -> {
                         packageManager.setComponentEnabledSetting(
-                            ComponentName(context, lensPeriodClassList.last()),
+                            ComponentName(context, pkg + alias),
                             enabled,
-                            DONT_KILL_APP
+                            dontKillApp
+                        )
+                        packageManager.setComponentEnabledSetting(
+                            ComponentName(context, defaultIcon), disabled, dontKillApp
                         )
                     }
                     else -> {
                         packageManager.setComponentEnabledSetting(
-                            ComponentName(context, cls), disabled, DONT_KILL_APP
+                            ComponentName(context, pkg + alias), disabled, dontKillApp
+                        )
+                        packageManager.setComponentEnabledSetting(
+                            ComponentName(context, defaultIcon), disabled, dontKillApp
                         )
                     }
                 }
             }
         } else {
-            lensPeriodClassList.forEachIndexed { index, alias ->
-                val cls = "com.example.contactlensreminder.$alias"
-                // DefaultAlias
-                if (index == lensPeriodClassList.size - 2) {
-                    packageManager.setComponentEnabledSetting(
-                        ComponentName(context, cls), enabled, DONT_KILL_APP
-                    )
-                } else {
-                    packageManager.setComponentEnabledSetting(
-                        ComponentName(context, cls), disabled, DONT_KILL_APP
-                    )
-                }
+            // DefaultAlias
+            aliasList.forEach { alias ->
+                packageManager.setComponentEnabledSetting(
+                    ComponentName(context, pkg + alias), disabled, dontKillApp
+                )
             }
+            packageManager.setComponentEnabledSetting(
+                ComponentName(context, defaultIcon), enabled, dontKillApp
+            )
         }
     }
 }

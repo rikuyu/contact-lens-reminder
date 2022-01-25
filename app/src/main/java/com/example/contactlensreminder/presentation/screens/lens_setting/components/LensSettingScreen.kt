@@ -42,8 +42,6 @@ fun LensSettingScreen(
 
     var lensPeriod by remember { mutableStateOf(settingValue.lensPeriod) }
 
-    var temporaryLensPeriod by remember { mutableStateOf(lensPeriod) }
-
     var notificationType by remember { mutableStateOf(settingValue.notificationDay) }
 
     var notificationTimeHour by remember { mutableStateOf(settingValue.notificationTimeHour) }
@@ -60,17 +58,11 @@ fun LensSettingScreen(
 
     var isShowLensPowerPicker by remember { mutableStateOf(false) }
 
-    val setLensPeriod: (Int) -> Unit = { type ->
-        when (type) {
-            0 -> {
-                temporaryLensPeriod = lensPeriod
-                lensPeriod = 14
-            }
-            1 -> {
-                temporaryLensPeriod = lensPeriod
-                lensPeriod = 31
-            }
-            2 -> lensPeriod = temporaryLensPeriod
+    val setLensPeriod: (Int) -> Unit = { index ->
+        when (index) {
+            0 -> lensPeriod = 14
+            1 -> lensPeriod = 31
+            2 -> lensPeriod = 10
         }
     }
 
@@ -116,7 +108,7 @@ fun LensSettingScreen(
                         setLensPeriod(it)
                         lensType = it
                         viewModel.onEvent(SettingEvent.Type(it))
-                        viewModel.onEvent(SettingEvent.Period(it))
+                        viewModel.onEvent(SettingEvent.Period(lensPeriod))
                         isShowLensPeriodPicker = lensType == 2
                     }
                     AnimatedVisibility(visible = !isShowLensPeriodPicker) { SimpleDivider() }

@@ -24,16 +24,20 @@ import com.example.contactlensreminder.presentation.theme.SmoothGray
 import com.example.contactlensreminder.presentation.util.Routes
 import com.example.contactlensreminder.presentation.util.SimpleDivider
 import com.example.contactlensreminder.presentation.util.SimpleSpacer
+import com.example.contactlensreminder.presentation.util.makeNotificationSettingIntent
 
 @Composable
 fun AppSettingScreen(
     navController: NavController
 ) {
+    val context = LocalContext.current
+
     val sectionList = listOf(
-        AppSettingSection(stringResource(id = R.string.terms_of_service), Routes.TERMS_OF_SERVICE),
-        AppSettingSection(stringResource(id = R.string.help), Routes.HELP),
-        AppSettingSection(stringResource(id = R.string.inquiry), Routes.INQUIRY),
-        AppSettingSection(stringResource(id = R.string.version, getVersionName(LocalContext.current)), null)
+        AppSettingSection(1, stringResource(id = R.string.terms_of_service), Routes.TERMS_OF_SERVICE),
+        AppSettingSection(2, stringResource(id = R.string.help), Routes.HELP),
+        AppSettingSection(3, stringResource(id = R.string.notification_setting), null),
+        AppSettingSection(4, stringResource(id = R.string.inquiry), Routes.INQUIRY),
+        AppSettingSection(5, stringResource(id = R.string.version, getVersionName(context)), null)
     )
 
     Scaffold(
@@ -68,7 +72,13 @@ fun AppSettingScreen(
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .clickable { item.route?.let { navController.navigate(it) } }
+                            .clickable {
+                                if (item.route != null) {
+                                    navController.navigate(item.route)
+                                } else if (item.id == 3) {
+                                    context.startActivity(makeNotificationSettingIntent(context))
+                                }
+                            }
                             .padding(all = 16.dp)
                     ) {
                         Text(text = item.title, color = Color.Black)

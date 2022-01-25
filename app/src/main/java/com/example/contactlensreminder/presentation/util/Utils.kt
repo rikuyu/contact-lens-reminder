@@ -17,12 +17,12 @@ fun getExpirationDate(lensPeriod: Int): String {
 }
 
 fun makeNotificationSettingIntent(context: Context): Intent {
-    val intent = Intent()
-    intent.action = android.provider.Settings.ACTION_APP_NOTIFICATION_SETTINGS
-    intent.putExtra("app_package", context.packageName)
-    intent.putExtra("app_uid", context.applicationInfo.uid)
-    intent.putExtra("android.provider.extra.APP_PACKAGE", context.packageName)
-    return intent
+    return Intent().apply {
+        action = android.provider.Settings.ACTION_APP_NOTIFICATION_SETTINGS
+        putExtra("app_package", context.packageName)
+        putExtra("app_uid", context.applicationInfo.uid)
+        putExtra("android.provider.extra.APP_PACKAGE", context.packageName)
+    }
 }
 
 fun checkNetworkConnection(context: Context): Boolean {

@@ -4,6 +4,7 @@
     package="com.example.contactlensreminder">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 
     <application
         android:name=".presentation.ContactLensReminderApp"
@@ -20,6 +21,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.ContactLensReminder"
             tools:ignore="LockedOrientationActivity" />
+
+        <receiver
+            android:name=".data.workmanager.AlarmBroadcastReceiver"
+            android:exported="false"/>
 
         <!-- Default -->
         <activity-alias
@@ -42,20 +47,6 @@
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/icon_expired"
-            android:label="@string/app_name"
-            android:targetActivity=".presentation.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity-alias>
-
-        <!-- 0 -->
-        <activity-alias
-            android:name=".ZeroAlias"
-            android:enabled="false"
-            android:exported="true"
-            android:icon="@mipmap/icon_0"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -363,7 +354,7 @@
             android:name=".TwentyTwoAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@mipmap/icon_21"
+            android:icon="@mipmap/icon_22"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
@@ -377,7 +368,7 @@
             android:name=".TwentyThreeAlias"
             android:enabled="false"
             android:exported="true"
-            android:icon="@mipmap/icon_22"
+            android:icon="@mipmap/icon_23"
             android:label="@string/app_name"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>

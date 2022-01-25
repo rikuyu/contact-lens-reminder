@@ -1,8 +1,7 @@
-package com.example.contactlensreminder.presentation.screens.app_setting.terms_of_service.component
+package com.example.contactlensreminder.presentation.screens.app_setting.terms_of_service_screen.component
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -22,7 +21,7 @@ import com.example.contactlensreminder.presentation.util.SimpleDivider
 import com.example.contactlensreminder.presentation.util.SimpleSpacer
 
 @Composable
-fun TermsOfService(navController: NavHostController) {
+fun TermsOfServiceScreen(navController: NavHostController) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -46,7 +45,7 @@ fun TermsOfService(navController: NavHostController) {
                 .padding(horizontal = 10.dp)
         ) {
             item { SimpleSpacer(height = 12.dp) }
-            // 1条
+// 1条
             item {
                 Text(
                     text = stringResource(id = R.string.title_1),
@@ -66,7 +65,7 @@ fun TermsOfService(navController: NavHostController) {
                 )
             }
             item { SimpleSpacer(height = 14.dp) }
-            // 2条
+// 2条
             item {
                 Text(
                     text = stringResource(id = R.string.title_2),
@@ -86,7 +85,7 @@ fun TermsOfService(navController: NavHostController) {
                 )
             }
             item { SimpleSpacer(height = 14.dp) }
-            // 3条
+// 3条
             item {
                 Text(
                     text = stringResource(id = R.string.title_3),
@@ -120,7 +119,7 @@ fun TermsOfService(navController: NavHostController) {
                 )
             }
             item { SimpleSpacer(height = 14.dp) }
-            // 4条
+// 4条
             item {
                 Text(
                     text = stringResource(id = R.string.title_4),
@@ -140,7 +139,7 @@ fun TermsOfService(navController: NavHostController) {
                 )
             }
             item { SimpleSpacer(height = 14.dp) }
-            // 5条
+// 5条
             item {
                 Text(
                     text = stringResource(id = R.string.title_5),
@@ -202,7 +201,7 @@ fun TermsOfService(navController: NavHostController) {
                 )
             }
             item { SimpleSpacer(height = 14.dp) }
-            // 6条
+// 6条
             item {
                 Text(
                     text = stringResource(id = R.string.title_6),
@@ -243,7 +242,7 @@ fun TermsOfService(navController: NavHostController) {
                 )
             }
             item { SimpleSpacer(height = 14.dp) }
-            // 7条
+// 7条
             item {
                 Text(
                     text = stringResource(id = R.string.title_7),
@@ -263,7 +262,7 @@ fun TermsOfService(navController: NavHostController) {
                 )
             }
             item { SimpleSpacer(height = 14.dp) }
-            // 8条
+// 8条
             item {
                 Text(
                     text = stringResource(id = R.string.title_8),
@@ -291,11 +290,13 @@ fun TermsOfService(navController: NavHostController) {
             }
             item { SimpleSpacer(height = 14.dp) }
             item {
-                Text(
-                    text = stringResource(id = R.string.title_that_all),
-                    fontSize = 14.sp,
-                    color = Color.Black
-                )
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                    Text(
+                        text = stringResource(id = R.string.title_that_all),
+                        fontSize = 14.sp,
+                        color = Color.Black
+                    )
+                }
             }
             item { SimpleSpacer(height = 14.dp) }
         }
