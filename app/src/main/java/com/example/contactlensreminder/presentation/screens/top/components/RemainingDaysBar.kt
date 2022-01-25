@@ -34,6 +34,7 @@ fun RemainingDaysBar(
     notificationTimeHour: Int,
     notificationTimeMinute: Int,
     lensElapsedDays: Int,
+    isUseNotification: Boolean,
     remainingDaysTextFontSize: TextUnit = 36.sp,
     supportTextFontSize: TextUnit = 24.sp,
     periodTextFontSize: TextUnit = 16.sp,
@@ -121,25 +122,27 @@ fun RemainingDaysBar(
                     ) {
                         append(getExpirationDate(lensElapsedDays))
                     }
-                    append(stringResource(id = R.string.new_line))
-                    withStyle(
-                        style = SpanStyle(
-                            color = supportTextColor,
-                            fontSize = periodTextFontSize
-                        )
-                    ) {
-                        append(stringResource(id = R.string.time_message))
-                    }
-                    append(" ")
-                    withStyle(
-                        style = SpanStyle(
-                            color = supportTextColor,
-                            fontSize = periodTextFontSize
-                        )
-                    ) {
-                        append(notificationTimeHour.toString())
-                        append(stringResource(id = R.string.time_div))
-                        append(notificationTimeMinute.toString())
+                    if (isUseNotification) {
+                        append(stringResource(id = R.string.new_line))
+                        withStyle(
+                            style = SpanStyle(
+                                color = supportTextColor,
+                                fontSize = periodTextFontSize
+                            )
+                        ) {
+                            append(stringResource(id = R.string.time_message))
+                        }
+                        append(" ")
+                        withStyle(
+                            style = SpanStyle(
+                                color = supportTextColor,
+                                fontSize = periodTextFontSize
+                            )
+                        ) {
+                            append(notificationTimeHour.toString())
+                            append(stringResource(id = R.string.time_div))
+                            append(notificationTimeMinute.toString())
+                        }
                     }
                 }
             },

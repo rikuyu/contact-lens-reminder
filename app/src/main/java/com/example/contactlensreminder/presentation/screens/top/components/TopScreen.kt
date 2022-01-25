@@ -31,6 +31,8 @@ fun TopScreen(
 
     val reminderValue = viewModel.reminder.value
 
+    val isUseNotification = reminderValue.isUseNotification
+
     var isUsingContactLens by remember { mutableStateOf(reminderValue.isUsingContactLens) }
 
     val lensPeriod by remember { mutableStateOf(reminderValue.lensPeriod) }
@@ -86,7 +88,8 @@ fun TopScreen(
                 lensPeriod = lensPeriod,
                 notificationTimeHour = notificationTimeHour,
                 notificationTimeMinute = notificationTimeMinute,
-                lensElapsedDays = lensElapsedDays
+                lensElapsedDays = lensElapsedDays,
+                isUseNotification = isUseNotification
             )
         }
         HandleReminderButtonSection(

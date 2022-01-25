@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -14,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.contactlensreminder.R
 import com.example.contactlensreminder.presentation.theme.CleanBlue
@@ -48,9 +50,10 @@ fun InstructionScreen(navController: NavHostController) {
 
         val pages = remember {
             listOf(
-                context.getString(R.string.help_1),
-                context.getString(R.string.help_2),
-                context.getString(R.string.help_3)
+                context.getString(R.string.help_1_page),
+                context.getString(R.string.help_2_page),
+                context.getString(R.string.help_3_page),
+                context.getString(R.string.other_page)
             )
         }
 
@@ -89,9 +92,26 @@ fun InstructionScreen(navController: NavHostController) {
                     .fillMaxWidth()
             ) { page ->
                 when (page) {
-                    0 -> Text("0")
-                    1 -> Text("1")
-                    2 -> Text("2")
+                    0 -> StepOne(
+                        Modifier
+                            .padding(5.dp)
+                            .background(Color.White)
+                    )
+                    1 -> StepTwo(
+                        Modifier
+                            .padding(5.dp)
+                            .background(Color.White)
+                    )
+                    2 -> StepThree(
+                        Modifier
+                            .padding(5.dp)
+                            .background(Color.White)
+                    )
+                    3 -> OtherScreen(
+                        Modifier
+                            .padding(5.dp)
+                            .background(Color.White)
+                    )
                 }
             }
         }

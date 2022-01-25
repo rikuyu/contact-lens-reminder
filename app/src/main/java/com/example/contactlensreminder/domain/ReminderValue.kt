@@ -5,5 +5,6 @@ data class ReminderValue(
     val elapsedDays: Int = 14,
     val notificationTimeHour: Int = 9,
     val notificationTimeMinute: Int = 15,
-    val isUsingContactLens: Boolean = false
+    val isUsingContactLens: Boolean = false,
+    val isUseNotification: Boolean = true
 )

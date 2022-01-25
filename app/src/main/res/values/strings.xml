@@ -52,9 +52,34 @@
     <string name="btn_ok">OK</string>
 
     <!-- ヘルプ（使い方） -->
-    <string name="help_1">STEP 1</string>
-    <string name="help_2">STEP 2</string>
-    <string name="help_3">STEP 3</string>
+    <string name="help_1_page">STEP 1</string>
+    <string name="help_2_page">STEP 2</string>
+    <string name="help_3_page">STEP 3</string>
+    <string name="other_page">Other</string>
+    <string name="step_1_1">レンズと通知の設定について</string>
+    <string name="step_1_2">はじめに、「レンズの設定」ボタン（赤枠）を押してコンタクトレンズと通知の設定をしましょう。\nこの設定をせずに「スタート」を押すと、2Week用レンズの設定（通知なし）が適用されます。</string>
+    <string name="step_1_3">レンズと通知の設定画面</string>
+    <string name="step_1_4">この画面では、「コンタクトレンズの種類」「使用する期間」「通知日」「通知時刻」「コンタクトレンズの度数」を設定することができます。</string>
+    <string name="step_2_1">コンタクトレンズの種類</string>
+    <string name="step_2_2">コンタクトレンズの種類は「2Weeks」「1Month」から選ぶことができます。それ以外に、1～31日の間でレンズの使用期間を選択することもできます。</string>
+    <string name="step_2_3">通知の設定</string>
+    <string name="step_2_4">通知日は、当日か前日かを選択することができます。また、通知時刻は15分単位で設定することができます。（ベルマークを押下すると、Android端末の通知設定画面を開くことができます。）</string>
+    <string name="step_2_5">レンズの度数設定</string>
+    <string name="step_2_6">コンタクトレンズの度数は、-8.0～-3.0の範囲で設定することができます。</string>
+    <string name="step_2_7">設定の保存方法</string>
+    <string name="step_2_8">これまでの設定を保存するにはokボタンを押下してください。</string>
+    <string name="step_3_1">リマインダーの設定方法</string>
+    <string name="step_3_2">リマインダーを開始するためには、「スタート」ボタン（赤枠）を押下してください。リマインダーをスタートすると、いったんアプリが閉じます。</string>
+    <string name="step_3_3">リマインダー開始後</string>
+    <string name="step_3_4">リマインダーを開始すると、「スタート」ボタンが「レンズの交換」ボタンになります。また、一度リマインダーを開始すると、設定を変更することができなくなります。</string>
+    <string name="step_3_5">その他、アプリの特徴は、Otherをご覧ください。</string>
+    <string name="step_4_1">ヘルプについて</string>
+    <string name="step_4_2">トップ画面から「ヘルプ」ボタン（赤枠）を押下すると、ヘルプ画面を見ることができます。</string>
+    <string name="step_4_3">このアプリについての画面</string>
+    <string name="step_4_4">この画面では、「利用規約」「ヘルプ（使い方）」「通知設定」「お問い合わせ」「バージョン」を参照することができます。</string>
+    <string name="step_4_5">アプリアイコンについて</string>
+    <string name="step_4_6">このアプリのアイコンはコンタクトレンズの残り使用可能日数によって変化します！わざわざアプリを開かなくとも残り使用可能日数を知ることができます。</string>
+    <string name="step_4_7">デフォルトのアイコン（リマインダーがセットされていない状態のアイコン）は左上、コンタクトレンズの使用可能日数を超えた場合のアイコンは、デフォルトアイコンの右のものになります。</string>
 
     <!-- お問い合わせ -->
     <string name="network_error_message_1">お問い合わせするには</string>

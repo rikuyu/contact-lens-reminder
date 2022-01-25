@@ -48,13 +48,15 @@ class ReminderRepositoryImpl(
         val notificationTimeMinute = sharedPreferencesManager.getNotificationTimeMinute()
         val elapsedDays = sharedPreferencesManager.getContactLensElapsedDays()
         val isUsingContactLens = sharedPreferencesManager.getIsUsingContactLens()
+        val isUseNotification = sharedPreferencesManager.getIsUseNotification()
 
         return ReminderValue(
             lensPeriod = lensPeriod,
             notificationTimeHour = notificationTimeHour,
             notificationTimeMinute = notificationTimeMinute,
             elapsedDays = elapsedDays,
-            isUsingContactLens = isUsingContactLens
+            isUsingContactLens = isUsingContactLens,
+            isUseNotification = isUseNotification
         )
     }
 

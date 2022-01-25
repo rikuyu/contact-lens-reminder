@@ -70,7 +70,7 @@ class SharedPreferencesManager(private val context: Context) {
     fun getIsUseNotification(): Boolean {
         return getSharedPreferences().getBoolean(
             SharedPreferencesKey.STORED_IS_USE_NOTIFICATION,
-            true
+            false
         )
     }
 
