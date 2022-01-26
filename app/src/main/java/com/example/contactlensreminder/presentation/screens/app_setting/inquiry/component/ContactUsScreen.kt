@@ -1,5 +1,6 @@
 package com.example.contactlensreminder.presentation.screens.app_setting.inquiry.component
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -24,9 +25,11 @@ import androidx.navigation.NavController
 import com.example.contactlensreminder.R
 import com.example.contactlensreminder.presentation.theme.CleanBlue
 import com.example.contactlensreminder.presentation.theme.SkyBlue
+import com.example.contactlensreminder.presentation.theme.WebViewBackground
 import com.example.contactlensreminder.presentation.util.Routes
 import com.example.contactlensreminder.presentation.util.checkNetworkConnection
 
+@SuppressLint("SetJavaScriptEnabled")
 @Composable
 fun ContactUsScreen(navController: NavController) {
 
@@ -53,27 +56,38 @@ fun ContactUsScreen(navController: NavController) {
         }
     ) {
         if (isNetworkConnected) {
-            Box(modifier = Modifier.fillMaxSize()) {
-                AndroidView(
-                    factory = { WebView(it) },
-                    update = { webView ->
-                        webView.webViewClient = object : WebViewClient() {
-                            override fun onPageStarted(
-                                view: WebView,
-                                url: String,
-                                favicon: Bitmap?
-                            ) {
-                                visibility.value = true
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(WebViewBackground)
+            ) {
+                Box(modifier = Modifier.fillMaxSize()) {
+                    AndroidView(
+                        factory = {
+                            WebView(it).apply {
+                                webViewClient = WebViewClient()
+                                settings.javaScriptEnabled = true
                             }
+                        },
+                        update = { webView ->
+                            webView.webViewClient = object : WebViewClient() {
+                                override fun onPageStarted(
+                                    view: WebView,
+                                    url: String,
+                                    favicon: Bitmap?
+                                ) {
+                                    visibility.value = true
+                                }
+                            }
+                            webView.loadUrl("https://docs.google.com/forms/d/e/$formId/viewform")
                         }
-                        webView.loadUrl("https://docs.google.com/forms/d/e/$formId/viewform")
-                    }
-                )
-                if (!visibility.value) {
-                    CircularProgressIndicator(
-                        color = SkyBlue,
-                        modifier = Modifier.align(Alignment.Center)
                     )
+                    if (!visibility.value) {
+                        CircularProgressIndicator(
+                            color = SkyBlue,
+                            modifier = Modifier.align(Alignment.Center)
+                        )
+                    }
                 }
             }
         } else {
