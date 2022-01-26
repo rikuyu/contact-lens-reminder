@@ -76,6 +76,7 @@ fun TopScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Color.White),
+            lensElapsedDays = lensElapsedDays,
             period = lensPeriod
         )
         SimpleSpacer(height = 4.dp)
@@ -100,6 +101,7 @@ fun TopScreen(
                 .fillMaxWidth()
                 .weight(1f)
                 .background(Color.White),
+            lensElapsedDays = lensElapsedDays,
             isUsingContactLens = isUsingContactLens,
             startReminder = {
                 isUsingContactLens = it

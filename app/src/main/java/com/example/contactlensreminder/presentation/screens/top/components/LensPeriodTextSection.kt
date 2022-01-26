@@ -12,10 +12,12 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.sp
 import com.example.contactlensreminder.presentation.theme.CleanBlue
+import com.example.contactlensreminder.presentation.theme.LightRed
 
 @Composable
 fun LensPeriodTextSection(
     modifier: Modifier,
+    lensElapsedDays: Int,
     period: Int
 ) {
     Row(
@@ -30,7 +32,7 @@ fun LensPeriodTextSection(
                         withStyle(style = ParagraphStyle(lineHeight = 20.sp)) {
                             withStyle(
                                 style = SpanStyle(
-                                    color = CleanBlue,
+                                    color = if (lensElapsedDays < 0) LightRed else CleanBlue,
                                     fontSize = 28.sp
                                 )
                             ) {
@@ -38,11 +40,11 @@ fun LensPeriodTextSection(
                             }
                             withStyle(
                                 style = SpanStyle(
-                                    color = CleanBlue,
+                                    color = if (lensElapsedDays < 0) LightRed else CleanBlue,
                                     fontSize = 24.sp
                                 )
                             ) {
-                                append(" Day")
+                                append(" Day レンズ")
                             }
                         }
                     }
@@ -50,11 +52,11 @@ fun LensPeriodTextSection(
                         withStyle(style = ParagraphStyle(lineHeight = 20.sp)) {
                             withStyle(
                                 style = SpanStyle(
-                                    color = CleanBlue,
+                                    color = if (lensElapsedDays < 0) LightRed else CleanBlue,
                                     fontSize = 26.sp
                                 )
                             ) {
-                                append("2Weeks")
+                                append("2Weeks レンズ")
                             }
                         }
                     }
@@ -62,11 +64,11 @@ fun LensPeriodTextSection(
                         withStyle(style = ParagraphStyle(lineHeight = 20.sp)) {
                             withStyle(
                                 style = SpanStyle(
-                                    color = CleanBlue,
+                                    color = if (lensElapsedDays < 0) LightRed else CleanBlue,
                                     fontSize = 26.sp
                                 )
                             ) {
-                                append("1Month")
+                                append("1Month レンズ")
                             }
                         }
                     }
@@ -74,7 +76,7 @@ fun LensPeriodTextSection(
                         withStyle(style = ParagraphStyle(lineHeight = 20.sp)) {
                             withStyle(
                                 style = SpanStyle(
-                                    color = CleanBlue,
+                                    color = if (lensElapsedDays < 0) LightRed else CleanBlue,
                                     fontSize = 28.sp
                                 )
                             ) {
@@ -82,11 +84,11 @@ fun LensPeriodTextSection(
                             }
                             withStyle(
                                 style = SpanStyle(
-                                    color = CleanBlue,
+                                    color = if (lensElapsedDays < 0) LightRed else CleanBlue,
                                     fontSize = 24.sp
                                 )
                             ) {
-                                append(" Days")
+                                append(" Days レンズ")
                             }
                         }
                     }

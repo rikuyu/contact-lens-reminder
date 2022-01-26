@@ -1,4 +1,4 @@
-package com.example.contactlensreminder.data.workmanager
+package com.example.contactlensreminder.data.alarm
 
 import android.content.BroadcastReceiver
 import android.content.Context

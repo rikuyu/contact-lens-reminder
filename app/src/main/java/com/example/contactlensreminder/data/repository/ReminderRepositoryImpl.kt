@@ -1,7 +1,7 @@
 package com.example.contactlensreminder.data.repository
 
-import com.example.contactlensreminder.data.util.SharedPreferencesManager
-import com.example.contactlensreminder.data.workmanager.AlarmManagerService
+import com.example.contactlensreminder.data.sharedpreferences.SharedPreferencesManager
+import com.example.contactlensreminder.data.alarm.AlarmManagerService
 import com.example.contactlensreminder.data.workmanager.TickDownWorkManagerService
 import com.example.contactlensreminder.domain.ReminderValue
 import com.example.contactlensreminder.domain.repository.ReminderRepository
@@ -30,8 +30,8 @@ class ReminderRepositoryImpl(
     override fun startReminder(elapsedDays: Int) {
         if (sharedPreferencesManager.getIsUseNotification()) {
             alarmManagerService.initAlarm()
-            tickDownWorkManagerService.startTickDownWork(elapsedDays)
         }
+        tickDownWorkManagerService.startTickDownWork(elapsedDays)
     }
 
     override fun getReminderSetting(): ReminderValue {

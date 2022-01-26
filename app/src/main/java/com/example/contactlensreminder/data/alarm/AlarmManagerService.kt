@@ -1,10 +1,10 @@
-package com.example.contactlensreminder.data.workmanager
+package com.example.contactlensreminder.data.alarm
 
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import com.example.contactlensreminder.data.util.SharedPreferencesManager
+import com.example.contactlensreminder.data.sharedpreferences.SharedPreferencesManager
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -34,7 +34,6 @@ class AlarmManagerService(
             add(Calendar.HOUR, sharedPreferencesManager.getNotificationTimeHour())
             add(Calendar.MINUTE, sharedPreferencesManager.getNotificationTimeMinute())
         }
-        calendar.add(Calendar.SECOND, 10)
         alarmManager.setExact(
             AlarmManager.RTC,
             calendar.timeInMillis,

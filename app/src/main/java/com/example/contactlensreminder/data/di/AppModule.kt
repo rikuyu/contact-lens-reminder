@@ -3,8 +3,8 @@ package com.example.contactlensreminder.data.di
 import android.content.Context
 import com.example.contactlensreminder.data.repository.ReminderRepositoryImpl
 import com.example.contactlensreminder.data.repository.SettingRepositoryImpl
-import com.example.contactlensreminder.data.util.SharedPreferencesManager
-import com.example.contactlensreminder.data.workmanager.AlarmManagerService
+import com.example.contactlensreminder.data.sharedpreferences.SharedPreferencesManager
+import com.example.contactlensreminder.data.alarm.AlarmManagerService
 import com.example.contactlensreminder.data.workmanager.TickDownWorkManagerService
 import com.example.contactlensreminder.domain.repository.ReminderRepository
 import com.example.contactlensreminder.domain.repository.SettingRepository

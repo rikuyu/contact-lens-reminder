@@ -63,16 +63,16 @@ fun RemainingDaysBar(
     Box(contentAlignment = Alignment.Center, modifier = Modifier.size(radius * 2f)) {
         Canvas(modifier = Modifier.size(radius * 2f)) {
             drawArc(
-                color = if (lensElapsedDays >= 0) LightBlue else LightRed,
+                color = if (lensElapsedDays > 0) LightBlue else LightRed,
                 startAngle = 0f,
                 sweepAngle = 360f,
                 useCenter = false,
                 style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
             )
             drawArc(
-                color = if (lensElapsedDays >= 0) color else Color.Red,
+                color = if (lensElapsedDays > 0) color else Color.Red,
                 startAngle = -90f,
-                sweepAngle = if (lensElapsedDays >= 0) daysRemaining.value * (360 / lensPeriod) + 5f else 360f,
+                sweepAngle = if (lensElapsedDays > 0) daysRemaining.value * (360 / lensPeriod) + 5f else 360f,
                 useCenter = false,
                 style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
             )
@@ -90,7 +90,7 @@ fun RemainingDaysBar(
                     }
                     withStyle(
                         style = SpanStyle(
-                            color = if (lensElapsedDays >= 0) color else Color.Red,
+                            color = if (lensElapsedDays > 0) color else Color.Red,
                             fontSize = remainingDaysTextFontSize
                         )
                     ) {
@@ -112,14 +112,7 @@ fun RemainingDaysBar(
                         )
                     ) {
                         append(stringResource(id = R.string.change_message))
-                    }
-                    append(" ")
-                    withStyle(
-                        style = SpanStyle(
-                            color = supportTextColor,
-                            fontSize = periodTextFontSize
-                        )
-                    ) {
+                        append(" ")
                         append(exchangeDay)
                     }
                     if (isUseNotification) {
@@ -131,14 +124,7 @@ fun RemainingDaysBar(
                             )
                         ) {
                             append(stringResource(id = R.string.time_message))
-                        }
-                        append(" ")
-                        withStyle(
-                            style = SpanStyle(
-                                color = supportTextColor,
-                                fontSize = periodTextFontSize
-                            )
-                        ) {
+                            append(" ")
                             append(notificationTimeHour.toString())
                             append(stringResource(id = R.string.time_div))
                             append(notificationTimeMinute.toString())

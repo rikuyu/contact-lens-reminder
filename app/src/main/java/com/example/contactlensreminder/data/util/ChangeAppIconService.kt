@@ -59,6 +59,9 @@ class ChangeAppIconService(val context: Context) {
                             dontKillApp
                         )
                         packageManager.setComponentEnabledSetting(
+                            ComponentName(context, pkg + "OneAlias"), disabled, dontKillApp
+                        )
+                        packageManager.setComponentEnabledSetting(
                             ComponentName(context, defaultIcon), disabled, dontKillApp
                         )
                     }

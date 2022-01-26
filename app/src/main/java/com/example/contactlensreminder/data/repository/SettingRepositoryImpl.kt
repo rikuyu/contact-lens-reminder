@@ -1,6 +1,6 @@
 package com.example.contactlensreminder.data.repository
 
-import com.example.contactlensreminder.data.util.SharedPreferencesManager
+import com.example.contactlensreminder.data.sharedpreferences.SharedPreferencesManager
 import com.example.contactlensreminder.domain.repository.SettingRepository
 import com.example.contactlensreminder.domain.SettingValue
 

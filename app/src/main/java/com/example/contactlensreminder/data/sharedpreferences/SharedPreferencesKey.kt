@@ -1,4 +1,4 @@
-package com.example.contactlensreminder.data.util
+package com.example.contactlensreminder.data.sharedpreferences
 
 object SharedPreferencesKey {
 

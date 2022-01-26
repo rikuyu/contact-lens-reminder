@@ -6,6 +6,8 @@ import androidx.work.PeriodicWorkRequest
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.example.contactlensreminder.data.util.ChangeAppIconService
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 class TickDownWorkManagerService(val context: Context) {
@@ -17,9 +19,12 @@ class TickDownWorkManagerService(val context: Context) {
     private lateinit var reminderWork: PeriodicWorkRequest
 
     fun initTickDownWork() {
+        val calendar = Calendar.getInstance()
+        val simpleDateFormat = SimpleDateFormat("hh", Locale.ENGLISH)
+        val hour = (24 - simpleDateFormat.format(calendar.time).toInt()).toLong()
         reminderWork = PeriodicWorkRequestBuilder<TickDownWorker>(
             1, TimeUnit.DAYS
-        ).apply { setInitialDelay(1, TimeUnit.DAYS) }.build()
+        ).apply { setInitialDelay(hour, TimeUnit.HOURS) }.build()
     }
 
     fun startTickDownWork(elapsedDays: Int) {

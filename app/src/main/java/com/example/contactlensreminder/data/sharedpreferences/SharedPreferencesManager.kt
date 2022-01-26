@@ -1,4 +1,4 @@
-package com.example.contactlensreminder.data.util
+package com.example.contactlensreminder.data.sharedpreferences
 
 import android.content.Context
 import android.content.SharedPreferences

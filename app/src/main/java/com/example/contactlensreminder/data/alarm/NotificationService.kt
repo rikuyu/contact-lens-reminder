@@ -1,18 +1,33 @@
-package com.example.contactlensreminder.data.workmanager
+package com.example.contactlensreminder.data.alarm
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.graphics.BitmapFactory
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.VISIBILITY_PUBLIC
 import androidx.core.content.ContextCompat
 import com.example.contactlensreminder.R
+import com.example.contactlensreminder.presentation.MainActivity
 
 class NotificationService(val context: Context) {
 
     private val notificationManager =
         context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+    private val intent = Intent(context, MainActivity::class.java).apply {
+        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+    }
+
+    private val pendingIntent: PendingIntent =
+        PendingIntent.getActivity(
+            context,
+            0,
+            intent,
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
 
     private var notificationBuilder = NotificationCompat.Builder(context, CHANNEL_ID)
         .setSmallIcon(R.drawable.ic_water_drop)
@@ -24,6 +39,7 @@ class NotificationService(val context: Context) {
         .setContentText(context.getString(R.string.notification_content))
         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
         .setVisibility(VISIBILITY_PUBLIC)
+        .setContentIntent(pendingIntent)
         .setAutoCancel(true)
 
     // Build.VERSION.SDK_INT >= Build.VERSION_CODES.O always true. min SDK 26
@@ -45,7 +61,7 @@ class NotificationService(val context: Context) {
 
     companion object {
         private const val CHANNEL_ID = "contact_lens_reminder_channel_id"
-        private const val CHANNEL_NAME = "contact_lens_reminder_channel_name"
+        private const val CHANNEL_NAME = "レンズ交換通知"
         private const val CHANNEL_DESCRIPTION = "contact_lens_reminder_channel_description "
     }
 }

@@ -23,7 +23,7 @@
             tools:ignore="LockedOrientationActivity" />
 
         <receiver
-            android:name=".data.workmanager.AlarmBroadcastReceiver"
+            android:name=".data.alarm.AlarmBroadcastReceiver"
             android:exported="false"/>
 
         <!-- Default -->

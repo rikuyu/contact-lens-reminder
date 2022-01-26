@@ -3,8 +3,8 @@ package com.example.contactlensreminder.data.workmanager
 import android.content.Context
 import androidx.work.Worker
 import androidx.work.WorkerParameters
+import com.example.contactlensreminder.data.sharedpreferences.SharedPreferencesManager
 import com.example.contactlensreminder.data.util.ChangeAppIconService
-import com.example.contactlensreminder.data.util.SharedPreferencesManager
 
 class TickDownWorker(val context: Context, params: WorkerParameters) : Worker(context, params) {
 
