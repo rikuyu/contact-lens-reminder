@@ -12,7 +12,6 @@ class AlarmManagerService(
     private val context: Context,
     private val sharedPreferencesManager: SharedPreferencesManager
 ) {
-
     private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
     fun initAlarm() {
@@ -27,12 +26,12 @@ class AlarmManagerService(
         val simpleDateFormat = SimpleDateFormat("hh/mm", Locale.ENGLISH)
         val (hour, min) = simpleDateFormat.format(calendar.time).split("/").map(String::toInt)
         calendar.apply {
-            add(Calendar.DATE, sharedPreferencesManager.getContactLensPeriod())
-            add(Calendar.DATE, sharedPreferencesManager.getNotificationDay())
-            add(Calendar.HOUR, -hour)
-            add(Calendar.MINUTE, -min)
-            add(Calendar.HOUR, sharedPreferencesManager.getNotificationTimeHour())
-            add(Calendar.MINUTE, sharedPreferencesManager.getNotificationTimeMinute())
+            add(
+                Calendar.DATE,
+                sharedPreferencesManager.getContactLensPeriod() - sharedPreferencesManager.getNotificationDay()
+            )
+            add(Calendar.HOUR, sharedPreferencesManager.getNotificationTimeHour() - hour)
+            add(Calendar.MINUTE, sharedPreferencesManager.getNotificationTimeMinute() - min)
         }
         alarmManager.setExact(
             AlarmManager.RTC,

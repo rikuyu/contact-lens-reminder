@@ -21,9 +21,10 @@ class TickDownWorkManagerService(val context: Context) {
     fun initTickDownWork() {
         val calendar = Calendar.getInstance()
         val simpleDateFormat = SimpleDateFormat("hh", Locale.ENGLISH)
+        calendar.timeZone = TimeZone.getDefault()
         val hour = (24 - simpleDateFormat.format(calendar.time).toInt()).toLong()
         reminderWork = PeriodicWorkRequestBuilder<TickDownWorker>(
-            1, TimeUnit.DAYS
+            24, TimeUnit.HOURS
         ).apply { setInitialDelay(hour, TimeUnit.HOURS) }.build()
     }
 

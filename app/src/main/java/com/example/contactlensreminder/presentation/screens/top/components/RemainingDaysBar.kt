@@ -47,7 +47,7 @@ fun RemainingDaysBar(
 ) {
     var animationPlayed by remember { mutableStateOf(false) }
 
-    val daysRemaining =
+    val remainingDays =
         animateFloatAsState(
             targetValue = if (animationPlayed) lensElapsedDays.toFloat() else 0f,
             animationSpec = tween(
@@ -72,7 +72,7 @@ fun RemainingDaysBar(
             drawArc(
                 color = if (lensElapsedDays > 0) color else Color.Red,
                 startAngle = -90f,
-                sweepAngle = if (lensElapsedDays > 0) daysRemaining.value * (360 / lensPeriod) + 5f else 360f,
+                sweepAngle = if (lensElapsedDays > 0) (remainingDays.value * (360.0 / lensPeriod)).toFloat() else 360f,
                 useCenter = false,
                 style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
             )
