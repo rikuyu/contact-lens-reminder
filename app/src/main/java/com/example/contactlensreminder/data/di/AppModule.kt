@@ -1,11 +1,12 @@
 package com.example.contactlensreminder.data.di
 
 import android.content.Context
+import com.example.contactlensreminder.data.local.alarm.AlarmManagerService
+import com.example.contactlensreminder.data.local.LocalDataSource
+import com.example.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
 import com.example.contactlensreminder.data.repository.ReminderRepositoryImpl
 import com.example.contactlensreminder.data.repository.SettingRepositoryImpl
-import com.example.contactlensreminder.data.sharedpreferences.SharedPreferencesManager
-import com.example.contactlensreminder.data.alarm.AlarmManagerService
-import com.example.contactlensreminder.data.workmanager.TickDownWorkManagerService
+import com.example.contactlensreminder.data.local.workmanager.TickDownWorkManagerService
 import com.example.contactlensreminder.domain.repository.ReminderRepository
 import com.example.contactlensreminder.domain.repository.SettingRepository
 import com.example.contactlensreminder.domain.usecase.reminder.*
@@ -25,10 +26,22 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideLocalDataSource(
+        sharedPreferencesManager: SharedPreferencesManager,
+        tickDownWorkManagerService: TickDownWorkManagerService,
+        alarmManagerService: AlarmManagerService
+    ): LocalDataSource =
+        LocalDataSource(
+            tickDownWorkManagerService = tickDownWorkManagerService,
+            sharedPreferencesManager = sharedPreferencesManager,
+            alarmManagerService = alarmManagerService
+        )
+
+    @Provides
+    @Singleton
     fun provideSettingRepository(
-        sharedPreferencesManager: SharedPreferencesManager
-    ): SettingRepository =
-        SettingRepositoryImpl(sharedPreferencesManager)
+        localDataSource: LocalDataSource
+    ): SettingRepository = SettingRepositoryImpl(localDataSource)
 
     @Provides
     @Singleton
@@ -63,14 +76,8 @@ object AppModule {
     @Provides
     @Singleton
     fun provideReminderRepository(
-        sharedPreferencesManager: SharedPreferencesManager,
-        tickDownWorkManagerService: TickDownWorkManagerService,
-        alarmManagerService: AlarmManagerService
-    ): ReminderRepository = ReminderRepositoryImpl(
-        tickDownWorkManagerService = tickDownWorkManagerService,
-        sharedPreferencesManager = sharedPreferencesManager,
-        alarmManagerService = alarmManagerService
-    )
+        localDataSource: LocalDataSource
+    ): ReminderRepository = ReminderRepositoryImpl(localDataSource)
 
     @Provides
     @Singleton

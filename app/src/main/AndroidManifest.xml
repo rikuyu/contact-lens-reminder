@@ -23,7 +23,7 @@
             tools:ignore="LockedOrientationActivity" />
 
         <receiver
-            android:name=".data.alarm.AlarmBroadcastReceiver"
+            android:name="com.example.contactlensreminder.data.local.alarm.AlarmBroadcastReceiver"
             android:exported="false"/>
 
         <!-- Default -->

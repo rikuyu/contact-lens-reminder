@@ -1,4 +1,4 @@
-package com.example.contactlensreminder.data.alarm
+package com.example.contactlensreminder.data.local.alarm
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

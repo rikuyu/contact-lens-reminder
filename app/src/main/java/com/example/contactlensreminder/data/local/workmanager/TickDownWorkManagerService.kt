@@ -1,4 +1,4 @@
-package com.example.contactlensreminder.data.workmanager
+package com.example.contactlensreminder.data.local.workmanager
 
 import android.content.Context
 import androidx.work.ExistingPeriodicWorkPolicy
