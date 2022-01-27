@@ -9,7 +9,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.example.contactlensremainderapp"
+        applicationId "io.github.rikuyu.contactlensremainderapp"
         minSdk 26
         targetSdk 31
         versionCode 1
@@ -33,6 +33,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+        freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
     }
     buildFeatures {
         compose true
