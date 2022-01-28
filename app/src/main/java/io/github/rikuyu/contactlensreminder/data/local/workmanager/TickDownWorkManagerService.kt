@@ -1,10 +1,7 @@
 package io.github.rikuyu.contactlensreminder.data.local.workmanager
 
 import android.content.Context
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.PeriodicWorkRequest
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
+import androidx.work.*
 import io.github.rikuyu.contactlensreminder.data.util.ChangeAppIconService
 import java.text.SimpleDateFormat
 import java.util.*
@@ -12,37 +9,49 @@ import java.util.concurrent.TimeUnit
 
 class TickDownWorkManagerService(val context: Context) {
 
-    private val manager: WorkManager = WorkManager.getInstance(context)
+    private val managerFirst: WorkManager = WorkManager.getInstance(context)
+    private val managerSecond: WorkManager = WorkManager.getInstance(context)
 
     private val changeAppIconService: ChangeAppIconService = ChangeAppIconService(context)
 
-    private lateinit var reminderWork: PeriodicWorkRequest
+    private lateinit var firstOneTimeTickDownWork: OneTimeWorkRequest
+    private lateinit var secondPeriodicTickDownWork: PeriodicWorkRequest
 
     fun initTickDownWork() {
         val calendar = Calendar.getInstance()
         val simpleDateFormat = SimpleDateFormat("hh", Locale.ENGLISH)
         calendar.timeZone = TimeZone.getDefault()
         val hour = (24 - simpleDateFormat.format(calendar.time).toInt()).toLong()
-        reminderWork = PeriodicWorkRequestBuilder<TickDownWorker>(
-            24, TimeUnit.HOURS
-        ).apply { setInitialDelay(hour, TimeUnit.HOURS) }.build()
+        firstOneTimeTickDownWork = OneTimeWorkRequestBuilder<TickDownWorker>()
+            .setInitialDelay(hour, TimeUnit.HOURS)
+            .build()
+        secondPeriodicTickDownWork = PeriodicWorkRequestBuilder<TickDownWorker>(
+            24, TimeUnit.HOURS,
+            15, TimeUnit.MINUTES
+        ).setInitialDelay(hour, TimeUnit.HOURS).build()
     }
 
     fun startTickDownWork(elapsedDays: Int) {
-        manager.enqueueUniquePeriodicWork(
-            TICK_DOWN_QUEUE,
-            ExistingPeriodicWorkPolicy.REPLACE,
-            reminderWork
+        managerFirst.enqueueUniqueWork(
+            TICK_DOWN_FIRST_WORK,
+            ExistingWorkPolicy.KEEP,
+            firstOneTimeTickDownWork
+        )
+        managerSecond.enqueueUniquePeriodicWork(
+            TICK_DOWN_SECOND_WORK,
+            ExistingPeriodicWorkPolicy.KEEP,
+            secondPeriodicTickDownWork
         )
         changeAppIconService.changeAppIcon(context, true, elapsedDays)
     }
 
     fun cancelTickDownWork() {
-        manager.cancelAllWork()
+        managerFirst.cancelAllWork()
         changeAppIconService.changeAppIcon(context, false, null)
     }
 
     companion object {
-        private const val TICK_DOWN_QUEUE = "tick_down_queue"
+        private const val TICK_DOWN_FIRST_WORK = "tick_down_first_work"
+        private const val TICK_DOWN_SECOND_WORK = "tick_down_second_work"
     }
 }

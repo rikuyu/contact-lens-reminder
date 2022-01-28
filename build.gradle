@@ -9,6 +9,7 @@ buildscript {
         lifecycleRuntimeVersion = "2.4.0"
         activityVersion = "1.3.1"
         supportCompat = "28.0.0"
+        googleService = "4.3.10"
 
         appDependencies = [
                 core            : "androidx.core:core-ktx:$coreVersion",
@@ -32,7 +33,7 @@ buildscript {
                 numberPicker            : "com.chargemap.compose:numberpicker:$numberPicker",
                 lifecyclViewModelCompose: "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVersion",
                 pager                   : "com.google.accompanist:accompanist-pager:$pager",
-                pagerIndicator       : "com.google.accompanist:accompanist-pager-indicators:$pager"
+                pagerIndicator          : "com.google.accompanist:accompanist-pager-indicators:$pager"
         ]
 
         workManagerVersion = "2.7.1"
@@ -72,12 +73,23 @@ buildscript {
                 coreTesting: "androidx.arch.core:core-testing:$coreTesting",
                 truth      : "com.google.truth:truth:$truth"
         ]
+
+        firebaseBom = "29.0.4"
+        firebaseCrashlyticsGradle = "2.8.1"
+
+        firebaseDependencies = [
+                firebaseBom           : "com.google.firebase:firebase-bom:$firebaseBom",
+                firebaseAnalyticsKtx  : 'com.google.firebase:firebase-analytics-ktx',
+                firebaseCrashlyticsKtx: 'com.google.firebase:firebase-crashlytics-ktx'
+        ]
     }
 
     dependencies {
         classpath "com.android.tools.build:gradle:$gradleVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinGradlePluginVersion"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hiltAndroidVersion"
+        classpath "com.google.gms:google-services:$googleService"
+        classpath "com.google.firebase:firebase-crashlytics-gradle:$firebaseCrashlyticsGradle"
     }
 }
 

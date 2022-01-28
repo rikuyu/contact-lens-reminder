@@ -23,9 +23,7 @@ class LocalDataSource(
             saveIsUsingContactLens(reminderValue.isUsingContactLens)
             saveLensExchangeDay(getExpirationDate(reminderValue.lensPeriod))
         }
-        if (sharedPreferencesManager.getIsUsingContactLens()) {
-            tickDownWorkManagerService.initTickDownWork()
-        }
+        tickDownWorkManagerService.initTickDownWork()
     }
 
     override fun startReminder(elapsedDays: Int) {
