@@ -27,7 +27,7 @@ import io.github.rikuyu.contactlensreminder.presentation.theme.SkyBlue
 fun HandleReminderButtonSection(
     modifier: Modifier,
     isUsingContactLens: Boolean,
-    lensElapsedDays: Int,
+    lensRemainingDays: Int,
     startReminder: (Boolean) -> Unit,
     openDialog: () -> Unit
 ) {
@@ -45,7 +45,7 @@ fun HandleReminderButtonSection(
             onClick = { onClick(isUsingContactLens) },
             modifier = Modifier.size(240.dp, 60.dp),
             colors = ButtonDefaults.textButtonColors(
-                backgroundColor = if (lensElapsedDays < 0) LightRed else SkyBlue,
+                backgroundColor = if (lensRemainingDays < 0) LightRed else SkyBlue,
                 contentColor = Color.White,
                 disabledContentColor = Color.LightGray
             ),

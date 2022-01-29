@@ -4,6 +4,7 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
 import java.text.SimpleDateFormat
 import java.util.*
@@ -23,15 +24,17 @@ class AlarmManagerService(
             intent,
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
-        val simpleDateFormat = SimpleDateFormat("hh/mm", Locale.ENGLISH)
-        val (hour, min) = simpleDateFormat.format(calendar.time).split("/").map(String::toInt)
+        val simpleDateFormat = SimpleDateFormat("hh/mm/ss", Locale.ENGLISH)
+        val (hour, min, sec) = simpleDateFormat.format(calendar.time).split("/").map(String::toInt)
         calendar.apply {
+            timeInMillis = System.currentTimeMillis()
             add(
-                Calendar.DATE,
+                Calendar.DAY_OF_MONTH,
                 sharedPreferencesManager.getContactLensPeriod() - sharedPreferencesManager.getNotificationDay()
             )
             add(Calendar.HOUR, sharedPreferencesManager.getNotificationTimeHour() - hour)
             add(Calendar.MINUTE, sharedPreferencesManager.getNotificationTimeMinute() - min)
+            add(Calendar.SECOND, -sec)
         }
         alarmManager.setExact(
             AlarmManager.RTC,

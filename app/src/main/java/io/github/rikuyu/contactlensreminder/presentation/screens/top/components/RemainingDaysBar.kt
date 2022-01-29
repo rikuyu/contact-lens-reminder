@@ -32,7 +32,8 @@ fun RemainingDaysBar(
     lensPeriod: Int,
     notificationTimeHour: Int,
     notificationTimeMinute: Int,
-    lensElapsedDays: Int,
+    isUsingContactLens: Boolean,
+    lensRemainingDays: Int,
     exchangeDay: String,
     isUseNotification: Boolean,
     remainingDaysTextFontSize: TextUnit = 36.sp,
@@ -49,7 +50,7 @@ fun RemainingDaysBar(
 
     val remainingDays =
         animateFloatAsState(
-            targetValue = if (animationPlayed) lensElapsedDays.toFloat() else 0f,
+            targetValue = if (animationPlayed) lensRemainingDays.toFloat() else 0f,
             animationSpec = tween(
                 durationMillis = animDuration,
                 delayMillis = animDelay
@@ -63,16 +64,16 @@ fun RemainingDaysBar(
     Box(contentAlignment = Alignment.Center, modifier = Modifier.size(radius * 2f)) {
         Canvas(modifier = Modifier.size(radius * 2f)) {
             drawArc(
-                color = if (lensElapsedDays > 0) LightBlue else LightRed,
+                color = if (lensRemainingDays > 0 || !isUsingContactLens) LightBlue else LightRed,
                 startAngle = 0f,
                 sweepAngle = 360f,
                 useCenter = false,
                 style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
             )
             drawArc(
-                color = if (lensElapsedDays > 0) color else Color.Red,
+                color = if (lensRemainingDays > 0 || !isUsingContactLens) color else Color.Red,
                 startAngle = -90f,
-                sweepAngle = if (lensElapsedDays > 0) (remainingDays.value * (360.0 / lensPeriod)).toFloat() else 360f,
+                sweepAngle = if (lensRemainingDays > 0) (remainingDays.value * (360.0 / lensPeriod)).toFloat() else 360f,
                 useCenter = false,
                 style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
             )
@@ -90,11 +91,16 @@ fun RemainingDaysBar(
                     }
                     withStyle(
                         style = SpanStyle(
-                            color = if (lensElapsedDays > 0) color else Color.Red,
+                            color = if (lensRemainingDays > 0 || !isUsingContactLens) color else Color.Red,
                             fontSize = remainingDaysTextFontSize
                         )
                     ) {
-                        append(lensElapsedDays.toString())
+                        append(
+                            if (lensRemainingDays > 0 || !isUsingContactLens)
+                                lensRemainingDays.toString()
+                            else
+                                lensPeriod.toString()
+                        )
                     }
                     withStyle(
                         style = SpanStyle(
@@ -127,7 +133,11 @@ fun RemainingDaysBar(
                             append(" ")
                             append(notificationTimeHour.toString())
                             append(stringResource(id = R.string.time_div))
-                            append(notificationTimeMinute.toString())
+                            append(
+                                if (notificationTimeMinute == 0)
+                                    "0$notificationTimeMinute"
+                                else notificationTimeMinute.toString()
+                            )
                         }
                     }
                 }

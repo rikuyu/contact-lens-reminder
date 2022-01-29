@@ -14,9 +14,9 @@ class TickDownWorker(val context: Context, params: WorkerParameters) : Worker(co
     private val changeAppIconService: ChangeAppIconService = ChangeAppIconService(context)
 
     override fun doWork(): Result {
-        val before = sharedPreferencesManager.getContactLensElapsedDays()
+        val before = sharedPreferencesManager.getContactLensRemainingDays()
         val after = before - 1
-        sharedPreferencesManager.saveContactLensElapsedDays(after)
+        sharedPreferencesManager.saveContactLensRemainingDays(after)
 
         val isUsingContactLens = sharedPreferencesManager.getIsUsingContactLens()
         changeAppIconService.changeAppIcon(context, isUsingContactLens, after)

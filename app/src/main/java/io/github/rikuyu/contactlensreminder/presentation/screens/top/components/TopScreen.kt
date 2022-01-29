@@ -35,7 +35,7 @@ fun TopScreen(
 
     val lensPeriod by remember { mutableStateOf(reminderValue.lensPeriod) }
 
-    val lensElapsedDays by remember { mutableStateOf(reminderValue.elapsedDays) }
+    val lensRemainingDays by remember { mutableStateOf(reminderValue.lensRemainingDays) }
 
     val exchangeDay by remember { mutableStateOf(reminderValue.exchangeDay) }
 
@@ -76,7 +76,7 @@ fun TopScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Color.White),
-            lensElapsedDays = lensElapsedDays,
+            lensRemainingDays = lensRemainingDays,
             period = lensPeriod
         )
         SimpleSpacer(height = 4.dp)
@@ -90,9 +90,10 @@ fun TopScreen(
             RemainingDaysBar(
                 lensPeriod = lensPeriod,
                 exchangeDay = exchangeDay,
+                isUsingContactLens = isUsingContactLens,
                 notificationTimeHour = notificationTimeHour,
                 notificationTimeMinute = notificationTimeMinute,
-                lensElapsedDays = lensElapsedDays,
+                lensRemainingDays = lensRemainingDays,
                 isUseNotification = isUseNotification
             )
         }
@@ -101,7 +102,7 @@ fun TopScreen(
                 .fillMaxWidth()
                 .weight(1f)
                 .background(Color.White),
-            lensElapsedDays = lensElapsedDays,
+            lensRemainingDays = lensRemainingDays,
             isUsingContactLens = isUsingContactLens,
             startReminder = {
                 isUsingContactLens = it
@@ -111,7 +112,7 @@ fun TopScreen(
                             lensPeriod = lensPeriod,
                             notificationTimeHour = notificationTimeHour,
                             notificationTimeMinute = notificationTimeMinute,
-                            elapsedDays = lensElapsedDays,
+                            lensRemainingDays = lensRemainingDays,
                             isUsingContactLens = it
                         )
                     )
@@ -130,7 +131,7 @@ fun TopScreen(
                         lensPeriod = lensPeriod,
                         notificationTimeHour = notificationTimeHour,
                         notificationTimeMinute = notificationTimeMinute,
-                        elapsedDays = lensElapsedDays,
+                        lensRemainingDays = lensRemainingDays,
                         isUsingContactLens = it
                     )
                 )

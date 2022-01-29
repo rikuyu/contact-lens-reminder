@@ -16,14 +16,13 @@ class LocalDataSource(
 
     override fun saveReminderSetting(reminderValue: ReminderValue) {
         sharedPreferencesManager.apply {
-            saveContactLensElapsedDays(reminderValue.elapsedDays)
+            saveContactLensRemainingDays(reminderValue.lensRemainingDays)
             saveContactLensPeriod(reminderValue.lensPeriod)
             saveNotificationTimeHour(reminderValue.notificationTimeHour)
             saveNotificationTimeMinute(reminderValue.notificationTimeMinute)
             saveIsUsingContactLens(reminderValue.isUsingContactLens)
             saveLensExchangeDay(getExpirationDate(reminderValue.lensPeriod))
         }
-        tickDownWorkManagerService.initTickDownWork()
     }
 
     override fun startReminder(elapsedDays: Int) {
@@ -37,7 +36,7 @@ class LocalDataSource(
         val lensPeriod = sharedPreferencesManager.getContactLensPeriod()
         val notificationTimeHour = sharedPreferencesManager.getNotificationTimeHour()
         val notificationTimeMinute = sharedPreferencesManager.getNotificationTimeMinute()
-        val elapsedDays = sharedPreferencesManager.getContactLensElapsedDays()
+        val elapsedDays = sharedPreferencesManager.getContactLensRemainingDays()
         val isUsingContactLens = sharedPreferencesManager.getIsUsingContactLens()
         val isUseNotification = sharedPreferencesManager.getIsUseNotification()
         val exchangeDay = sharedPreferencesManager.getLensExchangeDay() ?: getExpirationDate(lensPeriod)
@@ -47,7 +46,7 @@ class LocalDataSource(
             exchangeDay = exchangeDay,
             notificationTimeHour = notificationTimeHour,
             notificationTimeMinute = notificationTimeMinute,
-            elapsedDays = elapsedDays,
+            lensRemainingDays = elapsedDays,
             isUsingContactLens = isUsingContactLens,
             isUseNotification = isUseNotification
         )
@@ -82,7 +81,7 @@ class LocalDataSource(
             saveIsShowContactLensPowerSection(isShowLensPowerSection)
             saveLeftContactLensPower(leftLensPower.toString())
             saveRightContactLensPower(rightLensPower.toString())
-            saveContactLensElapsedDays(elapsedDays)
+            saveContactLensRemainingDays(elapsedDays)
         }
     }
 

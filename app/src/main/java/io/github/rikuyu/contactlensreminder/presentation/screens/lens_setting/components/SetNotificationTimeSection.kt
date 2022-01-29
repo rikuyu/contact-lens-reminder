@@ -22,6 +22,7 @@ import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.presentation.theme.CleanBlue
 import io.github.rikuyu.contactlensreminder.presentation.theme.PaleBlue
 import io.github.rikuyu.contactlensreminder.presentation.util.SimpleDivider
+import io.github.rikuyu.contactlensreminder.presentation.util.StringNumberPicker
 
 @Composable
 fun SetNotificationTimeSection(
@@ -59,10 +60,10 @@ fun SetNotificationTimeSection(
                     textStyle = LocalTextStyle.current.copy(color = Color.Black)
                 )
                 Text(text = " : ")
-                NumberPicker(
-                    value = notificationTimeMinute,
-                    onValueChange = { setNotificationTimeMinute(it) },
-                    range = List(4) { it * 15 },
+                StringNumberPicker(
+                    value = notificationTimeMinute.toString(),
+                    onValueChange = { setNotificationTimeMinute(it.toInt()) },
+                    range = listOf("00", "15", "30", "45"),
                     textStyle = LocalTextStyle.current.copy(color = Color.Black)
                 )
             } else {
@@ -84,7 +85,7 @@ fun SetNotificationTimeSection(
                             modifier = Modifier.padding(horizontal = 4.dp)
                         )
                         Text(
-                            text = notificationTimeMinute.toString(),
+                            text = if (notificationTimeMinute == 0) "0$notificationTimeMinute" else notificationTimeMinute.toString(),
                             color = textColor,
                             fontSize = 20.sp
                         )

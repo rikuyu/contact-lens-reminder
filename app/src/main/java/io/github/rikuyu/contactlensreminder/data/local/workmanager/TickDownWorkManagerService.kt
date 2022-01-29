@@ -17,11 +17,12 @@ class TickDownWorkManagerService(val context: Context) {
     private lateinit var firstOneTimeTickDownWork: OneTimeWorkRequest
     private lateinit var secondPeriodicTickDownWork: PeriodicWorkRequest
 
-    fun initTickDownWork() {
+    fun startTickDownWork(elapsedDays: Int) {
         val calendar = Calendar.getInstance()
         val simpleDateFormat = SimpleDateFormat("hh", Locale.ENGLISH)
         calendar.timeZone = TimeZone.getDefault()
         val hour = (24 - simpleDateFormat.format(calendar.time).toInt()).toLong()
+
         firstOneTimeTickDownWork = OneTimeWorkRequestBuilder<TickDownWorker>()
             .setInitialDelay(hour, TimeUnit.HOURS)
             .build()
@@ -29,9 +30,7 @@ class TickDownWorkManagerService(val context: Context) {
             24, TimeUnit.HOURS,
             15, TimeUnit.MINUTES
         ).setInitialDelay(hour, TimeUnit.HOURS).build()
-    }
 
-    fun startTickDownWork(elapsedDays: Int) {
         managerFirst.enqueueUniqueWork(
             TICK_DOWN_FIRST_WORK,
             ExistingWorkPolicy.KEEP,
@@ -47,6 +46,7 @@ class TickDownWorkManagerService(val context: Context) {
 
     fun cancelTickDownWork() {
         managerFirst.cancelAllWork()
+        managerSecond.cancelAllWork()
         changeAppIconService.changeAppIcon(context, false, null)
     }
 

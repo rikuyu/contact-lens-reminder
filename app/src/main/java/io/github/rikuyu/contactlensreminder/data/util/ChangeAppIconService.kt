@@ -27,22 +27,23 @@ class ChangeAppIconService(val context: Context) {
         val defaultIcon = "$pkg.DefaultAlias"
         val expiredIcon = "$pkg.ExpiredAlias"
         if (isUsingContactLens && lensElapsedDays != null) {
+            if(lensElapsedDays < 1){
+                packageManager.setComponentEnabledSetting(
+                    ComponentName(context, expiredIcon), enabled, dontKillApp
+                )
+                packageManager.setComponentEnabledSetting(
+                    ComponentName(context, defaultIcon), disabled, dontKillApp
+                )
+                aliasList.forEach { alias ->
+                    packageManager.setComponentEnabledSetting(
+                        ComponentName(context, "$pkg.$alias"), disabled, dontKillApp
+                    )
+                }
+                return
+            }
             aliasList.forEachIndexed { index, alias ->
-                when {
-                    lensElapsedDays - 1 < 0 -> {
-                        packageManager.setComponentEnabledSetting(
-                            ComponentName(context, expiredIcon),
-                            enabled,
-                            dontKillApp
-                        )
-                        packageManager.setComponentEnabledSetting(
-                            ComponentName(context, "$pkg.OneAlias"), disabled, dontKillApp
-                        )
-                        packageManager.setComponentEnabledSetting(
-                            ComponentName(context, defaultIcon), disabled, dontKillApp
-                        )
-                    }
-                    index == lensElapsedDays - 1 -> {
+                when (index) {
+                    lensElapsedDays - 1 -> {
                         packageManager.setComponentEnabledSetting(
                             ComponentName(context, "$pkg.$alias"),
                             enabled,
@@ -50,6 +51,9 @@ class ChangeAppIconService(val context: Context) {
                         )
                         packageManager.setComponentEnabledSetting(
                             ComponentName(context, defaultIcon), disabled, dontKillApp
+                        )
+                        packageManager.setComponentEnabledSetting(
+                            ComponentName(context, expiredIcon), disabled, dontKillApp
                         )
                     }
                     else -> {
@@ -59,18 +63,24 @@ class ChangeAppIconService(val context: Context) {
                         packageManager.setComponentEnabledSetting(
                             ComponentName(context, defaultIcon), disabled, dontKillApp
                         )
+                        packageManager.setComponentEnabledSetting(
+                            ComponentName(context, expiredIcon), disabled, dontKillApp
+                        )
                     }
                 }
             }
         } else {
             // DefaultAlias
+            packageManager.setComponentEnabledSetting(
+                ComponentName(context, defaultIcon), enabled, dontKillApp
+            )
             aliasList.forEach { alias ->
                 packageManager.setComponentEnabledSetting(
                     ComponentName(context, "$pkg.$alias"), disabled, dontKillApp
                 )
             }
             packageManager.setComponentEnabledSetting(
-                ComponentName(context, defaultIcon), enabled, dontKillApp
+                ComponentName(context, expiredIcon), disabled, dontKillApp
             )
         }
     }

@@ -54,14 +54,14 @@ class SharedPreferencesManager(private val context: Context) {
     }
 
     // コンタクトレンズの残り日数
-    fun getContactLensElapsedDays(): Int {
+    fun getContactLensRemainingDays(): Int {
         return getSharedPreferences().getInt(
             SharedPreferencesKey.STORED_CONTACT_LENS_ELAPSED_DAYS,
             14
         )
     }
 
-    fun saveContactLensElapsedDays(elapsedDays: Int) {
+    fun saveContactLensRemainingDays(elapsedDays: Int) {
         getSharedPreferences().edit()
             .putInt(SharedPreferencesKey.STORED_CONTACT_LENS_ELAPSED_DAYS, elapsedDays).apply()
     }
