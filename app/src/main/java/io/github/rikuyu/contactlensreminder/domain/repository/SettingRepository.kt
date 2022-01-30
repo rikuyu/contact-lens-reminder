@@ -1,6 +1,6 @@
 package io.github.rikuyu.contactlensreminder.domain.repository
 
-import io.github.rikuyu.contactlensreminder.domain.SettingValue
+import io.github.rikuyu.contactlensreminder.domain.model.SettingValue
 
 interface SettingRepository {
 

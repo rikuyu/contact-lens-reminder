@@ -2,8 +2,11 @@ package io.github.rikuyu.contactlensreminder.data.local.sharedpreferences
 
 import android.content.Context
 import android.content.SharedPreferences
+import javax.inject.Inject
 
-class SharedPreferencesManager(private val context: Context) {
+class SharedPreferencesManager @Inject constructor(
+    private val context: Context
+) {
 
     // SharedPreferencesインスタンスの取得
     private fun getSharedPreferences(): SharedPreferences {

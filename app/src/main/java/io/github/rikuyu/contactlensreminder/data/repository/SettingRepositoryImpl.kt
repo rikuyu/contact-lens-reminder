@@ -1,7 +1,7 @@
 package io.github.rikuyu.contactlensreminder.data.repository
 
 import io.github.rikuyu.contactlensreminder.data.local.LocalDataSource
-import io.github.rikuyu.contactlensreminder.domain.SettingValue
+import io.github.rikuyu.contactlensreminder.domain.model.SettingValue
 import io.github.rikuyu.contactlensreminder.domain.repository.SettingRepository
 
 class SettingRepositoryImpl(private val localDataSource: LocalDataSource) :

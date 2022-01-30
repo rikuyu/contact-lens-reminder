@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.domain.ReminderValue
+import io.github.rikuyu.contactlensreminder.domain.model.ReminderValue
 import io.github.rikuyu.contactlensreminder.presentation.screens.top.ReminderEvent
 import io.github.rikuyu.contactlensreminder.presentation.screens.top.ReminderViewModel
 import io.github.rikuyu.contactlensreminder.presentation.theme.LightBlue

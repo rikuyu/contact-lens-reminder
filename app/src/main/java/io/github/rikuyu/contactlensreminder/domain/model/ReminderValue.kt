@@ -1,4 +1,4 @@
-package io.github.rikuyu.contactlensreminder.domain
+package io.github.rikuyu.contactlensreminder.domain.model
 
 data class ReminderValue(
     val lensPeriod: Int = 14,

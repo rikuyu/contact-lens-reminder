@@ -3,8 +3,8 @@ package io.github.rikuyu.contactlensreminder.data.local
 import io.github.rikuyu.contactlensreminder.data.local.alarm.AlarmManagerService
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
 import io.github.rikuyu.contactlensreminder.data.local.workmanager.TickDownWorkManagerService
-import io.github.rikuyu.contactlensreminder.domain.ReminderValue
-import io.github.rikuyu.contactlensreminder.domain.SettingValue
+import io.github.rikuyu.contactlensreminder.domain.model.ReminderValue
+import io.github.rikuyu.contactlensreminder.domain.model.SettingValue
 import io.github.rikuyu.contactlensreminder.domain.local.DataSource
 import io.github.rikuyu.contactlensreminder.presentation.util.getExpirationDate
 

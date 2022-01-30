@@ -3,8 +3,9 @@ package io.github.rikuyu.contactlensreminder.data.util
 import android.content.ComponentName
 import android.content.Context
 import android.content.pm.PackageManager
+import javax.inject.Inject
 
-class ChangeAppIconService(val context: Context) {
+class ChangeAppIconService @Inject constructor(val context: Context) {
 
     private val packageManager: PackageManager = context.packageManager
     private val enabled = PackageManager.COMPONENT_ENABLED_STATE_ENABLED
@@ -27,7 +28,7 @@ class ChangeAppIconService(val context: Context) {
         val defaultIcon = "$pkg.DefaultAlias"
         val expiredIcon = "$pkg.ExpiredAlias"
         if (isUsingContactLens && lensElapsedDays != null) {
-            if(lensElapsedDays < 1){
+            if (lensElapsedDays < 1) {
                 packageManager.setComponentEnabledSetting(
                     ComponentName(context, expiredIcon), enabled, dontKillApp
                 )

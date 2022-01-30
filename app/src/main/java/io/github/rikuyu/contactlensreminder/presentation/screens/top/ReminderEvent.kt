@@ -1,6 +1,6 @@
 package io.github.rikuyu.contactlensreminder.presentation.screens.top
 
-import io.github.rikuyu.contactlensreminder.domain.ReminderValue
+import io.github.rikuyu.contactlensreminder.domain.model.ReminderValue
 
 sealed class ReminderEvent(val reminderValue: ReminderValue) {
 

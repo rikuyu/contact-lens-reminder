@@ -4,7 +4,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import io.github.rikuyu.contactlensreminder.domain.SettingValue
+import io.github.rikuyu.contactlensreminder.domain.model.SettingValue
 import io.github.rikuyu.contactlensreminder.domain.usecase.setting.LensSettingUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

@@ -1,4 +1,4 @@
-package io.github.rikuyu.contactlensreminder.domain
+package io.github.rikuyu.contactlensreminder.domain.model
 
 data class SettingValue(
     val lensType: Int = 0,
