@@ -23,12 +23,12 @@ class ChangeAppIconService @Inject constructor(val context: Context) {
         "TwentyNineAlias", "ThirtyAlias", "ThirtyOneAlias"
     )
 
-    fun changeAppIcon(context: Context, isUsingContactLens: Boolean, lensElapsedDays: Int?) {
+    fun changeAppIcon(isUsingContactLens: Boolean, remainingDay: Int?) {
         val pkg = context.packageName
         val defaultIcon = "$pkg.DefaultAlias"
         val expiredIcon = "$pkg.ExpiredAlias"
-        if (isUsingContactLens && lensElapsedDays != null) {
-            if (lensElapsedDays < 1) {
+        if (isUsingContactLens && remainingDay != null) {
+            if (remainingDay < 1) {
                 packageManager.setComponentEnabledSetting(
                     ComponentName(context, expiredIcon), enabled, dontKillApp
                 )
@@ -44,7 +44,7 @@ class ChangeAppIconService @Inject constructor(val context: Context) {
             }
             aliasList.forEachIndexed { index, alias ->
                 when (index) {
-                    lensElapsedDays - 1 -> {
+                    remainingDay - 1 -> {
                         packageManager.setComponentEnabledSetting(
                             ComponentName(context, "$pkg.$alias"),
                             enabled,

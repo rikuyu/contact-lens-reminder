@@ -85,7 +85,9 @@ fun SetNotificationTimeSection(
                             modifier = Modifier.padding(horizontal = 4.dp)
                         )
                         Text(
-                            text = if (notificationTimeMinute == 0) "0$notificationTimeMinute" else notificationTimeMinute.toString(),
+                            text = if (notificationTimeMinute == 0)
+                                "0$notificationTimeMinute"
+                            else notificationTimeMinute.toString(),
                             color = textColor,
                             fontSize = 20.sp
                         )

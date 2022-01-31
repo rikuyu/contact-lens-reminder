@@ -23,7 +23,11 @@
             tools:ignore="LockedOrientationActivity" />
 
         <receiver
-            android:name=".data.local.alarm.AlarmBroadcastReceiver"
+            android:name=".data.local.alarm.notification.NotificationAlarmReceiver"
+            android:exported="false"/>
+
+        <receiver
+            android:name=".data.local.alarm.tickdown.TickDownAlarmReceiver"
             android:exported="false"/>
 
         <!-- Default -->

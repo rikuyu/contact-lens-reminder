@@ -73,7 +73,10 @@ fun RemainingDaysBar(
             drawArc(
                 color = if (lensRemainingDays > 0 || !isUsingContactLens) color else Color.Red,
                 startAngle = -90f,
-                sweepAngle = if (lensRemainingDays > 0) (remainingDays.value * (360.0 / lensPeriod)).toFloat() else 360f,
+                sweepAngle =
+                if (lensRemainingDays > 0)
+                    (remainingDays.value * (360.0 / lensPeriod)).toFloat()
+                else 360f,
                 useCenter = false,
                 style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
             )
