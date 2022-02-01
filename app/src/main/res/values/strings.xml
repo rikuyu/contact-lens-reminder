@@ -11,8 +11,8 @@
     <string name="lens_setting">レンズの設定</string>
     <string name="new_line">\n\n</string>
     <string name="time_div">:</string>
-    <string name="alert_toast_message">レンズ使用中は設定を変更できません</string>
     <string name="confirm_reminder_message">リマインダーがリセットされました</string>
+    <string name="alert_toast_message">レンズ使用中は設定を変更できません</string>
 
     <!-- LensSettingScreen -->
     <string name="lens_setting_screen_title">コンタクトレンズ設定</string>

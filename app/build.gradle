@@ -3,13 +3,15 @@ plugins {
     id "org.jetbrains.kotlin.android"
     id "kotlin-kapt"
     id "dagger.hilt.android.plugin"
+    id "com.google.gms.google-services"
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.example.contactlensremainderapp"
+        applicationId "io.github.rikuyu.contactlensreminder"
         minSdk 26
         targetSdk 31
         versionCode 1
@@ -33,6 +35,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+
+        // @OptIn(ExperimentalXXXXApi::class) warningを消す
+        freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
     }
     buildFeatures {
         compose true
@@ -73,20 +78,20 @@ dependencies {
 
     implementation navigationDependencies.navigation
 
-    implementation uiDependencies.materialDialogs
     implementation uiDependencies.numberPicker
     implementation uiDependencies.lifecyclViewModelCompose
     implementation uiDependencies.pager
     implementation uiDependencies.pagerIndicator
-
-    implementation workerDependencies.workRuntimeKtx
-    implementation workerDependencies.workRuntime
 
     implementation diDependencies.hiltAndroid
     kapt diDependencies.hiltAndroidCompiler
     implementation diDependencies.hiltLifecycleViewModel
     kapt diDependencies.hiltCompiler
     implementation diDependencies.hiltNavigationCompose
+
+    implementation platform(firebaseDependencies.firebaseBom)
+    implementation firebaseDependencies.firebaseAnalyticsKtx
+    implementation firebaseDependencies.firebaseCrashlyticsKtx
 
     ktlint("com.pinterest:ktlint:0.42.1")
 }
