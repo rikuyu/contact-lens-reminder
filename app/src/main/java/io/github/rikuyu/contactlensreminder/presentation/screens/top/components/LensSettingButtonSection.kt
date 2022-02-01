@@ -23,27 +23,17 @@ import io.github.rikuyu.contactlensreminder.presentation.theme.SkyBlue
 @Composable
 fun LensSettingButtonSection(
     modifier: Modifier,
-    isUsingContactLens: Boolean,
-    showAlertToast: () -> Unit,
     navigate: () -> Unit
 ) {
-    val onClick: () -> Unit = {
-        if (isUsingContactLens) {
-            showAlertToast()
-        } else {
-            navigate()
-        }
-    }
-
     Box(
         modifier = modifier,
         contentAlignment = Alignment.Center
     ) {
         Button(
-            onClick = onClick,
+            onClick = navigate,
             modifier = Modifier.size(240.dp, 60.dp),
             colors = ButtonDefaults.textButtonColors(
-                backgroundColor = if (!isUsingContactLens) SkyBlue else Color.LightGray,
+                backgroundColor = SkyBlue,
                 contentColor = Color.White,
                 disabledContentColor = Color.White
             ),

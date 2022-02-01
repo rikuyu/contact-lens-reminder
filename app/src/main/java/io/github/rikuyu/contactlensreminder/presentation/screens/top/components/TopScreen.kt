@@ -147,14 +147,6 @@ fun TopScreen(
                 .fillMaxWidth()
                 .weight(1f)
                 .background(Color.White),
-            showAlertToast = {
-                Toast.makeText(
-                    context,
-                    context.getString(R.string.alert_toast_message),
-                    Toast.LENGTH_SHORT
-                ).show()
-            },
-            isUsingContactLens = isUsingContactLens,
             navigate = { navController.navigate(Routes.LENS_SETTING) }
         )
     }

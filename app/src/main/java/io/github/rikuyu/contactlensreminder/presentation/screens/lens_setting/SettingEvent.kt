@@ -2,9 +2,9 @@ package io.github.rikuyu.contactlensreminder.presentation.screens.lens_setting
 
 sealed class SettingEvent {
 
-    data class Type(val lensType: Int) : SettingEvent()
+    data class LensType(val lensType: Int) : SettingEvent()
 
-    data class Period(val lensPeriod: Int) : SettingEvent()
+    data class LensPeriod(val lensPeriod: Int) : SettingEvent()
 
     data class IsUseNotification(val isUseNotification: Boolean) : SettingEvent()
 

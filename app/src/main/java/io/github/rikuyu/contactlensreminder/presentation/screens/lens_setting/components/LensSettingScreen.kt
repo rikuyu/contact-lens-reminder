@@ -58,6 +58,8 @@ fun LensSettingScreen(
 
     var isShowLensPowerPicker by remember { mutableStateOf(false) }
 
+    val isUsingContactLens by remember { mutableStateOf(settingValue.isUsingContactLens) }
+
     val setLensPeriod: (Int) -> Unit = { index ->
         when (index) {
             0 -> lensPeriod = 14
@@ -103,22 +105,38 @@ fun LensSettingScreen(
                     SimpleDivider()
                     SetLensTypeSection(
                         modifier = Modifier.fillMaxWidth(),
-                        lensType = lensType
+                        isUsingContactLens = isUsingContactLens,
+                        lensType = lensType,
+                        showToast = {
+                            Toast.makeText(
+                                context,
+                                context.getString(R.string.alert_toast_message),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     ) {
                         setLensPeriod(it)
                         lensType = it
-                        viewModel.onEvent(SettingEvent.Type(it))
-                        viewModel.onEvent(SettingEvent.Period(lensPeriod))
+                        viewModel.onEvent(SettingEvent.LensType(it))
+                        viewModel.onEvent(SettingEvent.LensPeriod(lensPeriod))
                         isShowLensPeriodPicker = lensType == 2
                     }
                     AnimatedVisibility(visible = !isShowLensPeriodPicker) { SimpleDivider() }
                     AnimatedVisibility(visible = isShowLensPeriodPicker) {
                         SetLensPeriodSection(
                             modifier = Modifier.fillMaxWidth(),
+                            isUsingContactLens = isUsingContactLens,
+                            showToast = {
+                                Toast.makeText(
+                                    context,
+                                    context.getString(R.string.alert_toast_message),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            },
                             period = lensPeriod,
                             setLensPeriod = {
                                 lensPeriod = it
-                                viewModel.onEvent(SettingEvent.Period(it))
+                                viewModel.onEvent(SettingEvent.LensPeriod(it))
                             }
                         )
                     }

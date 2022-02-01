@@ -98,6 +98,7 @@ class LocalDataSource(
         val notificationTimeHour = sharedPreferencesManager.getNotificationTimeHour()
         val notificationTimeMinute = sharedPreferencesManager.getNotificationTimeMinute()
         val isShowLensPowerSection = sharedPreferencesManager.getIsShowContactLensPowerSection()
+        val isUsingContactLens = sharedPreferencesManager.getIsUsingContactLens()
         val leftLensPower =
             sharedPreferencesManager.getLeftContactLensPower()?.toDouble() ?: -4.00
         val rightLensPower =
@@ -111,6 +112,7 @@ class LocalDataSource(
             notificationTimeHour = notificationTimeHour,
             notificationTimeMinute = notificationTimeMinute,
             isShowLensPowerSection = isShowLensPowerSection,
+            isUsingContactLens = isUsingContactLens,
             leftLensPower = leftLensPower,
             rightLensPower = rightLensPower
         )

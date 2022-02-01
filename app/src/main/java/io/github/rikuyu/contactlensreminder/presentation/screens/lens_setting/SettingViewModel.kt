@@ -23,12 +23,12 @@ class SettingViewModel @Inject constructor(
 
     fun onEvent(event: SettingEvent) {
         when (event) {
-            is SettingEvent.Type -> {
+            is SettingEvent.LensType -> {
                 _setting.value = setting.value.copy(
                     lensType = event.lensType
                 )
             }
-            is SettingEvent.Period -> {
+            is SettingEvent.LensPeriod -> {
                 _setting.value = setting.value.copy(
                     lensPeriod = event.lensPeriod
                 )
