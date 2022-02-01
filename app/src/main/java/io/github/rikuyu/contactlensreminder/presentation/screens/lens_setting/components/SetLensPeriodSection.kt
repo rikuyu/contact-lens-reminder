@@ -25,8 +25,6 @@ fun SetLensPeriodSection(
     modifier: Modifier = Modifier,
     textColor: Color = Color.Black,
     fontSize: TextUnit = 18.sp,
-    isUsingContactLens: Boolean,
-    showToast: () -> Unit,
     period: Int,
     setLensPeriod: (Int) -> Unit
 ) {
@@ -73,15 +71,9 @@ fun SetLensPeriodSection(
                 }
             }
             Button(
-                onClick = {
-                    if (isUsingContactLens) {
-                        showToast.invoke()
-                    } else {
-                        isShowLensPeriodPicker = !isShowLensPeriodPicker
-                    }
-                },
+                onClick = { isShowLensPeriodPicker = !isShowLensPeriodPicker },
                 colors = ButtonDefaults.textButtonColors(
-                    backgroundColor = if (!isUsingContactLens) CleanBlue else Color.LightGray,
+                    backgroundColor = CleanBlue,
                     contentColor = Color.White,
                     disabledContentColor = Color.LightGray
                 ),

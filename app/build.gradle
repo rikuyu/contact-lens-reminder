@@ -78,7 +78,6 @@ dependencies {
 
     implementation navigationDependencies.navigation
 
-    implementation uiDependencies.materialDialogs
     implementation uiDependencies.numberPicker
     implementation uiDependencies.lifecyclViewModelCompose
     implementation uiDependencies.pager

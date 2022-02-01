@@ -23,13 +23,11 @@ buildscript {
                 supportCompat   : "com.android.support:support-compat:$supportCompat"
         ]
 
-        materialDialogs = "0.6.2"
         numberPicker = "0.0.11"
         lifecycleVersion = "2.4.0"
-        pager = "0.18.0"
+        pager = "0.22.1-rc"
 
         uiDependencies = [
-                materialDialogs         : "io.github.vanpra.compose-material-dialogs:datetime:$materialDialogs",
                 numberPicker            : "com.chargemap.compose:numberpicker:$numberPicker",
                 lifecyclViewModelCompose: "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVersion",
                 pager                   : "com.google.accompanist:accompanist-pager:$pager",

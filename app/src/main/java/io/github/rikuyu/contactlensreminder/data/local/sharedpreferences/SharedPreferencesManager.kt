@@ -99,7 +99,7 @@ class SharedPreferencesManager @Inject constructor(
     fun getNotificationTimeHour(): Int {
         return getSharedPreferences().getInt(
             SharedPreferencesKey.STORED_NOTIFICATION_TIME_HOUR,
-            9
+            8
         )
     }
 
@@ -112,7 +112,7 @@ class SharedPreferencesManager @Inject constructor(
     fun getNotificationTimeMinute(): Int {
         return getSharedPreferences().getInt(
             SharedPreferencesKey.STORED_NOTIFICATION_TIME_MINUTE,
-            15
+            0
         )
     }
 

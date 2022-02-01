@@ -25,9 +25,7 @@ fun SetLensTypeSection(
     modifier: Modifier,
     textColor: Color = Color.Black,
     fontSize: TextUnit = 18.sp,
-    isUsingContactLens: Boolean,
     lensType: Int,
-    showToast: () -> Unit,
     onClick: (Int) -> Unit
 ) {
     Row(
@@ -67,35 +65,20 @@ fun SetLensTypeSection(
                 else -> CutCornerShape(0.dp)
             }
             OutlinedButton(
-                onClick = {
-                    if (!isUsingContactLens) {
-                        onClick(index)
-                    } else {
-                        showToast.invoke()
-                    }
-                },
+                onClick = { onClick(index) },
                 shape = shape,
                 colors = ButtonDefaults.textButtonColors(
-                    backgroundColor =
-                    if (isUsingContactLens)
-                        if (selected) Color.LightGray else Color.Transparent
-                    else {
-                        if (selected) CleanBlue else Color.Transparent
-                    }
+                    backgroundColor = if (selected) CleanBlue else Color.Transparent
                 ),
                 modifier = Modifier.padding(vertical = 2.dp),
                 border = BorderStroke(
                     width = 1.dp,
-                    color = if (isUsingContactLens) Color.LightGray else CleanBlue
+                    color = CleanBlue
                 )
             ) {
                 Text(
                     text = item,
-                    color =
-                    if (selected) Color.White
-                    else {
-                        if (isUsingContactLens) Color.LightGray else CleanBlue
-                    },
+                    color = if (selected) Color.White else CleanBlue,
                     modifier = Modifier.padding(vertical = 2.dp),
                     fontSize = 16.sp
                 )

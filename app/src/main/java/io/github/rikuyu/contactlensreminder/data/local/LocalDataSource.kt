@@ -73,9 +73,9 @@ class LocalDataSource(
             saveIsUseNotification(settingValue.isUseNotification)
             saveNotificationDay(settingValue.notificationDay)
             saveNotificationTimeHour(settingValue.notificationTimeHour)
-            saveNotificationTimeMinute( settingValue.notificationTimeMinute)
+            saveNotificationTimeMinute(settingValue.notificationTimeMinute)
             saveIsShowContactLensPowerSection(settingValue.isShowLensPowerSection)
-            saveLeftContactLensPower( settingValue.leftLensPower.toString())
+            saveLeftContactLensPower(settingValue.leftLensPower.toString())
             saveRightContactLensPower(settingValue.rightLensPower.toString())
             saveContactLensRemainingDays(remainingRay)
         }
@@ -84,12 +84,10 @@ class LocalDataSource(
     override fun getAllSetting(): SettingValue {
         val lensType = sharedPreferencesManager.getContactLensType()
         val lensPeriod = sharedPreferencesManager.getContactLensPeriod()
-        val isUseNotification = sharedPreferencesManager.getIsUseNotification()
         val notificationDay = sharedPreferencesManager.getNotificationDay()
         val notificationTimeHour = sharedPreferencesManager.getNotificationTimeHour()
         val notificationTimeMinute = sharedPreferencesManager.getNotificationTimeMinute()
         val isShowLensPowerSection = sharedPreferencesManager.getIsShowContactLensPowerSection()
-        val isUsingContactLens = sharedPreferencesManager.getIsUsingContactLens()
         val leftLensPower =
             sharedPreferencesManager.getLeftContactLensPower()?.toDouble() ?: -4.00
         val rightLensPower =
@@ -98,12 +96,10 @@ class LocalDataSource(
         return SettingValue(
             lensType = lensType,
             lensPeriod = lensPeriod,
-            isUseNotification = isUseNotification,
             notificationDay = notificationDay,
             notificationTimeHour = notificationTimeHour,
             notificationTimeMinute = notificationTimeMinute,
             isShowLensPowerSection = isShowLensPowerSection,
-            isUsingContactLens = isUsingContactLens,
             leftLensPower = leftLensPower,
             rightLensPower = rightLensPower
         )
