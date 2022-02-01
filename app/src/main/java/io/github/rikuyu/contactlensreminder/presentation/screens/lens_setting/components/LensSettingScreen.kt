@@ -56,8 +56,6 @@ fun LensSettingScreen(
 
     var isShowLensPeriodPicker by remember { mutableStateOf(settingValue.lensType == 2) }
 
-    var isShowLensPowerPicker by remember { mutableStateOf(false) }
-
     val isUsingContactLens by remember { mutableStateOf(settingValue.isUsingContactLens) }
 
     val setLensPeriod: (Int) -> Unit = { index ->
@@ -200,17 +198,12 @@ fun LensSettingScreen(
                             setRightLensPower = {
                                 rightLensPower = it
                                 viewModel.onEvent(SettingEvent.RightPower(it))
-                            },
-                            isShowLensPowerPicker = isShowLensPowerPicker,
-                            changeIsShowPowerPicker = {
-                                isShowLensPowerPicker = !isShowLensPowerPicker
                             }
                         )
                     }
                 }
                 SetSettingButton(modifier = Modifier.fillMaxWidth()) {
                     isShowLensPeriodPicker = false
-                    isShowLensPowerPicker = false
                     Toast.makeText(
                         context,
                         context.getString(R.string.success_save_setting),

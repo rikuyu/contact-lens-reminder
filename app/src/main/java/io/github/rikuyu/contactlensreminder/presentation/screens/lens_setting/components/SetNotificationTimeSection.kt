@@ -10,7 +10,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -47,7 +47,7 @@ fun SetNotificationTimeSection(
             Text(
                 text = stringResource(id = R.string.notification_time),
                 color = textColor,
-                fontSize = 20.sp,
+                fontSize = fontSize,
                 modifier = Modifier
                     .weight(1f)
                     .padding(start = 10.dp)

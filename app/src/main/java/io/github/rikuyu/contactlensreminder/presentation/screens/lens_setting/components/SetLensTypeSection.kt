@@ -27,7 +27,7 @@ fun SetLensTypeSection(
     fontSize: TextUnit = 18.sp,
     isUsingContactLens: Boolean,
     lensType: Int,
-    showToast: ()->Unit,
+    showToast: () -> Unit,
     onClick: (Int) -> Unit
 ) {
     Row(
@@ -70,7 +70,7 @@ fun SetLensTypeSection(
                 onClick = {
                     if (!isUsingContactLens) {
                         onClick(index)
-                    }else{
+                    } else {
                         showToast.invoke()
                     }
                 },

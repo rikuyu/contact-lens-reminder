@@ -26,7 +26,7 @@ fun SetLensPeriodSection(
     textColor: Color = Color.Black,
     fontSize: TextUnit = 18.sp,
     isUsingContactLens: Boolean,
-    showToast: ()->Unit,
+    showToast: () -> Unit,
     period: Int,
     setLensPeriod: (Int) -> Unit
 ) {
@@ -76,7 +76,7 @@ fun SetLensPeriodSection(
                 onClick = {
                     if (isUsingContactLens) {
                         showToast.invoke()
-                    }else{
+                    } else {
                         isShowLensPeriodPicker = !isShowLensPeriodPicker
                     }
                 },

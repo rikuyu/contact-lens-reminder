@@ -1,6 +1,7 @@
 package io.github.rikuyu.contactlensreminder.presentation.screens.lens_setting.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
@@ -9,7 +10,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,9 +19,9 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.presentation.util.LensPowerPicker
 import io.github.rikuyu.contactlensreminder.presentation.theme.CleanBlue
 import io.github.rikuyu.contactlensreminder.presentation.theme.PaleBlue
+import io.github.rikuyu.contactlensreminder.presentation.util.LensPowerPicker
 import io.github.rikuyu.contactlensreminder.presentation.util.SimpleDivider
 
 @Composable
@@ -32,9 +33,9 @@ fun SetLensPowerSection(
     setLeftLensPower: (Double) -> Unit,
     rightLensPower: Double,
     setRightLensPower: (Double) -> Unit,
-    isShowLensPowerPicker: Boolean,
-    changeIsShowPowerPicker: () -> Unit
 ) {
+    var isShowLensPowerPicker by remember { mutableStateOf(false) }
+
     Column(modifier = modifier.background(Color.White)) {
         Row(
             modifier = modifier
@@ -58,6 +59,7 @@ fun SetLensPowerSection(
                     lensPower = leftLensPower,
                     eye = stringResource(id = R.string.left),
                     isShowLensPowerPicker = isShowLensPowerPicker,
+                    changeIsShowLensPowerPicker = { isShowLensPowerPicker = true },
                     setLensPower = { setLeftLensPower(it) }
                 )
                 SetOneLensPowerItem(
@@ -66,10 +68,11 @@ fun SetLensPowerSection(
                     lensPower = rightLensPower,
                     eye = stringResource(id = R.string.right),
                     isShowLensPowerPicker = isShowLensPowerPicker,
+                    changeIsShowLensPowerPicker = { isShowLensPowerPicker = true },
                     setLensPower = { setRightLensPower(it) }
                 )
                 Button(
-                    onClick = changeIsShowPowerPicker,
+                    onClick = { isShowLensPowerPicker = !isShowLensPowerPicker },
                     colors = ButtonDefaults.textButtonColors(
                         backgroundColor = CleanBlue,
                         contentColor = Color.White,
@@ -103,6 +106,7 @@ fun SetOneLensPowerItem(
     fontSize: TextUnit,
     eye: String,
     isShowLensPowerPicker: Boolean,
+    changeIsShowLensPowerPicker: () -> Unit,
     lensPower: Double,
     setLensPower: (Double) -> Unit,
 ) {
@@ -124,6 +128,7 @@ fun SetOneLensPowerItem(
         Box(
             modifier = Modifier
                 .background(PaleBlue, shape = RoundedCornerShape(20))
+                .clickable { changeIsShowLensPowerPicker.invoke() }
                 .padding(vertical = 8.dp, horizontal = 10.dp)
         ) {
             Text(

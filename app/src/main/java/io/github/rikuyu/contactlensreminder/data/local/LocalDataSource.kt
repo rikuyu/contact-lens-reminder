@@ -41,7 +41,7 @@ class LocalDataSource(
         val lensPeriod = sharedPreferencesManager.getContactLensPeriod()
         val notificationTimeHour = sharedPreferencesManager.getNotificationTimeHour()
         val notificationTimeMinute = sharedPreferencesManager.getNotificationTimeMinute()
-        val elapsedDays = sharedPreferencesManager.getContactLensRemainingDays()
+        val lensRemainingDays = sharedPreferencesManager.getContactLensRemainingDays()
         val isUsingContactLens = sharedPreferencesManager.getIsUsingContactLens()
         val isUseNotification = sharedPreferencesManager.getIsUseNotification()
         val exchangeDay = sharedPreferencesManager.getLensExchangeDay() ?: getExpirationDate(lensPeriod)
@@ -51,7 +51,7 @@ class LocalDataSource(
             exchangeDay = exchangeDay,
             notificationTimeHour = notificationTimeHour,
             notificationTimeMinute = notificationTimeMinute,
-            lensRemainingDays = elapsedDays,
+            lensRemainingDays = lensRemainingDays,
             isUsingContactLens = isUsingContactLens,
             isUseNotification = isUseNotification
         )
@@ -65,28 +65,19 @@ class LocalDataSource(
     }
 
     override fun saveAllSetting(settingValue: SettingValue) {
-        val lensType = settingValue.lensType
-        val lensPeriod = settingValue.lensPeriod
-        val isUseNotification = settingValue.isUseNotification
-        val notificationDay = settingValue.notificationDay
-        val notificationTimeHour = settingValue.notificationTimeHour
-        val notificationTimeMinute = settingValue.notificationTimeMinute
-        val isShowLensPowerSection = settingValue.isShowLensPowerSection
-        val leftLensPower = settingValue.leftLensPower
-        val rightLensPower = settingValue.rightLensPower
-        val elapsedDays = settingValue.lensPeriod
+        val remainingRay = settingValue.lensPeriod
 
         sharedPreferencesManager.apply {
-            saveContactLensType(lensType)
-            saveContactLensPeriod(lensPeriod)
-            saveIsUseNotification(isUseNotification)
-            saveNotificationDay(notificationDay)
-            saveNotificationTimeHour(notificationTimeHour)
-            saveNotificationTimeMinute(notificationTimeMinute)
-            saveIsShowContactLensPowerSection(isShowLensPowerSection)
-            saveLeftContactLensPower(leftLensPower.toString())
-            saveRightContactLensPower(rightLensPower.toString())
-            saveContactLensRemainingDays(elapsedDays)
+            saveContactLensType(settingValue.lensType)
+            saveContactLensPeriod(settingValue.lensPeriod)
+            saveIsUseNotification(settingValue.isUseNotification)
+            saveNotificationDay(settingValue.notificationDay)
+            saveNotificationTimeHour(settingValue.notificationTimeHour)
+            saveNotificationTimeMinute( settingValue.notificationTimeMinute)
+            saveIsShowContactLensPowerSection(settingValue.isShowLensPowerSection)
+            saveLeftContactLensPower( settingValue.leftLensPower.toString())
+            saveRightContactLensPower(settingValue.rightLensPower.toString())
+            saveContactLensRemainingDays(remainingRay)
         }
     }
 
