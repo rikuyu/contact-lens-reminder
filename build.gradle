@@ -36,13 +36,6 @@ buildscript {
                 pagerIndicator          : "com.google.accompanist:accompanist-pager-indicators:$pager"
         ]
 
-        workManagerVersion = "2.7.1"
-
-        workerDependencies = [
-                workRuntimeKtx: "androidx.work:work-runtime-ktx:$workManagerVersion",
-                workRuntime   : "androidx.work:work-runtime:$workManagerVersion"
-        ]
-
         navigationVersion = "2.4.0"
 
         navigationDependencies = [
