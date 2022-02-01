@@ -7,11 +7,12 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import io.github.rikuyu.contactlensreminder.data.local.LocalDataSource
-import io.github.rikuyu.contactlensreminder.data.local.alarm.AlarmManagerService
+import io.github.rikuyu.contactlensreminder.data.local.alarm.notification.NotificationAlarmManager
+import io.github.rikuyu.contactlensreminder.data.local.alarm.tickdown.TickDownAlarmManager
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
-import io.github.rikuyu.contactlensreminder.data.local.workmanager.TickDownWorkManagerService
 import io.github.rikuyu.contactlensreminder.data.repository.ReminderRepositoryImpl
 import io.github.rikuyu.contactlensreminder.data.repository.SettingRepositoryImpl
+import io.github.rikuyu.contactlensreminder.data.util.ChangeAppIconService
 import io.github.rikuyu.contactlensreminder.domain.repository.ReminderRepository
 import io.github.rikuyu.contactlensreminder.domain.repository.SettingRepository
 import io.github.rikuyu.contactlensreminder.domain.usecase.reminder.*
@@ -28,13 +29,15 @@ object AppModule {
     @Singleton
     fun provideLocalDataSource(
         sharedPreferencesManager: SharedPreferencesManager,
-        tickDownWorkManagerService: TickDownWorkManagerService,
-        alarmManagerService: AlarmManagerService
+        tickDownAlarmManager: TickDownAlarmManager,
+        notificationAlarmManager: NotificationAlarmManager,
+        changeAppIconService: ChangeAppIconService
     ): LocalDataSource =
         LocalDataSource(
-            tickDownWorkManagerService = tickDownWorkManagerService,
+            tickDownAlarmManager = tickDownAlarmManager,
             sharedPreferencesManager = sharedPreferencesManager,
-            alarmManagerService = alarmManagerService
+            notificationAlarmManager = notificationAlarmManager,
+            changeAppIconService = changeAppIconService
         )
 
     @Provides
@@ -54,17 +57,22 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideTickDownWorkManagerService(
-        @ApplicationContext context: Context
-    ): TickDownWorkManagerService =
-        TickDownWorkManagerService(context)
+    fun provideNotificationAlarmManager(
+        @ApplicationContext context: Context,
+        sharedPreferencesManager: SharedPreferencesManager
+    ): NotificationAlarmManager = NotificationAlarmManager(context, sharedPreferencesManager)
 
     @Provides
     @Singleton
-    fun provideAlarmManagerService(
-        @ApplicationContext context: Context,
-        sharedPreferencesManager: SharedPreferencesManager
-    ): AlarmManagerService = AlarmManagerService(context, sharedPreferencesManager)
+    fun provideChangeAppIconService(
+        @ApplicationContext context: Context
+    ): ChangeAppIconService = ChangeAppIconService(context)
+
+    @Provides
+    @Singleton
+    fun provideTickDownAlarmManager(
+        @ApplicationContext context: Context
+    ): TickDownAlarmManager = TickDownAlarmManager(context)
 
     @Provides
     @Singleton

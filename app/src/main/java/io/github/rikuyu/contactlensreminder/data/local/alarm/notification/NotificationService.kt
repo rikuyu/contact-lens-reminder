@@ -1,4 +1,4 @@
-package io.github.rikuyu.contactlensreminder.data.local.alarm
+package io.github.rikuyu.contactlensreminder.data.local.alarm.notification
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

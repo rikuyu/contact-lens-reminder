@@ -84,9 +84,6 @@ dependencies {
     implementation uiDependencies.pager
     implementation uiDependencies.pagerIndicator
 
-    implementation workerDependencies.workRuntimeKtx
-    implementation workerDependencies.workRuntime
-
     implementation diDependencies.hiltAndroid
     kapt diDependencies.hiltAndroidCompiler
     implementation diDependencies.hiltLifecycleViewModel

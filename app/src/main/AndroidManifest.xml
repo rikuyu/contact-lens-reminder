@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="io.github.rikuyu.contactlensreminder">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 
     <application
@@ -20,11 +20,16 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.ContactLensReminder"
+            android:windowSoftInputMode="adjustResize"
             tools:ignore="LockedOrientationActivity" />
 
         <receiver
-            android:name=".data.local.alarm.AlarmBroadcastReceiver"
-            android:exported="false"/>
+            android:name=".data.local.alarm.notification.NotificationAlarmReceiver"
+            android:exported="false" />
+
+        <receiver
+            android:name=".data.local.alarm.tickdown.TickDownAlarmReceiver"
+            android:exported="false" />
 
         <!-- Default -->
         <activity-alias
@@ -32,8 +37,8 @@
             android:enabled="true"
             android:exported="true"
             android:icon="@mipmap/ic_launcher"
-            android:roundIcon="@mipmap/ic_launcher_round"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_round"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -48,6 +53,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_expired"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_expired"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -62,6 +68,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_1"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_1"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -76,6 +83,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_2"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_2"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -90,6 +98,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_3"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_3"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -104,6 +113,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_4"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_4"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -118,6 +128,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_5"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_5"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -132,6 +143,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_6"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_6"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -146,6 +158,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_7"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_7"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -160,6 +173,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_8"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_8"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -174,6 +188,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_9"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_9"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -188,6 +203,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_10"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_10"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -202,6 +218,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_11"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_11"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -216,6 +233,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_12"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_12"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -230,6 +248,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_13"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_13"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -244,6 +263,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_14"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_14"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -258,6 +278,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_15"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_15"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -272,6 +293,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_16"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_16"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -286,6 +308,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_17"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_17"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -300,6 +323,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_18"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_18"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -314,6 +338,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_19"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_19"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -328,6 +353,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_20"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_20"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -342,6 +368,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_21"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_21"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -356,6 +383,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_22"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_22"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -370,6 +398,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_23"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_23"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -384,6 +413,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_24"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_24"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -398,6 +428,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_25"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_25"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -412,6 +443,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_26"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_26"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -426,6 +458,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_27"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_27"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -440,6 +473,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_28"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_28"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -454,6 +488,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_29"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_29"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -468,6 +503,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_30"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_30"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -482,6 +518,7 @@
             android:exported="true"
             android:icon="@mipmap/icon_31"
             android:label="@string/app_name"
+            android:roundIcon="@mipmap/icon_31"
             android:targetActivity=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

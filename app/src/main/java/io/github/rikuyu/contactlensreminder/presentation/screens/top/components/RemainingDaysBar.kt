@@ -36,15 +36,12 @@ fun RemainingDaysBar(
     lensRemainingDays: Int,
     exchangeDay: String,
     isUseNotification: Boolean,
-    remainingDaysTextFontSize: TextUnit = 36.sp,
     supportTextFontSize: TextUnit = 24.sp,
     periodTextFontSize: TextUnit = 16.sp,
     supportTextColor: Color = Color.Black,
     radius: Dp = 150.dp,
     color: Color = CleanBlue,
-    strokeWidth: Dp = 30.dp,
-    animDuration: Int = 1500,
-    animDelay: Int = 0
+    strokeWidth: Dp = 30.dp
 ) {
     var animationPlayed by remember { mutableStateOf(false) }
 
@@ -52,8 +49,8 @@ fun RemainingDaysBar(
         animateFloatAsState(
             targetValue = if (animationPlayed) lensRemainingDays.toFloat() else 0f,
             animationSpec = tween(
-                durationMillis = animDuration,
-                delayMillis = animDelay
+                durationMillis = 1500,
+                delayMillis = 0
             )
         )
 
@@ -73,7 +70,10 @@ fun RemainingDaysBar(
             drawArc(
                 color = if (lensRemainingDays > 0 || !isUsingContactLens) color else Color.Red,
                 startAngle = -90f,
-                sweepAngle = if (lensRemainingDays > 0) (remainingDays.value * (360.0 / lensPeriod)).toFloat() else 360f,
+                sweepAngle =
+                if (lensRemainingDays > 0)
+                    (remainingDays.value * (360.0 / lensPeriod)).toFloat()
+                else 360f,
                 useCenter = false,
                 style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
             )
@@ -92,7 +92,7 @@ fun RemainingDaysBar(
                     withStyle(
                         style = SpanStyle(
                             color = if (lensRemainingDays > 0 || !isUsingContactLens) color else Color.Red,
-                            fontSize = remainingDaysTextFontSize
+                            fontSize = 36.sp
                         )
                     ) {
                         append(

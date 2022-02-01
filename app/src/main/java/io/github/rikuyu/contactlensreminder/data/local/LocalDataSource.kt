@@ -1,17 +1,19 @@
 package io.github.rikuyu.contactlensreminder.data.local
 
-import io.github.rikuyu.contactlensreminder.data.local.alarm.AlarmManagerService
+import io.github.rikuyu.contactlensreminder.data.local.alarm.notification.NotificationAlarmManager
+import io.github.rikuyu.contactlensreminder.data.local.alarm.tickdown.TickDownAlarmManager
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
-import io.github.rikuyu.contactlensreminder.data.local.workmanager.TickDownWorkManagerService
+import io.github.rikuyu.contactlensreminder.data.util.ChangeAppIconService
+import io.github.rikuyu.contactlensreminder.domain.local.DataSource
 import io.github.rikuyu.contactlensreminder.domain.model.ReminderValue
 import io.github.rikuyu.contactlensreminder.domain.model.SettingValue
-import io.github.rikuyu.contactlensreminder.domain.local.DataSource
 import io.github.rikuyu.contactlensreminder.presentation.util.getExpirationDate
 
 class LocalDataSource(
-    private val tickDownWorkManagerService: TickDownWorkManagerService,
+    private val tickDownAlarmManager: TickDownAlarmManager,
     private val sharedPreferencesManager: SharedPreferencesManager,
-    private val alarmManagerService: AlarmManagerService
+    private val notificationAlarmManager: NotificationAlarmManager,
+    private val changeAppIconService: ChangeAppIconService
 ) : DataSource {
 
     override fun saveReminderSetting(reminderValue: ReminderValue) {
@@ -27,9 +29,12 @@ class LocalDataSource(
 
     override fun startReminder(elapsedDays: Int) {
         if (sharedPreferencesManager.getIsUseNotification()) {
-            alarmManagerService.initAlarm()
+            notificationAlarmManager.initAlarm()
         }
-        tickDownWorkManagerService.startTickDownWork(elapsedDays)
+        changeAppIconService.changeAppIcon(
+            true, sharedPreferencesManager.getContactLensRemainingDays()
+        )
+        tickDownAlarmManager.initAlarm()
     }
 
     override fun getReminderSetting(): ReminderValue {
@@ -54,9 +59,9 @@ class LocalDataSource(
 
     override fun cancelReminder() {
         if (sharedPreferencesManager.getIsUseNotification()) {
-            alarmManagerService.cancelAlarm()
+            notificationAlarmManager.cancelAlarm()
         }
-        tickDownWorkManagerService.cancelTickDownWork()
+        tickDownAlarmManager.cancelAlarm()
     }
 
     override fun saveAllSetting(settingValue: SettingValue) {
