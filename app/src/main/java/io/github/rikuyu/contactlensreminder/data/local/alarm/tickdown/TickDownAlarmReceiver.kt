@@ -7,14 +7,14 @@ import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedP
 import io.github.rikuyu.contactlensreminder.data.util.ChangeAppIconService
 import javax.inject.Inject
 
-class TickDownAlarmReceiver @Inject constructor(
-    private val sharedPreferencesManager: SharedPreferencesManager,
-    private val changeAppIconService: ChangeAppIconService,
-    private val tickDownAlarmManager: TickDownAlarmManager
-) : BroadcastReceiver() {
+class TickDownAlarmReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
         context?.let {
+            val sharedPreferencesManager = SharedPreferencesManager(it)
+            val changeAppIconService = ChangeAppIconService(it)
+            val tickDownAlarmManager = TickDownAlarmManager(it)
+
             val remainingDay = sharedPreferencesManager.getContactLensRemainingDays()
             val isUsingContactLens = sharedPreferencesManager.getIsUsingContactLens()
             if (remainingDay > 0) {
