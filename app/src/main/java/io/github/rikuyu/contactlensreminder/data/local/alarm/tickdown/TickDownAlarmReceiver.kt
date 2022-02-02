@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
 import io.github.rikuyu.contactlensreminder.data.util.ChangeAppIconService
-import javax.inject.Inject
 
 class TickDownAlarmReceiver : BroadcastReceiver() {
 
