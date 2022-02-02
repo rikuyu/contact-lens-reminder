@@ -30,6 +30,7 @@ import io.github.rikuyu.contactlensreminder.presentation.theme.LightRed
 @Composable
 fun RemainingDaysBar(
     lensPeriod: Int,
+    notificationDay: Int,
     notificationTimeHour: Int,
     notificationTimeMinute: Int,
     isUsingContactLens: Boolean,
@@ -130,6 +131,13 @@ fun RemainingDaysBar(
                             )
                         ) {
                             append(stringResource(id = R.string.time_message))
+                            append(" ")
+                            append(
+                                if (notificationDay == 0)
+                                    stringResource(id = R.string.on_the_day)
+                                else
+                                    stringResource(id = R.string.before_day)
+                            )
                             append(" ")
                             append(notificationTimeHour.toString())
                             append(stringResource(id = R.string.time_div))

@@ -4,9 +4,10 @@ import io.github.rikuyu.contactlensreminder.domain.model.ReminderValue
 import io.github.rikuyu.contactlensreminder.domain.model.SettingValue
 
 interface DataSource {
+
     fun saveReminderSetting(reminderValue: ReminderValue)
 
-    fun startReminder(elapsedDays: Int)
+    fun startReminder()
 
     fun getReminderSetting(): ReminderValue
 

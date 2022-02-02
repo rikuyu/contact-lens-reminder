@@ -1,19 +1,20 @@
 package io.github.rikuyu.contactlensreminder.data.repository
 
-import io.github.rikuyu.contactlensreminder.data.local.LocalDataSource
+import io.github.rikuyu.contactlensreminder.domain.local.DataSource
 import io.github.rikuyu.contactlensreminder.domain.model.ReminderValue
 import io.github.rikuyu.contactlensreminder.domain.repository.ReminderRepository
+import javax.inject.Inject
 
-class ReminderRepositoryImpl(
-    private val localDataSource: LocalDataSource
+class ReminderRepositoryImpl @Inject constructor(
+    private val localDataSource: DataSource
 ) : ReminderRepository {
 
     override fun saveReminderSetting(reminderValue: ReminderValue) {
         localDataSource.saveReminderSetting(reminderValue)
     }
 
-    override fun startReminder(elapsedDays: Int) {
-        localDataSource.startReminder(elapsedDays)
+    override fun startReminder() {
+        localDataSource.startReminder()
     }
 
     override fun getReminderSetting(): ReminderValue = localDataSource.getReminderSetting()

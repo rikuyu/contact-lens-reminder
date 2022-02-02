@@ -1,10 +1,11 @@
 package io.github.rikuyu.contactlensreminder.data.repository
 
-import io.github.rikuyu.contactlensreminder.data.local.LocalDataSource
+import io.github.rikuyu.contactlensreminder.domain.local.DataSource
 import io.github.rikuyu.contactlensreminder.domain.model.SettingValue
 import io.github.rikuyu.contactlensreminder.domain.repository.SettingRepository
+import javax.inject.Inject
 
-class SettingRepositoryImpl(private val localDataSource: LocalDataSource) :
+class SettingRepositoryImpl @Inject constructor(private val localDataSource: DataSource) :
     SettingRepository {
 
     override fun saveAllSetting(settingValue: SettingValue) {

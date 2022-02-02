@@ -4,12 +4,13 @@ import io.github.rikuyu.contactlensreminder.data.local.alarm.notification.Notifi
 import io.github.rikuyu.contactlensreminder.data.local.alarm.tickdown.TickDownAlarmManager
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
 import io.github.rikuyu.contactlensreminder.data.util.ChangeAppIconService
+import io.github.rikuyu.contactlensreminder.data.util.getExpirationDate
 import io.github.rikuyu.contactlensreminder.domain.local.DataSource
 import io.github.rikuyu.contactlensreminder.domain.model.ReminderValue
 import io.github.rikuyu.contactlensreminder.domain.model.SettingValue
-import io.github.rikuyu.contactlensreminder.presentation.util.getExpirationDate
+import javax.inject.Inject
 
-class LocalDataSource(
+class LocalDataSource @Inject constructor(
     private val tickDownAlarmManager: TickDownAlarmManager,
     private val sharedPreferencesManager: SharedPreferencesManager,
     private val notificationAlarmManager: NotificationAlarmManager,
@@ -27,7 +28,7 @@ class LocalDataSource(
         }
     }
 
-    override fun startReminder(elapsedDays: Int) {
+    override fun startReminder() {
         if (sharedPreferencesManager.getIsUseNotification()) {
             notificationAlarmManager.initAlarm()
         }
@@ -39,6 +40,7 @@ class LocalDataSource(
 
     override fun getReminderSetting(): ReminderValue {
         val lensPeriod = sharedPreferencesManager.getContactLensPeriod()
+        val notificationDay = sharedPreferencesManager.getNotificationDay()
         val notificationTimeHour = sharedPreferencesManager.getNotificationTimeHour()
         val notificationTimeMinute = sharedPreferencesManager.getNotificationTimeMinute()
         val lensRemainingDays = sharedPreferencesManager.getContactLensRemainingDays()
@@ -49,6 +51,7 @@ class LocalDataSource(
         return ReminderValue(
             lensPeriod = lensPeriod,
             exchangeDay = exchangeDay,
+            notificationDay = notificationDay,
             notificationTimeHour = notificationTimeHour,
             notificationTimeMinute = notificationTimeMinute,
             lensRemainingDays = lensRemainingDays,
@@ -84,6 +87,7 @@ class LocalDataSource(
     override fun getAllSetting(): SettingValue {
         val lensType = sharedPreferencesManager.getContactLensType()
         val lensPeriod = sharedPreferencesManager.getContactLensPeriod()
+        val isUseNotification = sharedPreferencesManager.getIsUseNotification()
         val notificationDay = sharedPreferencesManager.getNotificationDay()
         val notificationTimeHour = sharedPreferencesManager.getNotificationTimeHour()
         val notificationTimeMinute = sharedPreferencesManager.getNotificationTimeMinute()
@@ -96,6 +100,7 @@ class LocalDataSource(
         return SettingValue(
             lensType = lensType,
             lensPeriod = lensPeriod,
+            isUseNotification = isUseNotification,
             notificationDay = notificationDay,
             notificationTimeHour = notificationTimeHour,
             notificationTimeMinute = notificationTimeMinute,

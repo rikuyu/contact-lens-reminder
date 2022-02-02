@@ -31,19 +31,21 @@ fun TopScreen(
 
     val reminderValue = viewModel.reminder.value
 
-    val isUseNotification by remember { mutableStateOf(reminderValue.isUseNotification) }
+    val isUseNotification = reminderValue.isUseNotification
 
-    val lensPeriod by remember { mutableStateOf(reminderValue.lensPeriod) }
+    val lensPeriod = reminderValue.lensPeriod
 
-    val lensRemainingDays by remember { mutableStateOf(reminderValue.lensRemainingDays) }
+    val lensRemainingDays = reminderValue.lensRemainingDays
 
-    val exchangeDay by remember { mutableStateOf(reminderValue.exchangeDay) }
+    val exchangeDay = reminderValue.exchangeDay
 
-    val notificationTimeHour by remember { mutableStateOf(reminderValue.notificationTimeHour) }
+    val notificationTimeHour = reminderValue.notificationTimeHour
 
-    val notificationTimeMinute by remember { mutableStateOf(reminderValue.notificationTimeMinute) }
+    val notificationTimeMinute = reminderValue.notificationTimeMinute
 
-    var isUsingContactLens by remember { mutableStateOf(reminderValue.isUsingContactLens) }
+    val notificationDay = reminderValue.notificationDay
+
+    var isUsingContactLens = reminderValue.isUsingContactLens
 
     var dialogState by remember { mutableStateOf(false) }
 
@@ -91,6 +93,7 @@ fun TopScreen(
                 lensPeriod = lensPeriod,
                 exchangeDay = exchangeDay,
                 isUsingContactLens = isUsingContactLens,
+                notificationDay = notificationDay,
                 notificationTimeHour = notificationTimeHour,
                 notificationTimeMinute = notificationTimeMinute,
                 lensRemainingDays = lensRemainingDays,
@@ -151,7 +154,7 @@ fun TopScreen(
                 Toast.makeText(
                     context,
                     context.getString(R.string.alert_toast_message),
-                    Toast.LENGTH_SHORT
+                    Toast.LENGTH_LONG
                 ).show()
             },
             isUsingContactLens = isUsingContactLens,
