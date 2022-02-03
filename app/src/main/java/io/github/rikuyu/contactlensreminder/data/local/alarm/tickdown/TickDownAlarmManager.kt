@@ -7,8 +7,9 @@ import android.content.Intent
 import io.github.rikuyu.contactlensreminder.data.util.ChangeAppIconService
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
-class TickDownAlarmManager(private val context: Context) {
+class TickDownAlarmManager @Inject constructor (private val context: Context) {
 
     private val changeAppIconService: ChangeAppIconService = ChangeAppIconService(context)
 

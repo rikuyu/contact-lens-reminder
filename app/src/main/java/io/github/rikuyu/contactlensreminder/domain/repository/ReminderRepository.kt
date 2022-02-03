@@ -6,7 +6,7 @@ interface ReminderRepository {
 
     fun saveReminderSetting(reminderValue: ReminderValue)
 
-    fun startReminder(elapsedDays: Int)
+    fun startReminder()
 
     fun getReminderSetting(): ReminderValue
 

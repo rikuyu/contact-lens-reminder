@@ -4,17 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import java.text.SimpleDateFormat
-import java.util.*
-
-fun getExpirationDate(lensPeriod: Int): String {
-    val calender = Calendar.getInstance()
-    calender.time = Date()
-    calender.add(Calendar.DATE, lensPeriod)
-    val date: Date = calender.time
-    val simpleDateFormat = SimpleDateFormat("yyyy/MM/dd", Locale.ENGLISH)
-    return simpleDateFormat.format(date)
-}
 
 fun makeNotificationSettingIntent(context: Context): Intent {
     return Intent().apply {

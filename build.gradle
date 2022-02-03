@@ -65,7 +65,7 @@ buildscript {
                 truth      : "com.google.truth:truth:$truth"
         ]
 
-        firebaseBom = "29.0.4"
+        firebaseBom = "29.0.3"
         firebaseCrashlyticsGradle = "2.8.1"
 
         firebaseDependencies = [

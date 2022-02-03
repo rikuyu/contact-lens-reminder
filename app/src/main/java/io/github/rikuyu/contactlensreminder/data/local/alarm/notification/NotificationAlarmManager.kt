@@ -7,8 +7,9 @@ import android.content.Intent
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
-class NotificationAlarmManager(
+class NotificationAlarmManager @Inject constructor(
     private val context: Context,
     private val sharedPreferencesManager: SharedPreferencesManager
 ) {
