@@ -24,6 +24,11 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      - name: Generate google-services.json
+        env:
+          GOOGLE_SERVICE_JSON: ${{ secrets.GOOGLE_SERVICE_JSON }}
+        run: echo $GOOGLE_SERVICE_JSON | base64 --decode --ignore-garbage > $GITHUB_WORKSPACE/app/google-services.json
+
       - name: Build with Gradle
         run: ./gradlew build
 
