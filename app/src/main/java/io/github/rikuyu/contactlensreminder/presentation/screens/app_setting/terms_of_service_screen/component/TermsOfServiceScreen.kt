@@ -18,7 +18,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.presentation.theme.CleanBlue
-import io.github.rikuyu.contactlensreminder.presentation.util.Routes
 import io.github.rikuyu.contactlensreminder.presentation.util.SimpleDivider
 import io.github.rikuyu.contactlensreminder.presentation.util.SimpleSpacer
 

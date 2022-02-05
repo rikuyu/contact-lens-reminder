@@ -19,7 +19,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import io.github.rikuyu.contactlensreminder.presentation.theme.CleanBlue
 import io.github.rikuyu.contactlensreminder.presentation.theme.SkyBlue
-import io.github.rikuyu.contactlensreminder.presentation.util.Routes
 import io.github.rikuyu.contactlensreminder.R
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager

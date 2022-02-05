@@ -27,7 +27,6 @@ import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.presentation.theme.CleanBlue
 import io.github.rikuyu.contactlensreminder.presentation.theme.SkyBlue
 import io.github.rikuyu.contactlensreminder.presentation.theme.WebViewBackground
-import io.github.rikuyu.contactlensreminder.presentation.util.Routes
 import io.github.rikuyu.contactlensreminder.presentation.util.checkNetworkConnection
 
 @SuppressLint("SetJavaScriptEnabled")
