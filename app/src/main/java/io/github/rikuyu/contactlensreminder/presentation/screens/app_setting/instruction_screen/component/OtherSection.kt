@@ -19,7 +19,7 @@ import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.presentation.util.SimpleSpacer
 
 @Composable
-fun OtherScreen(
+fun OtherSection(
     modifier: Modifier,
     textColor: Color = Color.Black,
     descFontSize: TextUnit = 14.sp

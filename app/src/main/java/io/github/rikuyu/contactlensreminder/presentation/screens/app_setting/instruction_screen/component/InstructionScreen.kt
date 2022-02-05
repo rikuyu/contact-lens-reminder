@@ -37,7 +37,7 @@ fun InstructionScreen(navController: NavHostController) {
                     Text(text = stringResource(id = R.string.help))
                 },
                 navigationIcon = {
-                    IconButton(onClick = { navController.navigate(Routes.APP_SETTING) }) {
+                    IconButton(onClick = { navController.popBackStack() }) {
                         Icon(Icons.Filled.ArrowBack, null)
                     }
                 },
@@ -107,7 +107,7 @@ fun InstructionScreen(navController: NavHostController) {
                             .padding(5.dp)
                             .background(Color.White)
                     )
-                    3 -> OtherScreen(
+                    3 -> OtherSection(
                         Modifier
                             .padding(5.dp)
                             .background(Color.White)

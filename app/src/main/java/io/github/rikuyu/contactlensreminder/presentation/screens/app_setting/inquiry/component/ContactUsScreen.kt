@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
+import io.github.rikuyu.contactlensreminder.BuildConfig
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.presentation.theme.CleanBlue
 import io.github.rikuyu.contactlensreminder.presentation.theme.SkyBlue
@@ -33,7 +34,7 @@ import io.github.rikuyu.contactlensreminder.presentation.util.checkNetworkConnec
 @Composable
 fun ContactUsScreen(navController: NavController) {
 
-    val formId = "1FAIpQLScyhLuzmtG6fcmLzJ0lEC4pXHU5KwrCW7Le_K1_P41pnfP10g"
+    val formId = BuildConfig.GOOGLE_FORM_ID
 
     val isNetworkConnected = checkNetworkConnection(LocalContext.current)
 
@@ -46,7 +47,7 @@ fun ContactUsScreen(navController: NavController) {
                     Text(text = stringResource(id = R.string.inquiry))
                 },
                 navigationIcon = {
-                    IconButton(onClick = { navController.navigate(Routes.APP_SETTING) }) {
+                    IconButton(onClick = { navController.popBackStack() }) {
                         Icon(Icons.Filled.ArrowBack, null)
                     }
                 },

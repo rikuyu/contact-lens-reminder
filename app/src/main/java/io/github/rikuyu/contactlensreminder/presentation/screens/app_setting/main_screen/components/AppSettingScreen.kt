@@ -47,7 +47,7 @@ fun AppSettingScreen(
                     Text(text = stringResource(id = R.string.app_setting_screen_title))
                 },
                 navigationIcon = {
-                    IconButton(onClick = { navController.navigate(Routes.TOP) }) {
+                    IconButton(onClick = { navController.popBackStack() }) {
                         Icon(Icons.Filled.ArrowBack, null)
                     }
                 },

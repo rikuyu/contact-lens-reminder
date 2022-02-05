@@ -31,7 +31,7 @@ fun TermsOfServiceScreen(navController: NavHostController) {
                     Text(text = stringResource(id = R.string.terms_of_service))
                 },
                 navigationIcon = {
-                    IconButton(onClick = { navController.navigate(Routes.APP_SETTING) }) {
+                    IconButton(onClick = { navController.popBackStack() }) {
                         Icon(Icons.Filled.ArrowBack, null)
                     }
                 },
