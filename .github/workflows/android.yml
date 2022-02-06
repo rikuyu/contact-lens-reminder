@@ -24,6 +24,11 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      - name: Access GOOGLE_FORM_ID
+        env:
+          GOOGLE_FORM_ID: ${{ secrets.GOOGLE_FORM_ID }}
+        run: echo GOOGLE_FORM_ID=\"$GOOGLE_FORM_ID\" > ./local.properties
+
       - name: Generate google-services.json
         env:
           GOOGLE_SERVICE_JSON: ${{ secrets.GOOGLE_SERVICE_JSON }}

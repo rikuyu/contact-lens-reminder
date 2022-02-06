@@ -7,6 +7,13 @@ plugins {
     id 'com.google.firebase.crashlytics'
 }
 
+def getGoogleFormId() {
+    def propFile = project.rootProject.file('local.properties')
+    def properties = new Properties()
+    properties.load(propFile.newDataInputStream())
+    return properties['GOOGLE_FORM_ID']
+}
+
 android {
     compileSdk 31
 
@@ -21,6 +28,8 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+
+        buildConfigField ("String", 'GOOGLE_FORM_ID', getGoogleFormId())
     }
 
     buildTypes {

@@ -81,6 +81,7 @@ class LocalDataSource @Inject constructor(
             saveLeftContactLensPower(settingValue.leftLensPower.toString())
             saveRightContactLensPower(settingValue.rightLensPower.toString())
             saveContactLensRemainingDays(remainingRay)
+            saveLensExchangeDay(getExpirationDate(remainingRay))
         }
     }
 

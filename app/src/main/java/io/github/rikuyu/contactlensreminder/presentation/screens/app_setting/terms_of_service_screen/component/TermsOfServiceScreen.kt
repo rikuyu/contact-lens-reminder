@@ -18,7 +18,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.presentation.theme.CleanBlue
-import io.github.rikuyu.contactlensreminder.presentation.util.Routes
 import io.github.rikuyu.contactlensreminder.presentation.util.SimpleDivider
 import io.github.rikuyu.contactlensreminder.presentation.util.SimpleSpacer
 
@@ -31,7 +30,7 @@ fun TermsOfServiceScreen(navController: NavHostController) {
                     Text(text = stringResource(id = R.string.terms_of_service))
                 },
                 navigationIcon = {
-                    IconButton(onClick = { navController.navigate(Routes.APP_SETTING) }) {
+                    IconButton(onClick = { navController.popBackStack() }) {
                         Icon(Icons.Filled.ArrowBack, null)
                     }
                 },
