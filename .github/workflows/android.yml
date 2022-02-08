@@ -45,6 +45,9 @@ jobs:
       - name: run ktlint
         run: ./gradlew ktlint
 
+      - name: run Unit Test
+        run: ./gradlew :app:testDebugUnitTest
+
       - name: run danger
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -57,12 +57,14 @@ buildscript {
         coreTesting = "2.1.0"
         coroutinesTest = "1.5.2"
         truth = "1.1.3"
+        robolectric = "4.7.3"
 
         testDependencies = [
                 junitKtx   : "androidx.test.ext:junit-ktx:$junitKtx",
                 coreKtx    : "androidx.test:core-ktx:$coreKtx",
                 coreTesting: "androidx.arch.core:core-testing:$coreTesting",
-                truth      : "com.google.truth:truth:$truth"
+                truth      : "com.google.truth:truth:$truth",
+                robolectric: "org.robolectric:robolectric:$robolectric"
         ]
 
         firebaseBom = "29.0.3"
