@@ -45,7 +45,7 @@ fun HandleReminderButtonSection(
             onClick = { onClick(isUsingContactLens) },
             modifier = Modifier.size(240.dp, 60.dp),
             colors = ButtonDefaults.textButtonColors(
-                backgroundColor = if (lensRemainingDays < 1) LightRed else SkyBlue,
+                backgroundColor = if (lensRemainingDays < 0) LightRed else SkyBlue,
                 contentColor = Color.White,
                 disabledContentColor = Color.LightGray
             ),

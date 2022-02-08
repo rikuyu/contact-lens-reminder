@@ -62,11 +62,6 @@ android {
     lintOptions {
         xmlReport true
     }
-    testOptions {
-        unitTests {
-            includeAndroidResources = true
-        }
-    }
 }
 
 configurations {
@@ -88,7 +83,6 @@ dependencies {
     testImplementation testDependencies.coreKtx
     testImplementation testDependencies.coreTesting
     testImplementation testDependencies.truth
-    testImplementation testDependencies.robolectric
 
     implementation navigationDependencies.navigation
 

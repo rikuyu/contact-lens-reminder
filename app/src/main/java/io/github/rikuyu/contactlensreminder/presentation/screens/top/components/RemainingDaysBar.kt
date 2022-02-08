@@ -96,7 +96,12 @@ fun RemainingDaysBar(
                             fontSize = 36.sp
                         )
                     ) {
-                        append(lensRemainingDays.toString())
+                        append(
+                            if (lensRemainingDays > 0 || !isUsingContactLens)
+                                lensRemainingDays.toString()
+                            else
+                                lensPeriod.toString()
+                        )
                     }
                     withStyle(
                         style = SpanStyle(
