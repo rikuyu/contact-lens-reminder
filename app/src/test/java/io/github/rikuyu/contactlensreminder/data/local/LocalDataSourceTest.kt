@@ -165,7 +165,7 @@ class LocalDataSourceTest {
         assertThat(shadowAlarmManager.scheduledAlarms.size).isEqualTo(1)
     }
 
-    private fun initLocalDataSource(){
+    private fun initLocalDataSource() {
         sharedPreferencesManager = mockk()
         localDataSource = LocalDataSource(
             tickDownAlarmManager = tickDownAlarmManager,
