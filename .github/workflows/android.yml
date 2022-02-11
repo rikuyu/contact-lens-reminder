@@ -11,9 +11,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.6.5
+
       - name: set up JDK 11
         uses: actions/setup-java@v2
         with:
@@ -33,6 +35,20 @@ jobs:
         env:
           GOOGLE_SERVICE_JSON: ${{ secrets.GOOGLE_SERVICE_JSON }}
         run: echo $GOOGLE_SERVICE_JSON | base64 --decode --ignore-garbage > $GITHUB_WORKSPACE/app/google-services.json
+
+      - name: Unit Test
+        run: ./gradlew testDebugUnitTest
+
+      - name: Android Unit Test Report on Console
+        uses: asadmansr/android-test-report-action@v1.2.0
+        if: ${{ always() }}
+
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1.28
+        if: ${{ always() }}
+        with:
+          files: test-results/**/*.xml
+          report_individual_runs: "true"
 
       - name: Build with Gradle
         run: ./gradlew build

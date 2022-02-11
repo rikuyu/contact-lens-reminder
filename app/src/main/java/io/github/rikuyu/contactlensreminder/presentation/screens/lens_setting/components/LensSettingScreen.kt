@@ -171,15 +171,15 @@ fun LensSettingScreen(
                     AnimatedVisibility(visible = isShowLensPowerSection) {
                         SetLensPowerSection(
                             modifier = Modifier.fillMaxWidth(),
-                            leftLensPower = leftLensPower,
+                            leftLensPower = leftLensPower.toDouble(),
                             setLeftLensPower = {
-                                leftLensPower = it
-                                viewModel.onEvent(SettingEvent.LeftPower(it))
+                                leftLensPower = it.toString()
+                                viewModel.onEvent(SettingEvent.LeftPower(it.toString()))
                             },
-                            rightLensPower = rightLensPower,
+                            rightLensPower = rightLensPower.toDouble(),
                             setRightLensPower = {
-                                rightLensPower = it
-                                viewModel.onEvent(SettingEvent.RightPower(it))
+                                rightLensPower = it.toString()
+                                viewModel.onEvent(SettingEvent.RightPower(it.toString()))
                             }
                         )
                     }

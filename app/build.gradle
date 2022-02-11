@@ -90,6 +90,8 @@ dependencies {
     testImplementation testDependencies.coreTesting
     testImplementation testDependencies.truth
     testImplementation testDependencies.robolectric
+    testImplementation testDependencies.mockk
+    testImplementation testDependencies.mockkAgentJvm
 
     implementation navigationDependencies.navigation
 

@@ -16,9 +16,9 @@ sealed class SettingEvent {
 
     data class IsShowLensPowerSection(val isShowLensPowerSection: Boolean) : SettingEvent()
 
-    data class LeftPower(val leftLensPower: Double) : SettingEvent()
+    data class LeftPower(val leftLensPower: String) : SettingEvent()
 
-    data class RightPower(val rightLensPower: Double) : SettingEvent()
+    data class RightPower(val rightLensPower: String) : SettingEvent()
 
     object SaveSetting : SettingEvent()
 }

@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import dagger.hilt.android.AndroidEntryPoint
 import io.github.rikuyu.contactlensreminder.presentation.screens.app_setting.inquiry.component.ContactUsScreen
 import io.github.rikuyu.contactlensreminder.presentation.screens.app_setting.instruction_screen.component.InstructionScreen
 import io.github.rikuyu.contactlensreminder.presentation.screens.app_setting.main_screen.components.AppSettingScreen
@@ -14,8 +15,6 @@ import io.github.rikuyu.contactlensreminder.presentation.screens.lens_setting.co
 import io.github.rikuyu.contactlensreminder.presentation.screens.top.components.TopScreen
 import io.github.rikuyu.contactlensreminder.presentation.theme.ContactLensReminderTheme
 import io.github.rikuyu.contactlensreminder.presentation.util.Routes
-
-import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
