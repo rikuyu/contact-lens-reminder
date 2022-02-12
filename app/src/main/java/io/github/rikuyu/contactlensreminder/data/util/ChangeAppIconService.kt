@@ -12,7 +12,7 @@ class ChangeAppIconService @Inject constructor(val context: Context) {
     private val disabled = PackageManager.COMPONENT_ENABLED_STATE_DISABLED
     private val dontKillApp = PackageManager.DONT_KILL_APP
 
-    private val aliasList: List<String> = listOf(
+    val aliasList: List<String> = listOf(
         "OneAlias", "TwoAlias", "ThreeAlias", "FourAlias",
         "FiveAlias", "SixAlias", "SevenAlias", "EightAlias",
         "NineAlias", "TenAlias", "ElevenAlias", "TwelveAlias",
@@ -24,64 +24,55 @@ class ChangeAppIconService @Inject constructor(val context: Context) {
     )
 
     fun changeAppIcon(isUsingContactLens: Boolean, remainingDay: Int?) {
-        val pkg = context.packageName
-        val defaultIcon = "$pkg.DefaultAlias"
-        val expiredIcon = "$pkg.ExpiredAlias"
+        val packageName = context.packageName
+        val defaultAlias = "$packageName.DefaultAlias"
+        val expiredAlias = "$packageName.ExpiredAlias"
         if (isUsingContactLens && remainingDay != null) {
             if (remainingDay < 1) {
                 packageManager.setComponentEnabledSetting(
-                    ComponentName(context, expiredIcon), enabled, dontKillApp
+                    ComponentName(context, expiredAlias), enabled, dontKillApp
                 )
                 packageManager.setComponentEnabledSetting(
-                    ComponentName(context, defaultIcon), disabled, dontKillApp
+                    ComponentName(context, defaultAlias), disabled, dontKillApp
                 )
                 aliasList.forEach { alias ->
                     packageManager.setComponentEnabledSetting(
-                        ComponentName(context, "$pkg.$alias"), disabled, dontKillApp
+                        ComponentName(context, "$packageName.$alias"), disabled, dontKillApp
                     )
                 }
                 return
             }
+            packageManager.setComponentEnabledSetting(
+                ComponentName(context, defaultAlias), disabled, dontKillApp
+            )
+            packageManager.setComponentEnabledSetting(
+                ComponentName(context, expiredAlias), disabled, dontKillApp
+            )
             aliasList.forEachIndexed { index, alias ->
-                when (index) {
-                    remainingDay - 1 -> {
-                        packageManager.setComponentEnabledSetting(
-                            ComponentName(context, "$pkg.$alias"),
-                            enabled,
-                            dontKillApp
-                        )
-                        packageManager.setComponentEnabledSetting(
-                            ComponentName(context, defaultIcon), disabled, dontKillApp
-                        )
-                        packageManager.setComponentEnabledSetting(
-                            ComponentName(context, expiredIcon), disabled, dontKillApp
-                        )
-                    }
-                    else -> {
-                        packageManager.setComponentEnabledSetting(
-                            ComponentName(context, "$pkg.$alias"), disabled, dontKillApp
-                        )
-                        packageManager.setComponentEnabledSetting(
-                            ComponentName(context, defaultIcon), disabled, dontKillApp
-                        )
-                        packageManager.setComponentEnabledSetting(
-                            ComponentName(context, expiredIcon), disabled, dontKillApp
-                        )
-                    }
+                if (index == remainingDay - 1) {
+                    packageManager.setComponentEnabledSetting(
+                        ComponentName(context, "$packageName.$alias"),
+                        enabled,
+                        dontKillApp
+                    )
+                } else {
+                    packageManager.setComponentEnabledSetting(
+                        ComponentName(context, "$packageName.$alias"), disabled, dontKillApp
+                    )
                 }
             }
         } else {
             // DefaultAlias
             packageManager.setComponentEnabledSetting(
-                ComponentName(context, defaultIcon), enabled, dontKillApp
+                ComponentName(context, defaultAlias), enabled, dontKillApp
             )
             aliasList.forEach { alias ->
                 packageManager.setComponentEnabledSetting(
-                    ComponentName(context, "$pkg.$alias"), disabled, dontKillApp
+                    ComponentName(context, "$packageName.$alias"), disabled, dontKillApp
                 )
             }
             packageManager.setComponentEnabledSetting(
-                ComponentName(context, expiredIcon), disabled, dontKillApp
+                ComponentName(context, expiredAlias), disabled, dontKillApp
             )
         }
     }
