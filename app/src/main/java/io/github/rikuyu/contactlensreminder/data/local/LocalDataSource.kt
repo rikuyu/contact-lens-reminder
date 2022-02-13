@@ -93,10 +93,8 @@ class LocalDataSource @Inject constructor(
         val notificationTimeHour = sharedPreferencesManager.getNotificationTimeHour()
         val notificationTimeMinute = sharedPreferencesManager.getNotificationTimeMinute()
         val isShowLensPowerSection = sharedPreferencesManager.getIsShowContactLensPowerSection()
-        val leftLensPower =
-            sharedPreferencesManager.getLeftContactLensPower()?.toDouble() ?: -4.00
-        val rightLensPower =
-            sharedPreferencesManager.getRightContactLensPower()?.toDouble() ?: -4.00
+        val leftLensPower = sharedPreferencesManager.getLeftContactLensPower() ?: "-4.00"
+        val rightLensPower = sharedPreferencesManager.getRightContactLensPower() ?: "-4.00"
 
         return SettingValue(
             lensType = lensType,

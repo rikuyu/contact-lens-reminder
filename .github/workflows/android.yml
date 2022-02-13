@@ -11,9 +11,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.6.5
+
       - name: set up JDK 11
         uses: actions/setup-java@v2
         with:
@@ -34,8 +36,22 @@ jobs:
           GOOGLE_SERVICE_JSON: ${{ secrets.GOOGLE_SERVICE_JSON }}
         run: echo $GOOGLE_SERVICE_JSON | base64 --decode --ignore-garbage > $GITHUB_WORKSPACE/app/google-services.json
 
+      - name: Unit Test
+        run: ./gradlew testDebugUnitTest
+
+      - name: Android Unit Test Report on Console
+        uses: asadmansr/android-test-report-action@v1.2.0
+        if: ${{ always() }}
+
       - name: Build with Gradle
         run: ./gradlew build
+
+      - name: Archive code coverage results
+        if: always()
+        uses: actions/upload-artifact@v1
+        with:
+          name: code-coverage-report
+          path: app/build/reports/tests/testDebugUnitTest
 
       - name: install danger
         run: |

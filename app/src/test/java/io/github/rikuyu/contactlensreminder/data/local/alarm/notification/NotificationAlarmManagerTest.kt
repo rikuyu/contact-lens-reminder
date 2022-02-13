@@ -3,9 +3,8 @@ package io.github.rikuyu.contactlensreminder.data.local.alarm.notification
 import android.app.AlarmManager
 import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry
+import com.google.common.truth.Truth.assertThat
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
-import org.junit.Assert.assertNotNull
-import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -32,17 +31,17 @@ class NotificationAlarmManagerTest {
     }
 
     @Test
-    fun `will the notifications be set`() {
-        assertNull(shadowAlarmManager.nextScheduledAlarm)
+    fun `通知を予約できるかどうか`() {
+        assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
         notificationAlarmManager.initAlarm()
-        assertNotNull(shadowAlarmManager.nextScheduledAlarm)
+        assertThat(shadowAlarmManager.nextScheduledAlarm).isNotNull()
     }
 
     @Test
-    fun `will notifications be cancel`() {
+    fun `通知をキャンセルできるかどうか`() {
         notificationAlarmManager.initAlarm()
-        assertNotNull(shadowAlarmManager.nextScheduledAlarm)
+        assertThat(shadowAlarmManager.nextScheduledAlarm).isNotNull()
         notificationAlarmManager.cancelAlarm()
-        assertNull(shadowAlarmManager.nextScheduledAlarm)
+        assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
     }
 }

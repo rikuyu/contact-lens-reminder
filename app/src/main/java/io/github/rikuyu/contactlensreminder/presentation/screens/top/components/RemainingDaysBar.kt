@@ -40,8 +40,8 @@ fun RemainingDaysBar(
     supportTextFontSize: TextUnit = 24.sp,
     periodTextFontSize: TextUnit = 16.sp,
     supportTextColor: Color = Color.Black,
-    radius: Dp = 150.dp,
     color: Color = CleanBlue,
+    radius: Dp = 150.dp,
     strokeWidth: Dp = 30.dp
 ) {
     var animationPlayed by remember { mutableStateOf(false) }

@@ -8,6 +8,6 @@ data class SettingValue(
     val notificationTimeHour: Int = 8,
     val notificationTimeMinute: Int = 0,
     val isShowLensPowerSection: Boolean = false,
-    val leftLensPower: Double = -4.00,
-    val rightLensPower: Double = -4.00
+    val leftLensPower: String = "-4.00",
+    val rightLensPower: String = "-4.00"
 )
