@@ -6,7 +6,7 @@ import java.util.*
 fun getExpirationDate(lensPeriod: Int): String {
     val calendar = Calendar.getInstance()
     calendar.add(Calendar.DATE, lensPeriod)
-    val simpleDateFormat = SimpleDateFormat("yyyy/MM/dd:E", Locale.getDefault())
-    val (date, day) = simpleDateFormat.format(calendar.time).split(":")
-    return "$date ($day)"
+    val simpleDateFormat = SimpleDateFormat("MM/dd/E", Locale.getDefault())
+    val (m, d, day) = simpleDateFormat.format(calendar.time).split("/")
+    return "${m.toInt()}/${d.toInt()} ($day)"
 }
