@@ -10,7 +10,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.VISIBILITY_PUBLIC
 import androidx.core.content.ContextCompat
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.presentation.MainActivity
+import io.github.rikuyu.contactlensreminder.ui.MainActivity
 
 class NotificationService(val context: Context) {
 
