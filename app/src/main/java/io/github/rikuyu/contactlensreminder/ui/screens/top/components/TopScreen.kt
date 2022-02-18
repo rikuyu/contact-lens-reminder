@@ -54,7 +54,6 @@ fun TopScreen(
             .fillMaxSize()
             .background(Color.White)
     ) {
-        SimpleSpacer(height = 8.dp)
         Row(
             modifier = Modifier.background(Color.White),
             verticalAlignment = Alignment.CenterVertically
