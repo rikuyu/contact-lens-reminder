@@ -51,7 +51,7 @@ fun ToggleButtonSection(
                 modifier = Modifier.padding(end = 14.dp)
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_notifications),
+                    painter = painterResource(id = R.drawable.ic_notify),
                     contentDescription = null,
                     tint = LightBlue,
                     modifier = Modifier.size(33.dp, 33.dp)
