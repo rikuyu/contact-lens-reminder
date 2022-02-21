@@ -29,7 +29,7 @@ class ReminderViewModel @Inject constructor(
         reminderUseCase.saveReminderSetting(reminder.value)
         when (event) {
             is ReminderEvent.StartReminder -> reminderUseCase.startReminder()
-            is ReminderEvent.CancelReminder -> reminderUseCase.cancelReminder.invoke()
+            is ReminderEvent.CancelReminder -> reminderUseCase.cancelReminder()
         }
     }
 }

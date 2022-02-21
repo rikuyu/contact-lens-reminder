@@ -53,7 +53,7 @@ fun LensSettingButtonSection(
             shape = RoundedCornerShape(30)
         ) {
             Icon(
-                painter = painterResource(id = R.drawable.water_drop),
+                painter = painterResource(id = R.drawable.ic_water_drop),
                 contentDescription = null,
                 tint = Color.White,
                 modifier = Modifier.size(24.dp, 24.dp)

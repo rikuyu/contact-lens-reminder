@@ -14,12 +14,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingSection
 import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
+import io.github.rikuyu.contactlensreminder.ui.theme.SkyBlue
 import io.github.rikuyu.contactlensreminder.ui.theme.SmoothGray
 import io.github.rikuyu.contactlensreminder.ui.util.Routes
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
@@ -33,11 +35,35 @@ fun AppSettingScreen(
     val context = LocalContext.current
 
     val sectionList = listOf(
-        AppSettingSection(1, stringResource(id = R.string.terms_of_service), Routes.TERMS_OF_SERVICE),
-        AppSettingSection(2, stringResource(id = R.string.help), Routes.HELP),
-        AppSettingSection(3, stringResource(id = R.string.notification_setting), null),
-        AppSettingSection(4, stringResource(id = R.string.inquiry), Routes.INQUIRY),
-        AppSettingSection(5, stringResource(id = R.string.version, getVersionName(context)), null)
+        AppSettingSection(
+            1,
+            stringResource(id = R.string.terms_of_service),
+            R.drawable.ic_terms_of_service,
+            Routes.TERMS_OF_SERVICE
+        ),
+        AppSettingSection(
+            2,
+            stringResource(id = R.string.help),
+            R.drawable.ic_help, Routes.HELP
+        ),
+        AppSettingSection(
+            3,
+            stringResource(id = R.string.notification_setting),
+            R.drawable.ic_notify,
+            null
+        ),
+        AppSettingSection(
+            4,
+            stringResource(id = R.string.inquiry),
+            R.drawable.ic_inquiry,
+            Routes.INQUIRY
+        ),
+        AppSettingSection(
+            5,
+            stringResource(id = R.string.version, getVersionName(context)),
+            R.drawable.ic_version,
+            null
+        )
     )
 
     Scaffold(
@@ -82,6 +108,13 @@ fun AppSettingScreen(
                             .padding(all = 16.dp)
                     ) {
                         Text(text = item.title, color = Color.Black)
+                        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                            Icon(
+                                painter = painterResource(id = item.icon),
+                                tint = SkyBlue,
+                                contentDescription = null
+                            )
+                        }
                     }
                     SimpleDivider()
                 }
