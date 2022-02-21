@@ -81,7 +81,6 @@ dependencies {
     implementation appDependencies.appcompat
     implementation appDependencies.material
     implementation appDependencies.composeMaterial
-    implementation appDependencies.preview
     implementation appDependencies.lifecycleRuntime
     implementation appDependencies.activity
 
