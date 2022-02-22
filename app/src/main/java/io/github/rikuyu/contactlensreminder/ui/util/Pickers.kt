@@ -35,9 +35,7 @@ fun LensPowerPicker(
 @Composable
 fun StringNumberPicker(
     modifier: Modifier = Modifier,
-    label: (String) -> String = {
-        it.toString()
-    },
+    label: (String) -> String = { it },
     value: String,
     onValueChange: (String) -> Unit,
     dividersColor: Color = MaterialTheme.colors.primary,
