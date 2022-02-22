@@ -2,7 +2,7 @@
 
 [Play Store](https://play.google.com/store/apps/details?id=io.github.rikuyu.contactlensreminder)
 
-<img src="https://user-images.githubusercontent.com/51118613/154684861-5367f4d4-1ef6-4eee-8919-cc09c37d7b96.jpg" width="800">
+<img src="https://user-images.githubusercontent.com/51118613/155189510-2be974c9-7528-45d1-9a96-bdc5cd47c081.jpg" width="500">
 
 ### 使用技術・ツール等
 - Jetpack Compose
@@ -63,5 +63,11 @@ flowchart BT
 - 毎日アプリアイコンを変えること
 - Unit Test
 
+### デモ
+アプリアイコンが日付をまたいで変化する様子（Googleカレンダーのアイコンも変わっていることに注目）
+
+<img src="https://user-images.githubusercontent.com/51118613/155189795-1d74ebf9-799e-468a-894d-1b1765cb3cc5.gif" width="270">
+
+
 ### その他
-- [ブログ](https://www.yuuuki-blog.com/2022/02/13/Android-%E3%82%A2%E3%83%97%E3%83%AA%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3%E3%82%92%E5%8B%95%E7%9A%84%E3%81%AB%E5%A4%89%E3%81%88%E3%82%8B%E6%96%B9%E6%B3%95/)
+- [Androidアプリアイコンを動的に変える方法](https://www.yuuuki-blog.com/2022/02/13/Android-%E3%82%A2%E3%83%97%E3%83%AA%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3%E3%82%92%E5%8B%95%E7%9A%84%E3%81%AB%E5%A4%89%E3%81%88%E3%82%8B%E6%96%B9%E6%B3%95/)

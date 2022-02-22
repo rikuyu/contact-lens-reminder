@@ -78,8 +78,8 @@ class LocalDataSource @Inject constructor(
             saveNotificationTimeHour(settingValue.notificationTimeHour)
             saveNotificationTimeMinute(settingValue.notificationTimeMinute)
             saveIsShowContactLensPowerSection(settingValue.isShowLensPowerSection)
-            saveLeftContactLensPower(settingValue.leftLensPower.toString())
-            saveRightContactLensPower(settingValue.rightLensPower.toString())
+            saveLeftContactLensPower(settingValue.leftLensPower)
+            saveRightContactLensPower(settingValue.rightLensPower)
             saveContactLensRemainingDays(remainingRay)
             saveLensExchangeDay(getExpirationDate(remainingRay))
         }
