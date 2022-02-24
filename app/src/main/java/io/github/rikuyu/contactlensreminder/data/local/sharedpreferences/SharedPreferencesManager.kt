@@ -194,12 +194,12 @@ class SharedPreferencesManager @Inject constructor(
     fun getIsFirstUse(): Boolean {
         return getSharedPreferences().getBoolean(
             SharedPreferencesKey.STORED_IS_FIRST_USE,
-            false
+            true
         )
     }
 
     fun saveIsFirstUse() {
         getSharedPreferences().edit()
-            .putBoolean(SharedPreferencesKey.STORED_IS_FIRST_USE, true).apply()
+            .putBoolean(SharedPreferencesKey.STORED_IS_FIRST_USE, false).apply()
     }
 }

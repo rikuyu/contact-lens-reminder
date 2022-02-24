@@ -4,15 +4,19 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.analytics.ktx.logEvent
+import com.google.firebase.ktx.Firebase
+import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
 import io.github.rikuyu.contactlensreminder.data.util.ChangeAppIconService
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
-class TickDownAlarmManager @Inject constructor (private val context: Context) {
+class TickDownAlarmManager @Inject constructor(private val context: Context) {
 
     private val changeAppIconService: ChangeAppIconService = ChangeAppIconService(context)
-
+    private val sharedPreferencesManager = SharedPreferencesManager(context)
     private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
     fun initAlarm() {
@@ -37,6 +41,7 @@ class TickDownAlarmManager @Inject constructor (private val context: Context) {
             calendar.timeInMillis,
             pendingIntent
         )
+        logTickDownAlarmEvent()
     }
 
     fun cancelAlarm() {
@@ -51,7 +56,23 @@ class TickDownAlarmManager @Inject constructor (private val context: Context) {
         changeAppIconService.changeAppIcon(false, null)
     }
 
+    private fun logTickDownAlarmEvent() {
+        val uuid = sharedPreferencesManager.getUuid() ?: return
+        val lensPeriod = sharedPreferencesManager.getContactLensPeriod().toString()
+        val remainingDay = sharedPreferencesManager.getContactLensRemainingDays().toString()
+
+        val firebaseAnalytics = Firebase.analytics
+        firebaseAnalytics.logEvent("init_tick_down_alarm_event") {
+            param(UUID, uuid)
+            param(LENS_PERIOD, lensPeriod)
+            param(REMAINING_DAY, remainingDay)
+        }
+    }
+
     companion object {
         private const val REQUEST_CODE = 7777
+        private const val LENS_PERIOD = "lens_period"
+        private const val REMAINING_DAY = "remaining_day"
+        private const val UUID = "uuid"
     }
 }

@@ -38,10 +38,6 @@ class LocalDataSource @Inject constructor(
                 true, getContactLensRemainingDays()
             )
             tickDownAlarmManager.initAlarm()
-            if (!getIsFirstUse()) {
-                saveIsFirstUse()
-                saveUuid(UUID.randomUUID().toString())
-            }
         }
     }
 
@@ -91,6 +87,11 @@ class LocalDataSource @Inject constructor(
             saveRightContactLensPower(settingValue.rightLensPower)
             saveContactLensRemainingDays(remainingRay)
             saveLensExchangeDay(getExpirationDate(remainingRay))
+
+            if (getIsFirstUse()) {
+                saveIsFirstUse()
+                saveUuid(UUID.randomUUID().toString())
+            }
         }
     }
 
