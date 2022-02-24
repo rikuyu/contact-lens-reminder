@@ -52,6 +52,6 @@ class TickDownAlarmManager @Inject constructor (private val context: Context) {
     }
 
     companion object {
-        private const val REQUEST_CODE = 2
+        private const val REQUEST_CODE = 7777
     }
 }
