@@ -41,7 +41,7 @@ class TickDownAlarmManager @Inject constructor(private val context: Context) {
             calendar.timeInMillis,
             pendingIntent
         )
-        logTickDownAlarmEvent()
+        logInitTickDownEvent()
     }
 
     fun cancelAlarm() {
@@ -54,9 +54,10 @@ class TickDownAlarmManager @Inject constructor(private val context: Context) {
         )
         alarmManager.cancel(pendingIntent)
         changeAppIconService.changeAppIcon(false, null)
+        logCancelTickDownEvent()
     }
 
-    private fun logTickDownAlarmEvent() {
+    private fun logInitTickDownEvent() {
         val uuid = sharedPreferencesManager.getUuid() ?: return
         val lensPeriod = sharedPreferencesManager.getContactLensPeriod().toString()
         val remainingDay = sharedPreferencesManager.getContactLensRemainingDays().toString()
@@ -67,6 +68,12 @@ class TickDownAlarmManager @Inject constructor(private val context: Context) {
             param(LENS_PERIOD, lensPeriod)
             param(REMAINING_DAY, remainingDay)
         }
+    }
+
+    private fun logCancelTickDownEvent() {
+        val uuid = sharedPreferencesManager.getUuid() ?: return
+        val firebaseAnalytics = Firebase.analytics
+        firebaseAnalytics.logEvent("cancel_tick_down_alarm_event") { param(UUID, uuid) }
     }
 
     companion object {
