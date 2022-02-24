@@ -40,4 +40,10 @@ object SharedPreferencesKey {
 
     // レンズ交換日
     const val STORED_CONTACT_LENS_EXCHANGE_DAY = "contact_lens_exchange_day"
+
+    // UUID
+    const val STORED_UUID = "uuid"
+
+    // 初めてリマインダーを使用するかどうか
+    const val STORED_IS_FIRST_USE = "is_first_use"
 }
