@@ -9,7 +9,7 @@ import io.github.rikuyu.contactlensreminder.data.local.alarm.tickdown.TickDownAl
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
 import io.github.rikuyu.contactlensreminder.data.util.ChangeAppIconService
 import io.github.rikuyu.contactlensreminder.domain.model.ReminderValue
-import io.github.rikuyu.contactlensreminder.domain.model.SettingValue
+import io.github.rikuyu.contactlensreminder.domain.model.LensSettingValue
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -43,7 +43,7 @@ class LocalDataSourceTest {
         isUseNotification = true
     )
 
-    private val expectedSettingValue = SettingValue(
+    private val expectedSettingValue = LensSettingValue(
         lensType = 2,
         lensPeriod = 31,
         isUseNotification = true,
@@ -116,7 +116,7 @@ class LocalDataSourceTest {
         every { sharedPreferencesManager.getLeftContactLensPower() } returns "-4.75"
         every { sharedPreferencesManager.getRightContactLensPower() } returns "-5.00"
 
-        val actual = localDataSource.getAllSetting()
+        val actual = localDataSource.getAllLensSetting()
 
         verify(exactly = 1) {
             sharedPreferencesManager.getContactLensType()

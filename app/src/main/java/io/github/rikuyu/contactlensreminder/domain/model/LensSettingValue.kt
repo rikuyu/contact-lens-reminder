@@ -1,6 +1,6 @@
 package io.github.rikuyu.contactlensreminder.domain.model
 
-data class SettingValue(
+data class LensSettingValue(
     val lensType: Int = 0,
     val lensPeriod: Int = 14,
     val isUseNotification: Boolean = false,

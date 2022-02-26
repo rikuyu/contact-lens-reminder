@@ -12,12 +12,12 @@ import io.github.rikuyu.contactlensreminder.data.local.alarm.notification.Notifi
 import io.github.rikuyu.contactlensreminder.data.local.alarm.tickdown.TickDownAlarmManager
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
 import io.github.rikuyu.contactlensreminder.data.repository.ReminderRepositoryImpl
-import io.github.rikuyu.contactlensreminder.data.repository.SettingRepositoryImpl
+import io.github.rikuyu.contactlensreminder.data.repository.LensSettingRepositoryImpl
 import io.github.rikuyu.contactlensreminder.data.util.ChangeAppIconService
 import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEvent
 import io.github.rikuyu.contactlensreminder.domain.local.DataSource
 import io.github.rikuyu.contactlensreminder.domain.repository.ReminderRepository
-import io.github.rikuyu.contactlensreminder.domain.repository.SettingRepository
+import io.github.rikuyu.contactlensreminder.domain.repository.LensSettingRepository
 import javax.inject.Singleton
 
 @Module
@@ -30,7 +30,7 @@ abstract class AppModule {
 
     @Binds
     @Singleton
-    abstract fun bindSettingRepository(settingRepository: SettingRepositoryImpl): SettingRepository
+    abstract fun bindSettingRepository(settingRepository: LensSettingRepositoryImpl): LensSettingRepository
 
     @Binds
     @Singleton

@@ -7,7 +7,7 @@ import io.github.rikuyu.contactlensreminder.data.util.ChangeAppIconService
 import io.github.rikuyu.contactlensreminder.data.util.getExpirationDate
 import io.github.rikuyu.contactlensreminder.domain.local.DataSource
 import io.github.rikuyu.contactlensreminder.domain.model.ReminderValue
-import io.github.rikuyu.contactlensreminder.domain.model.SettingValue
+import io.github.rikuyu.contactlensreminder.domain.model.LensSettingValue
 import java.util.*
 import javax.inject.Inject
 
@@ -72,19 +72,19 @@ class LocalDataSource @Inject constructor(
         tickDownAlarmManager.cancelAlarm()
     }
 
-    override fun saveAllSetting(settingValue: SettingValue) {
-        val remainingRay = settingValue.lensPeriod
+    override fun saveAllLensSetting(lensSettingValue: LensSettingValue) {
+        val remainingRay = lensSettingValue.lensPeriod
 
         sharedPreferencesManager.apply {
-            saveContactLensType(settingValue.lensType)
-            saveContactLensPeriod(settingValue.lensPeriod)
-            saveIsUseNotification(settingValue.isUseNotification)
-            saveNotificationDay(settingValue.notificationDay)
-            saveNotificationTimeHour(settingValue.notificationTimeHour)
-            saveNotificationTimeMinute(settingValue.notificationTimeMinute)
-            saveIsShowContactLensPowerSection(settingValue.isShowLensPowerSection)
-            saveLeftContactLensPower(settingValue.leftLensPower)
-            saveRightContactLensPower(settingValue.rightLensPower)
+            saveContactLensType(lensSettingValue.lensType)
+            saveContactLensPeriod(lensSettingValue.lensPeriod)
+            saveIsUseNotification(lensSettingValue.isUseNotification)
+            saveNotificationDay(lensSettingValue.notificationDay)
+            saveNotificationTimeHour(lensSettingValue.notificationTimeHour)
+            saveNotificationTimeMinute(lensSettingValue.notificationTimeMinute)
+            saveIsShowContactLensPowerSection(lensSettingValue.isShowLensPowerSection)
+            saveLeftContactLensPower(lensSettingValue.leftLensPower)
+            saveRightContactLensPower(lensSettingValue.rightLensPower)
             saveContactLensRemainingDays(remainingRay)
             saveLensExchangeDay(getExpirationDate(remainingRay))
 
@@ -95,7 +95,7 @@ class LocalDataSource @Inject constructor(
         }
     }
 
-    override fun getAllSetting(): SettingValue {
+    override fun getAllLensSetting(): LensSettingValue {
         sharedPreferencesManager.apply {
             val lensType = getContactLensType()
             val lensPeriod = getContactLensPeriod()
@@ -107,7 +107,7 @@ class LocalDataSource @Inject constructor(
             val leftLensPower = getLeftContactLensPower() ?: "-4.00"
             val rightLensPower = getRightContactLensPower() ?: "-4.00"
 
-            return SettingValue(
+            return LensSettingValue(
                 lensType = lensType,
                 lensPeriod = lensPeriod,
                 isUseNotification = isUseNotification,
