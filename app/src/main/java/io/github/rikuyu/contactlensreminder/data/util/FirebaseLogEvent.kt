@@ -4,8 +4,9 @@ import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.ktx.Firebase
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
+import javax.inject.Inject
 
-class FirebaseLogEvent(val sharedPreferencesManager: SharedPreferencesManager) {
+class FirebaseLogEvent @Inject constructor(val sharedPreferencesManager: SharedPreferencesManager) {
 
     fun logEvent(label: String) {
         val uuid = sharedPreferencesManager.getUuid() ?: return

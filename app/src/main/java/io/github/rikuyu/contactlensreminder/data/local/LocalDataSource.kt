@@ -4,6 +4,7 @@ import io.github.rikuyu.contactlensreminder.data.local.alarm.notification.Notifi
 import io.github.rikuyu.contactlensreminder.data.local.alarm.tickdown.TickDownAlarmManager
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
 import io.github.rikuyu.contactlensreminder.data.util.ChangeAppIconService
+import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEvent
 import io.github.rikuyu.contactlensreminder.data.util.getExpirationDate
 import io.github.rikuyu.contactlensreminder.domain.local.DataSource
 import io.github.rikuyu.contactlensreminder.domain.model.ReminderValue
@@ -15,7 +16,8 @@ class LocalDataSource @Inject constructor(
     private val tickDownAlarmManager: TickDownAlarmManager,
     private val sharedPreferencesManager: SharedPreferencesManager,
     private val notificationAlarmManager: NotificationAlarmManager,
-    private val changeAppIconService: ChangeAppIconService
+    private val changeAppIconService: ChangeAppIconService,
+    private val firebaseLogEvent: FirebaseLogEvent
 ) : DataSource {
 
     override fun saveReminderSetting(reminderValue: ReminderValue) {
@@ -119,5 +121,9 @@ class LocalDataSource @Inject constructor(
                 rightLensPower = rightLensPower
             )
         }
+    }
+
+    override fun logEvent(label: String) {
+        firebaseLogEvent.logEvent(label)
     }
 }

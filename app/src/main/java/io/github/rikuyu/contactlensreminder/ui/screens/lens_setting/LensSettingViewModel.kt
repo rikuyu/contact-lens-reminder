@@ -14,58 +14,58 @@ class LensSettingViewModel @Inject constructor(
     private val lensSettingUseCase: LensSettingUseCase
 ) : ViewModel() {
 
-    private val _Lens_setting: MutableState<LensSettingValue> = mutableStateOf(LensSettingValue())
-    val lensSetting: State<LensSettingValue> = _Lens_setting
+    private val _lensSetting: MutableState<LensSettingValue> = mutableStateOf(LensSettingValue())
+    val lensSetting: State<LensSettingValue> = _lensSetting
 
     init {
-        _Lens_setting.value = lensSettingUseCase.getAllLensSetting.invoke()
+        _lensSetting.value = lensSettingUseCase.getAllLensSetting.invoke()
     }
 
-    fun onEvent(eventLens: LensSettingEvent) {
-        when (eventLens) {
+    fun onEvent(event: LensSettingEvent) {
+        when (event) {
             is LensSettingEvent.LensType -> {
-                _Lens_setting.value = lensSetting.value.copy(
-                    lensType = eventLens.lensType
+                _lensSetting.value = lensSetting.value.copy(
+                    lensType = event.lensType
                 )
             }
             is LensSettingEvent.LensPeriod -> {
-                _Lens_setting.value = lensSetting.value.copy(
-                    lensPeriod = eventLens.lensPeriod
+                _lensSetting.value = lensSetting.value.copy(
+                    lensPeriod = event.lensPeriod
                 )
             }
             is LensSettingEvent.IsUseNotification -> {
-                _Lens_setting.value = lensSetting.value.copy(
-                    isUseNotification = eventLens.isUseNotification
+                _lensSetting.value = lensSetting.value.copy(
+                    isUseNotification = event.isUseNotification
                 )
             }
             is LensSettingEvent.NotificationDay -> {
-                _Lens_setting.value = lensSetting.value.copy(
-                    notificationDay = eventLens.notificationType
+                _lensSetting.value = lensSetting.value.copy(
+                    notificationDay = event.notificationType
                 )
             }
             is LensSettingEvent.NotificationTimeHour -> {
-                _Lens_setting.value = lensSetting.value.copy(
-                    notificationTimeHour = eventLens.notificationTimeHour
+                _lensSetting.value = lensSetting.value.copy(
+                    notificationTimeHour = event.notificationTimeHour
                 )
             }
             is LensSettingEvent.NotificationTimeMinute -> {
-                _Lens_setting.value = lensSetting.value.copy(
-                    notificationTimeMinute = eventLens.notificationTimeMinute
+                _lensSetting.value = lensSetting.value.copy(
+                    notificationTimeMinute = event.notificationTimeMinute
                 )
             }
             is LensSettingEvent.IsShowLensPowerSection -> {
-                _Lens_setting.value = lensSetting.value.copy(
-                    isShowLensPowerSection = eventLens.isShowLensPowerSection
+                _lensSetting.value = lensSetting.value.copy(
+                    isShowLensPowerSection = event.isShowLensPowerSection
                 )
             }
             is LensSettingEvent.LeftPower -> {
-                _Lens_setting.value = lensSetting.value.copy(
-                    leftLensPower = eventLens.leftLensPower
+                _lensSetting.value = lensSetting.value.copy(
+                    leftLensPower = event.leftLensPower
                 )
             }
             is LensSettingEvent.RightPower -> {
-                _Lens_setting.value = lensSetting.value.copy(
-                    rightLensPower = eventLens.rightLensPower
+                _lensSetting.value = lensSetting.value.copy(
+                    rightLensPower = event.rightLensPower
                 )
             }
             is LensSettingEvent.SaveLensSetting -> lensSettingUseCase.saveAllLensSetting(lensSetting.value)
