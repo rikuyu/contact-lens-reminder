@@ -60,7 +60,7 @@ fun LensSettingScreen(
         when (index) {
             0 -> lensPeriod = 14
             1 -> lensPeriod = 31
-            2 -> lensPeriod = 10
+            2 -> {}
         }
     }
 
