@@ -14,6 +14,7 @@ import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedP
 import io.github.rikuyu.contactlensreminder.data.repository.ReminderRepositoryImpl
 import io.github.rikuyu.contactlensreminder.data.repository.SettingRepositoryImpl
 import io.github.rikuyu.contactlensreminder.data.util.ChangeAppIconService
+import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEvent
 import io.github.rikuyu.contactlensreminder.domain.local.DataSource
 import io.github.rikuyu.contactlensreminder.domain.repository.ReminderRepository
 import io.github.rikuyu.contactlensreminder.domain.repository.SettingRepository
@@ -55,13 +56,20 @@ abstract class AppModule {
         @Provides
         @Singleton
         fun provideTickDownAlarmManager(
-            @ApplicationContext context: Context
-        ): TickDownAlarmManager = TickDownAlarmManager(context)
+            @ApplicationContext context: Context,
+            firebaseLogEvent: FirebaseLogEvent
+        ): TickDownAlarmManager = TickDownAlarmManager(context, firebaseLogEvent)
 
         @Provides
         @Singleton
         fun provideSharedPreferencesManager(
             @ApplicationContext context: Context
         ): SharedPreferencesManager = SharedPreferencesManager(context)
+
+        @Provides
+        @Singleton
+        fun provideFirebaseLogEvent(
+            sharedPreferencesManager: SharedPreferencesManager
+        ): FirebaseLogEvent = FirebaseLogEvent(sharedPreferencesManager)
     }
 }
