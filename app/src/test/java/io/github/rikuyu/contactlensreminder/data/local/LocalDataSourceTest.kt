@@ -8,6 +8,7 @@ import io.github.rikuyu.contactlensreminder.data.local.alarm.notification.Notifi
 import io.github.rikuyu.contactlensreminder.data.local.alarm.tickdown.TickDownAlarmManager
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
 import io.github.rikuyu.contactlensreminder.data.util.ChangeAppIconService
+import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEvent
 import io.github.rikuyu.contactlensreminder.domain.model.ReminderValue
 import io.github.rikuyu.contactlensreminder.domain.model.LensSettingValue
 import io.mockk.every
@@ -31,6 +32,7 @@ class LocalDataSourceTest {
     private lateinit var changeAppIconService: ChangeAppIconService
     private lateinit var localDataSource: LocalDataSource
     private lateinit var sharedPreferencesManager: SharedPreferencesManager
+    private lateinit var firebaseLogEvent: FirebaseLogEvent
 
     private val expectedReminderValue = ReminderValue(
         lensPeriod = 22,
@@ -59,9 +61,10 @@ class LocalDataSourceTest {
     fun setup() {
         context = InstrumentationRegistry.getInstrumentation().context
         alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        shadowAlarmManager = Shadows.shadowOf(alarmManager)
-        tickDownAlarmManager = TickDownAlarmManager(context)
         sharedPreferencesManager = SharedPreferencesManager(context)
+        shadowAlarmManager = Shadows.shadowOf(alarmManager)
+        firebaseLogEvent = FirebaseLogEvent(sharedPreferencesManager)
+        tickDownAlarmManager = TickDownAlarmManager(context, firebaseLogEvent)
         notificationAlarmManager = NotificationAlarmManager(context, sharedPreferencesManager)
         changeAppIconService = ChangeAppIconService(context)
     }
@@ -171,7 +174,8 @@ class LocalDataSourceTest {
             tickDownAlarmManager = tickDownAlarmManager,
             sharedPreferencesManager = sharedPreferencesManager,
             notificationAlarmManager = notificationAlarmManager,
-            changeAppIconService = changeAppIconService
+            changeAppIconService = changeAppIconService,
+            firebaseLogEvent = firebaseLogEvent
         )
     }
 
