@@ -4,7 +4,6 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import io.github.rikuyu.contactlensreminder.data.util.ChangeAppIconService
 import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEvent
 import java.text.SimpleDateFormat
 import java.util.*
@@ -14,7 +13,6 @@ class TickDownAlarmManager @Inject constructor(
     private val context: Context,
     private val firebaseLogEvent: FirebaseLogEvent
 ) {
-    private val changeAppIconService: ChangeAppIconService = ChangeAppIconService(context)
     private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
     fun initAlarm() {
@@ -51,7 +49,6 @@ class TickDownAlarmManager @Inject constructor(
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
         alarmManager.cancel(pendingIntent)
-//        changeAppIconService.changeAppIcon(false, null)
         firebaseLogEvent.logEvent("cancel_tick_down_alarm_event")
     }
 
