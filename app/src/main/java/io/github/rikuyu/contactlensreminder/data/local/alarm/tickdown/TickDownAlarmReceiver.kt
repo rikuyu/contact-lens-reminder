@@ -3,11 +3,9 @@ package io.github.rikuyu.contactlensreminder.data.local.alarm.tickdown
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.google.firebase.analytics.ktx.analytics
-import com.google.firebase.analytics.ktx.logEvent
-import com.google.firebase.ktx.Firebase
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
 import io.github.rikuyu.contactlensreminder.data.util.ChangeAppIconService
+import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEvent
 
 class TickDownAlarmReceiver : BroadcastReceiver() {
 
@@ -15,7 +13,8 @@ class TickDownAlarmReceiver : BroadcastReceiver() {
         context?.let {
             val sharedPreferencesManager = SharedPreferencesManager(it)
             val changeAppIconService = ChangeAppIconService(it)
-            val tickDownAlarmManager = TickDownAlarmManager(it)
+            val firebaseLogEvent = FirebaseLogEvent(sharedPreferencesManager)
+            val tickDownAlarmManager = TickDownAlarmManager(it, firebaseLogEvent)
 
             val remainingDay = sharedPreferencesManager.getContactLensRemainingDays()
             val isUsingContactLens = sharedPreferencesManager.getIsUsingContactLens()
@@ -25,16 +24,9 @@ class TickDownAlarmReceiver : BroadcastReceiver() {
                 changeAppIconService.changeAppIcon(isUsingContactLens, after)
                 if (after > 0) {
                     tickDownAlarmManager.initAlarm()
-                    val uuid = sharedPreferencesManager.getUuid() ?: return
-
-                    val firebaseAnalytics = Firebase.analytics
-                    firebaseAnalytics.logEvent("receive_tick_down_alarm_event") { param(UUID, uuid) }
+                    firebaseLogEvent.logEvent("receive_tick_down_alarm_event")
                 }
             }
         }
-    }
-
-    companion object {
-        private const val UUID = "uuid"
     }
 }

@@ -1,7 +1,7 @@
 package io.github.rikuyu.contactlensreminder.domain.local
 
+import io.github.rikuyu.contactlensreminder.domain.model.LensSettingValue
 import io.github.rikuyu.contactlensreminder.domain.model.ReminderValue
-import io.github.rikuyu.contactlensreminder.domain.model.SettingValue
 
 interface DataSource {
 
@@ -13,7 +13,9 @@ interface DataSource {
 
     fun cancelReminder()
 
-    fun saveAllSetting(settingValue: SettingValue)
+    fun saveAllLensSetting(lensSettingValue: LensSettingValue)
 
-    fun getAllSetting(): SettingValue
+    fun getAllLensSetting(): LensSettingValue
+
+    fun logEvent(label: String)
 }

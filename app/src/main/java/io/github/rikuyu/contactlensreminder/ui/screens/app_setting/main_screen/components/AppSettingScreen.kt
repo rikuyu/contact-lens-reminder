@@ -17,9 +17,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import io.github.rikuyu.contactlensreminder.R
+import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingEvent
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingSection
+import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingViewModel
 import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
 import io.github.rikuyu.contactlensreminder.ui.theme.SkyBlue
 import io.github.rikuyu.contactlensreminder.ui.theme.SmoothGray
@@ -30,7 +33,8 @@ import io.github.rikuyu.contactlensreminder.ui.util.makeNotificationSettingInten
 
 @Composable
 fun AppSettingScreen(
-    navController: NavController
+    navController: NavController,
+    viewModel: AppSettingViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
 
@@ -44,7 +48,8 @@ fun AppSettingScreen(
         AppSettingSection(
             2,
             stringResource(id = R.string.help),
-            R.drawable.ic_help, Routes.HELP
+            R.drawable.ic_help,
+            Routes.HELP
         ),
         AppSettingSection(
             3,
@@ -101,8 +106,10 @@ fun AppSettingScreen(
                             .clickable {
                                 if (item.route != null) {
                                     navController.navigate(item.route)
+                                    viewModel.onEvent(AppSettingEvent.LogEvent(item.route))
                                 } else if (item.id == 3) {
                                     context.startActivity(makeNotificationSettingIntent(context))
+                                    viewModel.onEvent(AppSettingEvent.LogEvent("notification_setting"))
                                 }
                             }
                             .padding(all = 16.dp)

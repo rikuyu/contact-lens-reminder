@@ -4,9 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import javax.inject.Inject
 
-class SharedPreferencesManager @Inject constructor(
-    private val context: Context
-) {
+class SharedPreferencesManager @Inject constructor(private val context: Context) {
 
     // SharedPreferencesインスタンスの取得
     private fun getSharedPreferences(): SharedPreferences {
