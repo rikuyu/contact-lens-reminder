@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     android:description="@string/app_widget_progress_bar"
-    android:initialKeyguardLayout="@layout/widget_progress_bar"
-    android:initialLayout="@layout/widget_progress_bar"
+    android:initialKeyguardLayout="@layout/widget_progress_bar_type"
+    android:initialLayout="@layout/widget_progress_bar_type"
     android:minWidth="110dp"
     android:minHeight="110dp"
     android:minResizeWidth="110dp"

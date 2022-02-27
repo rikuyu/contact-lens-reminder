@@ -36,9 +36,9 @@ class LocalDataSource @Inject constructor(
             if (getIsUseNotification()) {
                 notificationAlarmManager.initAlarm()
             }
-            changeAppIconService.changeAppIcon(
-                true, getContactLensRemainingDays()
-            )
+//            changeAppIconService.changeAppIcon(
+//                true, getContactLensRemainingDays()
+//            )
             tickDownAlarmManager.initAlarm()
         }
     }

@@ -122,5 +122,6 @@
     <string name="text_remaining_day">残り%d日</string>
     <string name="text_preview_remaining_day">残り14日</string>
     <string name="text_preview_exchange_date">12/10 (水)</string>
+    <string name="no_image_description">no image</string>
 
 </resources>

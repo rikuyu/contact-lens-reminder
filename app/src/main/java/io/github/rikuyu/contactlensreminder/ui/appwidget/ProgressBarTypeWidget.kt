@@ -8,7 +8,7 @@ import android.widget.RemoteViews
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
 
-class ProgressBarWidget : AppWidgetProvider() {
+class ProgressBarTypeWidget : AppWidgetProvider() {
 
     override fun onUpdate(
         context: Context,
@@ -16,11 +16,11 @@ class ProgressBarWidget : AppWidgetProvider() {
         appWidgetIds: IntArray
     ) {
         for (appWidgetId in appWidgetIds) {
-            updateProgressBarWidget(context, appWidgetManager, appWidgetId)
+            updateProgressBarTypeWidget(context, appWidgetManager, appWidgetId)
         }
     }
 
-    private fun updateProgressBarWidget(
+    private fun updateProgressBarTypeWidget(
         context: Context,
         appWidgetManager: AppWidgetManager,
         appWidgetId: Int
@@ -32,7 +32,7 @@ class ProgressBarWidget : AppWidgetProvider() {
 
         val section = 100 / lensPeriod * remainingDay
 
-        val view = RemoteViews(context.packageName, R.layout.widget_progress_bar)
+        val view = RemoteViews(context.packageName, R.layout.widget_progress_bar_type)
         view.apply {
             setTextViewText(R.id.tv_exchange_date, exchangeDate)
             if (remainingDay > 0) {
