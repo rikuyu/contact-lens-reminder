@@ -1,12 +1,15 @@
 package io.github.rikuyu.contactlensreminder.ui.appwidget
 
+import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
+import android.content.Intent
 import android.widget.RemoteViews
 import androidx.annotation.DrawableRes
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
+import io.github.rikuyu.contactlensreminder.ui.MainActivity
 
 class ImageTypeWidget : AppWidgetProvider() {
 
@@ -27,9 +30,21 @@ class ImageTypeWidget : AppWidgetProvider() {
     ) {
         val sharedPreferencesManager = SharedPreferencesManager(context)
         val remainingDay = sharedPreferencesManager.getContactLensPeriod()
+        val pendingIntent: PendingIntent = Intent(context, MainActivity::class.java)
+            .let { intent ->
+                PendingIntent.getActivity(
+                    context,
+                    0,
+                    intent,
+                    PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+                )
+            }
 
         val view = RemoteViews(context.packageName, R.layout.widget_image_type)
-        view.setImageViewResource(R.id.widget_image, getRemainingDayDrawable(remainingDay))
+        view.apply {
+            setImageViewResource(R.id.widget_image, getRemainingDayDrawable(remainingDay))
+            setOnClickPendingIntent(R.id.widget_image_type, pendingIntent)
+        }
 
         appWidgetManager.updateAppWidget(appWidgetId, view)
     }
