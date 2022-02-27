@@ -119,6 +119,7 @@
 
     <!-- AppWidget -->
     <string name="app_widget_progress_bar">Progress Bar Type</string>
+    <string name="app_widget_image">Image Type</string>
     <string name="text_remaining_day">残り%d日</string>
     <string name="text_preview_remaining_day">残り14日</string>
     <string name="text_preview_exchange_date">12/10 (水)</string>

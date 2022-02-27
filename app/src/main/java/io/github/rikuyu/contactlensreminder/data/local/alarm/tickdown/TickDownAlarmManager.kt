@@ -51,7 +51,7 @@ class TickDownAlarmManager @Inject constructor(
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
         alarmManager.cancel(pendingIntent)
-        changeAppIconService.changeAppIcon(false, null)
+//        changeAppIconService.changeAppIcon(false, null)
         firebaseLogEvent.logEvent("cancel_tick_down_alarm_event")
     }
 
