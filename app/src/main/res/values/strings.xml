@@ -117,4 +117,10 @@
     <string name="content_8_3">3．前二項の変更は、公表の際に定める適用開始日から適用されるものとし、公表の日から適用開始日までは変更の内容に応じて相当の期間をおくものとします。</string>
     <string name="title_that_all">以上</string>
 
+    <!-- AppWidget -->
+    <string name="app_widget_progress_bar">Progress Bar Type</string>
+    <string name="text_remaining_day">残り%d日</string>
+    <string name="text_preview_remaining_day">残り14日</string>
+    <string name="text_preview_exchange_date">12/10 (水)</string>
+
 </resources>
