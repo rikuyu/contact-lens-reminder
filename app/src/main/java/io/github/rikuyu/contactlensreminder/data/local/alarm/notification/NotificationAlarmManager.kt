@@ -55,6 +55,6 @@ class NotificationAlarmManager @Inject constructor(
     }
 
     companion object {
-        private const val REQUEST_CODE = 1
+        private const val REQUEST_CODE = 8888
     }
 }

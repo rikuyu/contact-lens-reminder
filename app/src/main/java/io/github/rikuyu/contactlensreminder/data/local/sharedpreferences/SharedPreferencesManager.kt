@@ -4,9 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import javax.inject.Inject
 
-class SharedPreferencesManager @Inject constructor(
-    private val context: Context
-) {
+class SharedPreferencesManager @Inject constructor(private val context: Context) {
 
     // SharedPreferencesインスタンスの取得
     private fun getSharedPreferences(): SharedPreferences {
@@ -175,5 +173,31 @@ class SharedPreferencesManager @Inject constructor(
     fun saveLensExchangeDay(exchangeDay: String) {
         getSharedPreferences().edit()
             .putString(SharedPreferencesKey.STORED_CONTACT_LENS_EXCHANGE_DAY, exchangeDay).apply()
+    }
+
+    // UUID
+    fun getUuid(): String? {
+        return getSharedPreferences().getString(
+            SharedPreferencesKey.STORED_UUID,
+            null
+        )
+    }
+
+    fun saveUuid(exchangeDay: String) {
+        getSharedPreferences().edit()
+            .putString(SharedPreferencesKey.STORED_UUID, exchangeDay).apply()
+    }
+
+    // 初めてリマインダーを使用するかどうか
+    fun getIsFirstUse(): Boolean {
+        return getSharedPreferences().getBoolean(
+            SharedPreferencesKey.STORED_IS_FIRST_USE,
+            true
+        )
+    }
+
+    fun saveIsFirstUse() {
+        getSharedPreferences().edit()
+            .putBoolean(SharedPreferencesKey.STORED_IS_FIRST_USE, false).apply()
     }
 }

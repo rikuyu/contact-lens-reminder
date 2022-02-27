@@ -18,8 +18,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.SettingEvent
-import io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.SettingViewModel
+import io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.LensSettingEvent
+import io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.LensSettingViewModel
 import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
 import io.github.rikuyu.contactlensreminder.ui.theme.SmoothGray
 import io.github.rikuyu.contactlensreminder.ui.util.Routes
@@ -30,11 +30,11 @@ import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
 @Composable
 fun LensSettingScreen(
     navController: NavController,
-    viewModel: SettingViewModel = hiltViewModel()
+    viewModelLens: LensSettingViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
 
-    val settingValue = viewModel.setting.value
+    val settingValue = viewModelLens.lensSetting.value
 
     var lensType by remember { mutableStateOf(settingValue.lensType) }
 
@@ -60,7 +60,7 @@ fun LensSettingScreen(
         when (index) {
             0 -> lensPeriod = 14
             1 -> lensPeriod = 31
-            2 -> lensPeriod = 10
+            2 -> {}
         }
     }
 
@@ -105,8 +105,8 @@ fun LensSettingScreen(
                     ) {
                         setLensPeriod(it)
                         lensType = it
-                        viewModel.onEvent(SettingEvent.LensType(it))
-                        viewModel.onEvent(SettingEvent.LensPeriod(lensPeriod))
+                        viewModelLens.onEvent(LensSettingEvent.LensType(it))
+                        viewModelLens.onEvent(LensSettingEvent.LensPeriod(lensPeriod))
                         isShowLensPeriodPicker = lensType == 2
                     }
                     AnimatedVisibility(visible = !isShowLensPeriodPicker) { SimpleDivider() }
@@ -116,7 +116,7 @@ fun LensSettingScreen(
                             period = lensPeriod,
                             setLensPeriod = {
                                 lensPeriod = it
-                                viewModel.onEvent(SettingEvent.LensPeriod(it))
+                                viewModelLens.onEvent(LensSettingEvent.LensPeriod(it))
                             }
                         )
                     }
@@ -128,7 +128,7 @@ fun LensSettingScreen(
                         flag = isUseNotification
                     ) {
                         isUseNotification = !isUseNotification
-                        viewModel.onEvent(SettingEvent.IsUseNotification(isUseNotification))
+                        viewModelLens.onEvent(LensSettingEvent.IsUseNotification(isUseNotification))
                     }
                     SimpleDivider()
                     AnimatedVisibility(visible = isUseNotification) {
@@ -138,19 +138,19 @@ fun LensSettingScreen(
                                 notificationType = notificationType
                             ) {
                                 notificationType = it
-                                viewModel.onEvent(SettingEvent.NotificationDay(it))
+                                viewModelLens.onEvent(LensSettingEvent.NotificationDay(it))
                             }
                             SetNotificationTimeSection(
                                 modifier = Modifier.fillMaxWidth(),
                                 notificationTimeHour = notificationTimeHour,
                                 setNotificationTimeHour = {
                                     notificationTimeHour = it
-                                    viewModel.onEvent(SettingEvent.NotificationTimeHour(it))
+                                    viewModelLens.onEvent(LensSettingEvent.NotificationTimeHour(it))
                                 },
                                 notificationTimeMinute = notificationTimeMinute,
                                 setNotificationTimeMinute = {
                                     notificationTimeMinute = it
-                                    viewModel.onEvent(SettingEvent.NotificationTimeMinute(it))
+                                    viewModelLens.onEvent(LensSettingEvent.NotificationTimeMinute(it))
                                 }
                             )
                         }
@@ -163,8 +163,8 @@ fun LensSettingScreen(
                         flag = isShowLensPowerSection
                     ) {
                         isShowLensPowerSection = !isShowLensPowerSection
-                        viewModel.onEvent(
-                            SettingEvent.IsShowLensPowerSection(isShowLensPowerSection)
+                        viewModelLens.onEvent(
+                            LensSettingEvent.IsShowLensPowerSection(isShowLensPowerSection)
                         )
                     }
                     SimpleDivider()
@@ -174,12 +174,12 @@ fun LensSettingScreen(
                             leftLensPower = leftLensPower.toDouble(),
                             setLeftLensPower = {
                                 leftLensPower = it.toString()
-                                viewModel.onEvent(SettingEvent.LeftPower(it.toString()))
+                                viewModelLens.onEvent(LensSettingEvent.LeftPower(it.toString()))
                             },
                             rightLensPower = rightLensPower.toDouble(),
                             setRightLensPower = {
                                 rightLensPower = it.toString()
-                                viewModel.onEvent(SettingEvent.RightPower(it.toString()))
+                                viewModelLens.onEvent(LensSettingEvent.RightPower(it.toString()))
                             }
                         )
                     }
@@ -191,7 +191,7 @@ fun LensSettingScreen(
                         context.getString(R.string.success_save_setting),
                         Toast.LENGTH_SHORT
                     ).show()
-                    viewModel.onEvent(SettingEvent.SaveSetting)
+                    viewModelLens.onEvent(LensSettingEvent.SaveLensSetting)
                     navController.navigate(Routes.TOP)
                 }
             }

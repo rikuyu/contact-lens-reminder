@@ -2,8 +2,8 @@ package io.github.rikuyu.contactlensreminder.data.repository
 
 import com.google.common.truth.Truth.assertThat
 import io.github.rikuyu.contactlensreminder.domain.local.DataSource
-import io.github.rikuyu.contactlensreminder.domain.model.SettingValue
-import io.github.rikuyu.contactlensreminder.domain.repository.SettingRepository
+import io.github.rikuyu.contactlensreminder.domain.model.LensSettingValue
+import io.github.rikuyu.contactlensreminder.domain.repository.LensSettingRepository
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
@@ -11,16 +11,16 @@ import io.mockk.verify
 import org.junit.Before
 import org.junit.Test
 
-class SettingRepositoryTest {
+class LensSettingRepositoryTest {
 
-    lateinit var settingRepository: SettingRepository
+    lateinit var lensSettingRepository: LensSettingRepository
 
     @MockK
     lateinit var localDataSource: DataSource
 
-    private var settingValue: SettingValue? = null
+    private var lensSettingValue: LensSettingValue? = null
 
-    private val expectedSettingValue = SettingValue(
+    private val expectedSettingValue = LensSettingValue(
         lensType = 2,
         lensPeriod = 31,
         isUseNotification = true,
@@ -35,12 +35,12 @@ class SettingRepositoryTest {
     @Before
     fun setup() {
         MockKAnnotations.init(this)
-        settingRepository = SettingRepositoryImpl(localDataSource)
+        lensSettingRepository = LensSettingRepositoryImpl(localDataSource)
     }
 
     @Test
     fun `getAllSetting test`() {
-        val dummySetting = SettingValue(
+        val dummySetting = LensSettingValue(
             lensType = 2,
             lensPeriod = 31,
             isUseNotification = true,
@@ -51,19 +51,19 @@ class SettingRepositoryTest {
             leftLensPower = "-4.75",
             rightLensPower = "-5.00"
         )
-        every { localDataSource.getAllSetting() } returns dummySetting
-        assertThat(settingValue).isNull()
-        settingValue = settingRepository.getAllSetting()
-        assertThat(settingValue).isEqualTo(expectedSettingValue)
+        every { localDataSource.getAllLensSetting() } returns dummySetting
+        assertThat(lensSettingValue).isNull()
+        lensSettingValue = lensSettingRepository.getAllLensSetting()
+        assertThat(lensSettingValue).isEqualTo(expectedSettingValue)
     }
 
     @Test
     fun `saveAllSetting test`() {
-        every { localDataSource.saveAllSetting(any()) } returns Unit
-        settingRepository.saveAllSetting(expectedSettingValue)
+        every { localDataSource.saveAllLensSetting(any()) } returns Unit
+        lensSettingRepository.saveAllLensSetting(expectedSettingValue)
         verify(exactly = 1) {
-            localDataSource.saveAllSetting(any())
-            settingRepository.saveAllSetting(any())
+            localDataSource.saveAllLensSetting(any())
+            lensSettingRepository.saveAllLensSetting(any())
         }
     }
 }
