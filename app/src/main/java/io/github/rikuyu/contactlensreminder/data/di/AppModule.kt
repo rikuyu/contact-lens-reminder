@@ -48,9 +48,8 @@ abstract class AppModule {
         @Provides
         @Singleton
         fun provideNotificationAlarmManager(
-            @ApplicationContext context: Context,
-            sharedPreferencesManager: SharedPreferencesManager
-        ): NotificationAlarmManager = NotificationAlarmManager(context, sharedPreferencesManager)
+            @ApplicationContext context: Context
+        ): NotificationAlarmManager = NotificationAlarmManager(context)
 
         @Provides
         @Singleton

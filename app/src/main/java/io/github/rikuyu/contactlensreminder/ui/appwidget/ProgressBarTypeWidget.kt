@@ -13,11 +13,9 @@ import android.view.View
 import android.widget.RemoteViews
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
-import io.github.rikuyu.contactlensreminder.data.util.createIntent
+import io.github.rikuyu.contactlensreminder.data.util.createBroadcastPendingIntent
+import io.github.rikuyu.contactlensreminder.data.util.getDateChangeTime
 import io.github.rikuyu.contactlensreminder.ui.MainActivity
-import java.text.SimpleDateFormat
-import java.util.*
-
 
 class ProgressBarTypeWidget : AppWidgetProvider() {
 
@@ -40,9 +38,9 @@ class ProgressBarTypeWidget : AppWidgetProvider() {
 
     override fun onDisabled(context: Context) {
         super.onDisabled(context)
-        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(INTENT_CODE)
-        alarmManager.cancel(createIntent(context, intent, PROGRESS_BAR_WIDGET_CODE))
+//        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+//        val intent = Intent(ACTION_CODE)
+//        alarmManager.cancel(createPendingIntent(context, intent, REQUEST_CODE))
         Log.d("AAAAAAAAAA", "disable")
     }
 
@@ -51,7 +49,7 @@ class ProgressBarTypeWidget : AppWidgetProvider() {
 
         val action = intent?.action ?: return
         Log.d("AAAAAAAAAA", "action $action")
-        if (action == INTENT_CODE) {
+        if (action == ACTION_CODE) {
             Log.d("AAAAAAAAAA", "rece if $action")
             val thisAppWidget = ComponentName(context.packageName, javaClass.name)
             val appWidgetManager = AppWidgetManager.getInstance(context)
@@ -72,16 +70,12 @@ class ProgressBarTypeWidget : AppWidgetProvider() {
         val lensPeriod = sharedPreferencesManager.getContactLensPeriod()
         val exchangeDate = sharedPreferencesManager.getLensExchangeDay() ?: "null"
         val isUsingContactLens = sharedPreferencesManager.getIsUsingContactLens()
-        val pendingIntent: PendingIntent = Intent(context, MainActivity::class.java)
-            .let { intent ->
-                PendingIntent.getActivity(
-                    context,
-                    0,
-                    intent,
-                    PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-                )
-            }
-
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(
+            context,
+            REQUEST_CODE_ACTIVITY,
+            Intent(context, MainActivity::class.java),
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
         val section = 100 / lensPeriod * remainingDay
 
         val view = RemoteViews(context.packageName, R.layout.widget_progress_bar_type)
@@ -106,28 +100,22 @@ class ProgressBarTypeWidget : AppWidgetProvider() {
         Log.d("AAAAAAAAAA", "updateProgressBarTypeWidget")
 
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(context, ProgressBarTypeWidget::class.java)
-        intent.action = INTENT_CODE
-        val pi = PendingIntent.getBroadcast(context, PROGRESS_BAR_WIDGET_CODE, intent, PendingIntent.FLAG_IMMUTABLE)
-        val calendar = Calendar.getInstance()
-        val simpleDateFormat = SimpleDateFormat("HH/mm/ss", Locale.ENGLISH)
-        val (hour, min, sec) = simpleDateFormat.format(calendar.time).split("/").map(String::toInt)
-        calendar.apply {
-            timeInMillis = System.currentTimeMillis()
-            add(Calendar.HOUR, 24 - hour)
-            add(Calendar.MINUTE, -min)
-            add(Calendar.SECOND, -sec + 5)
-        }
         alarmManager.setExact(
             AlarmManager.RTC,
-            calendar.timeInMillis,
-            pi
+            getDateChangeTime(ds = 3),
+            createBroadcastPendingIntent(
+                context,
+                ProgressBarTypeWidget::class.java,
+                REQUEST_CODE_BROADCAST,
+                ACTION_CODE
+            )
         )
         appWidgetManager.updateAppWidget(appWidgetId, view)
     }
 
     companion object {
-        private const val INTENT_CODE = "PROGRESS_BAR_TYPE_WIDGET_TICK_DOWN"
-        private const val PROGRESS_BAR_WIDGET_CODE = 777778
+        const val ACTION_CODE = "PROGRESS_BAR_TYPE_WIDGET_TICK_DOWN"
+        private const val REQUEST_CODE_BROADCAST = 777778
+        private const val REQUEST_CODE_ACTIVITY = 666666
     }
 }
