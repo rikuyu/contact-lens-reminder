@@ -54,7 +54,7 @@ class ProgressBarTypeWidget : AppWidgetProvider() {
         }
     }
 
-    private fun updateProgressBarTypeWidget(
+    fun updateProgressBarTypeWidget(
         context: Context,
         appWidgetManager: AppWidgetManager,
         appWidgetId: Int
@@ -112,7 +112,7 @@ class ProgressBarTypeWidget : AppWidgetProvider() {
         )
     }
 
-    private fun cancelUpdateAppWidget(context: Context) {
+    fun cancelUpdateAppWidget(context: Context) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarmManager.cancel(
             createBroadcastPendingIntent(

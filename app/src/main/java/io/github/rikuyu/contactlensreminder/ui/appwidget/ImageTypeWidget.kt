@@ -53,7 +53,7 @@ class ImageTypeWidget : AppWidgetProvider() {
         }
     }
 
-    private fun updateImageTypeWidget(
+    fun updateImageTypeWidget(
         context: Context,
         appWidgetManager: AppWidgetManager,
         appWidgetId: Int
@@ -90,7 +90,7 @@ class ImageTypeWidget : AppWidgetProvider() {
         )
     }
 
-    private fun cancelUpdateAppWidget(context: Context) {
+    fun cancelUpdateAppWidget(context: Context) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarmManager.cancel(
             createBroadcastPendingIntent(
