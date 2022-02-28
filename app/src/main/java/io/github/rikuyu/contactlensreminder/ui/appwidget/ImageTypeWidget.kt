@@ -5,6 +5,7 @@ import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.widget.RemoteViews
 import androidx.annotation.DrawableRes
 import io.github.rikuyu.contactlensreminder.R
@@ -45,7 +46,7 @@ class ImageTypeWidget : AppWidgetProvider() {
             setImageViewResource(R.id.widget_image, getRemainingDayDrawable(remainingDay))
             setOnClickPendingIntent(R.id.widget_image_type, pendingIntent)
         }
-
+        Log.d("AAAAAAAAAA", "image update")
         appWidgetManager.updateAppWidget(appWidgetId, view)
     }
 

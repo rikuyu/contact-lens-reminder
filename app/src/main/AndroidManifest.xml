@@ -42,6 +42,7 @@
             android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="PROGRESS_BAR_TYPE_WIDGET_TICK_DOWN" />
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"

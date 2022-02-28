@@ -13,7 +13,6 @@ class TickDownAlarmReceiver : BroadcastReceiver() {
             val sharedPreferencesManager = SharedPreferencesManager(it)
             val firebaseLogEvent = FirebaseLogEvent(sharedPreferencesManager)
             val tickDownAlarmManager = TickDownAlarmManager(it, firebaseLogEvent)
-
             val remainingDay = sharedPreferencesManager.getContactLensRemainingDays()
             if (remainingDay > 0) {
                 val after = remainingDay - 1

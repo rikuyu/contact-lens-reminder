@@ -1,12 +1,15 @@
 package io.github.rikuyu.contactlensreminder.data.local.alarm.tickdown
 
 import android.app.AlarmManager
-import android.app.PendingIntent
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEvent
-import java.text.SimpleDateFormat
-import java.util.*
+import io.github.rikuyu.contactlensreminder.data.util.createIntent
+import io.github.rikuyu.contactlensreminder.data.util.getDateChangeTime
+import io.github.rikuyu.contactlensreminder.ui.appwidget.ProgressBarTypeWidget
 import javax.inject.Inject
 
 class TickDownAlarmManager @Inject constructor(
@@ -17,42 +20,21 @@ class TickDownAlarmManager @Inject constructor(
 
     fun initAlarm() {
         val intent = Intent(context, TickDownAlarmReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(
-            context,
-            REQUEST_CODE,
-            intent,
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-        )
-        val calendar = Calendar.getInstance()
-        val simpleDateFormat = SimpleDateFormat("HH/mm/ss", Locale.ENGLISH)
-        val (hour, min, sec) = simpleDateFormat.format(calendar.time).split("/").map(String::toInt)
-        calendar.apply {
-            timeInMillis = System.currentTimeMillis()
-            add(Calendar.HOUR, 24 - hour)
-            add(Calendar.MINUTE, -min)
-            add(Calendar.SECOND, -sec)
-        }
         alarmManager.setExact(
             AlarmManager.RTC,
-            calendar.timeInMillis,
-            pendingIntent
+            getDateChangeTime(),
+            createIntent(context, intent, SHARED_PREFERENCE_DATA_CODE)
         )
         firebaseLogEvent.logInitTickDownEvent()
     }
 
     fun cancelAlarm() {
         val intent = Intent(context, TickDownAlarmReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(
-            context,
-            REQUEST_CODE,
-            intent,
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-        )
-        alarmManager.cancel(pendingIntent)
+        alarmManager.cancel(createIntent(context, intent, SHARED_PREFERENCE_DATA_CODE))
         firebaseLogEvent.logEvent("cancel_tick_down_alarm_event")
     }
 
     companion object {
-        private const val REQUEST_CODE = 7777
+        private const val SHARED_PREFERENCE_DATA_CODE = 777777
     }
 }
