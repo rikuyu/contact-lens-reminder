@@ -1,15 +1,19 @@
 package io.github.rikuyu.contactlensreminder.ui.appwidget
 
+import android.app.AlarmManager
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.util.Log
+import android.content.IntentFilter
 import android.widget.RemoteViews
 import androidx.annotation.DrawableRes
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
+import io.github.rikuyu.contactlensreminder.data.util.createBroadcastPendingIntent
+import io.github.rikuyu.contactlensreminder.data.util.getDateChangeTime
 import io.github.rikuyu.contactlensreminder.ui.MainActivity
 
 class ImageTypeWidget : AppWidgetProvider() {
@@ -19,8 +23,33 @@ class ImageTypeWidget : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray
     ) {
-        for (appWidgetId in appWidgetIds) {
-            updateImageTypeWidget(context, appWidgetManager, appWidgetId)
+        context.applicationContext.registerReceiver(this, IntentFilter(Intent.ACTION_USER_PRESENT))
+
+        for (id in appWidgetIds) {
+            updateImageTypeWidget(context, appWidgetManager, id)
+        }
+    }
+
+    override fun onEnabled(context: Context) {
+        super.onEnabled(context)
+    }
+
+    override fun onDisabled(context: Context) {
+        super.onDisabled(context)
+        cancelUpdateAppWidget(context)
+    }
+
+    override fun onReceive(context: Context, intent: Intent?) {
+        super.onReceive(context, intent)
+
+        val action = intent?.action ?: return
+        if (action == ACTION_CODE) {
+            val appWidget = ComponentName(context.packageName, javaClass.name)
+            val appWidgetManager = AppWidgetManager.getInstance(context)
+            val appWidgetIds = appWidgetManager.getAppWidgetIds(appWidget)
+            for (id in appWidgetIds) {
+                updateImageTypeWidget(context, appWidgetManager, id)
+            }
         }
     }
 
@@ -30,24 +59,47 @@ class ImageTypeWidget : AppWidgetProvider() {
         appWidgetId: Int
     ) {
         val sharedPreferencesManager = SharedPreferencesManager(context)
-        val remainingDay = sharedPreferencesManager.getContactLensPeriod()
-        val pendingIntent: PendingIntent = Intent(context, MainActivity::class.java)
-            .let { intent ->
-                PendingIntent.getActivity(
-                    context,
-                    0,
-                    intent,
-                    PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-                )
-            }
+        val remainingDay = sharedPreferencesManager.getContactLensRemainingDays()
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(
+            context,
+            REQUEST_CODE_ACTIVITY,
+            Intent(context, MainActivity::class.java),
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
 
         val view = RemoteViews(context.packageName, R.layout.widget_image_type)
         view.apply {
             setImageViewResource(R.id.widget_image, getRemainingDayDrawable(remainingDay))
             setOnClickPendingIntent(R.id.widget_image_type, pendingIntent)
         }
-        Log.d("AAAAAAAAAA", "image update")
+        reserveUpdateAppWidget(context)
         appWidgetManager.updateAppWidget(appWidgetId, view)
+    }
+
+    private fun reserveUpdateAppWidget(context: Context) {
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmManager.setExact(
+            AlarmManager.RTC,
+            getDateChangeTime(ds = 3),
+            createBroadcastPendingIntent(
+                context,
+                ImageTypeWidget::class.java,
+                REQUEST_CODE_BROADCAST,
+                ACTION_CODE
+            )
+        )
+    }
+
+    private fun cancelUpdateAppWidget(context: Context) {
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmManager.cancel(
+            createBroadcastPendingIntent(
+                context,
+                ImageTypeWidget::class.java,
+                REQUEST_CODE_BROADCAST,
+                ACTION_CODE
+            )
+        )
     }
 
     private fun getRemainingDayDrawable(remainingDay: Int): Int {
@@ -88,5 +140,11 @@ class ImageTypeWidget : AppWidgetProvider() {
             else -> R.drawable.icon_default
         }
         return widgetImageResId
+    }
+
+    companion object {
+        const val ACTION_CODE = "IMAGE_TYPE_WIDGET_UPDATE"
+        private const val REQUEST_CODE_BROADCAST = 888889
+        private const val REQUEST_CODE_ACTIVITY = 888888
     }
 }

@@ -4,7 +4,6 @@ import android.app.AlarmManager
 import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry
 import com.google.common.truth.Truth.assertThat
-import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -19,15 +18,13 @@ class NotificationAlarmManagerTest {
     private lateinit var alarmManager: AlarmManager
     private lateinit var shadowAlarmManager: ShadowAlarmManager
     private lateinit var notificationAlarmManager: NotificationAlarmManager
-    private lateinit var sharedPreferencesManager: SharedPreferencesManager
 
     @Before
     fun setup() {
         context = InstrumentationRegistry.getInstrumentation().context
         alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         shadowAlarmManager = shadowOf(alarmManager)
-        sharedPreferencesManager = SharedPreferencesManager(context)
-        notificationAlarmManager = NotificationAlarmManager(context, sharedPreferencesManager)
+        notificationAlarmManager = NotificationAlarmManager(context)
     }
 
     @Test

@@ -42,7 +42,6 @@
             android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name=".ui.appwidget.ProgressBarTypeWidget.INTENT_CODE" />
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"

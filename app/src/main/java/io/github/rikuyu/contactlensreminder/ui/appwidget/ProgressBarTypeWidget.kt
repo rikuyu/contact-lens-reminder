@@ -26,8 +26,8 @@ class ProgressBarTypeWidget : AppWidgetProvider() {
     ) {
         context.applicationContext.registerReceiver(this, IntentFilter(Intent.ACTION_USER_PRESENT))
 
-        for (appWidgetId in appWidgetIds) {
-            updateProgressBarTypeWidget(context, appWidgetManager, appWidgetId)
+        for (id in appWidgetIds) {
+            updateProgressBarTypeWidget(context, appWidgetManager, id)
         }
     }
 
@@ -45,11 +45,11 @@ class ProgressBarTypeWidget : AppWidgetProvider() {
 
         val action = intent?.action ?: return
         if (action == ACTION_CODE) {
-            val thisAppWidget = ComponentName(context.packageName, javaClass.name)
+            val appWidget = ComponentName(context.packageName, javaClass.name)
             val appWidgetManager = AppWidgetManager.getInstance(context)
-            val ids = appWidgetManager.getAppWidgetIds(thisAppWidget)
-            for (appWidgetID in ids) {
-                updateProgressBarTypeWidget(context, appWidgetManager, appWidgetID)
+            val appWidgetIds = appWidgetManager.getAppWidgetIds(appWidget)
+            for (id in appWidgetIds) {
+                updateProgressBarTypeWidget(context, appWidgetManager, id)
             }
         }
     }
