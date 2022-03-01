@@ -6,9 +6,13 @@ import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.android.play.core.ktx.isImmediateUpdateAllowed
+import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEvent
+import javax.inject.Inject
 
-class AppUpdateService(context: Context) {
-
+class AppUpdateService @Inject constructor(
+    context: Context,
+    private val firebaseLogEvent: FirebaseLogEvent
+) {
     private val appUpdateManager = AppUpdateManagerFactory.create(context)
 
     fun executeAppUpdate(activity: Activity) {
@@ -16,12 +20,16 @@ class AppUpdateService(context: Context) {
             if (info.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE &&
                 info.isImmediateUpdateAllowed
             ) {
-                appUpdateManager.startUpdateFlowForResult(
-                    info,
-                    AppUpdateType.IMMEDIATE,
-                    activity,
-                    REQUEST_UPDATE_CODE
-                )
+                try {
+                    appUpdateManager.startUpdateFlowForResult(
+                        info,
+                        AppUpdateType.IMMEDIATE,
+                        activity,
+                        REQUEST_UPDATE_CODE
+                    )
+                } catch (e: Exception) {
+                    firebaseLogEvent.logEvent(e.toString())
+                }
             }
         }
     }

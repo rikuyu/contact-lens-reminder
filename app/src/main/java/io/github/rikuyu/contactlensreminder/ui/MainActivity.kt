@@ -19,13 +19,18 @@ import io.github.rikuyu.contactlensreminder.ui.screens.top.components.TopScreen
 import io.github.rikuyu.contactlensreminder.ui.theme.ContactLensReminderTheme
 import io.github.rikuyu.contactlensreminder.ui.util.AppUpdateService
 import io.github.rikuyu.contactlensreminder.ui.util.Routes
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var appUpdateService: AppUpdateService
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        AppUpdateService(this).executeAppUpdate(this)
+        appUpdateService.executeAppUpdate(this)
 
         setContent {
             ContactLensReminderTheme {
@@ -65,7 +70,7 @@ class MainActivity : ComponentActivity() {
                 .setTitle(R.string.update_dialog_title)
                 .setMessage(R.string.update_dialog_message)
                 .setPositiveButton(R.string.update_dialog_positive_button_label) { _, _ ->
-                    AppUpdateService(this).executeAppUpdate(this)
+                    appUpdateService.executeAppUpdate(this)
                 }
                 .setCancelable(false)
                 .create()
