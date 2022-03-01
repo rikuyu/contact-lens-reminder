@@ -110,6 +110,9 @@ dependencies {
     implementation firebaseDependencies.firebaseAnalyticsKtx
     implementation firebaseDependencies.firebaseCrashlyticsKtx
 
+    implementation playCoreDependencies.playCore
+    implementation playCoreDependencies.playCoreKtx
+
     ktlint("com.pinterest:ktlint:0.42.1")
 }
 
