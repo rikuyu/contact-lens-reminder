@@ -20,6 +20,7 @@ import io.github.rikuyu.contactlensreminder.domain.local.DataSource
 import io.github.rikuyu.contactlensreminder.domain.repository.AppSettingRepository
 import io.github.rikuyu.contactlensreminder.domain.repository.LensSettingRepository
 import io.github.rikuyu.contactlensreminder.domain.repository.ReminderRepository
+import io.github.rikuyu.contactlensreminder.ui.util.AppUpdateService
 import javax.inject.Singleton
 
 @Module
@@ -77,5 +78,12 @@ abstract class AppModule {
         fun provideFirebaseLogEvent(
             sharedPreferencesManager: SharedPreferencesManager
         ): FirebaseLogEvent = FirebaseLogEvent(sharedPreferencesManager)
+
+        @Provides
+        @Singleton
+        fun provideAppUpdateService(
+            @ApplicationContext context: Context,
+            firebaseLogEvent: FirebaseLogEvent
+        ): AppUpdateService = AppUpdateService(context, firebaseLogEvent)
     }
 }
