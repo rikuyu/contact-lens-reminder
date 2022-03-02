@@ -2,21 +2,30 @@ package io.github.rikuyu.contactlensreminder.ui.screens.app_setting.main_screen.
 
 import android.content.Context
 import android.content.pm.PackageManager
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.ClipboardManager
+import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import io.github.rikuyu.contactlensreminder.R
@@ -37,6 +46,8 @@ fun AppSettingScreen(
     viewModel: AppSettingViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
+    val version = getVersionName(context, viewModel)
+    val clipboardManager: ClipboardManager = LocalClipboardManager.current
 
     val sectionList = listOf(
         AppSettingSection(
@@ -63,12 +74,6 @@ fun AppSettingScreen(
             R.drawable.ic_inquiry,
             Routes.INQUIRY
         ),
-        AppSettingSection(
-            5,
-            stringResource(id = R.string.version, getVersionName(context)),
-            R.drawable.ic_version,
-            null
-        )
     )
 
     Scaffold(
@@ -87,57 +92,77 @@ fun AppSettingScreen(
             )
         }
     ) {
-        LazyColumn(
+        Box(
             modifier = Modifier
                 .fillMaxSize()
                 .background(SmoothGray)
         ) {
-            item { SimpleSpacer(height = 20.dp, color = SmoothGray) }
-            item { SimpleDivider() }
-            items(sectionList) { item ->
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(Color.White)
-                ) {
-                    Box(
+            LazyColumn(modifier = Modifier.align(Alignment.TopCenter)) {
+                item { SimpleSpacer(height = 20.dp, color = SmoothGray) }
+                item { SimpleDivider() }
+                items(sectionList) { item ->
+                    Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .clickable {
-                                if (item.route != null) {
-                                    navController.navigate(item.route)
-                                    viewModel.onEvent(AppSettingEvent.LogEvent(item.route))
-                                } else if (item.id == 3) {
-                                    context.startActivity(makeNotificationSettingIntent(context))
-                                    viewModel.onEvent(AppSettingEvent.LogEvent("notification_setting"))
-                                }
-                            }
-                            .padding(all = 16.dp)
+                            .background(Color.White)
                     ) {
-                        Text(text = item.title, color = Color.Black)
-                        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                            Icon(
-                                painter = painterResource(id = item.icon),
-                                tint = SkyBlue,
-                                contentDescription = null
-                            )
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable {
+                                    if (item.route != null) {
+                                        navController.navigate(item.route)
+                                        viewModel.onEvent(AppSettingEvent.LogEvent(item.route))
+                                    } else if (item.id == 3) {
+                                        context.startActivity(makeNotificationSettingIntent(context))
+                                        viewModel.onEvent(AppSettingEvent.LogEvent("notification_setting"))
+                                    }
+                                }
+                                .padding(all = 16.dp)
+                        ) {
+                            Text(text = item.title, color = Color.Black)
+                            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                                Icon(
+                                    painter = painterResource(id = item.icon),
+                                    tint = SkyBlue,
+                                    contentDescription = null
+                                )
+                            }
                         }
+                        SimpleDivider()
                     }
-                    SimpleDivider()
                 }
             }
+            Text(
+                text = stringResource(id = R.string.version, version),
+                color = Color.Gray,
+                fontSize = 18.sp,
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = 20.dp)
+                    .clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = rememberRipple(color = CleanBlue, bounded = false, radius = 50.dp)
+                    ) {
+                        clipboardManager.setText(AnnotatedString(version))
+                        Toast
+                            .makeText(context, "$version copied", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                    .padding(vertical = 8.dp, horizontal = 10.dp)
+            )
         }
     }
 }
 
-fun getVersionName(context: Context): String {
+fun getVersionName(context: Context, viewModel: AppSettingViewModel): String {
     val pm = context.packageManager
     var versionName = ""
     try {
         val packageInfo = pm.getPackageInfo(context.packageName, 0)
         versionName = packageInfo.versionName
     } catch (e: PackageManager.NameNotFoundException) {
-        e.printStackTrace()
+        viewModel.onEvent(AppSettingEvent.LogEvent("$e"))
     }
     return versionName
 }
