@@ -46,7 +46,7 @@
     <string name="help">ヘルプ（使い方）</string>
     <string name="notification_setting">通知設定</string>
     <string name="inquiry">お問い合わせ</string>
-    <string name="version">バージョン %s</string>
+    <string name="version">version %s</string>
 
     <!-- Notification -->
     <string name="notification_title">レンズ交換の日です！</string>
