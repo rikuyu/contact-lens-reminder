@@ -15,7 +15,8 @@
     <string name="time_message">通知時刻</string>
     <string name="start">スタート</string>
     <string name="lens_change">レンズの交換</string>
-    <string name="lens_setting">レンズの設定</string>
+    <string name="lens_setting_label">レンズの設定</string>
+    <string name="notification_setting_label">通知の設定</string>
     <string name="new_line">\n\n</string>
     <string name="time_div">:</string>
     <string name="confirm_reminder_message">リマインダーがリセットされました</string>
@@ -39,6 +40,11 @@
     <string name="one_month">1Month</string>
     <string name="other">Other</string>
     <string name="success_save_setting">設定が保存されました</string>
+
+    <!-- NotificationSettingScreen -->
+    <string name="notification_setting_screen_title">通知設定</string>
+    <string name="asterisk">※</string>
+    <string name="notification_setting_caution">その他の設定はレンズ使用中は変更できません</string>
 
     <!-- AppSettingScreen -->
     <string name="app_setting_screen_title">このアプリについて</string>

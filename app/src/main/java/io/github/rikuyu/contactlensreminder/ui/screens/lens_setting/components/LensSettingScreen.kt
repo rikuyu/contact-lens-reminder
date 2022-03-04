@@ -74,7 +74,7 @@ fun LensSettingScreen(
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = { navController.navigate(Routes.TOP) }) {
+                    IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = null,
@@ -184,7 +184,7 @@ fun LensSettingScreen(
                         )
                     }
                 }
-                SetSettingButton(modifier = Modifier.fillMaxWidth()) {
+                SaveSettingButton(modifier = Modifier.fillMaxWidth()) {
                     isShowLensPeriodPicker = false
                     Toast.makeText(
                         context,

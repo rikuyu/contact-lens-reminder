@@ -15,6 +15,7 @@ import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.instruction_s
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.main_screen.components.AppSettingScreen
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.terms_of_service_screen.component.TermsOfServiceScreen
 import io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.components.LensSettingScreen
+import io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.notification_setting.NotificationSettingScreen
 import io.github.rikuyu.contactlensreminder.ui.screens.top.components.TopScreen
 import io.github.rikuyu.contactlensreminder.ui.theme.ContactLensReminderTheme
 import io.github.rikuyu.contactlensreminder.ui.util.AppUpdateService
@@ -44,6 +45,9 @@ class MainActivity : ComponentActivity() {
                     }
                     composable(route = Routes.LENS_SETTING) {
                         LensSettingScreen(navController)
+                    }
+                    composable(route = Routes.NOTIFICATION_SETTING) {
+                        NotificationSettingScreen(navController)
                     }
                     composable(route = Routes.APP_SETTING) {
                         AppSettingScreen(navController)
