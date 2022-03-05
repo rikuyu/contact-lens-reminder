@@ -22,44 +22,9 @@
 - Danger
 
 ### アーキテクチャ
-```mermaid
-flowchart BT
-  subgraph data
-    direction BT
-    Repository -->  LocalDataSource
-    subgraph Repository
-      ReminderRepository
-      LensSettingRepository
-      AppSettingRepository
-    end
-  end
-  style data fill:#cafcdd
-  style Repository fill:#caebfc
-  subgraph domain
-    direction LR
-    subgraph UseCase
-      ReminderUseCase
-      LensSettingUseCase
-      AppSettingUseCase
-    end
-  end
-  style domain fill:#cafcdd
-  style UseCase fill:#caebfc
-  subgraph UI
-    direction BT
-    subgraph ViewModel
-      ReminderViewModel
-      LensSettingViewModel
-      AppSettingViewModel
-    end
-    View --> ViewModel
-  end
-  style UI fill:#cafcdd
-  style ViewModel fill:#caebfc
-  style View fill:#caebfc
-  
-  UI --> domain --> data
-```
+
+![diagram](https://user-images.githubusercontent.com/51118613/156873435-3e451ec1-1f0b-4167-8cc4-029cd2b2abab.svg)
+
 [アプリ アーキテクチャ ガイド](https://developer.android.com/jetpack/guide?hl=ja) を手本にした。
 ### 工夫点
 - 説明を見なくても操作方法の分かるUIデザイン
@@ -68,8 +33,7 @@ flowchart BT
 
 ### デモ（廃止予定）
 アプリアイコンが日付をまたいで変化する様子（Googleカレンダーのアイコンも変わっていることに注目）
-
-<img src="https://user-images.githubusercontent.com/51118613/155189795-1d74ebf9-799e-468a-894d-1b1765cb3cc5.gif" width="270">
+![diagram](https://user-images.githubusercontent.com/51118613/156873560-3fd72a64-4b16-408e-8479-7c632a80ab7e.svg)
 
 ### 新機能 AppWidget（開発中 v2.0.0 より使用可能）
 AppWidgetが日付をまたいで変化する様子
