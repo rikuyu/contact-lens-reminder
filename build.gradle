@@ -76,6 +76,14 @@ buildscript {
                 firebaseAnalyticsKtx  : 'com.google.firebase:firebase-analytics-ktx',
                 firebaseCrashlyticsKtx: 'com.google.firebase:firebase-crashlytics-ktx'
         ]
+
+        playCore = "1.10.3"
+        playCoreKtx = "1.8.1"
+
+        playCoreDependencies = [
+                playCore   : "com.google.android.play:core:$playCore",
+                playCoreKtx: "com.google.android.play:core-ktx:$playCoreKtx"
+        ]
     }
 
     dependencies {

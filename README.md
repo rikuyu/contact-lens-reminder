@@ -2,7 +2,7 @@
 
 [Play Store](https://play.google.com/store/apps/details?id=io.github.rikuyu.contactlensreminder)
 
-<img src="https://user-images.githubusercontent.com/51118613/155189510-2be974c9-7528-45d1-9a96-bdc5cd47c081.jpg" width="500">
+<img src="https://user-images.githubusercontent.com/51118613/156141489-3ee61042-3608-449b-ba34-076bd071f040.png">
 
 ### 使用技術・ツール等
 - Jetpack Compose
@@ -29,7 +29,8 @@ flowchart BT
     Repository -->  LocalDataSource
     subgraph Repository
       ReminderRepository
-      SettingRepository
+      LensSettingRepository
+      AppSettingRepository
     end
   end
   style data fill:#cafcdd
@@ -38,7 +39,8 @@ flowchart BT
     direction LR
     subgraph UseCase
       ReminderUseCase
-      SettingUseCase
+      LensSettingUseCase
+      AppSettingUseCase
     end
   end
   style domain fill:#cafcdd
@@ -47,7 +49,8 @@ flowchart BT
     direction BT
     subgraph ViewModel
       ReminderViewModel
-      SettingViewModel
+      LensSettingViewModel
+      AppSettingViewModel
     end
     View --> ViewModel
   end
@@ -63,11 +66,15 @@ flowchart BT
 - 毎日アプリアイコンを変えること
 - Unit Test
 
-### デモ
+### デモ（廃止予定）
 アプリアイコンが日付をまたいで変化する様子（Googleカレンダーのアイコンも変わっていることに注目）
 
 <img src="https://user-images.githubusercontent.com/51118613/155189795-1d74ebf9-799e-468a-894d-1b1765cb3cc5.gif" width="270">
 
+### 新機能 AppWidget（開発中 v2.0.0 より使用可能）
+AppWidgetが日付をまたいで変化する様子
 
-### その他
+<img src="https://user-images.githubusercontent.com/51118613/156142151-bb4a9376-93d4-453d-aeaf-24ebd38c7fee.gif" width="270">
+
+### 関連ブログ記事
 - [Androidアプリアイコンを動的に変える方法](https://www.yuuuki-blog.com/2022/02/13/Android-%E3%82%A2%E3%83%97%E3%83%AA%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3%E3%82%92%E5%8B%95%E7%9A%84%E3%81%AB%E5%A4%89%E3%81%88%E3%82%8B%E6%96%B9%E6%B3%95/)
