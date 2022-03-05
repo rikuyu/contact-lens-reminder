@@ -33,7 +33,7 @@
 
 ### デモ（廃止予定）
 アプリアイコンが日付をまたいで変化する様子（Googleカレンダーのアイコンも変わっていることに注目）
-![diagram](https://user-images.githubusercontent.com/51118613/156873560-3fd72a64-4b16-408e-8479-7c632a80ab7e.svg)
+<img src="https://user-images.githubusercontent.com/51118613/155189795-1d74ebf9-799e-468a-894d-1b1765cb3cc5.gif" width="270">
 
 ### 新機能 AppWidget（開発中 v2.0.0 より使用可能）
 AppWidgetが日付をまたいで変化する様子
