@@ -200,4 +200,17 @@ class SharedPreferencesManager @Inject constructor(private val context: Context)
         getSharedPreferences().edit()
             .putBoolean(SharedPreferencesKey.STORED_IS_FIRST_USE, false).apply()
     }
+
+    // OnBoarding 画面を表示するかどうか
+    fun getIsShowOnBoarding(): Boolean {
+        return getSharedPreferences().getBoolean(
+            SharedPreferencesKey.STORED_IS_SHOW_ON_BOARDING,
+            true
+        )
+    }
+
+    fun saveIsShowOnBoarding() {
+        getSharedPreferences().edit()
+            .putBoolean(SharedPreferencesKey.STORED_IS_SHOW_ON_BOARDING, false).apply()
+    }
 }

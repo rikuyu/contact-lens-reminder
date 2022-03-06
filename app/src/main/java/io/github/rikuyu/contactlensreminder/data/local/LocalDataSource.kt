@@ -6,8 +6,8 @@ import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedP
 import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEvent
 import io.github.rikuyu.contactlensreminder.data.util.getExpirationDate
 import io.github.rikuyu.contactlensreminder.domain.local.DataSource
-import io.github.rikuyu.contactlensreminder.domain.model.ReminderValue
 import io.github.rikuyu.contactlensreminder.domain.model.LensSettingValue
+import io.github.rikuyu.contactlensreminder.domain.model.ReminderValue
 import java.util.*
 import javax.inject.Inject
 
@@ -120,5 +120,13 @@ class LocalDataSource @Inject constructor(
 
     override fun logEvent(label: String) {
         firebaseLogEvent.logEvent(label)
+    }
+
+    override fun getIsShowOnBoarding(): Boolean {
+        val isShowOnBoarding = sharedPreferencesManager.getIsShowOnBoarding()
+        if (isShowOnBoarding) {
+            sharedPreferencesManager.saveIsShowOnBoarding()
+        }
+        return isShowOnBoarding
     }
 }

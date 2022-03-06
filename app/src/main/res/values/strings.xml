@@ -2,8 +2,6 @@
     <string name="app_name">レンズ交換</string>
 
     <!-- Update -->
-    <string name="success_update_message">Update Success</string>
-    <string name="failure_update_message">Update Failure</string>
     <string name="update_dialog_title">最新バージョン</string>
     <string name="update_dialog_message">このアプリを引き続き利用するには、最新バージョンにアップデートしてください.</string>
     <string name="update_dialog_positive_button_label">Update</string>
@@ -131,5 +129,12 @@
     <string name="text_preview_remaining_day">残り14日</string>
     <string name="text_preview_exchange_date">12/10 (水)</string>
     <string name="no_image_description">no image</string>
+
+    <!-- OnBoarding -->
+    <string name="title_launch_app_widget">新機能 アプリウィジェットのご案内</string>
+    <string name="description_launch_app__widget">新機能 アプリウィジェットのご案内</string>
+    <string name="title_omit_app_icon_change">アプリアイコン変更機能は廃止のご案内</string>
+    <string name="description_omit_app_icon_change">アプリアイコン変更機能は廃止のご案内</string>
+    <string name="btn_start">Start</string>
 
 </resources>
