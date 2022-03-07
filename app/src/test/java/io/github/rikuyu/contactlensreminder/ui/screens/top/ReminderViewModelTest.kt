@@ -61,6 +61,7 @@ class ReminderViewModelTest {
         every { getReminderSetting.invoke() } returns defaultReminderValue
         every { saveReminderSetting.invoke(any()) } returns Unit
         every { startReminder.invoke() } returns Unit
+        every { getIsShowOnBoarding.invoke() } returns true
         viewModel = ReminderViewModel(useCase)
 
         assertThat(viewModel.reminder.value).isEqualTo(defaultReminderValue)

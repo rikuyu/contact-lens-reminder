@@ -42,6 +42,7 @@ class ReminderUseCaseTest {
         startReminder = StartReminder(repository)
         getReminderSetting = GetReminderSetting(repository)
         cancelReminder = CancelReminder(repository)
+        getIsShowOnBoarding = GetIsShowOnBoarding(repository)
         reminderUseCase = ReminderUseCase(
             saveReminderSetting,
             startReminder,
