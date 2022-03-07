@@ -17,6 +17,7 @@ class ReminderUseCaseTest {
     lateinit var getReminderSetting: GetReminderSetting
     lateinit var cancelReminder: CancelReminder
     lateinit var reminderUseCase: ReminderUseCase
+    lateinit var getIsShowOnBoarding: GetIsShowOnBoarding
 
     @MockK
     lateinit var repository: ReminderRepository
@@ -45,7 +46,8 @@ class ReminderUseCaseTest {
             saveReminderSetting,
             startReminder,
             getReminderSetting,
-            cancelReminder
+            cancelReminder,
+            getIsShowOnBoarding
         )
     }
 

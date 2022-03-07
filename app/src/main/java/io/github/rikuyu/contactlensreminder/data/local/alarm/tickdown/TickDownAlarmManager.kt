@@ -53,6 +53,7 @@ class TickDownAlarmManager @Inject constructor(
                 SHARED_PREFERENCE_DATA_CODE
             )
         )
+        updateAppWidget(context)
         firebaseLogEvent.logEvent("cancel_tick_down_alarm_event")
     }
 
