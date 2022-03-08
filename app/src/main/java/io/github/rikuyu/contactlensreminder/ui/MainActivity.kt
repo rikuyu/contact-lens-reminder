@@ -17,7 +17,7 @@ import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.main_screen.c
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.terms_of_service_screen.component.TermsOfServiceScreen
 import io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.components.LensSettingScreen
 import io.github.rikuyu.contactlensreminder.ui.screens.top.ReminderViewModel
-import io.github.rikuyu.contactlensreminder.ui.screens.top.components.OnBoardingScreen
+import io.github.rikuyu.contactlensreminder.ui.screens.top.components.on_boarding.OnBoardingScreen
 import io.github.rikuyu.contactlensreminder.ui.screens.top.components.TopScreen
 import io.github.rikuyu.contactlensreminder.ui.theme.ContactLensReminderTheme
 import io.github.rikuyu.contactlensreminder.ui.util.AppUpdateService
