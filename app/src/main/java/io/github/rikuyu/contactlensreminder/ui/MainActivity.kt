@@ -42,7 +42,7 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(
                     navController = navController,
-                    startDestination = if (viewModel.isShowOnBoarding.value) Routes.ON_BOARDING else Routes.ON_BOARDING
+                    startDestination = if (viewModel.isShowOnBoarding.value) Routes.ON_BOARDING else Routes.TOP
                 ) {
                     composable(route = Routes.TOP) {
                         TopScreen(navController)

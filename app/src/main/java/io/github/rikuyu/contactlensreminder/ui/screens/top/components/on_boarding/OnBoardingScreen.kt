@@ -1,7 +1,9 @@
 package io.github.rikuyu.contactlensreminder.ui.screens.top.components.on_boarding
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -14,8 +16,6 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
-import io.github.rikuyu.contactlensreminder.ui.screens.top.components.on_boarding.AbolishChangeIcon
-import io.github.rikuyu.contactlensreminder.ui.screens.top.components.on_boarding.LaunchAppWidget
 import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
 import io.github.rikuyu.contactlensreminder.ui.theme.PaleBlue
 import io.github.rikuyu.contactlensreminder.ui.util.Routes
@@ -37,12 +37,13 @@ fun OnBoardingScreen(navController: NavController) {
                 .fillMaxSize()
                 .clip(RoundedCornerShape(12.dp))
                 .background(Color.White),
-            count = 2,
+            count = 3,
             state = pagerState
         ) { position ->
             when (position) {
-                0 -> LaunchAppWidget(modifier = Modifier.fillMaxSize())
-                1 -> AbolishChangeIcon(modifier = Modifier.fillMaxSize()) {
+                0 -> AnnounceVersionUpScreen(modifier = Modifier.fillMaxSize())
+                1 -> LaunchAppWidget(modifier = Modifier.fillMaxSize())
+                2 -> AbolishChangeIcon(modifier = Modifier.fillMaxSize()) {
                     navController.navigate(Routes.TOP)
                 }
             }

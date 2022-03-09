@@ -15,7 +15,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
-import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
 
 @Composable
@@ -40,7 +39,6 @@ fun LaunchAppWidget(modifier: Modifier) {
                 fontWeight = FontWeight.SemiBold
             )
         }
-        SimpleDivider()
         Image(
             painter = painterResource(id = R.drawable.app_widget),
             contentDescription = null,

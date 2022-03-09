@@ -56,10 +56,11 @@ class NotificationService(val context: Context) {
 
     fun showNotification() {
         createChannel()
-        notificationManager.notify(1, notificationBuilder.build())
+        notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build())
     }
 
     companion object {
+        private const val NOTIFICATION_ID = 111111
         private const val CHANNEL_ID = "contact_lens_reminder_channel_id"
         private const val CHANNEL_NAME = "レンズ交換通知"
         private const val CHANNEL_DESCRIPTION = "contact_lens_reminder_channel_description "
