@@ -14,7 +14,6 @@ import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedP
 import io.github.rikuyu.contactlensreminder.data.repository.AppSettingRepositoryImpl
 import io.github.rikuyu.contactlensreminder.data.repository.LensSettingRepositoryImpl
 import io.github.rikuyu.contactlensreminder.data.repository.ReminderRepositoryImpl
-import io.github.rikuyu.contactlensreminder.data.util.ChangeAppIconService
 import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEvent
 import io.github.rikuyu.contactlensreminder.domain.local.DataSource
 import io.github.rikuyu.contactlensreminder.domain.repository.AppSettingRepository
@@ -53,12 +52,6 @@ abstract class AppModule {
             @ApplicationContext context: Context,
             sharedPreferencesManager: SharedPreferencesManager
         ): NotificationAlarmManager = NotificationAlarmManager(context, sharedPreferencesManager)
-
-        @Provides
-        @Singleton
-        fun provideChangeAppIconService(
-            @ApplicationContext context: Context
-        ): ChangeAppIconService = ChangeAppIconService(context)
 
         @Provides
         @Singleton

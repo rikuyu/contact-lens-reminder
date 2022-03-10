@@ -9,7 +9,6 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -17,13 +16,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
-import io.github.rikuyu.contactlensreminder.ui.theme.SkyBlue
-import io.github.rikuyu.contactlensreminder.R
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.pagerTabIndicatorOffset
 import com.google.accompanist.pager.rememberPagerState
+import io.github.rikuyu.contactlensreminder.R
+import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
+import io.github.rikuyu.contactlensreminder.ui.theme.SkyBlue
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
@@ -47,14 +46,12 @@ fun InstructionScreen(navController: NavHostController) {
     ) {
         val context = LocalContext.current
 
-        val pages = remember {
-            listOf(
-                context.getString(R.string.help_1_page),
-                context.getString(R.string.help_2_page),
-                context.getString(R.string.help_3_page),
-                context.getString(R.string.other_page)
-            )
-        }
+        val pages = listOf(
+            context.getString(R.string.help_1_page),
+            context.getString(R.string.help_2_page),
+            context.getString(R.string.help_3_page),
+            context.getString(R.string.other_page)
+        )
 
         Column(Modifier.fillMaxSize()) {
             val coroutineScope = rememberCoroutineScope()

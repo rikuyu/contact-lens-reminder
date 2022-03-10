@@ -6,5 +6,6 @@ data class ReminderUseCase @Inject constructor(
     val saveReminderSetting: SaveReminderSetting,
     val startReminder: StartReminder,
     val getReminderSetting: GetReminderSetting,
-    val cancelReminder: CancelReminder
+    val cancelReminder: CancelReminder,
+    val getIsShowOnBoarding: GetIsShowOnBoarding
 )

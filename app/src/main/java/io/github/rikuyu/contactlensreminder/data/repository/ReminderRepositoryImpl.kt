@@ -22,4 +22,6 @@ class ReminderRepositoryImpl @Inject constructor(
     override fun cancelReminder() {
         localDataSource.cancelReminder()
     }
+
+    override fun getIsShowOnBoarding() = localDataSource.getIsShowOnBoarding()
 }

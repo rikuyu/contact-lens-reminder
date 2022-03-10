@@ -1,7 +1,10 @@
 package io.github.rikuyu.contactlensreminder.ui.screens.app_setting.instruction_screen.component
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -16,7 +19,6 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
 
 @Composable
 fun OtherSection(
@@ -71,7 +73,7 @@ fun OtherSection(
         item {
             Row {
                 Image(
-                    painter = painterResource(id = R.drawable.app_icons),
+                    painter = painterResource(id = R.drawable.app_widget),
                     contentDescription = null,
                     contentScale = ContentScale.Fit,
                     alignment = Alignment.TopStart,
@@ -79,21 +81,12 @@ fun OtherSection(
                         .width((screenWidth / 2).dp)
                         .padding(8.dp)
                 )
-                Column {
-                    Text(
-                        modifier = Modifier.padding(top = 10.dp),
-                        text = stringResource(id = R.string.step_4_6),
-                        fontSize = descFontSize,
-                        color = textColor
-                    )
-                    SimpleSpacer(height = 10.dp)
-                    Text(
-                        modifier = Modifier.padding(top = 10.dp),
-                        text = stringResource(id = R.string.step_4_7),
-                        fontSize = descFontSize,
-                        color = textColor
-                    )
-                }
+                Text(
+                    modifier = Modifier.padding(top = 10.dp),
+                    text = stringResource(id = R.string.step_4_6),
+                    fontSize = descFontSize,
+                    color = textColor
+                )
             }
         }
     }

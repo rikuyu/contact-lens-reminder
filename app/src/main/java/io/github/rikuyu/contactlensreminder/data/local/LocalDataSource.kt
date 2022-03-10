@@ -3,12 +3,11 @@ package io.github.rikuyu.contactlensreminder.data.local
 import io.github.rikuyu.contactlensreminder.data.local.alarm.notification.NotificationAlarmManager
 import io.github.rikuyu.contactlensreminder.data.local.alarm.tickdown.TickDownAlarmManager
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
-import io.github.rikuyu.contactlensreminder.data.util.ChangeAppIconService
 import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEvent
 import io.github.rikuyu.contactlensreminder.data.util.getExpirationDate
 import io.github.rikuyu.contactlensreminder.domain.local.DataSource
-import io.github.rikuyu.contactlensreminder.domain.model.ReminderValue
 import io.github.rikuyu.contactlensreminder.domain.model.LensSettingValue
+import io.github.rikuyu.contactlensreminder.domain.model.ReminderValue
 import java.util.*
 import javax.inject.Inject
 
@@ -16,7 +15,6 @@ class LocalDataSource @Inject constructor(
     private val tickDownAlarmManager: TickDownAlarmManager,
     private val sharedPreferencesManager: SharedPreferencesManager,
     private val notificationAlarmManager: NotificationAlarmManager,
-    private val changeAppIconService: ChangeAppIconService,
     private val firebaseLogEvent: FirebaseLogEvent
 ) : DataSource {
 
@@ -36,9 +34,6 @@ class LocalDataSource @Inject constructor(
             if (getIsUseNotification()) {
                 notificationAlarmManager.initAlarm()
             }
-            changeAppIconService.changeAppIcon(
-                true, getContactLensRemainingDays()
-            )
             tickDownAlarmManager.initAlarm()
         }
     }
@@ -125,5 +120,13 @@ class LocalDataSource @Inject constructor(
 
     override fun logEvent(label: String) {
         firebaseLogEvent.logEvent(label)
+    }
+
+    override fun getIsShowOnBoarding(): Boolean {
+        val isShowOnBoarding = sharedPreferencesManager.getIsShowOnBoarding()
+        if (isShowOnBoarding) {
+            sharedPreferencesManager.saveIsShowOnBoarding()
+        }
+        return isShowOnBoarding
     }
 }

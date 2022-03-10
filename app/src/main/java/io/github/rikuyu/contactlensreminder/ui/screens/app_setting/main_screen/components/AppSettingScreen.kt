@@ -1,7 +1,5 @@
 package io.github.rikuyu.contactlensreminder.ui.screens.app_setting.main_screen.components
 
-import android.content.Context
-import android.content.pm.PackageManager
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -28,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import io.github.rikuyu.contactlensreminder.BuildConfig
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingEvent
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingSection
@@ -46,7 +45,7 @@ fun AppSettingScreen(
     viewModel: AppSettingViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
-    val version = getVersionName(context, viewModel)
+    val version = BuildConfig.VERSION_NAME
     val clipboardManager: ClipboardManager = LocalClipboardManager.current
 
     val sectionList = listOf(
@@ -153,16 +152,4 @@ fun AppSettingScreen(
             )
         }
     }
-}
-
-fun getVersionName(context: Context, viewModel: AppSettingViewModel): String {
-    val pm = context.packageManager
-    var versionName = ""
-    try {
-        val packageInfo = pm.getPackageInfo(context.packageName, 0)
-        versionName = packageInfo.versionName
-    } catch (e: PackageManager.NameNotFoundException) {
-        viewModel.onEvent(AppSettingEvent.LogEvent("$e"))
-    }
-    return versionName
 }

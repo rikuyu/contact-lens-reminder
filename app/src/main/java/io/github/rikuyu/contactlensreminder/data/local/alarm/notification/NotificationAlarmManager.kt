@@ -1,10 +1,9 @@
 package io.github.rikuyu.contactlensreminder.data.local.alarm.notification
 
 import android.app.AlarmManager
-import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
+import io.github.rikuyu.contactlensreminder.data.util.createBroadcastPendingIntent
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -16,13 +15,6 @@ class NotificationAlarmManager @Inject constructor(
     private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
     fun initAlarm() {
-        val intent = Intent(context, NotificationAlarmReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(
-            context,
-            REQUEST_CODE,
-            intent,
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-        )
         val calendar = Calendar.getInstance()
         val simpleDateFormat = SimpleDateFormat("HH/mm/ss", Locale.ENGLISH)
         val (hour, min, sec) = simpleDateFormat.format(calendar.time).split("/").map(String::toInt)
@@ -39,22 +31,15 @@ class NotificationAlarmManager @Inject constructor(
         alarmManager.setExact(
             AlarmManager.RTC,
             calendar.timeInMillis,
-            pendingIntent
+            createBroadcastPendingIntent(context, NotificationAlarmReceiver::class.java, REQUEST_CODE)
         )
     }
 
     fun cancelAlarm() {
-        val intent = Intent(context, NotificationAlarmReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(
-            context,
-            REQUEST_CODE,
-            intent,
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-        )
-        alarmManager.cancel(pendingIntent)
+        alarmManager.cancel(createBroadcastPendingIntent(context, NotificationAlarmReceiver::class.java, REQUEST_CODE))
     }
 
     companion object {
-        private const val REQUEST_CODE = 8888
+        private const val REQUEST_CODE = 55555
     }
 }

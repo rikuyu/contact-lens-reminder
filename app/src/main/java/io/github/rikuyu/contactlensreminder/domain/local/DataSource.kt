@@ -18,4 +18,6 @@ interface DataSource {
     fun getAllLensSetting(): LensSettingValue
 
     fun logEvent(label: String)
+
+    fun getIsShowOnBoarding(): Boolean
 }
