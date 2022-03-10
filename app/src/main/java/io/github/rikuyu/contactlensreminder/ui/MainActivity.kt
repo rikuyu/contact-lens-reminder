@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -15,6 +16,8 @@ import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.instruction_s
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.main_screen.components.AppSettingScreen
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.terms_of_service_screen.component.TermsOfServiceScreen
 import io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.components.LensSettingScreen
+import io.github.rikuyu.contactlensreminder.ui.screens.top.ReminderViewModel
+import io.github.rikuyu.contactlensreminder.ui.screens.top.components.on_boarding.OnBoardingScreen
 import io.github.rikuyu.contactlensreminder.ui.screens.top.components.TopScreen
 import io.github.rikuyu.contactlensreminder.ui.theme.ContactLensReminderTheme
 import io.github.rikuyu.contactlensreminder.ui.util.AppUpdateService
@@ -27,6 +30,8 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var appUpdateService: AppUpdateService
 
+    private val viewModel: ReminderViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -37,10 +42,13 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(
                     navController = navController,
-                    startDestination = Routes.TOP
+                    startDestination = if (viewModel.isShowOnBoarding.value) Routes.ON_BOARDING else Routes.TOP
                 ) {
                     composable(route = Routes.TOP) {
                         TopScreen(navController)
+                    }
+                    composable(route = Routes.ON_BOARDING) {
+                        OnBoardingScreen(navController)
                     }
                     composable(route = Routes.LENS_SETTING) {
                         LensSettingScreen(navController)

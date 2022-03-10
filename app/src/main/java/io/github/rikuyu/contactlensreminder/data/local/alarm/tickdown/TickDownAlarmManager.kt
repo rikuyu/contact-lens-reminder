@@ -1,11 +1,13 @@
 package io.github.rikuyu.contactlensreminder.data.local.alarm.tickdown
 
 import android.app.AlarmManager
-import android.app.PendingIntent
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.Context
-import android.content.Intent
-import io.github.rikuyu.contactlensreminder.data.util.ChangeAppIconService
 import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEvent
+import io.github.rikuyu.contactlensreminder.data.util.createBroadcastPendingIntent
+import io.github.rikuyu.contactlensreminder.ui.appwidget.ImageTypeWidget
+import io.github.rikuyu.contactlensreminder.ui.appwidget.ProgressBarTypeWidget
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -14,17 +16,9 @@ class TickDownAlarmManager @Inject constructor(
     private val context: Context,
     private val firebaseLogEvent: FirebaseLogEvent
 ) {
-    private val changeAppIconService: ChangeAppIconService = ChangeAppIconService(context)
     private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
     fun initAlarm() {
-        val intent = Intent(context, TickDownAlarmReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(
-            context,
-            REQUEST_CODE,
-            intent,
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-        )
         val calendar = Calendar.getInstance()
         val simpleDateFormat = SimpleDateFormat("HH/mm/ss", Locale.ENGLISH)
         val (hour, min, sec) = simpleDateFormat.format(calendar.time).split("/").map(String::toInt)
@@ -37,25 +31,43 @@ class TickDownAlarmManager @Inject constructor(
         alarmManager.setExact(
             AlarmManager.RTC,
             calendar.timeInMillis,
-            pendingIntent
+            createBroadcastPendingIntent(context, TickDownAlarmReceiver::class.java, SHARED_PREFERENCE_DATA_CODE)
         )
         firebaseLogEvent.logInitTickDownEvent()
+        updateAppWidget(context)
+    }
+
+    private fun updateAppWidget(context: Context) {
+        val appWidgetManager = AppWidgetManager.getInstance(context)
+        ProgressBarTypeWidget().apply {
+            cancelUpdateAppWidget(context)
+            val appWidgetIds = appWidgetManager.getAppWidgetIds(ComponentName(context.packageName, javaClass.name))
+            for (id in appWidgetIds) {
+                updateProgressBarTypeWidget(context, appWidgetManager, id)
+            }
+        }
+        ImageTypeWidget().apply {
+            cancelUpdateAppWidget(context)
+            val appWidgetIds = appWidgetManager.getAppWidgetIds(ComponentName(context.packageName, javaClass.name))
+            for (id in appWidgetIds) {
+                updateImageTypeWidget(context, appWidgetManager, id)
+            }
+        }
     }
 
     fun cancelAlarm() {
-        val intent = Intent(context, TickDownAlarmReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(
-            context,
-            REQUEST_CODE,
-            intent,
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        alarmManager.cancel(
+            createBroadcastPendingIntent(
+                context,
+                TickDownAlarmReceiver::class.java,
+                SHARED_PREFERENCE_DATA_CODE
+            )
         )
-        alarmManager.cancel(pendingIntent)
-        changeAppIconService.changeAppIcon(false, null)
+        updateAppWidget(context)
         firebaseLogEvent.logEvent("cancel_tick_down_alarm_event")
     }
 
     companion object {
-        private const val REQUEST_CODE = 7777
+        private const val SHARED_PREFERENCE_DATA_CODE = 777777
     }
 }

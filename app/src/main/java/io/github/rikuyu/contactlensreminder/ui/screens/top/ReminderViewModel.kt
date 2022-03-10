@@ -11,14 +11,18 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ReminderViewModel @Inject constructor(
-    private val reminderUseCase: ReminderUseCase
+    private val useCase: ReminderUseCase
 ) : ViewModel() {
 
     private val _reminder: MutableState<ReminderValue> = mutableStateOf(ReminderValue())
     val reminder: State<ReminderValue> = _reminder
 
+    private val _isShowOnBoarding: MutableState<Boolean> = mutableStateOf(true)
+    val isShowOnBoarding: State<Boolean> = _isShowOnBoarding
+
     init {
-        _reminder.value = reminderUseCase.getReminderSetting.invoke()
+        _reminder.value = useCase.getReminderSetting.invoke()
+        _isShowOnBoarding.value = useCase.getIsShowOnBoarding.invoke()
     }
 
     fun onEvent(event: ReminderEvent) {
@@ -26,10 +30,10 @@ class ReminderViewModel @Inject constructor(
             isUsingContactLens = event.reminderValue.isUsingContactLens,
             lensRemainingDays = event.reminderValue.lensPeriod
         )
-        reminderUseCase.saveReminderSetting(reminder.value)
+        useCase.saveReminderSetting(reminder.value)
         when (event) {
-            is ReminderEvent.StartReminder -> reminderUseCase.startReminder()
-            is ReminderEvent.CancelReminder -> reminderUseCase.cancelReminder()
+            is ReminderEvent.StartReminder -> useCase.startReminder()
+            is ReminderEvent.CancelReminder -> useCase.cancelReminder()
         }
     }
 }

@@ -12,7 +12,7 @@ import org.junit.Test
 
 class ReminderViewModelTest {
 
-    lateinit var viewModel: ReminderViewModel
+    private lateinit var viewModel: ReminderViewModel
     lateinit var useCase: ReminderUseCase
 
     @MockK
@@ -27,6 +27,9 @@ class ReminderViewModelTest {
     @MockK
     lateinit var cancelReminder: CancelReminder
 
+    @MockK
+    lateinit var getIsShowOnBoarding: GetIsShowOnBoarding
+
     @Before
     fun setup() {
         MockKAnnotations.init(this)
@@ -34,7 +37,8 @@ class ReminderViewModelTest {
             saveReminderSetting,
             startReminder,
             getReminderSetting,
-            cancelReminder
+            cancelReminder,
+            getIsShowOnBoarding
         )
     }
 
@@ -57,6 +61,7 @@ class ReminderViewModelTest {
         every { getReminderSetting.invoke() } returns defaultReminderValue
         every { saveReminderSetting.invoke(any()) } returns Unit
         every { startReminder.invoke() } returns Unit
+        every { getIsShowOnBoarding.invoke() } returns true
         viewModel = ReminderViewModel(useCase)
 
         assertThat(viewModel.reminder.value).isEqualTo(defaultReminderValue)

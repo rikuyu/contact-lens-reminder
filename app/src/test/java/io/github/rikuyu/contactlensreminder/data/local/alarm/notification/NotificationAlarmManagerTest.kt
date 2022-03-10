@@ -18,8 +18,8 @@ class NotificationAlarmManagerTest {
     private lateinit var context: Context
     private lateinit var alarmManager: AlarmManager
     private lateinit var shadowAlarmManager: ShadowAlarmManager
-    private lateinit var notificationAlarmManager: NotificationAlarmManager
     private lateinit var sharedPreferencesManager: SharedPreferencesManager
+    private lateinit var notificationAlarmManager: NotificationAlarmManager
 
     @Before
     fun setup() {
@@ -32,16 +32,16 @@ class NotificationAlarmManagerTest {
 
     @Test
     fun `通知を予約できるかどうか`() {
-        assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
+        assertThat(shadowAlarmManager.scheduledAlarms.size).isEqualTo(0)
         notificationAlarmManager.initAlarm()
-        assertThat(shadowAlarmManager.nextScheduledAlarm).isNotNull()
+        assertThat(shadowAlarmManager.scheduledAlarms.size).isEqualTo(1)
     }
 
     @Test
     fun `通知をキャンセルできるかどうか`() {
         notificationAlarmManager.initAlarm()
-        assertThat(shadowAlarmManager.nextScheduledAlarm).isNotNull()
+        assertThat(shadowAlarmManager.scheduledAlarms.size).isEqualTo(1)
         notificationAlarmManager.cancelAlarm()
-        assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
+        assertThat(shadowAlarmManager.scheduledAlarms.size).isEqualTo(0)
     }
 }
