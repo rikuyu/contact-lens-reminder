@@ -6,9 +6,10 @@ import android.content.ComponentName
 import android.content.Context
 import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEvent
 import io.github.rikuyu.contactlensreminder.data.util.createBroadcastPendingIntent
-import io.github.rikuyu.contactlensreminder.data.util.getDateChangeTime
 import io.github.rikuyu.contactlensreminder.ui.appwidget.ImageTypeWidget
 import io.github.rikuyu.contactlensreminder.ui.appwidget.ProgressBarTypeWidget
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 class TickDownAlarmManager @Inject constructor(
@@ -18,9 +19,18 @@ class TickDownAlarmManager @Inject constructor(
     private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
     fun initAlarm() {
+        val calendar = Calendar.getInstance()
+        val simpleDateFormat = SimpleDateFormat("HH/mm/ss", Locale.ENGLISH)
+        val (hour, min, sec) = simpleDateFormat.format(calendar.time).split("/").map(String::toInt)
+        calendar.apply {
+            timeInMillis = System.currentTimeMillis()
+            add(Calendar.HOUR, 24 - hour)
+            add(Calendar.MINUTE, -min)
+            add(Calendar.SECOND, -sec)
+        }
         alarmManager.setExact(
             AlarmManager.RTC,
-            getDateChangeTime(),
+            calendar.timeInMillis,
             createBroadcastPendingIntent(context, TickDownAlarmReceiver::class.java, SHARED_PREFERENCE_DATA_CODE)
         )
         firebaseLogEvent.logInitTickDownEvent()

@@ -63,7 +63,7 @@ class LocalDataSourceTest {
         shadowAlarmManager = Shadows.shadowOf(alarmManager)
         firebaseLogEvent = FirebaseLogEvent(sharedPreferencesManager)
         tickDownAlarmManager = TickDownAlarmManager(context, firebaseLogEvent)
-        notificationAlarmManager = NotificationAlarmManager(context)
+        notificationAlarmManager = NotificationAlarmManager(context, sharedPreferencesManager)
     }
 
     @Test

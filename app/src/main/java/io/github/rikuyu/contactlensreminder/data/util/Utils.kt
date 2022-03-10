@@ -14,19 +14,6 @@ fun getExpirationDate(lensPeriod: Int): String {
     return "${m.toInt()}/${d.toInt()} ($day)"
 }
 
-fun getDateChangeTime(dh: Int = 0, dm: Int = 0, ds: Int = 0): Long {
-    val calendar = Calendar.getInstance()
-    val simpleDateFormat = SimpleDateFormat("HH/mm/ss", Locale.ENGLISH)
-    val (hour, min, sec) = simpleDateFormat.format(calendar.time).split("/").map(String::toInt)
-    calendar.apply {
-        timeInMillis = System.currentTimeMillis()
-        add(Calendar.HOUR, 24 - hour - dh)
-        add(Calendar.MINUTE, -min - dm)
-        add(Calendar.SECOND, -sec - ds)
-    }
-    return calendar.timeInMillis
-}
-
 fun <T> createBroadcastPendingIntent(
     context: Context,
     klass: Class<T>,

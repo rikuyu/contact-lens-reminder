@@ -13,9 +13,10 @@ import android.widget.RemoteViews
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
 import io.github.rikuyu.contactlensreminder.data.util.createBroadcastPendingIntent
-import io.github.rikuyu.contactlensreminder.data.util.getDateChangeTime
 import io.github.rikuyu.contactlensreminder.data.util.getExpirationDate
 import io.github.rikuyu.contactlensreminder.ui.MainActivity
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ProgressBarTypeWidget : AppWidgetProvider() {
 
@@ -100,9 +101,18 @@ class ProgressBarTypeWidget : AppWidgetProvider() {
 
     private fun reserveUpdateAppWidget(context: Context) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val calendar = Calendar.getInstance()
+        val simpleDateFormat = SimpleDateFormat("HH/mm/ss", Locale.ENGLISH)
+        val (hour, min, sec) = simpleDateFormat.format(calendar.time).split("/").map(String::toInt)
+        calendar.apply {
+            timeInMillis = System.currentTimeMillis()
+            add(Calendar.HOUR, 24 - hour)
+            add(Calendar.MINUTE, -min)
+            add(Calendar.SECOND, -sec)
+        }
         alarmManager.setExact(
             AlarmManager.RTC,
-            getDateChangeTime(ds = 3),
+            calendar.timeInMillis,
             createBroadcastPendingIntent(
                 context,
                 ProgressBarTypeWidget::class.java,
