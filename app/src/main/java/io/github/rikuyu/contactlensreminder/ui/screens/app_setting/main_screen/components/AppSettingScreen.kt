@@ -5,14 +5,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.ripple.rememberRipple
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,7 +28,7 @@ import androidx.navigation.NavController
 import io.github.rikuyu.contactlensreminder.BuildConfig
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingEvent
-import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingSection
+import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingItem
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingViewModel
 import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
 import io.github.rikuyu.contactlensreminder.ui.theme.SkyBlue
@@ -48,26 +47,28 @@ fun AppSettingScreen(
     val version = BuildConfig.VERSION_NAME
     val clipboardManager: ClipboardManager = LocalClipboardManager.current
 
+    val scrollState = rememberScrollState()
+
     val sectionList = listOf(
-        AppSettingSection(
+        AppSettingItem(
             1,
             stringResource(id = R.string.terms_of_service),
             R.drawable.ic_terms_of_service,
             Routes.TERMS_OF_SERVICE
         ),
-        AppSettingSection(
+        AppSettingItem(
             2,
             stringResource(id = R.string.help),
             R.drawable.ic_help,
             Routes.HELP
         ),
-        AppSettingSection(
+        AppSettingItem(
             3,
             stringResource(id = R.string.notification_setting),
             R.drawable.ic_notify,
-            null
+            "notification_setting"
         ),
-        AppSettingSection(
+        AppSettingItem(
             4,
             stringResource(id = R.string.inquiry),
             R.drawable.ic_inquiry,
@@ -96,10 +97,14 @@ fun AppSettingScreen(
                 .fillMaxSize()
                 .background(SmoothGray)
         ) {
-            LazyColumn(modifier = Modifier.align(Alignment.TopCenter)) {
-                item { SimpleSpacer(height = 20.dp, color = SmoothGray) }
-                item { SimpleDivider() }
-                items(sectionList) { item ->
+            Column(
+                modifier = Modifier
+                    .align(Alignment.TopCenter)
+                    .verticalScroll(scrollState)
+            ) {
+                SimpleSpacer(height = 20.dp, color = SmoothGray)
+                SimpleDivider()
+                sectionList.forEach {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -109,24 +114,22 @@ fun AppSettingScreen(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .clickable {
-                                    if (item.route != null) {
-                                        navController.navigate(item.route)
-                                        viewModel.onEvent(AppSettingEvent.LogEvent(item.route))
-                                    } else if (item.id == 3) {
+                                    viewModel.onEvent(AppSettingEvent.LogEvent(it.route))
+                                    if (it.id == 3) {
                                         context.startActivity(makeNotificationSettingIntent(context))
-                                        viewModel.onEvent(AppSettingEvent.LogEvent("notification_setting"))
+                                    } else {
+                                        navController.navigate(it.route)
                                     }
                                 }
                                 .padding(all = 16.dp)
                         ) {
-                            Text(text = item.title, color = Color.Black)
-                            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                                Icon(
-                                    painter = painterResource(id = item.icon),
-                                    tint = SkyBlue,
-                                    contentDescription = null
-                                )
-                            }
+                            Text(text = it.title, color = Color.Black)
+                            Icon(
+                                modifier = Modifier.align(Alignment.CenterEnd),
+                                painter = painterResource(id = it.icon),
+                                tint = SkyBlue,
+                                contentDescription = null
+                            )
                         }
                         SimpleDivider()
                     }

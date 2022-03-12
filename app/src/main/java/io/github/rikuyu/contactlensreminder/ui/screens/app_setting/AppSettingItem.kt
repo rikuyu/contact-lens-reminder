@@ -1,8 +1,8 @@
 package io.github.rikuyu.contactlensreminder.ui.screens.app_setting
 
-data class AppSettingSection(
+data class AppSettingItem(
     val id: Int,
     val title: String,
     val icon: Int,
-    val route: String?
+    val route: String
 )
