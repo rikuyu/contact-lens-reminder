@@ -3,7 +3,7 @@
 
     <!-- Update -->
     <string name="update_dialog_title">最新バージョン</string>
-    <string name="update_dialog_message">このアプリを引き続き利用するには、最新バージョンにアップデートしてください.</string>
+    <string name="update_dialog_message">このアプリを引き続き利用するには、最新バージョンにアップデートしてください。</string>
     <string name="update_dialog_positive_button_label">Update</string>
 
     <!-- TopScreen -->
@@ -84,6 +84,9 @@
     <string name="step_4_4">この画面では、「利用規約」「ヘルプ（使い方）」「通知設定」「お問い合わせ」「バージョン」を参照することができます。</string>
     <string name="step_4_5">アプリウィジェットについて</string>
     <string name="step_4_6">アプリウィジェットは「画像タイプ」「プログレスバータイプ」があります。画像タイプはコンタクトレンズの残り使用可能日数を表示します。プログレスバータイプは残り使用可能日数を表すプログレスバーとレンズ交換をする日付が表示されます。</string>
+    <string name="step_4_7">注意事項</string>
+    <string name="step_4_8">アプリウィジェットをホーム画面に出すとき「ウィジェットを読み込めません」と表示される場合は、一度アプリをアンインストールし、再度お試しください</string>
+    <string name="step_4_9">それでも解決しない場合は、お問い合わせからご連絡ください</string>
 
     <!-- お問い合わせ -->
     <string name="network_error_message_1">お問い合わせするには</string>

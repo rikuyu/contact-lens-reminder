@@ -70,6 +70,8 @@ class ReminderViewModelTest {
         every { saveReminderSetting.invoke(any()) } returns Unit
         every { startReminder.invoke() } returns Unit
         every { getIsShowOnBoarding.invoke() } returns true
+        every { getIsDarkTheme.invoke() } returns false
+
         viewModel = ReminderViewModel(useCase)
 
         assertThat(viewModel.reminder.value).isEqualTo(defaultReminderValue)
@@ -80,8 +82,9 @@ class ReminderViewModelTest {
 
         verify(exactly = 1) {
             getReminderSetting.invoke()
+            getIsShowOnBoarding.invoke()
+            getIsDarkTheme.invoke()
             saveReminderSetting.invoke(any())
-            viewModel.onEvent(event)
             startReminder.invoke()
         }
     }

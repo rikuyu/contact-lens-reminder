@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.rikuyu.contactlensreminder.R
+import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
 
 @Composable
 fun OtherSection(
@@ -94,6 +95,28 @@ fun OtherSection(
                     color = textColor
                 )
             }
+        }
+        item {
+            SimpleSpacer(height = 20.dp, color = MaterialTheme.colors.background)
+            Text(
+                modifier = Modifier.padding(horizontal = 10.dp),
+                text = stringResource(id = R.string.step_4_7),
+                fontSize = 16.sp,
+                color = Color.Red
+            )
+            Text(
+                modifier = Modifier.padding(vertical = 10.dp, horizontal = 10.dp),
+                text = stringResource(id = R.string.step_4_8),
+                fontSize = descFontSize,
+                color = textColor
+            )
+            Text(
+                modifier = Modifier.padding(top = 6.dp, start = 10.dp, end = 10.dp),
+                text = stringResource(id = R.string.step_4_9),
+                fontSize = descFontSize,
+                color = textColor
+            )
+            SimpleSpacer(height = 20.dp, color = MaterialTheme.colors.background)
         }
     }
 }
