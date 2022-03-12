@@ -129,4 +129,10 @@ class LocalDataSource @Inject constructor(
         }
         return isShowOnBoarding
     }
+
+    override fun getIsDarkTheme(): Boolean = sharedPreferencesManager.getIsDarkTheme()
+
+    override fun saveIsDarkTheme() {
+        sharedPreferencesManager.saveIsDarkTheme(!getIsDarkTheme())
+    }
 }

@@ -23,7 +23,7 @@ import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 @Composable
 fun SetLensPeriodSection(
     modifier: Modifier = Modifier,
-    textColor: Color = Color.Black,
+    textColor: Color = MaterialTheme.colors.onSecondary,
     fontSize: TextUnit = 18.sp,
     period: Int,
     setLensPeriod: (Int) -> Unit
@@ -31,17 +31,13 @@ fun SetLensPeriodSection(
     var isShowLensPeriodPicker by remember { mutableStateOf(false) }
 
     Column(
-        modifier = modifier.background(Color.White)
+        modifier = modifier.background(MaterialTheme.colors.background)
     ) {
         Row(
             modifier = modifier.padding(top = 0.dp, bottom = 14.dp, end = 12.dp, start = 2.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Spacer(
-                modifier = Modifier
-                    .weight(1f)
-                    .background(Color.White)
-            )
+            Spacer(modifier = Modifier.weight(1f))
             if (isShowLensPeriodPicker) {
                 NumberPicker(
                     value = period,

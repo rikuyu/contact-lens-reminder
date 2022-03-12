@@ -25,7 +25,7 @@ fun ToggleButtonSection(
     context: Context,
     modifier: Modifier = Modifier,
     text: String,
-    textColor: Color = Color.Black,
+    textColor: Color = MaterialTheme.colors.onSurface,
     fontSize: TextUnit = 18.sp,
     flag: Boolean,
     isShowIcon: Boolean,
@@ -33,7 +33,7 @@ fun ToggleButtonSection(
 ) {
     Row(
         modifier = modifier
-            .background(Color.White)
+            .background(MaterialTheme.colors.background)
             .clickable { changeSwitch() }
             .padding(top = 12.dp, bottom = 12.dp, end = 12.dp, start = 2.dp),
         verticalAlignment = Alignment.CenterVertically

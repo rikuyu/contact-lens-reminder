@@ -2,9 +2,12 @@ package io.github.rikuyu.contactlensreminder.ui.screens.top.components
 
 import android.widget.Toast
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,12 +21,15 @@ import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.domain.model.ReminderValue
 import io.github.rikuyu.contactlensreminder.ui.screens.top.ReminderEvent
 import io.github.rikuyu.contactlensreminder.ui.screens.top.ReminderViewModel
+import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
 import io.github.rikuyu.contactlensreminder.ui.theme.LightBlue
 import io.github.rikuyu.contactlensreminder.ui.util.Routes
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
 
 @Composable
 fun TopScreen(
+    isDarkTheme: Boolean,
+    switchDarkTheme: (Boolean) -> Unit,
     navController: NavController,
     viewModel: ReminderViewModel = hiltViewModel()
 ) {
@@ -52,41 +58,52 @@ fun TopScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
+            .background(MaterialTheme.colors.background)
     ) {
         Row(
-            modifier = Modifier.background(Color.White),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 12.dp)
         ) {
+            Icon(
+                painter = painterResource(id = if (isDarkTheme) R.drawable.ic_light_mode else R.drawable.ic_dark_mode),
+                contentDescription = null,
+                tint = if (isDarkTheme) Color.Gray else Color.LightGray,
+                modifier = Modifier
+                    .weight(1f)
+                    .size(32.dp, 32.dp)
+                    .clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = rememberRipple(color = CleanBlue, bounded = false, radius = 30.dp)
+                    ) {
+                        switchDarkTheme(!isDarkTheme)
+                        viewModel.onEvent(ReminderEvent.SwitchIsDarkTheme)
+                    }
+            )
             Spacer(modifier = Modifier.weight(7f))
-            IconButton(
-                onClick = { navController.navigate(Routes.APP_SETTING) },
-                modifier = Modifier.weight(1f)
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_help),
-                    contentDescription = null,
-                    tint = LightBlue,
-                    modifier = Modifier.size(36.dp, 36.dp)
-                )
-            }
-            Spacer(modifier = Modifier.size(12.dp))
+            Icon(
+                painter = painterResource(id = R.drawable.ic_help),
+                contentDescription = null,
+                tint = LightBlue,
+                modifier = Modifier
+                    .weight(1f)
+                    .size(36.dp, 36.dp)
+                    .clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = rememberRipple(color = CleanBlue, bounded = false, radius = 30.dp)
+                    ) { navController.navigate(Routes.APP_SETTING) }
+            )
         }
-        SimpleSpacer(height = 8.dp)
         LensPeriodTextSection(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Color.White),
+            modifier = Modifier.fillMaxWidth(),
             lensRemainingDays = lensRemainingDays,
             period = lensPeriod
         )
-        SimpleSpacer(height = 4.dp)
+        SimpleSpacer(height = 4.dp, color = MaterialTheme.colors.background)
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(3f)
-                .background(Color.White)
         ) {
             RemainingDaysBar(
                 lensPeriod = lensPeriod,
@@ -102,8 +119,7 @@ fun TopScreen(
         HandleReminderButtonSection(
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(1f)
-                .background(Color.White),
+                .weight(1f),
             lensRemainingDays = lensRemainingDays,
             isUsingContactLens = isUsingContactLens,
             startReminder = {
@@ -147,8 +163,7 @@ fun TopScreen(
         LensSettingButtonSection(
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(1f)
-                .background(Color.White),
+                .weight(1f),
             showAlertToast = {
                 Toast.makeText(
                     context,

@@ -21,7 +21,6 @@ import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.LensSettingEvent
 import io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.LensSettingViewModel
 import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
-import io.github.rikuyu.contactlensreminder.ui.theme.SmoothGray
 import io.github.rikuyu.contactlensreminder.ui.util.Routes
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
@@ -60,7 +59,8 @@ fun LensSettingScreen(
         when (index) {
             0 -> lensPeriod = 14
             1 -> lensPeriod = 31
-            2 -> {}
+            2 -> {
+            }
         }
     }
 
@@ -89,15 +89,16 @@ fun LensSettingScreen(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Color.White)
+                    .background(MaterialTheme.colors.surface)
             ) {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .background(MaterialTheme.colors.background)
                         .weight(1f)
                 ) {
                     SimpleDivider()
-                    SimpleSpacer(height = 20.dp, color = SmoothGray)
+                    SimpleSpacer(height = 20.dp, color = MaterialTheme.colors.surface)
                     SimpleDivider()
                     SetLensTypeSection(
                         modifier = Modifier.fillMaxWidth(),

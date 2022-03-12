@@ -213,4 +213,17 @@ class SharedPreferencesManager @Inject constructor(private val context: Context)
         getSharedPreferences().edit()
             .putBoolean(SharedPreferencesKey.STORED_IS_SHOW_ON_BOARDING, false).apply()
     }
+
+    // Dark Theme
+    fun getIsDarkTheme(): Boolean {
+        return getSharedPreferences().getBoolean(
+            SharedPreferencesKey.STORED_IS_DARK_THEME,
+            false
+        )
+    }
+
+    fun saveIsDarkTheme(isDarkTheme: Boolean) {
+        getSharedPreferences().edit()
+            .putBoolean(SharedPreferencesKey.STORED_IS_DARK_THEME, isDarkTheme).apply()
+    }
 }

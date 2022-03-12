@@ -19,7 +19,7 @@ fun LensPowerPicker(
     onValueChange: (Double) -> Unit,
     dividersColor: Color = CleanBlue,
     range: List<Double>,
-    textStyle: TextStyle = LocalTextStyle.current.copy(color = Color.Black),
+    textStyle: TextStyle = LocalTextStyle.current.copy(color = MaterialTheme.colors.onSurface),
 ) {
     ListItemPicker(
         modifier = modifier,

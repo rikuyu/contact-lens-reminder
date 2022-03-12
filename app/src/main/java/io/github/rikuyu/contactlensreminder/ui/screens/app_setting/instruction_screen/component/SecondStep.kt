@@ -1,11 +1,13 @@
 package io.github.rikuyu.contactlensreminder.ui.screens.app_setting.instruction_screen.component
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -21,7 +23,11 @@ import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
 
 @Composable
 fun SecondStep(modifier: Modifier) {
-    LazyColumn(modifier.fillMaxSize()) {
+    LazyColumn(
+        modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colors.background)
+    ) {
         item { TitleSection(title = stringResource(id = R.string.step_2_1)) }
         item {
             Section(
@@ -52,7 +58,7 @@ fun SecondStep(modifier: Modifier) {
                 description = stringResource(id = R.string.step_2_8)
             )
         }
-        item { SimpleSpacer(height = 20.dp) }
+        item { SimpleSpacer(height = 20.dp, color = MaterialTheme.colors.background) }
     }
 }
 
@@ -60,7 +66,7 @@ fun SecondStep(modifier: Modifier) {
 fun Section(
     painter: Painter,
     description: String,
-    textColor: Color = Color.Black,
+    textColor: Color = MaterialTheme.colors.onSurface,
     fontSize: TextUnit = 14.sp
 ) {
     Column {

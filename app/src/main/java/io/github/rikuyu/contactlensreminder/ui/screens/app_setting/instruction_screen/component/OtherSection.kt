@@ -1,11 +1,13 @@
 package io.github.rikuyu.contactlensreminder.ui.screens.app_setting.instruction_screen.component
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,12 +25,16 @@ import io.github.rikuyu.contactlensreminder.R
 @Composable
 fun OtherSection(
     modifier: Modifier,
-    textColor: Color = Color.Black,
+    textColor: Color = MaterialTheme.colors.onSurface,
     descFontSize: TextUnit = 14.sp
 ) {
     val screenWidth = LocalConfiguration.current.screenWidthDp
 
-    LazyColumn(modifier.fillMaxSize()) {
+    LazyColumn(
+        modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colors.background)
+    ) {
         item { TitleSection(title = stringResource(id = R.string.step_4_1)) }
         item {
             Row {

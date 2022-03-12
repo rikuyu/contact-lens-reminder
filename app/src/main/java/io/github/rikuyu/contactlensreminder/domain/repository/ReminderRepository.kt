@@ -13,4 +13,8 @@ interface ReminderRepository {
     fun cancelReminder()
 
     fun getIsShowOnBoarding(): Boolean
+
+    fun getIsDarkTheme(): Boolean
+
+    fun switchIsDarkTheme()
 }

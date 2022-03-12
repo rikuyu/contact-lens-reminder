@@ -11,7 +11,8 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.ripple.rememberRipple
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -32,7 +33,6 @@ import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingIte
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingViewModel
 import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
 import io.github.rikuyu.contactlensreminder.ui.theme.SkyBlue
-import io.github.rikuyu.contactlensreminder.ui.theme.SmoothGray
 import io.github.rikuyu.contactlensreminder.ui.util.Routes
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
@@ -95,24 +95,21 @@ fun AppSettingScreen(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(SmoothGray)
+                .background(MaterialTheme.colors.surface)
         ) {
             Column(
                 modifier = Modifier
                     .align(Alignment.TopCenter)
                     .verticalScroll(scrollState)
             ) {
-                SimpleSpacer(height = 20.dp, color = SmoothGray)
+                SimpleSpacer(height = 20.dp)
                 SimpleDivider()
                 sectionList.forEach {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .background(Color.White)
-                    ) {
+                    Column(modifier = Modifier.fillMaxWidth()) {
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
+                                .background(MaterialTheme.colors.background)
                                 .clickable {
                                     viewModel.onEvent(AppSettingEvent.LogEvent(it.route))
                                     if (it.id == 3) {
@@ -123,7 +120,7 @@ fun AppSettingScreen(
                                 }
                                 .padding(all = 16.dp)
                         ) {
-                            Text(text = it.title, color = Color.Black)
+                            Text(text = it.title, color = MaterialTheme.colors.onSurface)
                             Icon(
                                 modifier = Modifier.align(Alignment.CenterEnd),
                                 painter = painterResource(id = it.icon),

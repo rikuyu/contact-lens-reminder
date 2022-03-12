@@ -30,6 +30,12 @@ class ReminderViewModelTest {
     @MockK
     lateinit var getIsShowOnBoarding: GetIsShowOnBoarding
 
+    @MockK
+    lateinit var getIsDarkTheme: GetIsDarkTheme
+
+    @MockK
+    lateinit var switchIsDarkTheme: SwitchIsDarkTheme
+
     @Before
     fun setup() {
         MockKAnnotations.init(this)
@@ -38,7 +44,9 @@ class ReminderViewModelTest {
             startReminder,
             getReminderSetting,
             cancelReminder,
-            getIsShowOnBoarding
+            getIsShowOnBoarding,
+            getIsDarkTheme,
+            switchIsDarkTheme
         )
     }
 
