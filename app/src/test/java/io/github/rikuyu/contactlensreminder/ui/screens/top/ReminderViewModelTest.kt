@@ -84,6 +84,7 @@ class ReminderViewModelTest {
             getReminderSetting.invoke()
             getIsShowOnBoarding.invoke()
             getIsDarkTheme.invoke()
+            viewModel.onEvent(event)
             saveReminderSetting.invoke(any())
             startReminder.invoke()
         }

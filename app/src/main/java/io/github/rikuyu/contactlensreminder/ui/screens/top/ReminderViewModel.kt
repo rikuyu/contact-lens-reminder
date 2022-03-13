@@ -29,13 +29,13 @@ class ReminderViewModel @Inject constructor(
     }
 
     fun onEvent(event: ReminderEvent) {
-        useCase.saveReminderSetting(reminder.value)
         when (event) {
             is ReminderEvent.StartReminder -> {
                 _reminder.value = reminder.value.copy(
                     isUsingContactLens = event.data.isUsingContactLens,
                     lensRemainingDays = event.data.lensPeriod
                 )
+                useCase.saveReminderSetting(reminder.value)
                 useCase.startReminder()
             }
             is ReminderEvent.CancelReminder -> {
@@ -43,6 +43,7 @@ class ReminderViewModel @Inject constructor(
                     isUsingContactLens = event.data.isUsingContactLens,
                     lensRemainingDays = event.data.lensPeriod
                 )
+                useCase.saveReminderSetting(reminder.value)
                 useCase.cancelReminder()
             }
             is ReminderEvent.SwitchIsDarkTheme -> useCase.switchIsDarkTheme.invoke()
