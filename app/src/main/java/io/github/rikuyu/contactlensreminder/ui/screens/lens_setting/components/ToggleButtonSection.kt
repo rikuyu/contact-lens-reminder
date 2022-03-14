@@ -1,6 +1,5 @@
 package io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.components
 
-import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
@@ -18,17 +17,15 @@ import androidx.compose.ui.unit.sp
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
 import io.github.rikuyu.contactlensreminder.ui.theme.LightBlue
-import io.github.rikuyu.contactlensreminder.ui.util.makeNotificationSettingIntent
 
 @Composable
 fun ToggleButtonSection(
-    context: Context,
     modifier: Modifier = Modifier,
     text: String,
     textColor: Color = MaterialTheme.colors.onSurface,
     fontSize: TextUnit = 18.sp,
     flag: Boolean,
-    isShowIcon: Boolean,
+    isUseNotification: Boolean?,
     changeSwitch: () -> Unit
 ) {
     Row(
@@ -45,18 +42,21 @@ fun ToggleButtonSection(
                 .padding(start = 12.dp),
             color = textColor, fontSize = fontSize
         )
-        if (isShowIcon) {
-            IconButton(
-                onClick = { context.startActivity(makeNotificationSettingIntent(context)) },
-                modifier = Modifier.padding(end = 14.dp)
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_notify),
-                    contentDescription = null,
-                    tint = LightBlue,
-                    modifier = Modifier.size(33.dp, 33.dp)
-                )
-            }
+        if (isUseNotification != null) {
+            Icon(
+                painter = painterResource(
+                    id =
+                    if (isUseNotification)
+                        R.drawable.ic_notify
+                    else
+                        R.drawable.ic_notify_off
+                ),
+                contentDescription = null,
+                tint = LightBlue,
+                modifier = Modifier
+                    .size(40.dp, 40.dp)
+                    .padding(end = 14.dp)
+            )
         }
         Switch(
             checked = flag,

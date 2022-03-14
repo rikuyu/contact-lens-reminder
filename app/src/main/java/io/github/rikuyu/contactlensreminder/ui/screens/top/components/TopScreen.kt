@@ -11,7 +11,6 @@ import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -22,6 +21,8 @@ import io.github.rikuyu.contactlensreminder.domain.model.ReminderValue
 import io.github.rikuyu.contactlensreminder.ui.screens.top.ReminderEvent
 import io.github.rikuyu.contactlensreminder.ui.screens.top.ReminderViewModel
 import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
+import io.github.rikuyu.contactlensreminder.ui.theme.DeepBlue
+import io.github.rikuyu.contactlensreminder.ui.theme.DeepRed
 import io.github.rikuyu.contactlensreminder.ui.theme.LightBlue
 import io.github.rikuyu.contactlensreminder.ui.util.Routes
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
@@ -67,7 +68,7 @@ fun TopScreen(
             Icon(
                 painter = painterResource(id = if (isDarkTheme) R.drawable.ic_light_mode else R.drawable.ic_dark_mode),
                 contentDescription = null,
-                tint = if (isDarkTheme) Color.Gray else Color.LightGray,
+                tint = if (isDarkTheme) DeepRed else DeepBlue,
                 modifier = Modifier
                     .weight(1f)
                     .size(32.dp, 32.dp)
