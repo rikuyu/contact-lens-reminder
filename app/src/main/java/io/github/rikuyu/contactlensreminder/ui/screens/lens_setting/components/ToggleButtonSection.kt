@@ -54,8 +54,8 @@ fun ToggleButtonSection(
                 contentDescription = null,
                 tint = LightBlue,
                 modifier = Modifier
-                    .size(40.dp, 40.dp)
-                    .padding(end = 14.dp)
+                    .size(50.dp, 50.dp)
+                    .padding(end = 18.dp)
             )
         }
         Switch(

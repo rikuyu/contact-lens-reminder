@@ -42,7 +42,7 @@ fun SetLensPeriodSection(
                     value = period,
                     onValueChange = { setLensPeriod(it) },
                     range = 1..31,
-                    textStyle = LocalTextStyle.current.copy(color = Color.Black)
+                    textStyle = LocalTextStyle.current.copy(color = MaterialTheme.colors.onSurface)
                 )
             } else {
                 Box(

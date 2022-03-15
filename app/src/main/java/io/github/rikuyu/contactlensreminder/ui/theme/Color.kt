@@ -11,5 +11,5 @@ val WebViewBackground = Color(0xFFBDD4FD)
 
 val LightRed = Color(0xFFFC9797)
 
-val DeepBlue = Color(0xFF816EFD)
+val DeepBlue = Color(0xFF8783FC)
 val DeepRed = Color(0xFFFC355D)
