@@ -88,26 +88,10 @@ fun InstructionScreen(navController: NavHostController) {
                     .fillMaxWidth()
             ) { page ->
                 when (page) {
-                    0 -> FirstStep(
-                        Modifier
-                            .padding(5.dp)
-                            .background(Color.White)
-                    )
-                    1 -> SecondStep(
-                        Modifier
-                            .padding(5.dp)
-                            .background(Color.White)
-                    )
-                    2 -> ThirdStep(
-                        Modifier
-                            .padding(5.dp)
-                            .background(Color.White)
-                    )
-                    3 -> OtherSection(
-                        Modifier
-                            .padding(5.dp)
-                            .background(Color.White)
-                    )
+                    0 -> FirstStep(Modifier.padding(5.dp))
+                    1 -> SecondStep(Modifier.padding(5.dp))
+                    2 -> ThirdStep(Modifier.padding(5.dp))
+                    3 -> OtherSection(Modifier.padding(5.dp))
                 }
             }
         }

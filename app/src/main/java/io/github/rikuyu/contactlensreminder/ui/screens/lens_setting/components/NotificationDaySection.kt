@@ -8,9 +8,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,15 +24,15 @@ import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 
 @Composable
-fun SetNotificationDaySection(
+fun NotificationDaySection(
     modifier: Modifier = Modifier,
-    textColor: Color = Color.Black,
+    textColor: Color = MaterialTheme.colors.onSurface,
     fontSize: TextUnit = 18.sp,
     notificationType: Int,
     setNotificationType: (Int) -> Unit
 ) {
     Column(
-        modifier = modifier.background(Color.White)
+        modifier = modifier.background(MaterialTheme.colors.background)
     ) {
         Row(
             modifier = modifier.padding(top = 12.dp, bottom = 12.dp, end = 12.dp, start = 2.dp),

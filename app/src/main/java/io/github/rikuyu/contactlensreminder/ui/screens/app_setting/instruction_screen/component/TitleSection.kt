@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -25,7 +26,7 @@ import io.github.rikuyu.contactlensreminder.ui.theme.SkyBlue
 fun TitleSection(
     title: String,
     painter: Painter = painterResource(id = R.drawable.water_drop),
-    textColor: Color = Color.Black,
+    textColor: Color = MaterialTheme.colors.onSurface,
     fontSize: TextUnit = 16.sp
 ) {
     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 6.dp)) {

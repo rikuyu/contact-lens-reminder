@@ -24,17 +24,17 @@ import io.github.rikuyu.contactlensreminder.ui.theme.LightRed
 import io.github.rikuyu.contactlensreminder.ui.theme.SkyBlue
 
 @Composable
-fun HandleReminderButtonSection(
+fun HandleReminderButton(
     modifier: Modifier,
     isUsingContactLens: Boolean,
     lensRemainingDays: Int,
     startReminder: (Boolean) -> Unit,
     openDialog: () -> Unit
 ) {
-    val onClick: (Boolean) -> Unit = if (!isUsingContactLens) {
-        { startReminder(!it) }
-    } else {
+    val onClick: (Boolean) -> Unit = if (isUsingContactLens) {
         { openDialog() }
+    } else {
+        { startReminder(!it) }
     }
 
     Box(

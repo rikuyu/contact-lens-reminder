@@ -24,4 +24,10 @@ class ReminderRepositoryImpl @Inject constructor(
     }
 
     override fun getIsShowOnBoarding() = localDataSource.getIsShowOnBoarding()
+
+    override fun getIsDarkTheme(): Boolean = localDataSource.getIsDarkTheme()
+
+    override fun switchIsDarkTheme() {
+        localDataSource.saveIsDarkTheme()
+    }
 }

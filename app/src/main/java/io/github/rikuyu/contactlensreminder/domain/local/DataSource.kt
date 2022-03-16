@@ -20,4 +20,8 @@ interface DataSource {
     fun logEvent(label: String)
 
     fun getIsShowOnBoarding(): Boolean
+
+    fun getIsDarkTheme(): Boolean
+
+    fun saveIsDarkTheme()
 }

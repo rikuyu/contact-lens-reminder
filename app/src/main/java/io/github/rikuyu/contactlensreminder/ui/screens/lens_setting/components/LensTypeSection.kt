@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -21,16 +22,16 @@ import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
 
 @Composable
-fun SetLensTypeSection(
+fun LensTypeSection(
     modifier: Modifier,
-    textColor: Color = Color.Black,
+    textColor: Color = MaterialTheme.colors.onSurface,
     fontSize: TextUnit = 18.sp,
     lensType: Int,
     onClick: (Int) -> Unit
 ) {
     Row(
         modifier = modifier
-            .background(Color.White)
+            .background(MaterialTheme.colors.background)
             .padding(top = 14.dp, bottom = 14.dp, end = 12.dp, start = 2.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {

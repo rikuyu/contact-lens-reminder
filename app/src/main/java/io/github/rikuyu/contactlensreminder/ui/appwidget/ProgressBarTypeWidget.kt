@@ -80,7 +80,10 @@ class ProgressBarTypeWidget : AppWidgetProvider() {
                 pendingIntent
             )
             setTextViewText(R.id.tv_remaining_day, context.getString(R.string.text_remaining_day, remainingDay))
+
             if (remainingDay > 0) {
+                setViewVisibility(R.id.progress_bar, View.VISIBLE)
+                setViewVisibility(R.id.progress_bar_expired, View.GONE)
                 setProgressBar(
                     R.id.progress_bar,
                     100,

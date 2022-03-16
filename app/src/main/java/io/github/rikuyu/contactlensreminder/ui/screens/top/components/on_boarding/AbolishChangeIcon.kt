@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -59,11 +60,11 @@ fun AbolishChangeIcon(
                     .padding(horizontal = 8.dp, vertical = 12.dp)
                     .clip(RoundedCornerShape(10))
             )
-            SimpleSpacer(height = 10.dp)
+            SimpleSpacer(height = 10.dp, color = MaterialTheme.colors.background)
             Section(text = R.string.description_1_abolish_app_icon_change)
-            SimpleSpacer(height = 20.dp)
+            SimpleSpacer(height = 20.dp, color = MaterialTheme.colors.background)
             Section(text = R.string.description_2_abolish_app_icon_change)
-            SimpleSpacer(height = 20.dp)
+            SimpleSpacer(height = 20.dp, color = MaterialTheme.colors.background)
             Section(text = R.string.description_3_abolish_app_icon_change)
         }
         Button(

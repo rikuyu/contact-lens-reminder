@@ -20,20 +20,34 @@ class ReminderViewModel @Inject constructor(
     private val _isShowOnBoarding: MutableState<Boolean> = mutableStateOf(true)
     val isShowOnBoarding: State<Boolean> = _isShowOnBoarding
 
+    val isDarkTheme: MutableState<Boolean> = mutableStateOf(false)
+
     init {
         _reminder.value = useCase.getReminderSetting.invoke()
         _isShowOnBoarding.value = useCase.getIsShowOnBoarding.invoke()
+        isDarkTheme.value = useCase.getIsDarkTheme.invoke()
     }
 
     fun onEvent(event: ReminderEvent) {
-        _reminder.value = reminder.value.copy(
-            isUsingContactLens = event.reminderValue.isUsingContactLens,
-            lensRemainingDays = event.reminderValue.lensPeriod
-        )
-        useCase.saveReminderSetting(reminder.value)
         when (event) {
-            is ReminderEvent.StartReminder -> useCase.startReminder()
-            is ReminderEvent.CancelReminder -> useCase.cancelReminder()
+            is ReminderEvent.StartReminder -> {
+                _reminder.value = reminder.value.copy(
+                    isUsingContactLens = event.data.isUsingContactLens,
+                    lensRemainingDays = event.data.lensPeriod
+                )
+                useCase.saveReminderSetting(reminder.value)
+                useCase.startReminder()
+            }
+            is ReminderEvent.CancelReminder -> {
+                _reminder.value = reminder.value.copy(
+                    isUsingContactLens = event.data.isUsingContactLens,
+                    lensRemainingDays = event.data.lensPeriod
+                )
+                useCase.saveReminderSetting(reminder.value)
+                useCase.cancelReminder()
+            }
+            is ReminderEvent.SwitchIsDarkTheme -> useCase.switchIsDarkTheme.invoke()
+            is ReminderEvent.GetIsDarkTheme -> isDarkTheme.value = useCase.getIsDarkTheme.invoke()
         }
     }
 }

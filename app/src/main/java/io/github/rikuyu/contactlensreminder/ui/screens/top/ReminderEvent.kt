@@ -2,13 +2,17 @@ package io.github.rikuyu.contactlensreminder.ui.screens.top
 
 import io.github.rikuyu.contactlensreminder.domain.model.ReminderValue
 
-sealed class ReminderEvent(val reminderValue: ReminderValue) {
+sealed class ReminderEvent {
 
     data class StartReminder(
         val data: ReminderValue
-    ) : ReminderEvent(data)
+    ) : ReminderEvent()
 
     data class CancelReminder(
         val data: ReminderValue
-    ) : ReminderEvent(data)
+    ) : ReminderEvent()
+
+    object GetIsDarkTheme : ReminderEvent()
+
+    object SwitchIsDarkTheme : ReminderEvent()
 }
