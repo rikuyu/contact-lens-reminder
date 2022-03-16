@@ -18,6 +18,8 @@ class ReminderUseCaseTest {
     lateinit var cancelReminder: CancelReminder
     lateinit var reminderUseCase: ReminderUseCase
     lateinit var getIsShowOnBoarding: GetIsShowOnBoarding
+    lateinit var getIsDarkTheme: GetIsDarkTheme
+    lateinit var switchIsDarkTheme: SwitchIsDarkTheme
 
     @MockK
     lateinit var repository: ReminderRepository
@@ -43,12 +45,16 @@ class ReminderUseCaseTest {
         getReminderSetting = GetReminderSetting(repository)
         cancelReminder = CancelReminder(repository)
         getIsShowOnBoarding = GetIsShowOnBoarding(repository)
+        getIsDarkTheme = GetIsDarkTheme(repository)
+        switchIsDarkTheme = SwitchIsDarkTheme(repository)
         reminderUseCase = ReminderUseCase(
             saveReminderSetting,
             startReminder,
             getReminderSetting,
             cancelReminder,
-            getIsShowOnBoarding
+            getIsShowOnBoarding,
+            getIsDarkTheme,
+            switchIsDarkTheme
         )
     }
 

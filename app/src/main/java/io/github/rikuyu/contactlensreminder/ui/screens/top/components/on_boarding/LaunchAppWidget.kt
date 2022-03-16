@@ -3,6 +3,7 @@ package io.github.rikuyu.contactlensreminder.ui.screens.top.components.on_boardi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -46,13 +47,13 @@ fun LaunchAppWidget(modifier: Modifier) {
                 .padding(horizontal = 8.dp)
                 .clip(RoundedCornerShape(10))
         )
-        SimpleSpacer(height = 14.dp)
+        SimpleSpacer(height = 14.dp, color = MaterialTheme.colors.background)
         Section(text = R.string.description_1_launch_app__widget)
-        SimpleSpacer(height = 20.dp)
+        SimpleSpacer(height = 20.dp, color = MaterialTheme.colors.background)
         Section(text = R.string.description_2_launch_app__widget)
-        SimpleSpacer(height = 20.dp)
+        SimpleSpacer(height = 20.dp, color = MaterialTheme.colors.background)
         Section(text = R.string.description_3_launch_app__widget)
-        SimpleSpacer(height = 20.dp)
+        SimpleSpacer(height = 20.dp, color = MaterialTheme.colors.background)
         Section(text = R.string.description_4_launch_app__widget)
     }
 }

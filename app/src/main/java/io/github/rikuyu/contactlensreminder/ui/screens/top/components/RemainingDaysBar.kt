@@ -5,6 +5,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -39,7 +40,7 @@ fun RemainingDaysBar(
     isUseNotification: Boolean,
     supportTextFontSize: TextUnit = 24.sp,
     periodTextFontSize: TextUnit = 16.sp,
-    supportTextColor: Color = Color.Black,
+    supportTextColor: Color = MaterialTheme.colors.onSurface,
     color: Color = CleanBlue,
     radius: Dp = 150.dp,
     strokeWidth: Dp = 30.dp

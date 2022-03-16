@@ -30,6 +30,12 @@ class ReminderViewModelTest {
     @MockK
     lateinit var getIsShowOnBoarding: GetIsShowOnBoarding
 
+    @MockK
+    lateinit var getIsDarkTheme: GetIsDarkTheme
+
+    @MockK
+    lateinit var switchIsDarkTheme: SwitchIsDarkTheme
+
     @Before
     fun setup() {
         MockKAnnotations.init(this)
@@ -38,7 +44,9 @@ class ReminderViewModelTest {
             startReminder,
             getReminderSetting,
             cancelReminder,
-            getIsShowOnBoarding
+            getIsShowOnBoarding,
+            getIsDarkTheme,
+            switchIsDarkTheme
         )
     }
 
@@ -62,6 +70,8 @@ class ReminderViewModelTest {
         every { saveReminderSetting.invoke(any()) } returns Unit
         every { startReminder.invoke() } returns Unit
         every { getIsShowOnBoarding.invoke() } returns true
+        every { getIsDarkTheme.invoke() } returns false
+
         viewModel = ReminderViewModel(useCase)
 
         assertThat(viewModel.reminder.value).isEqualTo(defaultReminderValue)
@@ -72,8 +82,10 @@ class ReminderViewModelTest {
 
         verify(exactly = 1) {
             getReminderSetting.invoke()
-            saveReminderSetting.invoke(any())
+            getIsShowOnBoarding.invoke()
+            getIsDarkTheme.invoke()
             viewModel.onEvent(event)
+            saveReminderSetting.invoke(any())
             startReminder.invoke()
         }
     }

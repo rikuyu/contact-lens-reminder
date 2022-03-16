@@ -4,12 +4,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
@@ -23,7 +22,7 @@ import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 @Composable
 fun SetLensPeriodSection(
     modifier: Modifier = Modifier,
-    textColor: Color = Color.Black,
+    textColor: Color = MaterialTheme.colors.onSecondary,
     fontSize: TextUnit = 18.sp,
     period: Int,
     setLensPeriod: (Int) -> Unit
@@ -31,23 +30,19 @@ fun SetLensPeriodSection(
     var isShowLensPeriodPicker by remember { mutableStateOf(false) }
 
     Column(
-        modifier = modifier.background(Color.White)
+        modifier = modifier.background(MaterialTheme.colors.background)
     ) {
         Row(
             modifier = modifier.padding(top = 0.dp, bottom = 14.dp, end = 12.dp, start = 2.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Spacer(
-                modifier = Modifier
-                    .weight(1f)
-                    .background(Color.White)
-            )
+            Spacer(modifier = Modifier.weight(1f))
             if (isShowLensPeriodPicker) {
                 NumberPicker(
                     value = period,
                     onValueChange = { setLensPeriod(it) },
                     range = 1..31,
-                    textStyle = LocalTextStyle.current.copy(color = Color.Black)
+                    textStyle = LocalTextStyle.current.copy(color = MaterialTheme.colors.onSurface)
                 )
             } else {
                 Box(
@@ -87,7 +82,7 @@ fun SetLensPeriodSection(
                     )
                 } else {
                     Icon(
-                        imageVector = Icons.Default.Refresh,
+                        painter = painterResource(id = R.drawable.ic_date),
                         contentDescription = null,
                         tint = Color.White
                     )
