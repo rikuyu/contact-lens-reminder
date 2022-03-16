@@ -5,7 +5,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Icon
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.runtime.Composable
@@ -21,17 +24,17 @@ import io.github.rikuyu.contactlensreminder.ui.theme.LightRed
 import io.github.rikuyu.contactlensreminder.ui.theme.SkyBlue
 
 @Composable
-fun HandleReminderButtonSection(
+fun HandleReminderButton(
     modifier: Modifier,
     isUsingContactLens: Boolean,
     lensRemainingDays: Int,
     startReminder: (Boolean) -> Unit,
     openDialog: () -> Unit
 ) {
-    val onClick: (Boolean) -> Unit = if (!isUsingContactLens) {
-        { startReminder(!it) }
-    } else {
+    val onClick: (Boolean) -> Unit = if (isUsingContactLens) {
         { openDialog() }
+    } else {
+        { startReminder(!it) }
     }
 
     Box(

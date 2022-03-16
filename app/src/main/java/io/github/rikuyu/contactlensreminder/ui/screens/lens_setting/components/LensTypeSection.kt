@@ -22,7 +22,7 @@ import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
 
 @Composable
-fun SetLensTypeSection(
+fun LensTypeSection(
     modifier: Modifier,
     textColor: Color = MaterialTheme.colors.onSurface,
     fontSize: TextUnit = 18.sp,

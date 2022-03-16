@@ -74,7 +74,7 @@ fun LensSettingScreen(
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = { navController.navigate(Routes.TOP) }) {
+                    IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = null,
@@ -100,7 +100,7 @@ fun LensSettingScreen(
                     SimpleDivider()
                     SimpleSpacer(height = 20.dp, color = MaterialTheme.colors.surface)
                     SimpleDivider()
-                    SetLensTypeSection(
+                    LensTypeSection(
                         modifier = Modifier.fillMaxWidth(),
                         lensType = lensType
                     ) {
@@ -112,7 +112,7 @@ fun LensSettingScreen(
                     }
                     AnimatedVisibility(visible = !isShowLensPeriodPicker) { SimpleDivider() }
                     AnimatedVisibility(visible = isShowLensPeriodPicker) {
-                        SetLensPeriodSection(
+                        LensPeriodSection(
                             modifier = Modifier.fillMaxWidth(),
                             period = lensPeriod,
                             setLensPeriod = {
@@ -133,14 +133,14 @@ fun LensSettingScreen(
                     SimpleDivider()
                     AnimatedVisibility(visible = isUseNotification) {
                         Column {
-                            SetNotificationDaySection(
+                            NotificationDaySection(
                                 modifier = Modifier.fillMaxWidth(),
                                 notificationType = notificationType
                             ) {
                                 notificationType = it
                                 viewModelLens.onEvent(LensSettingEvent.NotificationDay(it))
                             }
-                            SetNotificationTimeSection(
+                            NotificationTimeSection(
                                 modifier = Modifier.fillMaxWidth(),
                                 notificationTimeHour = notificationTimeHour,
                                 setNotificationTimeHour = {
@@ -168,7 +168,7 @@ fun LensSettingScreen(
                     }
                     SimpleDivider()
                     AnimatedVisibility(visible = isShowLensPowerSection) {
-                        SetLensPowerSection(
+                        LensPowerSection(
                             modifier = Modifier.fillMaxWidth(),
                             leftLensPower = leftLensPower.toDouble(),
                             setLeftLensPower = {
@@ -183,7 +183,7 @@ fun LensSettingScreen(
                         )
                     }
                 }
-                SetSettingButton(modifier = Modifier.fillMaxWidth()) {
+                SaveSettingButton(modifier = Modifier.fillMaxWidth()) {
                     isShowLensPeriodPicker = false
                     Toast.makeText(
                         context,

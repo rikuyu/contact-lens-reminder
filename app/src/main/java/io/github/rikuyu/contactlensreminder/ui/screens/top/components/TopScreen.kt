@@ -116,7 +116,7 @@ fun TopScreen(
                 isUseNotification = isUseNotification
             )
         }
-        HandleReminderButtonSection(
+        HandleReminderButton(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f),

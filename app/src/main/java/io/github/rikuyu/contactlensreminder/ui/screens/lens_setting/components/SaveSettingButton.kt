@@ -21,7 +21,7 @@ import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
 
 @Composable
-fun SetSettingButton(
+fun SaveSettingButton(
     modifier: Modifier,
     fontSize: TextUnit = 18.sp,
     onClick: () -> Unit

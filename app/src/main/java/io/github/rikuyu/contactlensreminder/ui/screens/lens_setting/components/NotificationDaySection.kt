@@ -24,7 +24,7 @@ import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 
 @Composable
-fun SetNotificationDaySection(
+fun NotificationDaySection(
     modifier: Modifier = Modifier,
     textColor: Color = MaterialTheme.colors.onSurface,
     fontSize: TextUnit = 18.sp,

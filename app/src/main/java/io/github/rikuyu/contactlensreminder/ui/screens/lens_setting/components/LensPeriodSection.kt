@@ -1,6 +1,7 @@
 package io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -20,7 +21,7 @@ import io.github.rikuyu.contactlensreminder.ui.theme.PaleBlue
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 
 @Composable
-fun SetLensPeriodSection(
+fun LensPeriodSection(
     modifier: Modifier = Modifier,
     textColor: Color = MaterialTheme.colors.onSecondary,
     fontSize: TextUnit = 18.sp,
@@ -50,7 +51,10 @@ fun SetLensPeriodSection(
                         .background(PaleBlue, shape = RoundedCornerShape(20))
                         .padding(vertical = 8.dp, horizontal = 10.dp)
                 ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.clickable { isShowLensPeriodPicker = true }
+                    ) {
                         Text(
                             text = period.toString(),
                             color = textColor,

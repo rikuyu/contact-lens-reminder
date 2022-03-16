@@ -1,6 +1,7 @@
 package io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,7 +25,7 @@ import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 import io.github.rikuyu.contactlensreminder.ui.util.StringNumberPicker
 
 @Composable
-fun SetNotificationTimeSection(
+fun NotificationTimeSection(
     modifier: Modifier = Modifier,
     textColor: Color = MaterialTheme.colors.onSurface,
     fontSize: TextUnit = 18.sp,
@@ -68,7 +69,10 @@ fun SetNotificationTimeSection(
                         .background(PaleBlue, shape = RoundedCornerShape(20))
                         .padding(vertical = 8.dp, horizontal = 10.dp)
                 ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.clickable { isShowLensPeriodPicker = true }
+                    ) {
                         Text(
                             text = notificationTimeHour.toString(),
                             color = MaterialTheme.colors.onSecondary,

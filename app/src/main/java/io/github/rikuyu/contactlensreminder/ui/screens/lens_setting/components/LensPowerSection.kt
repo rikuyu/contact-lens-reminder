@@ -21,7 +21,7 @@ import io.github.rikuyu.contactlensreminder.ui.util.LensPowerPicker
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 
 @Composable
-fun SetLensPowerSection(
+fun LensPowerSection(
     modifier: Modifier,
     textColor: Color = MaterialTheme.colors.onSurface,
     fontSize: TextUnit = 18.sp,
