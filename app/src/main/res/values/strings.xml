@@ -35,6 +35,9 @@
     <string name="period">使用期間</string>
     <string name="two_weeks">2週間</string>
     <string name="one_month">1ヵ月</string>
+
+
+
     <string name="other">Other</string>
     <string name="success_save_setting">設定が保存されました</string>
 
