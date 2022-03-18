@@ -132,6 +132,12 @@ fun OtherSection(
                 fontSize = descFontSize,
                 color = textColor
             )
+            Text(
+                modifier = Modifier.padding(top = 4.dp, start = 10.dp, end = 10.dp),
+                text = stringResource(id = R.string.step_4_12),
+                fontSize = descFontSize,
+                color = textColor
+            )
             SimpleSpacer(height = 20.dp, color = MaterialTheme.colors.background)
         }
     }

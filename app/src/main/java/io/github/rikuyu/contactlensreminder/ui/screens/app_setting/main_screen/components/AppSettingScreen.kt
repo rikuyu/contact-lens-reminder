@@ -32,7 +32,7 @@ import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingEve
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingItem
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingViewModel
 import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
-import io.github.rikuyu.contactlensreminder.ui.theme.SkyBlue
+import io.github.rikuyu.contactlensreminder.ui.theme.LightBlue
 import io.github.rikuyu.contactlensreminder.ui.util.Routes
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
@@ -124,7 +124,7 @@ fun AppSettingScreen(
                             Icon(
                                 modifier = Modifier.align(Alignment.CenterEnd),
                                 painter = painterResource(id = it.icon),
-                                tint = SkyBlue,
+                                tint = LightBlue,
                                 contentDescription = null
                             )
                         }

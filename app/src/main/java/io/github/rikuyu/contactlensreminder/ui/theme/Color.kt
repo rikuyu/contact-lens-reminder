@@ -8,8 +8,4 @@ val LightBlue = Color(0xFF97C8FC)
 val SkyBlue = Color(0xFF4fa0f7)
 val PaleBlue = Color(0xFFCFE6FF)
 val WebViewBackground = Color(0xFFBDD4FD)
-
 val LightRed = Color(0xFFFC9797)
-
-val DeepBlue = Color(0xFF8783FC)
-val DeepRed = Color(0xFFFC355D)
