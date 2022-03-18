@@ -41,9 +41,16 @@ AppWidgetが日付をまたいで変化する様子
 
 <img src="https://user-images.githubusercontent.com/51118613/156142151-bb4a9376-93d4-453d-aeaf-24ebd38c7fee.gif" width="270">
 
+### ライト/ダークモード
+
+| ライトモード | ダークモード |
+|:---:|:---:|
+| <img src="https://user-images.githubusercontent.com/51118613/158942189-20ff8ba8-8872-4ddd-84bc-9efd4c3153eb.jpg" width=220 > | <img src="https://user-images.githubusercontent.com/51118613/158942244-b96f98c1-c63c-4388-8ded-c8a4f6e89d12.jpg" width=220 > |
+
 ### デモ（v2.0.0 から廃止）
 
-アプリアイコンが日付をまたいで変化する様子（Googleカレンダーのアイコンも変わっていることに注目）
+本アプリアイコンとGoogleカレンダーのアイコンが日付をまたいで変化する様子
+
 <img src="https://user-images.githubusercontent.com/51118613/155189795-1d74ebf9-799e-468a-894d-1b1765cb3cc5.gif" width="270">
 
 ### 関連ブログ記事

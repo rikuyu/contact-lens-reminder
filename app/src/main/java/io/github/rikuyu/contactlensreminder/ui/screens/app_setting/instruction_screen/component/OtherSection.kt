@@ -2,10 +2,7 @@ package io.github.rikuyu.contactlensreminder.ui.screens.app_setting.instruction_
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -78,6 +75,25 @@ fun OtherSection(
         }
         item { TitleSection(title = stringResource(id = R.string.step_4_5)) }
         item {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.light_dark_theme),
+                    contentDescription = null,
+                    modifier = Modifier.padding(8.dp)
+                )
+            }
+            Text(
+                modifier = Modifier.padding(10.dp),
+                text = stringResource(id = R.string.step_4_6),
+                fontSize = descFontSize,
+                color = textColor
+            )
+        }
+        item { TitleSection(title = stringResource(id = R.string.step_4_7)) }
+        item {
             Row {
                 Image(
                     painter = painterResource(id = R.drawable.app_widget),
@@ -90,7 +106,7 @@ fun OtherSection(
                 )
                 Text(
                     modifier = Modifier.padding(top = 10.dp),
-                    text = stringResource(id = R.string.step_4_6),
+                    text = stringResource(id = R.string.step_4_8),
                     fontSize = descFontSize,
                     color = textColor
                 )
@@ -100,19 +116,19 @@ fun OtherSection(
             SimpleSpacer(height = 20.dp, color = MaterialTheme.colors.background)
             Text(
                 modifier = Modifier.padding(horizontal = 10.dp),
-                text = stringResource(id = R.string.step_4_7),
+                text = stringResource(id = R.string.step_4_9),
                 fontSize = 16.sp,
                 color = Color.Red
             )
             Text(
                 modifier = Modifier.padding(vertical = 10.dp, horizontal = 10.dp),
-                text = stringResource(id = R.string.step_4_8),
+                text = stringResource(id = R.string.step_4_10),
                 fontSize = descFontSize,
                 color = textColor
             )
             Text(
-                modifier = Modifier.padding(top = 6.dp, start = 10.dp, end = 10.dp),
-                text = stringResource(id = R.string.step_4_9),
+                modifier = Modifier.padding(top = 4.dp, start = 10.dp, end = 10.dp),
+                text = stringResource(id = R.string.step_4_11),
                 fontSize = descFontSize,
                 color = textColor
             )
