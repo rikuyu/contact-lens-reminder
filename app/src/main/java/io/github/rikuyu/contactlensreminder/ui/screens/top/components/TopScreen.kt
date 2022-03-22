@@ -85,7 +85,7 @@ fun TopScreen(
             Icon(
                 painter = painterResource(id = R.drawable.ic_help),
                 contentDescription = null,
-                tint = MaterialTheme.colors.secondary,
+                tint = MaterialTheme.colors.primaryVariant,
                 modifier = Modifier
                     .weight(1f)
                     .size(36.dp, 36.dp)

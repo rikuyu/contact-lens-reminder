@@ -21,8 +21,6 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.pagerTabIndicatorOffset
 import com.google.accompanist.pager.rememberPagerState
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
-import io.github.rikuyu.contactlensreminder.ui.theme.SkyBlue
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPagerApi::class)
@@ -40,7 +38,7 @@ fun InstructionScreen(navController: NavHostController) {
                     }
                 },
                 contentColor = Color.White,
-                backgroundColor = CleanBlue
+                backgroundColor = MaterialTheme.colors.primary
             )
         }
     ) {
@@ -60,7 +58,7 @@ fun InstructionScreen(navController: NavHostController) {
             TabRow(
                 selectedTabIndex = pagerState.currentPage,
                 contentColor = Color.White,
-                backgroundColor = SkyBlue,
+                backgroundColor = MaterialTheme.colors.primaryVariant,
                 indicator = { tabPositions ->
                     TabRowDefaults.Indicator(
                         Modifier.pagerTabIndicatorOffset(pagerState, tabPositions)
@@ -83,7 +81,7 @@ fun InstructionScreen(navController: NavHostController) {
                 count = pages.size,
                 state = pagerState,
                 modifier = Modifier
-                    .background(CleanBlue)
+                    .background(MaterialTheme.colors.primary)
                     .weight(1f)
                     .fillMaxWidth()
             ) { page ->

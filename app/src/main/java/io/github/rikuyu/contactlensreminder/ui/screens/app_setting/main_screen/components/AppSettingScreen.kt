@@ -31,8 +31,6 @@ import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingEve
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingItem
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingViewModel
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.color_theme.ColorPickerDialog
-import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
-import io.github.rikuyu.contactlensreminder.ui.theme.LightBlue
 import io.github.rikuyu.contactlensreminder.ui.util.Routes
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
@@ -96,7 +94,7 @@ fun AppSettingScreen(
                     }
                 },
                 contentColor = Color.White,
-                backgroundColor = CleanBlue
+                backgroundColor = MaterialTheme.colors.primary
             )
         }
     ) {
@@ -132,7 +130,7 @@ fun AppSettingScreen(
                             Icon(
                                 modifier = Modifier.align(Alignment.CenterEnd),
                                 painter = painterResource(id = it.icon),
-                                tint = LightBlue,
+                                tint = MaterialTheme.colors.secondary,
                                 contentDescription = null
                             )
                         }
@@ -149,7 +147,11 @@ fun AppSettingScreen(
                     .padding(bottom = 20.dp)
                     .clickable(
                         interactionSource = remember { MutableInteractionSource() },
-                        indication = rememberRipple(color = CleanBlue, bounded = false, radius = 50.dp)
+                        indication = rememberRipple(
+                            color = MaterialTheme.colors.primary,
+                            bounded = false,
+                            radius = 50.dp
+                        )
                     ) {
                         clipboardManager.setText(AnnotatedString(version))
                         Toast

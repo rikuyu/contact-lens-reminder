@@ -18,7 +18,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
 
 @Composable
@@ -48,7 +47,7 @@ fun AbolishChangeIcon(
                 )
                 Text(
                     text = stringResource(id = R.string.title_abolish_app_icon_change),
-                    color = CleanBlue,
+                    color = MaterialTheme.colors.primary,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.SemiBold
                 )
@@ -70,7 +69,7 @@ fun AbolishChangeIcon(
         Button(
             onClick = navigate,
             colors = ButtonDefaults.textButtonColors(
-                backgroundColor = CleanBlue,
+                backgroundColor = MaterialTheme.colors.primary,
                 contentColor = Color.White
             ),
             modifier = Modifier

@@ -25,6 +25,7 @@ import io.github.rikuyu.contactlensreminder.ui.theme.ThemeColorPalette
 
 @Composable
 fun ColorPickerDialog(
+    color: Color = MaterialTheme.colors.primary,
     dialogState: Boolean,
     changeDialogState: (Boolean) -> Unit,
     changeThemeColor: (Boolean) -> Unit,
@@ -54,39 +55,39 @@ fun ColorPickerDialog(
                     horizontalArrangement = Arrangement.Center,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    ThemeColorItem(ThemeColorPalette.Blue)
+                    ThemeColorItem(ThemeColorPalette.Blue.primaryBlue)
                     Spacer(modifier = Modifier.width(4.dp))
-                    ThemeColorItem(ThemeColorPalette.Navy)
+                    ThemeColorItem(ThemeColorPalette.Navy.primaryNavy)
                     Spacer(modifier = Modifier.width(4.dp))
-                    ThemeColorItem(ThemeColorPalette.Cyan)
+                    ThemeColorItem(ThemeColorPalette.Cyan.primaryCyan)
                     Spacer(modifier = Modifier.width(4.dp))
-                    ThemeColorItem(ThemeColorPalette.PeacockBlue)
+                    ThemeColorItem(ThemeColorPalette.PeacockBlue.primaryPeacockBlue)
                 }
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    ThemeColorItem(ThemeColorPalette.Green)
+                    ThemeColorItem(ThemeColorPalette.Green.primaryGreen)
                     Spacer(modifier = Modifier.width(4.dp))
-                    ThemeColorItem(ThemeColorPalette.YellowGreen)
+                    ThemeColorItem(ThemeColorPalette.YellowGreen.primaryYellowGreen)
                     Spacer(modifier = Modifier.width(4.dp))
-                    ThemeColorItem(ThemeColorPalette.Yellow)
+                    ThemeColorItem(ThemeColorPalette.Yellow.primaryYellow)
                     Spacer(modifier = Modifier.width(4.dp))
-                    ThemeColorItem(ThemeColorPalette.Orange)
+                    ThemeColorItem(ThemeColorPalette.Orange.primaryOrange)
                 }
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    ThemeColorItem(ThemeColorPalette.Brown)
+                    ThemeColorItem(ThemeColorPalette.Brown.primaryBrown)
                     Spacer(modifier = Modifier.width(4.dp))
-                    ThemeColorItem(ThemeColorPalette.Purple)
+                    ThemeColorItem(ThemeColorPalette.Purple.primaryPurple)
                     Spacer(modifier = Modifier.width(4.dp))
-                    ThemeColorItem(ThemeColorPalette.Pink)
+                    ThemeColorItem(ThemeColorPalette.Pink.primaryPink)
                     Spacer(modifier = Modifier.width(4.dp))
-                    ThemeColorItem(ThemeColorPalette.Red)
+                    ThemeColorItem(ThemeColorPalette.Red.primaryRed)
                 }
                 Row(
                     horizontalArrangement = Arrangement.End,
@@ -97,13 +98,13 @@ fun ColorPickerDialog(
                     TextButton(
                         onClick = { changeDialogState(false) }
                     ) {
-                        Text(text = stringResource(id = R.string.btn_cancel))
+                        Text(text = stringResource(id = R.string.btn_cancel), color = color)
                     }
                     Spacer(modifier = Modifier.width(10.dp))
                     TextButton(
                         onClick = { changeDialogState(false) }
                     ) {
-                        Text(text = stringResource(id = R.string.btn_ok))
+                        Text(text = stringResource(id = R.string.btn_ok), color = color)
                     }
                 }
             }

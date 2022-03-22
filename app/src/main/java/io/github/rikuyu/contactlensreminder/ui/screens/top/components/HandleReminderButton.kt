@@ -7,10 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.runtime.*
@@ -25,11 +22,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.ui.theme.LightRed
-import io.github.rikuyu.contactlensreminder.ui.theme.SkyBlue
 
 @Composable
 fun HandleReminderButton(
     modifier: Modifier,
+    color: Color = MaterialTheme.colors.primaryVariant,
     isUsingContactLens: Boolean,
     lensRemainingDays: Int,
     startReminder: (Boolean) -> Unit,
@@ -53,7 +50,7 @@ fun HandleReminderButton(
             onClick = { onClick(isUsingContactLens) },
             modifier = Modifier.size(240.dp, 60.dp),
             colors = ButtonDefaults.textButtonColors(
-                backgroundColor = if (lensRemainingDays < 1) LightRed else SkyBlue,
+                backgroundColor = if (lensRemainingDays < 1) LightRed else color,
                 contentColor = Color.White,
                 disabledContentColor = Color.LightGray
             ),

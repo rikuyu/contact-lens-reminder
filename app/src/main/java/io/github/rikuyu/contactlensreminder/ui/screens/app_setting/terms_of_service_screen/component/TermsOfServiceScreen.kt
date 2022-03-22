@@ -17,7 +17,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
 
@@ -35,7 +34,7 @@ fun TermsOfServiceScreen(navController: NavHostController) {
                     }
                 },
                 contentColor = Color.White,
-                backgroundColor = CleanBlue
+                backgroundColor = MaterialTheme.colors.primary
             )
         }
     ) {

@@ -15,8 +15,6 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
-import io.github.rikuyu.contactlensreminder.ui.theme.LightBlue
 
 @Composable
 fun ToggleButtonSection(
@@ -25,8 +23,10 @@ fun ToggleButtonSection(
     textColor: Color = MaterialTheme.colors.onSurface,
     fontSize: TextUnit = 18.sp,
     flag: Boolean,
+    checkedColor: Color = MaterialTheme.colors.primary,
+    unCheckedColor: Color = MaterialTheme.colors.secondary,
     isUseNotification: Boolean?,
-    changeSwitch: () -> Unit
+    changeSwitch: () -> Unit,
 ) {
     Row(
         modifier = modifier
@@ -52,7 +52,7 @@ fun ToggleButtonSection(
                         R.drawable.ic_notify_off
                 ),
                 contentDescription = null,
-                tint = LightBlue,
+                tint = checkedColor.copy(alpha = 0.5f),
                 modifier = Modifier
                     .size(50.dp, 50.dp)
                     .padding(end = 18.dp)
@@ -65,10 +65,10 @@ fun ToggleButtonSection(
                 .padding(end = 12.dp),
             onCheckedChange = { changeSwitch() },
             colors = SwitchDefaults.colors(
-                checkedThumbColor = CleanBlue,
-                checkedTrackColor = CleanBlue,
-                uncheckedThumbColor = LightBlue,
-                uncheckedTrackColor = LightBlue
+                checkedThumbColor = checkedColor,
+                checkedTrackColor = checkedColor,
+                uncheckedThumbColor = unCheckedColor,
+                uncheckedTrackColor = unCheckedColor
             )
         )
     }

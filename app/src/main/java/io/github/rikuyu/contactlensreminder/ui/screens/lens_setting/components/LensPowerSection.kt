@@ -15,8 +15,6 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
-import io.github.rikuyu.contactlensreminder.ui.theme.PaleBlue
 import io.github.rikuyu.contactlensreminder.ui.util.LensPowerPicker
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 
@@ -68,7 +66,7 @@ fun LensPowerSection(
                 Button(
                     onClick = { isShowLensPowerPicker = !isShowLensPowerPicker },
                     colors = ButtonDefaults.textButtonColors(
-                        backgroundColor = CleanBlue,
+                        backgroundColor = MaterialTheme.colors.primary,
                         contentColor = Color.White,
                         disabledContentColor = Color.LightGray
                     ),
@@ -121,7 +119,7 @@ fun SetOneLensPowerItem(
     } else {
         Box(
             modifier = Modifier
-                .background(PaleBlue, shape = RoundedCornerShape(20))
+                .background(MaterialTheme.colors.primary.copy(alpha = 0.2f), shape = RoundedCornerShape(20))
                 .clickable { changeIsShowLensPowerPicker.invoke() }
                 .padding(vertical = 8.dp, horizontal = 10.dp)
         ) {

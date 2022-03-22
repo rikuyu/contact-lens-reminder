@@ -16,8 +16,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.chargemap.compose.numberpicker.NumberPicker
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
-import io.github.rikuyu.contactlensreminder.ui.theme.PaleBlue
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 
 @Composable
@@ -26,7 +24,7 @@ fun LensPeriodSection(
     textColor: Color = MaterialTheme.colors.onSecondary,
     fontSize: TextUnit = 18.sp,
     period: Int,
-    setLensPeriod: (Int) -> Unit
+    setLensPeriod: (Int) -> Unit,
 ) {
     var isShowLensPeriodPicker by remember { mutableStateOf(false) }
 
@@ -48,7 +46,7 @@ fun LensPeriodSection(
             } else {
                 Box(
                     modifier = Modifier
-                        .background(PaleBlue, shape = RoundedCornerShape(20))
+                        .background(MaterialTheme.colors.primary.copy(alpha = 0.2f), shape = RoundedCornerShape(20))
                         .padding(vertical = 8.dp, horizontal = 10.dp)
                 ) {
                     Row(
@@ -72,7 +70,7 @@ fun LensPeriodSection(
             Button(
                 onClick = { isShowLensPeriodPicker = !isShowLensPeriodPicker },
                 colors = ButtonDefaults.textButtonColors(
-                    backgroundColor = CleanBlue,
+                    backgroundColor = MaterialTheme.colors.primary,
                     contentColor = Color.White,
                     disabledContentColor = Color.LightGray
                 ),

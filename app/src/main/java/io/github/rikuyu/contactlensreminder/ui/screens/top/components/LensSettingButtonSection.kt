@@ -7,10 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,11 +18,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.ui.theme.SkyBlue
 
 @Composable
 fun LensSettingButtonSection(
     modifier: Modifier,
+    color: Color = MaterialTheme.colors.primaryVariant,
     isUsingContactLens: Boolean,
     showAlertToast: () -> Unit,
     navigate: () -> Unit,
@@ -53,7 +50,7 @@ fun LensSettingButtonSection(
             onClick = onClick,
             modifier = Modifier.size(240.dp, 60.dp),
             colors = ButtonDefaults.textButtonColors(
-                backgroundColor = if (!isUsingContactLens) SkyBlue else Color.LightGray,
+                backgroundColor = if (!isUsingContactLens) color else Color.LightGray,
                 contentColor = Color.White,
                 disabledContentColor = Color.White
             ),

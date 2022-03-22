@@ -6,29 +6,15 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
-private val DarkColorPalette = darkColors(
-    primary = CleanBlue,
-    primaryVariant = CleanBlue,
-    secondary = LightBlue,
-    surface = Color.Black
-)
-
-private val LightColorPalette = lightColors(
-    primary = CleanBlue,
-    primaryVariant = CleanBlue,
-    secondary = CleanBlue,
-    surface = SmoothGray
-)
-
 @Composable
 fun ContactLensReminderTheme(
     darkTheme: Boolean,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val colors = if (darkTheme) {
-        DarkColorPalette
+        ThemePalette.BlueDarkColorPalette
     } else {
-        LightColorPalette
+        ThemePalette.BlueLightColorPalette
     }
 
     MaterialTheme(
@@ -36,5 +22,21 @@ fun ContactLensReminderTheme(
         typography = Typography,
         shapes = Shapes,
         content = content
+    )
+}
+
+object ThemePalette {
+    val BlueDarkColorPalette = darkColors(
+        primary = ThemeColorPalette.Blue.primaryBlue,
+        primaryVariant = ThemeColorPalette.Blue.primaryVariantBlue,
+        secondary = ThemeColorPalette.Blue.secondaryBlue,
+        surface = Color.Black
+    )
+
+    val BlueLightColorPalette = lightColors(
+        primary = ThemeColorPalette.Blue.primaryBlue,
+        primaryVariant = ThemeColorPalette.Blue.primaryVariantBlue,
+        secondary = ThemeColorPalette.Blue.secondaryBlue,
+        surface = SmoothGray
     )
 }
