@@ -44,6 +44,7 @@
     <string name="help">ヘルプ（使い方）</string>
     <string name="notification_setting">通知設定</string>
     <string name="inquiry">お問い合わせ</string>
+    <string name="color_theme">テーマカラー変更</string>
     <string name="version">version %s</string>
 
     <!-- Notification -->
@@ -51,10 +52,13 @@
     <string name="notification_content">目の健康を守りましょう！</string>
 
     <!-- レンズ交換確認ダイアログ -->
-    <string name="dialog_title">本当にレンズを交換しますか？</string>
-    <string name="dialog_content">リマインダーはキャンセルされます</string>
+    <string name="reminder_cancel_dialog_title">本当にレンズを交換しますか？</string>
+    <string name="reminder_cancel_dialog_content">リマインダーはキャンセルされます</string>
     <string name="btn_cancel">キャンセル</string>
     <string name="btn_ok">OK</string>
+
+    <!-- カラーテーマ変更ダイアログ -->
+    <string name="color_theme_dialog_title">テーマカラー変更</string>
 
     <!-- ヘルプ（使い方） -->
     <string name="help_1_page">STEP 1</string>

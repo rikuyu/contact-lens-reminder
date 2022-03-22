@@ -11,8 +11,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.ripple.rememberRipple
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,6 +30,7 @@ import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingEvent
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingItem
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingViewModel
+import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.color_theme.ColorPickerDialog
 import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
 import io.github.rikuyu.contactlensreminder.ui.theme.LightBlue
 import io.github.rikuyu.contactlensreminder.ui.util.Routes
@@ -41,13 +41,15 @@ import io.github.rikuyu.contactlensreminder.ui.util.makeNotificationSettingInten
 @Composable
 fun AppSettingScreen(
     navController: NavController,
-    viewModel: AppSettingViewModel = hiltViewModel()
+    viewModel: AppSettingViewModel = hiltViewModel(),
 ) {
     val context = LocalContext.current
     val version = BuildConfig.VERSION_NAME
     val clipboardManager: ClipboardManager = LocalClipboardManager.current
 
     val scrollState = rememberScrollState()
+
+    var dialogState by remember { mutableStateOf(false) }
 
     val sectionList = listOf(
         AppSettingItem(
@@ -73,6 +75,12 @@ fun AppSettingScreen(
             stringResource(id = R.string.inquiry),
             R.drawable.ic_inquiry,
             Routes.INQUIRY
+        ),
+        AppSettingItem(
+            5,
+            stringResource(id = R.string.color_theme),
+            R.drawable.ic_palette,
+            "color_theme"
         ),
     )
 
@@ -112,10 +120,10 @@ fun AppSettingScreen(
                                 .background(MaterialTheme.colors.background)
                                 .clickable {
                                     viewModel.onEvent(AppSettingEvent.LogEvent(it.route))
-                                    if (it.id == 3) {
-                                        context.startActivity(makeNotificationSettingIntent(context))
-                                    } else {
-                                        navController.navigate(it.route)
+                                    when (it.id) {
+                                        3 -> context.startActivity(makeNotificationSettingIntent(context))
+                                        5 -> dialogState = true
+                                        else -> navController.navigate(it.route)
                                     }
                                 }
                                 .padding(all = 16.dp)
@@ -150,6 +158,10 @@ fun AppSettingScreen(
                     }
                     .padding(vertical = 8.dp, horizontal = 10.dp)
             )
+            ColorPickerDialog(
+                dialogState = dialogState,
+                changeDialogState = { dialogState = it },
+            ) {}
         }
     }
 }
