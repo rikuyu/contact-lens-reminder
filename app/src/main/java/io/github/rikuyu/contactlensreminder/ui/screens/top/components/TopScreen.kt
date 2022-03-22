@@ -31,7 +31,7 @@ fun TopScreen(
     isDarkTheme: Boolean,
     switchDarkTheme: (Boolean) -> Unit,
     navController: NavController,
-    viewModel: ReminderViewModel = hiltViewModel()
+    viewModel: ReminderViewModel = hiltViewModel(),
 ) {
     val context = LocalContext.current
 

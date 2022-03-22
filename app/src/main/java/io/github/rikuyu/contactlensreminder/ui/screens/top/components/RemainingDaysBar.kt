@@ -43,22 +43,20 @@ fun RemainingDaysBar(
     supportTextColor: Color = MaterialTheme.colors.onSurface,
     color: Color = CleanBlue,
     radius: Dp = 150.dp,
-    strokeWidth: Dp = 30.dp
+    strokeWidth: Dp = 30.dp,
 ) {
-    var animationPlayed by remember { mutableStateOf(false) }
+    var animate by remember { mutableStateOf(false) }
 
     val remainingDays =
         animateFloatAsState(
-            targetValue = if (animationPlayed) lensRemainingDays.toFloat() else 0f,
+            targetValue = if (animate) lensRemainingDays.toFloat() else 0f,
             animationSpec = tween(
                 durationMillis = 1500,
                 delayMillis = 0
             )
         )
 
-    LaunchedEffect(key1 = true) {
-        animationPlayed = true
-    }
+    LaunchedEffect(key1 = true) { animate = true }
 
     Box(contentAlignment = Alignment.Center, modifier = Modifier.size(radius * 2f)) {
         Canvas(modifier = Modifier.size(radius * 2f)) {

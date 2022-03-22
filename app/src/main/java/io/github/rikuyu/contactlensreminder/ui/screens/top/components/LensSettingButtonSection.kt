@@ -1,5 +1,7 @@
 package io.github.rikuyu.contactlensreminder.ui.screens.top.components
 
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
@@ -13,6 +15,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -25,9 +28,11 @@ fun LensSettingButtonSection(
     modifier: Modifier,
     isUsingContactLens: Boolean,
     showAlertToast: () -> Unit,
-    navigate: () -> Unit
+    navigate: () -> Unit,
 ) {
     var isFirstTap by remember { mutableStateOf(true) }
+
+    var animate by remember { mutableStateOf(true) }
 
     val onClick: () -> Unit = {
         if (isUsingContactLens) {
@@ -37,6 +42,8 @@ fun LensSettingButtonSection(
             navigate()
         }
     }
+
+    LaunchedEffect(key1 = true) { animate = false }
 
     Box(
         modifier = modifier,
@@ -56,7 +63,9 @@ fun LensSettingButtonSection(
                 painter = painterResource(id = R.drawable.ic_water_drop),
                 contentDescription = null,
                 tint = Color.White,
-                modifier = Modifier.size(24.dp, 24.dp)
+                modifier = Modifier
+                    .size(24.dp, 24.dp)
+                    .graphicsLayer(translationY = animateFloatAsState(if (animate) -30f else 0f, tween(1000)).value)
             )
             Spacer(modifier = Modifier.width(20.dp))
             Text(
