@@ -32,7 +32,7 @@ fun NotificationTimeSection(
     notificationTimeHour: Int,
     notificationTimeMinute: Int,
     setNotificationTimeHour: (Int) -> Unit,
-    setNotificationTimeMinute: (Int) -> Unit
+    setNotificationTimeMinute: (Int) -> Unit,
 ) {
     var isShowLensPeriodPicker by remember { mutableStateOf(false) }
 
@@ -60,7 +60,7 @@ fun NotificationTimeSection(
                 StringNumberPicker(
                     value = notificationTimeMinute.toString(),
                     onValueChange = { setNotificationTimeMinute(it.toInt()) },
-                    range = listOf("00", "15", "30", "45"),
+                    range = listOf("00", "05", "15", "20", "25", "30", "35", "40", "45", "50", "55"),
                     textStyle = LocalTextStyle.current.copy(color = MaterialTheme.colors.onSurface)
                 )
             } else {
