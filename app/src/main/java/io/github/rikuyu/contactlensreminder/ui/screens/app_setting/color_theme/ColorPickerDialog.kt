@@ -3,6 +3,7 @@ package io.github.rikuyu.contactlensreminder.ui.screens.app_setting.color_theme
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,14 +22,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.ui.theme.ThemeColorPalette
+import io.github.rikuyu.contactlensreminder.ui.theme.ColorPalette
+import io.github.rikuyu.contactlensreminder.ui.theme.ThemeColor
 
 @Composable
 fun ColorPickerDialog(
     color: Color = MaterialTheme.colors.primary,
+    stateColor: ThemeColor,
     dialogState: Boolean,
     changeDialogState: (Boolean) -> Unit,
-    changeThemeColor: (Boolean) -> Unit,
+    changeThemeColor: (ThemeColor) -> Unit,
 ) {
     if (dialogState) {
         Dialog(onDismissRequest = { }) {
@@ -55,39 +58,49 @@ fun ColorPickerDialog(
                     horizontalArrangement = Arrangement.Center,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    ThemeColorItem(ThemeColorPalette.Blue.primaryBlue)
+                    ThemeColorItem(ColorPalette.Blue.primaryBlue, stateColor, ThemeColor.Blue, changeThemeColor)
                     Spacer(modifier = Modifier.width(4.dp))
-                    ThemeColorItem(ThemeColorPalette.Navy.primaryNavy)
+                    ThemeColorItem(ColorPalette.Navy.primaryNavy, stateColor, ThemeColor.Navy, changeThemeColor)
                     Spacer(modifier = Modifier.width(4.dp))
-                    ThemeColorItem(ThemeColorPalette.Cyan.primaryCyan)
+                    ThemeColorItem(ColorPalette.Cyan.primaryCyan, stateColor, ThemeColor.Cyan, changeThemeColor)
                     Spacer(modifier = Modifier.width(4.dp))
-                    ThemeColorItem(ThemeColorPalette.PeacockBlue.primaryPeacockBlue)
+                    ThemeColorItem(
+                        ColorPalette.PeacockBlue.primaryPeacockBlue,
+                        stateColor,
+                        ThemeColor.PeacockBlue,
+                        changeThemeColor
+                    )
                 }
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    ThemeColorItem(ThemeColorPalette.Green.primaryGreen)
+                    ThemeColorItem(ColorPalette.Green.primaryGreen, stateColor, ThemeColor.Green, changeThemeColor)
                     Spacer(modifier = Modifier.width(4.dp))
-                    ThemeColorItem(ThemeColorPalette.YellowGreen.primaryYellowGreen)
+                    ThemeColorItem(
+                        ColorPalette.YellowGreen.primaryYellowGreen,
+                        stateColor,
+                        ThemeColor.YellowGreen,
+                        changeThemeColor
+                    )
                     Spacer(modifier = Modifier.width(4.dp))
-                    ThemeColorItem(ThemeColorPalette.Yellow.primaryYellow)
+                    ThemeColorItem(ColorPalette.Yellow.primaryYellow, stateColor, ThemeColor.Yellow, changeThemeColor)
                     Spacer(modifier = Modifier.width(4.dp))
-                    ThemeColorItem(ThemeColorPalette.Orange.primaryOrange)
+                    ThemeColorItem(ColorPalette.Orange.primaryOrange, stateColor, ThemeColor.Orange, changeThemeColor)
                 }
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    ThemeColorItem(ThemeColorPalette.Brown.primaryBrown)
+                    ThemeColorItem(ColorPalette.Brown.primaryBrown, stateColor, ThemeColor.Brown, changeThemeColor)
                     Spacer(modifier = Modifier.width(4.dp))
-                    ThemeColorItem(ThemeColorPalette.Purple.primaryPurple)
+                    ThemeColorItem(ColorPalette.Purple.primaryPurple, stateColor, ThemeColor.Purple, changeThemeColor)
                     Spacer(modifier = Modifier.width(4.dp))
-                    ThemeColorItem(ThemeColorPalette.Pink.primaryPink)
+                    ThemeColorItem(ColorPalette.Pink.primaryPink, stateColor, ThemeColor.Pink, changeThemeColor)
                     Spacer(modifier = Modifier.width(4.dp))
-                    ThemeColorItem(ThemeColorPalette.Red.primaryRed)
+                    ThemeColorItem(ColorPalette.Red.primaryRed, stateColor, ThemeColor.Red, changeThemeColor)
                 }
                 Row(
                     horizontalArrangement = Arrangement.End,
@@ -95,12 +108,6 @@ fun ColorPickerDialog(
                         .fillMaxWidth()
                         .padding(top = 10.dp)
                 ) {
-                    TextButton(
-                        onClick = { changeDialogState(false) }
-                    ) {
-                        Text(text = stringResource(id = R.string.btn_cancel), color = color)
-                    }
-                    Spacer(modifier = Modifier.width(10.dp))
                     TextButton(
                         onClick = { changeDialogState(false) }
                     ) {
@@ -113,21 +120,29 @@ fun ColorPickerDialog(
 }
 
 @Composable
-fun ThemeColorItem(color: Color) {
+fun ThemeColorItem(
+    background: Color,
+    stateColor: ThemeColor,
+    currentColor: ThemeColor,
+    changeThemeColor: (ThemeColor) -> Unit,
+) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
             .padding(6.dp)
             .size(54.dp)
             .clip(CircleShape)
-            .background(color)
+            .background(background)
             .border(BorderStroke(0.6.dp, MaterialTheme.colors.onSurface), CircleShape)
+            .clickable { changeThemeColor(currentColor) }
     ) {
-        Icon(
-            painter = painterResource(id = R.drawable.ic_check),
-            contentDescription = null,
-            tint = Color.White,
-            modifier = Modifier.size(28.dp)
-        )
+        if (currentColor == stateColor) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_check),
+                contentDescription = null,
+                tint = Color.White,
+                modifier = Modifier.size(28.dp)
+            )
+        }
     }
 }

@@ -125,7 +125,7 @@ fun SetOneLensPowerItem(
         ) {
             Text(
                 text = lensPower.toString(),
-                color = Color.Black,
+                color = textColor,
                 fontSize = 20.sp
             )
         }

@@ -73,7 +73,7 @@ fun NotificationTimeSection(
                     ) {
                         Text(
                             text = notificationTimeHour.toString(),
-                            color = MaterialTheme.colors.onSecondary,
+                            color = textColor,
                             fontSize = 20.sp
                         )
                         Text(
@@ -86,7 +86,7 @@ fun NotificationTimeSection(
                             text = if (notificationTimeMinute == 0)
                                 "0$notificationTimeMinute"
                             else notificationTimeMinute.toString(),
-                            color = MaterialTheme.colors.onSecondary,
+                            color = textColor,
                             fontSize = 20.sp
                         )
                     }

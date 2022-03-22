@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
             var isDarkTheme by remember { reminderViewModel.isDarkTheme }
             var themeColor by remember { appSettingViewModel.themeColor }
 
-            ContactLensReminderTheme(isDarkTheme) {
+            ContactLensReminderTheme(isDarkTheme, themeColor) {
                 val navController = rememberNavController()
                 NavHost(
                     navController = navController,
@@ -63,7 +63,7 @@ class MainActivity : ComponentActivity() {
                         LensSettingScreen(navController)
                     }
                     composable(route = Routes.APP_SETTING) {
-                        AppSettingScreen(navController)
+                        AppSettingScreen(themeColor, { themeColor = it }, navController)
                     }
                     composable(route = Routes.TERMS_OF_SERVICE) {
                         TermsOfServiceScreen(navController)

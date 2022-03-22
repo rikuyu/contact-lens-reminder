@@ -31,6 +31,7 @@ import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingEve
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingItem
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingViewModel
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.color_theme.ColorPickerDialog
+import io.github.rikuyu.contactlensreminder.ui.theme.ThemeColor
 import io.github.rikuyu.contactlensreminder.ui.util.Routes
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
@@ -38,6 +39,8 @@ import io.github.rikuyu.contactlensreminder.ui.util.makeNotificationSettingInten
 
 @Composable
 fun AppSettingScreen(
+    themeColor: ThemeColor,
+    changeThemeColor: (ThemeColor) -> Unit,
     navController: NavController,
     viewModel: AppSettingViewModel = hiltViewModel(),
 ) {
@@ -78,7 +81,7 @@ fun AppSettingScreen(
             5,
             stringResource(id = R.string.color_theme),
             R.drawable.ic_palette,
-            "color_theme"
+            "change_theme_color"
         ),
     )
 
@@ -161,9 +164,13 @@ fun AppSettingScreen(
                     .padding(vertical = 8.dp, horizontal = 10.dp)
             )
             ColorPickerDialog(
+                stateColor = themeColor,
                 dialogState = dialogState,
                 changeDialogState = { dialogState = it },
-            ) {}
+            ) {
+                changeThemeColor(it)
+                viewModel.onEvent(AppSettingEvent.SaveThemeColor(it))
+            }
         }
     }
 }
