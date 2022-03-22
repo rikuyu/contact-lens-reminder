@@ -24,4 +24,8 @@ interface DataSource {
     fun getIsDarkTheme(): Boolean
 
     fun saveIsDarkTheme()
+
+    fun getThemeColor(): String
+
+    fun saveThemeColor(color: String)
 }

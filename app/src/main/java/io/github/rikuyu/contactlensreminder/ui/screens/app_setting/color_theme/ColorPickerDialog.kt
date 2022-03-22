@@ -1,6 +1,8 @@
 package io.github.rikuyu.contactlensreminder.ui.screens.app_setting.color_theme
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -115,9 +117,10 @@ fun ThemeColorItem(color: Color) {
         contentAlignment = Alignment.Center,
         modifier = Modifier
             .padding(6.dp)
-            .size(50.dp)
+            .size(54.dp)
             .clip(CircleShape)
             .background(color)
+            .border(BorderStroke(0.6.dp, MaterialTheme.colors.onSurface), CircleShape)
     ) {
         Icon(
             painter = painterResource(id = R.drawable.ic_check),

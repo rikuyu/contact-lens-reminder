@@ -50,6 +50,9 @@ object SharedPreferencesKey {
     // OnBoarding 画面を表示するかどうか
     const val STORED_IS_SHOW_ON_BOARDING = "is_show_on_boarding"
 
-    // OnBoarding 画面を表示するかどうか
+    // ダークテーマを使うかどうか
     const val STORED_IS_DARK_THEME = "is_dark_theme"
+
+    // テーマカラーを使うかどうか
+    const val STORED_IS_THEME_COLOR = "contact_lens_reminder_theme_color"
 }

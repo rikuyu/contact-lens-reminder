@@ -14,6 +14,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.rikuyu.contactlensreminder.R
+import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingViewModel
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.inquiry.component.ContactUsScreen
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.instruction_screen.component.InstructionScreen
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.main_screen.components.AppSettingScreen
@@ -33,7 +34,8 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var appUpdateService: AppUpdateService
 
-    private val viewModel: ReminderViewModel by viewModels()
+    private val reminderViewModel: ReminderViewModel by viewModels()
+    private val appSettingViewModel: AppSettingViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,15 +43,18 @@ class MainActivity : ComponentActivity() {
         appUpdateService.executeAppUpdate(this)
 
         setContent {
-            var theme by remember { viewModel.isDarkTheme }
-            ContactLensReminderTheme(theme) {
+
+            var isDarkTheme by remember { reminderViewModel.isDarkTheme }
+            var themeColor by remember { appSettingViewModel.themeColor }
+
+            ContactLensReminderTheme(isDarkTheme) {
                 val navController = rememberNavController()
                 NavHost(
                     navController = navController,
-                    startDestination = if (viewModel.isShowOnBoarding.value) Routes.ON_BOARDING else Routes.TOP
+                    startDestination = if (reminderViewModel.isShowOnBoarding.value) Routes.ON_BOARDING else Routes.TOP
                 ) {
                     composable(route = Routes.TOP) {
-                        TopScreen(theme, { theme = it }, navController)
+                        TopScreen(isDarkTheme, { isDarkTheme = it }, navController)
                     }
                     composable(route = Routes.ON_BOARDING) {
                         OnBoardingScreen(navController)

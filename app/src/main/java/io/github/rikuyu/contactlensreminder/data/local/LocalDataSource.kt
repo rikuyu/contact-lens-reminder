@@ -15,7 +15,7 @@ class LocalDataSource @Inject constructor(
     private val tickDownAlarmManager: TickDownAlarmManager,
     private val sharedPreferencesManager: SharedPreferencesManager,
     private val notificationAlarmManager: NotificationAlarmManager,
-    private val firebaseLogEvent: FirebaseLogEvent
+    private val firebaseLogEvent: FirebaseLogEvent,
 ) : DataSource {
 
     override fun saveReminderSetting(reminderValue: ReminderValue) {
@@ -134,5 +134,11 @@ class LocalDataSource @Inject constructor(
 
     override fun saveIsDarkTheme() {
         sharedPreferencesManager.saveIsDarkTheme(!getIsDarkTheme())
+    }
+
+    override fun getThemeColor(): String = sharedPreferencesManager.getThemeColor()
+
+    override fun saveThemeColor(color: String) {
+        sharedPreferencesManager.saveThemeColor(color)
     }
 }

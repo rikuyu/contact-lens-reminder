@@ -226,4 +226,15 @@ class SharedPreferencesManager @Inject constructor(private val context: Context)
         getSharedPreferences().edit()
             .putBoolean(SharedPreferencesKey.STORED_IS_DARK_THEME, isDarkTheme).apply()
     }
+
+    // Theme Color
+    fun getThemeColor(): String {
+        return getSharedPreferences().getString(SharedPreferencesKey.STORED_IS_THEME_COLOR, "blue_color")
+            ?: "blue_color"
+    }
+
+    fun saveThemeColor(color: String) {
+        getSharedPreferences().edit()
+            .putString(SharedPreferencesKey.STORED_IS_THEME_COLOR, color).apply()
+    }
 }
