@@ -47,7 +47,8 @@ object SharedPreferencesKey {
     // 初めてリマインダーを使用するかどうか
     const val STORED_IS_FIRST_USE = "is_first_use"
 
-    // OnBoarding 画面を表示するかどうか
+    // OnBoarding 画面を表示するかどうか（AppWidget用）
+    @Deprecated("1回目のON_BOARDING")
     const val STORED_IS_SHOW_ON_BOARDING = "is_show_on_boarding"
 
     // ダークテーマを使うかどうか

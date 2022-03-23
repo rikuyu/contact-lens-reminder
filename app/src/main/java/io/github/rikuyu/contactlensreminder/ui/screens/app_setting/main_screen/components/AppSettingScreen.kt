@@ -133,7 +133,7 @@ fun AppSettingScreen(
                             Icon(
                                 modifier = Modifier.align(Alignment.CenterEnd),
                                 painter = painterResource(id = it.icon),
-                                tint = MaterialTheme.colors.secondary,
+                                tint = MaterialTheme.colors.primary,
                                 contentDescription = null
                             )
                         }

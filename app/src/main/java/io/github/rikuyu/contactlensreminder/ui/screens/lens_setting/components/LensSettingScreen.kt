@@ -27,8 +27,9 @@ import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun LensSettingScreen(
+    isDarkTheme: Boolean,
     navController: NavController,
-    viewModelLens: LensSettingViewModel = hiltViewModel()
+    viewModelLens: LensSettingViewModel = hiltViewModel(),
 ) {
     val context = LocalContext.current
 
@@ -111,7 +112,8 @@ fun LensSettingScreen(
                     }
                     AnimatedVisibility(visible = !isShowLensPeriodPicker) { SimpleDivider() }
                     AnimatedVisibility(visible = isShowLensPeriodPicker) {
-                        LensPeriodSection(
+                        LensPeriodOtherTypeSection(
+                            isDarkTheme = isDarkTheme,
                             modifier = Modifier.fillMaxWidth(),
                             period = lensPeriod,
                             setLensPeriod = {
@@ -140,6 +142,7 @@ fun LensSettingScreen(
                                 viewModelLens.onEvent(LensSettingEvent.NotificationDay(it))
                             }
                             NotificationTimeSection(
+                                isDarkTheme = isDarkTheme,
                                 modifier = Modifier.fillMaxWidth(),
                                 notificationTimeHour = notificationTimeHour,
                                 setNotificationTimeHour = {
@@ -168,6 +171,7 @@ fun LensSettingScreen(
                     SimpleDivider()
                     AnimatedVisibility(visible = isShowLensPowerSection) {
                         LensPowerSection(
+                            isDarkTheme = isDarkTheme,
                             modifier = Modifier.fillMaxWidth(),
                             leftLensPower = leftLensPower.toDouble(),
                             setLeftLensPower = {

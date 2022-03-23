@@ -24,8 +24,7 @@ class AppSettingViewModel @Inject constructor(
             is AppSettingEvent.LogEvent -> appSettingUseCase.logEvent.invoke(event.label)
             is AppSettingEvent.SaveThemeColor -> appSettingUseCase.saveThemeColor.invoke(event.color.name.lowercase())
             is AppSettingEvent.GetThemeColor ->
-                themeColor.value =
-                    ThemeColor.convertToEnumFromString(appSettingUseCase.getThemeColor.invoke())
+                themeColor.value = ThemeColor.convertToEnumFromString(appSettingUseCase.getThemeColor.invoke())
         }
     }
 }

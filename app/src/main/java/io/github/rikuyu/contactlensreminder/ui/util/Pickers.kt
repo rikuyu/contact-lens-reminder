@@ -11,9 +11,7 @@ import com.chargemap.compose.numberpicker.ListItemPicker
 @Composable
 fun LensPowerPicker(
     modifier: Modifier = Modifier,
-    label: (Double) -> String = {
-        it.toString()
-    },
+    label: (Double) -> String = { it.toString() },
     value: Double,
     onValueChange: (Double) -> Unit,
     dividersColor: Color = MaterialTheme.colors.primary,

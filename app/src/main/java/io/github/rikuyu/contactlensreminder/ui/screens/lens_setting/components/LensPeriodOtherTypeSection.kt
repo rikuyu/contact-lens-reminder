@@ -19,7 +19,8 @@ import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 
 @Composable
-fun LensPeriodSection(
+fun LensPeriodOtherTypeSection(
+    isDarkTheme: Boolean,
     modifier: Modifier = Modifier,
     textColor: Color = MaterialTheme.colors.onSurface,
     fontSize: TextUnit = 18.sp,
@@ -28,9 +29,7 @@ fun LensPeriodSection(
 ) {
     var isShowLensPeriodPicker by remember { mutableStateOf(false) }
 
-    Column(
-        modifier = modifier.background(MaterialTheme.colors.background)
-    ) {
+    Column(modifier = modifier.background(MaterialTheme.colors.background)) {
         Row(
             modifier = modifier.padding(top = 0.dp, bottom = 14.dp, end = 12.dp, start = 2.dp),
             verticalAlignment = Alignment.CenterVertically
@@ -46,7 +45,10 @@ fun LensPeriodSection(
             } else {
                 Box(
                     modifier = Modifier
-                        .background(MaterialTheme.colors.primary.copy(alpha = 0.2f), shape = RoundedCornerShape(20))
+                        .background(
+                            MaterialTheme.colors.primary.copy(alpha = if (isDarkTheme) 0.7f else 0.2f),
+                            shape = RoundedCornerShape(20)
+                        )
                         .padding(vertical = 8.dp, horizontal = 10.dp)
                 ) {
                     Row(

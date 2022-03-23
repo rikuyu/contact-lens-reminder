@@ -1,11 +1,14 @@
 package io.github.rikuyu.contactlensreminder.ui.theme
 
-import androidx.compose.material.Colors
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun ContactLensReminderTheme(
@@ -17,16 +20,36 @@ fun ContactLensReminderTheme(
 
     MaterialTheme(
         colors = colors,
-        typography = Typography,
-        shapes = Shapes,
+        typography = Typography(
+            body1 = TextStyle(
+                fontFamily = FontFamily.Default,
+                fontWeight = FontWeight.Normal,
+                fontSize = 16.sp
+            )
+        ),
+        shapes = Shapes(
+            small = RoundedCornerShape(4.dp),
+            medium = RoundedCornerShape(4.dp),
+            large = RoundedCornerShape(0.dp)
+        ),
         content = content
     )
 }
 
-enum class ThemeColor {
-    Blue, Navy, Cyan, PeacockBlue,
-    Green, YellowGreen, Yellow, Orange,
-    Brown, Purple, Pink, Red;
+enum class ThemeColor(val color: Color) {
+
+    Blue(ColorPalette.Blue.primaryBlue),
+    Navy(ColorPalette.Navy.primaryNavy),
+    Cyan(ColorPalette.Cyan.primaryCyan),
+    PeacockBlue(ColorPalette.PeacockBlue.primaryPeacockBlue),
+    Green(ColorPalette.Green.primaryGreen),
+    YellowGreen(ColorPalette.YellowGreen.primaryYellowGreen),
+    Yellow(ColorPalette.Yellow.primaryYellow),
+    Orange(ColorPalette.Orange.primaryOrange),
+    Brown(ColorPalette.Brown.primaryBrown),
+    Purple(ColorPalette.Purple.primaryPurple),
+    Pink(ColorPalette.Pink.primaryPink),
+    Red(ColorPalette.Red.primaryRed);
 
     companion object {
         fun convertToThemeFromEnum(isDarkTheme: Boolean, color: ThemeColor): Colors {
@@ -171,6 +194,7 @@ object LightThemePalette {
 }
 
 object DarkThemePalette {
+
     val blueDarkColorPalette = darkColors(
         primary = ColorPalette.Blue.primaryBlue,
         primaryVariant = ColorPalette.Blue.primaryVariantBlue,

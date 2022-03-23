@@ -22,7 +22,7 @@ import io.github.rikuyu.contactlensreminder.R
 @Composable
 fun LensSettingButtonSection(
     modifier: Modifier,
-    color: Color = MaterialTheme.colors.primaryVariant,
+    color: Color = MaterialTheme.colors.primary,
     isUsingContactLens: Boolean,
     showAlertToast: () -> Unit,
     navigate: () -> Unit,

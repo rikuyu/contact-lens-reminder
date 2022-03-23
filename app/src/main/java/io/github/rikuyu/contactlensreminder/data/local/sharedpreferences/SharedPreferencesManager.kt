@@ -205,7 +205,7 @@ class SharedPreferencesManager @Inject constructor(private val context: Context)
     fun getIsShowOnBoarding(): Boolean {
         return getSharedPreferences().getBoolean(
             SharedPreferencesKey.STORED_IS_SHOW_ON_BOARDING,
-            true
+            false
         )
     }
 

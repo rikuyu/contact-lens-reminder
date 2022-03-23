@@ -12,6 +12,7 @@ import androidx.compose.runtime.setValue
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingViewModel
@@ -46,6 +47,9 @@ class MainActivity : ComponentActivity() {
 
             var isDarkTheme by remember { reminderViewModel.isDarkTheme }
             var themeColor by remember { appSettingViewModel.themeColor }
+            val systemUiController = rememberSystemUiController()
+
+            systemUiController.setStatusBarColor(themeColor.color)
 
             ContactLensReminderTheme(isDarkTheme, themeColor) {
                 val navController = rememberNavController()
@@ -60,7 +64,7 @@ class MainActivity : ComponentActivity() {
                         OnBoardingScreen(navController)
                     }
                     composable(route = Routes.LENS_SETTING) {
-                        LensSettingScreen(navController)
+                        LensSettingScreen(isDarkTheme, navController)
                     }
                     composable(route = Routes.APP_SETTING) {
                         AppSettingScreen(themeColor, { themeColor = it }, navController)

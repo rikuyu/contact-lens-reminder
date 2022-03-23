@@ -52,7 +52,7 @@ fun ToggleButtonSection(
                         R.drawable.ic_notify_off
                 ),
                 contentDescription = null,
-                tint = checkedColor.copy(alpha = 0.7f),
+                tint = MaterialTheme.colors.primaryVariant,
                 modifier = Modifier
                     .size(50.dp, 50.dp)
                     .padding(end = 18.dp)

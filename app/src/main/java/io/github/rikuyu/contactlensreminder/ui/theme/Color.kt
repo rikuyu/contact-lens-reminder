@@ -4,7 +4,6 @@ import androidx.compose.ui.graphics.Color
 
 val SmoothGray = Color(0xFFF7F7F7)
 val WebViewBackground = Color(0xFFBDD4FD)
-val LightRed = Color(0xFFFC9797)
 
 object ColorPalette {
 
@@ -16,67 +15,67 @@ object ColorPalette {
 
     object Red {
         val primaryRed = Color(0xFFFF0000)
-        val primaryVariantRed = primaryRed.copy(alpha = 0.6f)
-        val secondaryRed = primaryRed.copy(alpha = 0.3f)
+        val primaryVariantRed = Color(0xFFFC3A3A)
+        val secondaryRed = Color(0xFFFC9797)
     }
 
     object Pink {
         val primaryPink = Color(0xFFFC62AF)
-        val primaryVariantPink = primaryPink.copy(alpha = 0.6f)
-        val secondaryPink = primaryPink.copy(alpha = 0.3f)
+        val primaryVariantPink = Color(0xFFF587BE)
+        val secondaryPink = Color(0xFFFC9DCC)
     }
 
     object Purple {
-        val primaryPurple = Color(0xFF9E05F7)
-        val primaryVariantPurple = primaryPurple.copy(alpha = 0.6f)
-        val secondaryPurple = primaryPurple.copy(alpha = 0.3f)
+        val primaryPurple = Color(0xFF9C0CF5)
+        val primaryVariantPurple = Color(0xFFAB38F2)
+        val secondaryPurple = Color(0xFFD088FC)
     }
 
     object Navy {
         val primaryNavy = Color(0xFF3F51B5)
-        val primaryVariantNavy = primaryNavy.copy(alpha = 0.6f)
-        val secondaryNavy = primaryNavy.copy(alpha = 0.3f)
+        val primaryVariantNavy = Color(0xFF6275E3)
+        val secondaryNavy = Color(0xFF96A2EB)
     }
 
     object Cyan {
         val primaryCyan = Color(0xFF00FFFF)
-        val primaryVariantCyan = primaryCyan.copy(alpha = 0.6f)
-        val secondaryCyan = primaryCyan.copy(alpha = 0.3f)
+        val primaryVariantCyan = Color(0xFF4CFCFC)
+        val secondaryCyan = Color(0xFFA4F5F5)
     }
 
     object PeacockBlue {
         val primaryPeacockBlue = Color(0xFF009E9F)
-        val primaryVariantPeacockBlue = primaryPeacockBlue.copy(alpha = 0.6f)
-        val secondaryPeacockBlue = primaryPeacockBlue.copy(alpha = 0.3f)
+        val primaryVariantPeacockBlue = Color(0xFF39BEBF)
+        val secondaryPeacockBlue = Color(0xFF74D3D4)
     }
 
     object Green {
         val primaryGreen = Color(0xFF4CAF50)
-        val primaryVariantGreen = primaryGreen.copy(alpha = 0.6f)
-        val secondaryGreen = primaryGreen.copy(alpha = 0.3f)
+        val primaryVariantGreen = Color(0xFF57C95B)
+        val secondaryGreen = Color(0xFF84E888)
     }
 
     object YellowGreen {
-        val primaryYellowGreen = Color(0xFF0AFA14)
-        val primaryVariantYellowGreen = primaryYellowGreen.copy(alpha = 0.6f)
-        val secondaryYellowGreen = primaryYellowGreen.copy(alpha = 0.3f)
+        val primaryYellowGreen = Color(0xFF42F54A)
+        val primaryVariantYellowGreen = Color(0xFF75F07B)
+        val secondaryYellowGreen = Color(0xFF9BF29F)
     }
 
     object Yellow {
-        val primaryYellow = Color(0xFFFFFF00)
-        val primaryVariantYellow = primaryYellow.copy(alpha = 0.6f)
-        val secondaryYellow = primaryYellow.copy(alpha = 0.3f)
+        val primaryYellow = Color(0xFFFFEC50)
+        val primaryVariantYellow = Color(0xFFFCED72)
+        val secondaryYellow = Color(0xFFFCF29D)
     }
 
     object Orange {
         val primaryOrange = Color(0xFFFF9800)
-        val primaryVariantOrange = primaryOrange.copy(alpha = 0.6f)
-        val secondaryOrange = primaryOrange.copy(alpha = 0.3f)
+        val primaryVariantOrange = Color(0xFFFCAC35)
+        val secondaryOrange = Color(0xFFFCC97C)
     }
 
     object Brown {
         val primaryBrown = Color(0xFF795548)
-        val primaryVariantBrown = primaryBrown.copy(alpha = 0.6f)
-        val secondaryBrown = primaryBrown.copy(alpha = 0.3f)
+        val primaryVariantBrown = Color(0xFF7D635A)
+        val secondaryBrown = Color(0xFFAB9A95)
     }
 }

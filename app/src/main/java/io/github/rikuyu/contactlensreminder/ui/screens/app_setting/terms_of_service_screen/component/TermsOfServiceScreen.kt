@@ -48,21 +48,21 @@ fun TermsOfServiceScreen(navController: NavHostController) {
 // 1条
             titleSection(title = R.string.title_1)
             descriptionSection(description = R.string.content_1)
-            item { SimpleSpacer(height = 36.dp, color = MaterialTheme.colors.background) }
+            item { SimpleSpacer(height = 32.dp, color = MaterialTheme.colors.background) }
 // 2条
             titleSection(title = R.string.title_2)
             descriptionSection(description = R.string.content_2)
-            item { SimpleSpacer(height = 36.dp, color = MaterialTheme.colors.background) }
+            item { SimpleSpacer(height = 32.dp, color = MaterialTheme.colors.background) }
 // 3条
             titleSection(title = R.string.title_3)
             descriptionSection(description = R.string.content_3_1)
             descriptionSection(description = R.string.content_3_2)
             descriptionSection(description = R.string.content_3_3)
-            item { SimpleSpacer(height = 36.dp, color = MaterialTheme.colors.background) }
+            item { SimpleSpacer(height = 32.dp, color = MaterialTheme.colors.background) }
 // 4条
             titleSection(title = R.string.title_4)
             descriptionSection(description = R.string.content_4)
-            item { SimpleSpacer(height = 36.dp, color = MaterialTheme.colors.background) }
+            item { SimpleSpacer(height = 32.dp, color = MaterialTheme.colors.background) }
 // 5条
             titleSection(title = R.string.title_5)
             descriptionSection(description = R.string.content_5_1)
@@ -72,23 +72,23 @@ fun TermsOfServiceScreen(navController: NavHostController) {
             descriptionSection(description = R.string.content_5_2_3)
             descriptionSection(description = R.string.content_5_2_4)
             descriptionSection(description = R.string.content_5_3)
-            item { SimpleSpacer(height = 36.dp, color = MaterialTheme.colors.background) }
+            item { SimpleSpacer(height = 32.dp, color = MaterialTheme.colors.background) }
 // 6条
             titleSection(title = R.string.title_6)
             descriptionSection(description = R.string.content_6_1)
             descriptionSection(description = R.string.content_6_2)
             descriptionSection(description = R.string.content_6_3)
             descriptionSection(description = R.string.content_6_4)
-            item { SimpleSpacer(height = 36.dp, color = MaterialTheme.colors.background) }
+            item { SimpleSpacer(height = 32.dp, color = MaterialTheme.colors.background) }
 // 7条
             titleSection(title = R.string.title_7)
             descriptionSection(description = R.string.content_7)
-            item { SimpleSpacer(height = 36.dp, color = MaterialTheme.colors.background) }
+            item { SimpleSpacer(height = 32.dp, color = MaterialTheme.colors.background) }
 // 8条
             titleSection(title = R.string.title_8)
             descriptionSection(description = R.string.content_8_1)
             descriptionSection(description = R.string.content_8_2)
-            item { SimpleSpacer(height = 36.dp, color = MaterialTheme.colors.background) }
+            item { SimpleSpacer(height = 32.dp, color = MaterialTheme.colors.background) }
             item {
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
                     Text(

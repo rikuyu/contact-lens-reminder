@@ -13,7 +13,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.sp
-import io.github.rikuyu.contactlensreminder.ui.theme.LightRed
+import io.github.rikuyu.contactlensreminder.ui.theme.ColorPalette
 
 @Composable
 fun LensPeriodTextSection(
@@ -21,6 +21,7 @@ fun LensPeriodTextSection(
     lensRemainingDays: Int,
     period: Int,
     color: Color = MaterialTheme.colors.primary,
+    expiredColor: Color = ColorPalette.Red.secondaryRed,
 ) {
     Row(
         modifier = modifier,
@@ -34,7 +35,7 @@ fun LensPeriodTextSection(
                         withStyle(style = ParagraphStyle(lineHeight = 20.sp)) {
                             withStyle(
                                 style = SpanStyle(
-                                    color = if (lensRemainingDays < 0) LightRed else color,
+                                    color = if (lensRemainingDays < 0) expiredColor else color,
                                     fontSize = 28.sp
                                 )
                             ) {
@@ -42,7 +43,7 @@ fun LensPeriodTextSection(
                             }
                             withStyle(
                                 style = SpanStyle(
-                                    color = if (lensRemainingDays < 0) LightRed else color,
+                                    color = if (lensRemainingDays < 0) expiredColor else color,
                                     fontSize = 24.sp
                                 )
                             ) {
@@ -54,7 +55,7 @@ fun LensPeriodTextSection(
                         withStyle(style = ParagraphStyle(lineHeight = 20.sp)) {
                             withStyle(
                                 style = SpanStyle(
-                                    color = if (lensRemainingDays < 0) LightRed else color,
+                                    color = if (lensRemainingDays < 0) expiredColor else color,
                                     fontSize = 26.sp
                                 )
                             ) {
@@ -66,7 +67,7 @@ fun LensPeriodTextSection(
                         withStyle(style = ParagraphStyle(lineHeight = 20.sp)) {
                             withStyle(
                                 style = SpanStyle(
-                                    color = if (lensRemainingDays < 0) LightRed else color,
+                                    color = if (lensRemainingDays < 0) expiredColor else color,
                                     fontSize = 26.sp
                                 )
                             ) {
@@ -78,7 +79,7 @@ fun LensPeriodTextSection(
                         withStyle(style = ParagraphStyle(lineHeight = 20.sp)) {
                             withStyle(
                                 style = SpanStyle(
-                                    color = if (lensRemainingDays < 0) LightRed else color,
+                                    color = if (lensRemainingDays < 0) expiredColor else color,
                                     fontSize = 28.sp
                                 )
                             ) {
@@ -86,7 +87,7 @@ fun LensPeriodTextSection(
                             }
                             withStyle(
                                 style = SpanStyle(
-                                    color = if (lensRemainingDays < 0) LightRed else color,
+                                    color = if (lensRemainingDays < 0) expiredColor else color,
                                     fontSize = 24.sp
                                 )
                             ) {

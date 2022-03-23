@@ -20,6 +20,7 @@ import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 
 @Composable
 fun LensPowerSection(
+    isDarkTheme: Boolean,
     modifier: Modifier,
     textColor: Color = MaterialTheme.colors.onSurface,
     fontSize: TextUnit = 18.sp,
@@ -46,6 +47,7 @@ fun LensPowerSection(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 SetOneLensPowerItem(
+                    isDarkTheme = isDarkTheme,
                     textColor = textColor,
                     fontSize = fontSize,
                     lensPower = leftLensPower,
@@ -55,6 +57,7 @@ fun LensPowerSection(
                     setLensPower = { setLeftLensPower(it) }
                 )
                 SetOneLensPowerItem(
+                    isDarkTheme = isDarkTheme,
                     textColor = textColor,
                     fontSize = fontSize,
                     lensPower = rightLensPower,
@@ -94,6 +97,7 @@ fun LensPowerSection(
 
 @Composable
 fun SetOneLensPowerItem(
+    isDarkTheme: Boolean,
     textColor: Color,
     fontSize: TextUnit,
     eye: String,
@@ -119,7 +123,10 @@ fun SetOneLensPowerItem(
     } else {
         Box(
             modifier = Modifier
-                .background(MaterialTheme.colors.primary.copy(alpha = 0.2f), shape = RoundedCornerShape(20))
+                .background(
+                    color = MaterialTheme.colors.primary.copy(alpha = if (isDarkTheme) 0.7f else 0.2f),
+                    shape = RoundedCornerShape(20)
+                )
                 .clickable { changeIsShowLensPowerPicker.invoke() }
                 .padding(vertical = 8.dp, horizontal = 10.dp)
         ) {

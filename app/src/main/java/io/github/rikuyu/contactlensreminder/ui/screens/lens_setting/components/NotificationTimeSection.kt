@@ -24,6 +24,7 @@ import io.github.rikuyu.contactlensreminder.ui.util.StringNumberPicker
 
 @Composable
 fun NotificationTimeSection(
+    isDarkTheme: Boolean,
     modifier: Modifier = Modifier,
     textColor: Color = MaterialTheme.colors.onSurface,
     fontSize: TextUnit = 18.sp,
@@ -54,17 +55,20 @@ fun NotificationTimeSection(
                     range = 1..24,
                     textStyle = LocalTextStyle.current.copy(color = MaterialTheme.colors.onSurface)
                 )
-                Text(text = " : ")
+                Text(text = " : ", color = textColor)
                 StringNumberPicker(
                     value = notificationTimeMinute.toString(),
                     onValueChange = { setNotificationTimeMinute(it.toInt()) },
-                    range = listOf("00", "05", "15", "20", "25", "30", "35", "40", "45", "50", "55"),
+                    range = listOf("00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"),
                     textStyle = LocalTextStyle.current.copy(color = MaterialTheme.colors.onSurface)
                 )
             } else {
                 Box(
                     modifier = Modifier
-                        .background(MaterialTheme.colors.primary.copy(alpha = 0.2f), shape = RoundedCornerShape(20))
+                        .background(
+                            MaterialTheme.colors.primary.copy(alpha = if (isDarkTheme) 0.7f else 0.2f),
+                            shape = RoundedCornerShape(20)
+                        )
                         .padding(vertical = 8.dp, horizontal = 10.dp)
                 ) {
                     Row(
@@ -78,7 +82,7 @@ fun NotificationTimeSection(
                         )
                         Text(
                             text = stringResource(id = R.string.time_div),
-                            color = MaterialTheme.colors.onSecondary,
+                            color = textColor,
                             fontSize = fontSize,
                             modifier = Modifier.padding(horizontal = 4.dp)
                         )
