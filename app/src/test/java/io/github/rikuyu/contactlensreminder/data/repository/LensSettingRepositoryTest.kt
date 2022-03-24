@@ -51,16 +51,25 @@ class LensSettingRepositoryTest {
             leftLensPower = "-4.75",
             rightLensPower = "-5.00"
         )
+
         every { localDataSource.getAllLensSetting() } returns dummySetting
+
         assertThat(lensSettingValue).isNull()
         lensSettingValue = lensSettingRepository.getAllLensSetting()
         assertThat(lensSettingValue).isEqualTo(expectedSettingValue)
+
+        verify(exactly = 1) {
+            localDataSource.getAllLensSetting()
+            lensSettingRepository.getAllLensSetting()
+        }
     }
 
     @Test
     fun `saveAllSetting test`() {
         every { localDataSource.saveAllLensSetting(any()) } returns Unit
+
         lensSettingRepository.saveAllLensSetting(expectedSettingValue)
+
         verify(exactly = 1) {
             localDataSource.saveAllLensSetting(any())
             lensSettingRepository.saveAllLensSetting(any())

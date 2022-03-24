@@ -42,7 +42,33 @@ class AppSettingViewModelTest {
 
         verify(exactly = 1) {
             getThemeColor.invoke()
+            viewModel.onEvent(AppSettingEvent.LogEvent(""))
             logEvent.invoke(any())
         }
+    }
+
+    @Test
+    fun `テーマカラーを変更できるか`() {
+        every { getThemeColor.invoke() } returns ThemeColor.Blue.name.lowercase()
+        every { saveThemeColor.invoke(ThemeColor.Purple.name.lowercase()) } returns Unit
+
+        viewModel = AppSettingViewModel(useCase)
+        viewModel.onEvent(AppSettingEvent.SaveThemeColor(ThemeColor.Purple))
+
+        verify(exactly = 1) {
+            getThemeColor.invoke()
+            viewModel.onEvent(AppSettingEvent.SaveThemeColor(ThemeColor.Purple))
+            saveThemeColor.invoke(ThemeColor.Purple.name.lowercase())
+        }
+    }
+
+    @Test
+    fun `テーマカラーを取得できるか`() {
+        every { getThemeColor.invoke() } returns ThemeColor.Blue.name.lowercase()
+
+        viewModel = AppSettingViewModel(useCase)
+        viewModel.onEvent(AppSettingEvent.GetThemeColor)
+
+        verify(exactly = 2) { getThemeColor.invoke() }
     }
 }

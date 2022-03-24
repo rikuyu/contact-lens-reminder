@@ -10,21 +10,21 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AppSettingViewModel @Inject constructor(
-    private val appSettingUseCase: AppSettingUseCase,
+    private val usecase: AppSettingUseCase,
 ) : ViewModel() {
 
     val themeColor: MutableState<ThemeColor> = mutableStateOf(ThemeColor.Blue)
 
     init {
-        themeColor.value = ThemeColor.convertToEnumFromString(appSettingUseCase.getThemeColor.invoke())
+        themeColor.value = ThemeColor.convertToEnumFromString(usecase.getThemeColor.invoke())
     }
 
     fun onEvent(event: AppSettingEvent) {
         when (event) {
-            is AppSettingEvent.LogEvent -> appSettingUseCase.logEvent.invoke(event.label)
-            is AppSettingEvent.SaveThemeColor -> appSettingUseCase.saveThemeColor.invoke(event.color.name.lowercase())
+            is AppSettingEvent.LogEvent -> usecase.logEvent.invoke(event.label)
+            is AppSettingEvent.SaveThemeColor -> usecase.saveThemeColor.invoke(event.color.name.lowercase())
             is AppSettingEvent.GetThemeColor ->
-                themeColor.value = ThemeColor.convertToEnumFromString(appSettingUseCase.getThemeColor.invoke())
+                themeColor.value = ThemeColor.convertToEnumFromString(usecase.getThemeColor.invoke())
         }
     }
 }

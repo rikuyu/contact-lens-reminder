@@ -34,14 +34,14 @@ class TickDownAlarmManagerTest {
     }
 
     @Test
-    fun `アイコン変更タスクを予約できるかどうか`() {
+    fun `AppWidget更新タスクを予約できるかどうか`() {
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
         tickDownAlarmManager.initAlarm()
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNotNull()
     }
 
     @Test
-    fun `アイコン変更タスクをキャンセルできるかどうか`() {
+    fun `AppWidget更新タスクをキャンセルできるかどうか`() {
         tickDownAlarmManager.initAlarm()
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNotNull()
         tickDownAlarmManager.cancelAlarm()

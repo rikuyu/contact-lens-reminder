@@ -30,12 +30,10 @@ class LocalDataSource @Inject constructor(
     }
 
     override fun startReminder() {
-        sharedPreferencesManager.apply {
-            if (getIsUseNotification()) {
-                notificationAlarmManager.initAlarm()
-            }
-            tickDownAlarmManager.initAlarm()
+        if (sharedPreferencesManager.getIsUseNotification()) {
+            notificationAlarmManager.initAlarm()
         }
+        tickDownAlarmManager.initAlarm()
     }
 
     override fun getReminderSetting(): ReminderValue {

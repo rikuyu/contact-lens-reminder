@@ -20,7 +20,6 @@ import androidx.navigation.NavController
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.LensSettingEvent
 import io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.LensSettingViewModel
-import io.github.rikuyu.contactlensreminder.ui.util.Routes
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
 
@@ -194,7 +193,7 @@ fun LensSettingScreen(
                         Toast.LENGTH_SHORT
                     ).show()
                     viewModelLens.onEvent(LensSettingEvent.SaveLensSetting)
-                    navController.navigate(Routes.TOP)
+                    navController.popBackStack()
                 }
             }
         }
