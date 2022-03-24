@@ -8,11 +8,11 @@ import io.github.rikuyu.contactlensreminder.data.local.alarm.notification.Notifi
 import io.github.rikuyu.contactlensreminder.data.local.alarm.tickdown.TickDownAlarmManager
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
 import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEvent
-import io.github.rikuyu.contactlensreminder.domain.model.ReminderValue
+import io.github.rikuyu.contactlensreminder.domain.local.DataSource
 import io.github.rikuyu.contactlensreminder.domain.model.LensSettingValue
-import io.mockk.every
-import io.mockk.mockk
-import io.mockk.verify
+import io.github.rikuyu.contactlensreminder.domain.model.ReminderValue
+import io.github.rikuyu.contactlensreminder.ui.theme.ThemeColor
+import io.mockk.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -28,9 +28,10 @@ class LocalDataSourceTest {
     private lateinit var shadowAlarmManager: ShadowAlarmManager
     private lateinit var tickDownAlarmManager: TickDownAlarmManager
     private lateinit var notificationAlarmManager: NotificationAlarmManager
-    private lateinit var localDataSource: LocalDataSource
     private lateinit var sharedPreferencesManager: SharedPreferencesManager
     private lateinit var firebaseLogEvent: FirebaseLogEvent
+
+    private lateinit var localDataSource: DataSource
 
     private val expectedReminderValue = ReminderValue(
         lensPeriod = 22,
@@ -54,6 +55,16 @@ class LocalDataSourceTest {
         leftLensPower = "-4.75",
         rightLensPower = "-5.00"
     )
+
+    private fun initLocalDataSource() {
+        sharedPreferencesManager = mockk()
+        localDataSource = LocalDataSource(
+            tickDownAlarmManager = tickDownAlarmManager,
+            sharedPreferencesManager = sharedPreferencesManager,
+            notificationAlarmManager = notificationAlarmManager,
+            firebaseLogEvent = firebaseLogEvent
+        )
+    }
 
     @Before
     fun setup() {
@@ -91,6 +102,8 @@ class LocalDataSourceTest {
             sharedPreferencesManager.getIsUseNotification()
             sharedPreferencesManager.getLensExchangeDay()
         }
+
+        confirmVerified(sharedPreferencesManager)
 
         assertThat(actual.lensPeriod).isEqualTo(expectedReminderValue.lensPeriod)
         assertThat(actual.notificationDay).isEqualTo(expectedReminderValue.notificationDay)
@@ -130,6 +143,8 @@ class LocalDataSourceTest {
             sharedPreferencesManager.getLeftContactLensPower()
         }
 
+        confirmVerified(sharedPreferencesManager)
+
         assertThat(actual.lensType).isEqualTo(expectedSettingValue.lensType)
         assertThat(actual.lensPeriod).isEqualTo(expectedSettingValue.lensPeriod)
         assertThat(actual.isUseNotification).isEqualTo(expectedSettingValue.isUseNotification)
@@ -142,64 +157,85 @@ class LocalDataSourceTest {
     }
 
     @Test
-    fun `isUseNotification == true のとき通知、アプリアイコン変更が予約されるかどうか`() {
+    fun `isUseNotification == true のとき通知, AppWidget更新が予約されるかどうか`() {
         initLocalDataSource()
 
         every { sharedPreferencesManager.getIsUseNotification() } returns true
-        every { sharedPreferencesManager.getContactLensRemainingDays() } returns 1
 
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
         localDataSource.startReminder()
         assertThat(shadowAlarmManager.scheduledAlarms.size).isEqualTo(2)
+
+        verify(exactly = 1) {
+            sharedPreferencesManager.getIsUseNotification()
+            localDataSource.startReminder()
+        }
     }
 
     @Test
-    fun `isUseNotification == false のとき通知、アプリアイコン変更が予約されるかどうか`() {
+    fun `isUseNotification == false のとき通知, AppWidget更新が予約されるかどうか`() {
         initLocalDataSource()
 
         every { sharedPreferencesManager.getIsUseNotification() } returns false
-        every { sharedPreferencesManager.getContactLensRemainingDays() } returns 1
 
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
         localDataSource.startReminder()
         assertThat(shadowAlarmManager.scheduledAlarms.size).isEqualTo(1)
-    }
 
-    private fun initLocalDataSource() {
-        sharedPreferencesManager = mockk()
-        localDataSource = LocalDataSource(
-            tickDownAlarmManager = tickDownAlarmManager,
-            sharedPreferencesManager = sharedPreferencesManager,
-            notificationAlarmManager = notificationAlarmManager,
-            firebaseLogEvent = firebaseLogEvent
-        )
+        verify(exactly = 1) {
+            sharedPreferencesManager.getIsUseNotification()
+            localDataSource.startReminder()
+        }
     }
 
     @Test
-    fun `isUseNotification == true のとき通知、アプリアイコン変更がキャンセルされるかどうか`() {
+    fun `isUseNotification == true のとき通知, AppWidget更新がキャンセルされるかどうか`() {
         initLocalDataSource()
 
         every { sharedPreferencesManager.getIsUseNotification() } returns true
-        every { sharedPreferencesManager.getContactLensRemainingDays() } returns 1
 
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
         localDataSource.startReminder()
         assertThat(shadowAlarmManager.scheduledAlarms.size).isEqualTo(2)
         localDataSource.cancelReminder()
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
+
+        verifyAll {
+            sharedPreferencesManager.getIsUseNotification()
+            localDataSource.startReminder()
+            localDataSource.cancelReminder()
+        }
     }
 
     @Test
-    fun `isUseNotification == false のとき通知、アプリアイコン変更がキャンセルされるかどうか`() {
+    fun `isUseNotification == false のとき通知, AppWidget更新が変更がキャンセルされるかどうか`() {
         initLocalDataSource()
 
         every { sharedPreferencesManager.getIsUseNotification() } returns false
-        every { sharedPreferencesManager.getContactLensRemainingDays() } returns 1
 
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
         localDataSource.startReminder()
         assertThat(shadowAlarmManager.scheduledAlarms.size).isEqualTo(1)
         localDataSource.cancelReminder()
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
+
+        verifyAll {
+            sharedPreferencesManager.getIsUseNotification()
+            localDataSource.startReminder()
+            localDataSource.cancelReminder()
+        }
+    }
+
+    @Test
+    fun `テーマカラーを取得できるか`() {
+        initLocalDataSource()
+
+        every { sharedPreferencesManager.getThemeColor() } returns ThemeColor.Blue.name.lowercase()
+        assertThat(localDataSource.getThemeColor()).isEqualTo(ThemeColor.Blue.name.lowercase())
+
+        verify(exactly = 1) {
+            sharedPreferencesManager.getThemeColor()
+            localDataSource.getThemeColor()
+        }
     }
 }

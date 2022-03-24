@@ -17,7 +17,7 @@ class LensSettingUseCaseTest {
     lateinit var lensSettingUseCase: LensSettingUseCase
 
     @MockK
-    lateinit var repositoryLens: LensSettingRepository
+    lateinit var repository: LensSettingRepository
 
     private var lensSettingValue: LensSettingValue? = null
 
@@ -36,8 +36,8 @@ class LensSettingUseCaseTest {
     @Before
     fun setup() {
         MockKAnnotations.init(this)
-        saveAllLensSetting = SaveAllLensSetting(repositoryLens)
-        getAllLensSetting = GetAllLensSetting(repositoryLens)
+        saveAllLensSetting = SaveAllLensSetting(repository)
+        getAllLensSetting = GetAllLensSetting(repository)
         lensSettingUseCase = LensSettingUseCase(saveAllLensSetting, getAllLensSetting)
     }
 
@@ -54,23 +54,23 @@ class LensSettingUseCaseTest {
             leftLensPower = "-4.75",
             rightLensPower = "-5.00"
         )
-        every { repositoryLens.getAllLensSetting() } returns dummySettingValue
+        every { repository.getAllLensSetting() } returns dummySettingValue
         assertThat(lensSettingValue).isNull()
         lensSettingValue = lensSettingUseCase.getAllLensSetting.invoke()
         assertThat(lensSettingValue).isEqualTo(expectedSettingValue)
         verify(exactly = 1) {
             lensSettingUseCase.getAllLensSetting.invoke()
-            repositoryLens.getAllLensSetting()
+            repository.getAllLensSetting()
         }
     }
 
     @Test
     fun `SaveAllSetting Test`() {
-        every { repositoryLens.saveAllLensSetting(any()) } returns Unit
+        every { repository.saveAllLensSetting(any()) } returns Unit
         lensSettingUseCase.saveAllLensSetting.invoke(expectedSettingValue)
         verify(exactly = 1) {
             lensSettingUseCase.saveAllLensSetting.invoke(any())
-            repositoryLens.saveAllLensSetting(any())
+            repository.saveAllLensSetting(any())
         }
     }
 }

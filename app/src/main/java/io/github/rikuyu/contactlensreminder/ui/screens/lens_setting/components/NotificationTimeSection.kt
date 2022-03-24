@@ -19,13 +19,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.chargemap.compose.numberpicker.NumberPicker
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
-import io.github.rikuyu.contactlensreminder.ui.theme.PaleBlue
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 import io.github.rikuyu.contactlensreminder.ui.util.StringNumberPicker
 
 @Composable
 fun NotificationTimeSection(
+    isDarkTheme: Boolean,
     modifier: Modifier = Modifier,
     textColor: Color = MaterialTheme.colors.onSurface,
     fontSize: TextUnit = 18.sp,
@@ -56,17 +55,20 @@ fun NotificationTimeSection(
                     range = 1..24,
                     textStyle = LocalTextStyle.current.copy(color = MaterialTheme.colors.onSurface)
                 )
-                Text(text = " : ")
+                Text(text = " : ", color = textColor)
                 StringNumberPicker(
                     value = notificationTimeMinute.toString(),
                     onValueChange = { setNotificationTimeMinute(it.toInt()) },
-                    range = listOf("00", "05", "15", "20", "25", "30", "35", "40", "45", "50", "55"),
+                    range = listOf("00", "15", "30", "45"),
                     textStyle = LocalTextStyle.current.copy(color = MaterialTheme.colors.onSurface)
                 )
             } else {
                 Box(
                     modifier = Modifier
-                        .background(PaleBlue, shape = RoundedCornerShape(20))
+                        .background(
+                            MaterialTheme.colors.primary.copy(alpha = if (isDarkTheme) 0.7f else 0.2f),
+                            shape = RoundedCornerShape(20)
+                        )
                         .padding(vertical = 8.dp, horizontal = 10.dp)
                 ) {
                     Row(
@@ -75,12 +77,12 @@ fun NotificationTimeSection(
                     ) {
                         Text(
                             text = notificationTimeHour.toString(),
-                            color = MaterialTheme.colors.onSecondary,
+                            color = textColor,
                             fontSize = 20.sp
                         )
                         Text(
                             text = stringResource(id = R.string.time_div),
-                            color = MaterialTheme.colors.onSecondary,
+                            color = textColor,
                             fontSize = fontSize,
                             modifier = Modifier.padding(horizontal = 4.dp)
                         )
@@ -88,7 +90,7 @@ fun NotificationTimeSection(
                             text = if (notificationTimeMinute == 0)
                                 "0$notificationTimeMinute"
                             else notificationTimeMinute.toString(),
-                            color = MaterialTheme.colors.onSecondary,
+                            color = textColor,
                             fontSize = 20.sp
                         )
                     }
@@ -97,7 +99,7 @@ fun NotificationTimeSection(
             Button(
                 onClick = { isShowLensPeriodPicker = !isShowLensPeriodPicker },
                 colors = ButtonDefaults.textButtonColors(
-                    backgroundColor = CleanBlue,
+                    backgroundColor = MaterialTheme.colors.primary,
                     contentColor = Color.White,
                     disabledContentColor = Color.LightGray
                 ),

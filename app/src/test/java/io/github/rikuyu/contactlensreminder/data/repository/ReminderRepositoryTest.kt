@@ -49,10 +49,13 @@ class ReminderRepositoryTest {
             isUsingContactLens = false,
             isUseNotification = true
         )
+
         every { localDataSource.getReminderSetting() } returns dummyReminderValue
+
         assertThat(reminderValue).isNull()
         reminderValue = reminderRepository.getReminderSetting()
         assertThat(reminderValue).isEqualTo(expectedReminderValue)
+
         verify(exactly = 1) {
             localDataSource.getReminderSetting()
             reminderRepository.getReminderSetting()
@@ -62,7 +65,9 @@ class ReminderRepositoryTest {
     @Test
     fun `startReminder test`() {
         every { localDataSource.startReminder() } returns Unit
+
         reminderRepository.startReminder()
+
         verify(exactly = 1) {
             localDataSource.startReminder()
             reminderRepository.startReminder()
@@ -72,7 +77,9 @@ class ReminderRepositoryTest {
     @Test
     fun `saveReminderSetting test`() {
         every { localDataSource.saveReminderSetting(any()) } returns Unit
+
         reminderRepository.saveReminderSetting(expectedReminderValue)
+
         verify(exactly = 1) {
             localDataSource.saveReminderSetting(any())
             reminderRepository.saveReminderSetting(any())
@@ -82,7 +89,9 @@ class ReminderRepositoryTest {
     @Test
     fun `cancelReminder test`() {
         every { localDataSource.cancelReminder() } returns Unit
+
         reminderRepository.cancelReminder()
+
         verify(exactly = 1) {
             localDataSource.cancelReminder()
             reminderRepository.cancelReminder()

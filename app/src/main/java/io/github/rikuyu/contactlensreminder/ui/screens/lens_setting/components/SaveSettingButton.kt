@@ -18,7 +18,6 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
 
 @Composable
 fun SaveSettingButton(
@@ -36,7 +35,7 @@ fun SaveSettingButton(
         Button(
             onClick = onClick,
             colors = ButtonDefaults.textButtonColors(
-                backgroundColor = CleanBlue,
+                backgroundColor = MaterialTheme.colors.primary,
                 contentColor = Color.White,
                 disabledContentColor = Color.LightGray
             ),

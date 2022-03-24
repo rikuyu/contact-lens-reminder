@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 
 @Composable
@@ -71,16 +70,16 @@ fun NotificationDaySection(
                     onClick = { setNotificationType(index) },
                     shape = shape,
                     colors = ButtonDefaults.textButtonColors(
-                        backgroundColor = if (selected) CleanBlue else Color.Transparent
+                        backgroundColor = if (selected) MaterialTheme.colors.primary else Color.Transparent
                     ),
                     border = BorderStroke(
                         width = 1.dp,
-                        color = CleanBlue
+                        color = MaterialTheme.colors.primary
                     )
                 ) {
                     Text(
                         text = item,
-                        color = if (selected) Color.White else CleanBlue,
+                        color = if (selected) Color.White else MaterialTheme.colors.primary,
                         modifier = Modifier.padding(vertical = 2.dp),
                         fontSize = 16.sp
                     )

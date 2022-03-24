@@ -11,14 +11,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LensSettingViewModel @Inject constructor(
-    private val lensSettingUseCase: LensSettingUseCase
+    private val usecase: LensSettingUseCase
 ) : ViewModel() {
 
     private val _lensSetting: MutableState<LensSettingValue> = mutableStateOf(LensSettingValue())
     val lensSetting: State<LensSettingValue> = _lensSetting
 
     init {
-        _lensSetting.value = lensSettingUseCase.getAllLensSetting.invoke()
+        _lensSetting.value = usecase.getAllLensSetting.invoke()
     }
 
     fun onEvent(event: LensSettingEvent) {
@@ -68,7 +68,7 @@ class LensSettingViewModel @Inject constructor(
                     rightLensPower = event.rightLensPower
                 )
             }
-            is LensSettingEvent.SaveLensSetting -> lensSettingUseCase.saveAllLensSetting(lensSetting.value)
+            is LensSettingEvent.SaveLensSetting -> usecase.saveAllLensSetting(lensSetting.value)
         }
     }
 }

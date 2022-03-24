@@ -15,7 +15,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
 
 @Composable
@@ -36,7 +35,7 @@ fun LaunchAppWidget(modifier: Modifier) {
             )
             Text(
                 text = stringResource(id = R.string.title_launch_app_widget),
-                color = CleanBlue, fontSize = 18.sp,
+                color = MaterialTheme.colors.primary, fontSize = 18.sp,
                 fontWeight = FontWeight.SemiBold
             )
         }

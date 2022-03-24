@@ -21,8 +21,6 @@ import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.domain.model.ReminderValue
 import io.github.rikuyu.contactlensreminder.ui.screens.top.ReminderEvent
 import io.github.rikuyu.contactlensreminder.ui.screens.top.ReminderViewModel
-import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
-import io.github.rikuyu.contactlensreminder.ui.theme.LightBlue
 import io.github.rikuyu.contactlensreminder.ui.util.Routes
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
 
@@ -73,7 +71,11 @@ fun TopScreen(
                     .size(32.dp, 32.dp)
                     .clickable(
                         interactionSource = remember { MutableInteractionSource() },
-                        indication = rememberRipple(color = CleanBlue, bounded = false, radius = 30.dp)
+                        indication = rememberRipple(
+                            color = MaterialTheme.colors.primary,
+                            bounded = false,
+                            radius = 30.dp
+                        )
                     ) {
                         switchDarkTheme(!isDarkTheme)
                         viewModel.onEvent(ReminderEvent.SwitchIsDarkTheme)
@@ -83,13 +85,17 @@ fun TopScreen(
             Icon(
                 painter = painterResource(id = R.drawable.ic_help),
                 contentDescription = null,
-                tint = LightBlue,
+                tint = MaterialTheme.colors.primaryVariant,
                 modifier = Modifier
                     .weight(1f)
                     .size(36.dp, 36.dp)
                     .clickable(
                         interactionSource = remember { MutableInteractionSource() },
-                        indication = rememberRipple(color = CleanBlue, bounded = false, radius = 30.dp)
+                        indication = rememberRipple(
+                            color = MaterialTheme.colors.primary,
+                            bounded = false,
+                            radius = 30.dp
+                        )
                     ) { navController.navigate(Routes.APP_SETTING) }
             )
         }

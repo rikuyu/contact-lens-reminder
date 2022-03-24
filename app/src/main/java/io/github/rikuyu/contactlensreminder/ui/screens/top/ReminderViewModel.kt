@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ReminderViewModel @Inject constructor(
-    private val useCase: ReminderUseCase
+    private val usecase: ReminderUseCase
 ) : ViewModel() {
 
     private val _reminder: MutableState<ReminderValue> = mutableStateOf(ReminderValue())
@@ -23,9 +23,9 @@ class ReminderViewModel @Inject constructor(
     val isDarkTheme: MutableState<Boolean> = mutableStateOf(false)
 
     init {
-        _reminder.value = useCase.getReminderSetting.invoke()
-        _isShowOnBoarding.value = useCase.getIsShowOnBoarding.invoke()
-        isDarkTheme.value = useCase.getIsDarkTheme.invoke()
+        _reminder.value = usecase.getReminderSetting.invoke()
+        _isShowOnBoarding.value = usecase.getIsShowOnBoarding.invoke()
+        isDarkTheme.value = usecase.getIsDarkTheme.invoke()
     }
 
     fun onEvent(event: ReminderEvent) {
@@ -35,19 +35,19 @@ class ReminderViewModel @Inject constructor(
                     isUsingContactLens = event.data.isUsingContactLens,
                     lensRemainingDays = event.data.lensPeriod
                 )
-                useCase.saveReminderSetting(reminder.value)
-                useCase.startReminder()
+                usecase.saveReminderSetting(reminder.value)
+                usecase.startReminder()
             }
             is ReminderEvent.CancelReminder -> {
                 _reminder.value = reminder.value.copy(
                     isUsingContactLens = event.data.isUsingContactLens,
                     lensRemainingDays = event.data.lensPeriod
                 )
-                useCase.saveReminderSetting(reminder.value)
-                useCase.cancelReminder()
+                usecase.saveReminderSetting(reminder.value)
+                usecase.cancelReminder()
             }
-            is ReminderEvent.SwitchIsDarkTheme -> useCase.switchIsDarkTheme.invoke()
-            is ReminderEvent.GetIsDarkTheme -> isDarkTheme.value = useCase.getIsDarkTheme.invoke()
+            is ReminderEvent.SwitchIsDarkTheme -> usecase.switchIsDarkTheme.invoke()
+            is ReminderEvent.GetIsDarkTheme -> isDarkTheme.value = usecase.getIsDarkTheme.invoke()
         }
     }
 }

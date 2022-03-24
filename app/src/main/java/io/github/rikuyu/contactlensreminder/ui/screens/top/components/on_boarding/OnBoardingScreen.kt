@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,8 +17,6 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
-import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
-import io.github.rikuyu.contactlensreminder.ui.theme.PaleBlue
 import io.github.rikuyu.contactlensreminder.ui.util.Routes
 
 @OptIn(ExperimentalPagerApi::class)
@@ -28,7 +27,7 @@ fun OnBoardingScreen(navController: NavController) {
 
     Box(
         modifier = Modifier
-            .background(PaleBlue)
+            .background(MaterialTheme.colors.secondary.copy(alpha = 0.2f))
             .padding(vertical = 30.dp, horizontal = 20.dp)
             .fillMaxSize()
     ) {
@@ -54,7 +53,7 @@ fun OnBoardingScreen(navController: NavController) {
                 .align(Alignment.BottomCenter)
                 .padding(bottom = 10.dp),
             pagerState = pagerState,
-            activeColor = CleanBlue,
+            activeColor = MaterialTheme.colors.primary,
             inactiveColor = Color.LightGray
         )
     }

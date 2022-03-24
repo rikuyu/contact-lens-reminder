@@ -7,17 +7,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import com.chargemap.compose.numberpicker.ListItemPicker
-import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
 
 @Composable
 fun LensPowerPicker(
     modifier: Modifier = Modifier,
-    label: (Double) -> String = {
-        it.toString()
-    },
+    label: (Double) -> String = { it.toString() },
     value: Double,
     onValueChange: (Double) -> Unit,
-    dividersColor: Color = CleanBlue,
+    dividersColor: Color = MaterialTheme.colors.primary,
     range: List<Double>,
     textStyle: TextStyle = LocalTextStyle.current.copy(color = MaterialTheme.colors.onSurface),
 ) {

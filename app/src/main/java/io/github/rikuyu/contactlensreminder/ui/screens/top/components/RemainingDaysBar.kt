@@ -24,9 +24,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
-import io.github.rikuyu.contactlensreminder.ui.theme.LightBlue
-import io.github.rikuyu.contactlensreminder.ui.theme.LightRed
+import io.github.rikuyu.contactlensreminder.ui.theme.ColorPalette
 
 @Composable
 fun RemainingDaysBar(
@@ -41,7 +39,8 @@ fun RemainingDaysBar(
     supportTextFontSize: TextUnit = 24.sp,
     periodTextFontSize: TextUnit = 16.sp,
     supportTextColor: Color = MaterialTheme.colors.onSurface,
-    color: Color = CleanBlue,
+    color: Color = MaterialTheme.colors.primary,
+    secondColor: Color = MaterialTheme.colors.secondary,
     radius: Dp = 150.dp,
     strokeWidth: Dp = 30.dp,
 ) {
@@ -61,7 +60,11 @@ fun RemainingDaysBar(
     Box(contentAlignment = Alignment.Center, modifier = Modifier.size(radius * 2f)) {
         Canvas(modifier = Modifier.size(radius * 2f)) {
             drawArc(
-                color = if (lensRemainingDays > 0 || !isUsingContactLens) LightBlue else LightRed,
+                color =
+                if (lensRemainingDays > 0 || !isUsingContactLens)
+                    secondColor
+                else
+                    ColorPalette.Red.secondaryRed,
                 startAngle = 0f,
                 sweepAngle = 360f,
                 useCenter = false,

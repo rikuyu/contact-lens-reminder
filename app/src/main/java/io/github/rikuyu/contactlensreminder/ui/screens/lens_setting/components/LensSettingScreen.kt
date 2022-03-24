@@ -20,16 +20,15 @@ import androidx.navigation.NavController
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.LensSettingEvent
 import io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.LensSettingViewModel
-import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
-import io.github.rikuyu.contactlensreminder.ui.util.Routes
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun LensSettingScreen(
+    isDarkTheme: Boolean,
     navController: NavController,
-    viewModelLens: LensSettingViewModel = hiltViewModel()
+    viewModelLens: LensSettingViewModel = hiltViewModel(),
 ) {
     val context = LocalContext.current
 
@@ -82,7 +81,7 @@ fun LensSettingScreen(
                         )
                     }
                 },
-                backgroundColor = CleanBlue
+                backgroundColor = MaterialTheme.colors.primary
             )
         },
         content = {
@@ -112,7 +111,8 @@ fun LensSettingScreen(
                     }
                     AnimatedVisibility(visible = !isShowLensPeriodPicker) { SimpleDivider() }
                     AnimatedVisibility(visible = isShowLensPeriodPicker) {
-                        LensPeriodSection(
+                        LensPeriodOtherTypeSection(
+                            isDarkTheme = isDarkTheme,
                             modifier = Modifier.fillMaxWidth(),
                             period = lensPeriod,
                             setLensPeriod = {
@@ -141,6 +141,7 @@ fun LensSettingScreen(
                                 viewModelLens.onEvent(LensSettingEvent.NotificationDay(it))
                             }
                             NotificationTimeSection(
+                                isDarkTheme = isDarkTheme,
                                 modifier = Modifier.fillMaxWidth(),
                                 notificationTimeHour = notificationTimeHour,
                                 setNotificationTimeHour = {
@@ -169,6 +170,7 @@ fun LensSettingScreen(
                     SimpleDivider()
                     AnimatedVisibility(visible = isShowLensPowerSection) {
                         LensPowerSection(
+                            isDarkTheme = isDarkTheme,
                             modifier = Modifier.fillMaxWidth(),
                             leftLensPower = leftLensPower.toDouble(),
                             setLeftLensPower = {
@@ -191,7 +193,7 @@ fun LensSettingScreen(
                         Toast.LENGTH_SHORT
                     ).show()
                     viewModelLens.onEvent(LensSettingEvent.SaveLensSetting)
-                    navController.navigate(Routes.TOP)
+                    navController.popBackStack()
                 }
             }
         }
