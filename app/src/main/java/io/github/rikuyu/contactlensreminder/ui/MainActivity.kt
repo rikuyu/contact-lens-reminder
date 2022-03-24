@@ -64,7 +64,7 @@ class MainActivity : ComponentActivity() {
                         OnBoardingScreen(navController)
                     }
                     composable(route = Routes.LENS_SETTING) {
-                        LensSettingScreen(isDarkTheme, navController)
+                        LensSettingScreen(isDarkTheme, themeColor, navController)
                     }
                     composable(route = Routes.APP_SETTING) {
                         AppSettingScreen(themeColor, { themeColor = it }, navController)

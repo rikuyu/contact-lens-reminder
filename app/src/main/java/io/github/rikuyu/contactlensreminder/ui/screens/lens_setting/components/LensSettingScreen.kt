@@ -20,6 +20,8 @@ import androidx.navigation.NavController
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.LensSettingEvent
 import io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.LensSettingViewModel
+import io.github.rikuyu.contactlensreminder.ui.theme.ThemeColor
+import io.github.rikuyu.contactlensreminder.ui.util.Routes
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
 
@@ -27,6 +29,7 @@ import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
 @Composable
 fun LensSettingScreen(
     isDarkTheme: Boolean,
+    themeColor: ThemeColor,
     navController: NavController,
     viewModelLens: LensSettingViewModel = hiltViewModel(),
 ) {
@@ -142,6 +145,7 @@ fun LensSettingScreen(
                             }
                             NotificationTimeSection(
                                 isDarkTheme = isDarkTheme,
+                                themeColor = themeColor,
                                 modifier = Modifier.fillMaxWidth(),
                                 notificationTimeHour = notificationTimeHour,
                                 setNotificationTimeHour = {
@@ -193,7 +197,9 @@ fun LensSettingScreen(
                         Toast.LENGTH_SHORT
                     ).show()
                     viewModelLens.onEvent(LensSettingEvent.SaveLensSetting)
-                    navController.popBackStack()
+                    navController.navigate(Routes.TOP) {
+                        popUpTo(Routes.TOP) { inclusive = true }
+                    }
                 }
             }
         }

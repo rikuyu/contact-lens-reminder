@@ -136,12 +136,12 @@ fun RemainingDaysBar(
                                     stringResource(id = R.string.before_day)
                             )
                             append(" ")
-                            append(notificationTimeHour.toString())
-                            append(stringResource(id = R.string.time_div))
                             append(
-                                if (notificationTimeMinute == 0)
+                                "$notificationTimeHour:${
+                                if (notificationTimeMinute < 10)
                                     "0$notificationTimeMinute"
                                 else notificationTimeMinute.toString()
+                                }"
                             )
                         }
                     }
