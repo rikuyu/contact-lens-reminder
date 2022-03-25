@@ -24,8 +24,6 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import io.github.rikuyu.contactlensreminder.BuildConfig
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
-import io.github.rikuyu.contactlensreminder.ui.theme.SkyBlue
 import io.github.rikuyu.contactlensreminder.ui.theme.WebViewBackground
 import io.github.rikuyu.contactlensreminder.ui.util.checkNetworkConnection
 
@@ -51,7 +49,7 @@ fun ContactUsScreen(navController: NavController) {
                     }
                 },
                 contentColor = Color.White,
-                backgroundColor = CleanBlue
+                backgroundColor = MaterialTheme.colors.primary,
             )
         }
     ) {
@@ -84,7 +82,7 @@ fun ContactUsScreen(navController: NavController) {
                     )
                     if (!visibility.value) {
                         CircularProgressIndicator(
-                            color = SkyBlue,
+                            color = MaterialTheme.colors.primaryVariant,
                             modifier = Modifier.align(Alignment.Center)
                         )
                     }
@@ -101,17 +99,17 @@ fun ContactUsScreen(navController: NavController) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_wifi_off),
                     modifier = Modifier.size(60.dp),
-                    tint = SkyBlue,
+                    tint = MaterialTheme.colors.primaryVariant,
                     contentDescription = null
                 )
                 Text(
                     text = stringResource(id = R.string.network_error_message_1),
-                    color = CleanBlue,
+                    color = MaterialTheme.colors.primary,
                     fontSize = 18.sp
                 )
                 Text(
                     text = stringResource(id = R.string.network_error_message_2),
-                    color = CleanBlue,
+                    color = MaterialTheme.colors.primary,
                     fontSize = 18.sp
                 )
             }

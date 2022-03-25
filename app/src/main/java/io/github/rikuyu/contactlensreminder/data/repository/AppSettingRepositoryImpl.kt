@@ -5,10 +5,16 @@ import io.github.rikuyu.contactlensreminder.domain.repository.AppSettingReposito
 import javax.inject.Inject
 
 class AppSettingRepositoryImpl @Inject constructor(
-    private val localDataSource: DataSource
+    private val localDataSource: DataSource,
 ) : AppSettingRepository {
 
     override fun logEvent(label: String) {
         localDataSource.logEvent(label)
+    }
+
+    override fun getThemeColor(): String = localDataSource.getThemeColor()
+
+    override fun saveThemeColor(color: String) {
+        localDataSource.saveThemeColor(color)
     }
 }

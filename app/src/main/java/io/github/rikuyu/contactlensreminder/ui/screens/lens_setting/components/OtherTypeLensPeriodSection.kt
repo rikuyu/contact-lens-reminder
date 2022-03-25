@@ -16,23 +16,20 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.chargemap.compose.numberpicker.NumberPicker
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
-import io.github.rikuyu.contactlensreminder.ui.theme.PaleBlue
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 
 @Composable
-fun LensPeriodSection(
+fun OtherTypeLensPeriodSection(
+    isDarkTheme: Boolean,
     modifier: Modifier = Modifier,
-    textColor: Color = MaterialTheme.colors.onSecondary,
+    textColor: Color = MaterialTheme.colors.onSurface,
     fontSize: TextUnit = 18.sp,
     period: Int,
-    setLensPeriod: (Int) -> Unit
+    setLensPeriod: (Int) -> Unit,
 ) {
     var isShowLensPeriodPicker by remember { mutableStateOf(false) }
 
-    Column(
-        modifier = modifier.background(MaterialTheme.colors.background)
-    ) {
+    Column(modifier = modifier.background(MaterialTheme.colors.background)) {
         Row(
             modifier = modifier.padding(top = 0.dp, bottom = 14.dp, end = 12.dp, start = 2.dp),
             verticalAlignment = Alignment.CenterVertically
@@ -48,7 +45,10 @@ fun LensPeriodSection(
             } else {
                 Box(
                     modifier = Modifier
-                        .background(PaleBlue, shape = RoundedCornerShape(20))
+                        .background(
+                            MaterialTheme.colors.primary.copy(alpha = if (isDarkTheme) 0.7f else 0.2f),
+                            shape = RoundedCornerShape(20)
+                        )
                         .padding(vertical = 8.dp, horizontal = 10.dp)
                 ) {
                     Row(
@@ -72,7 +72,7 @@ fun LensPeriodSection(
             Button(
                 onClick = { isShowLensPeriodPicker = !isShowLensPeriodPicker },
                 colors = ButtonDefaults.textButtonColors(
-                    backgroundColor = CleanBlue,
+                    backgroundColor = MaterialTheme.colors.primary,
                     contentColor = Color.White,
                     disabledContentColor = Color.LightGray
                 ),

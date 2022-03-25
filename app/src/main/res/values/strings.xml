@@ -36,7 +36,6 @@
     <string name="two_weeks">2週間</string>
     <string name="one_month">1ヵ月</string>
     <string name="other">Other</string>
-    <string name="success_save_setting">設定が保存されました</string>
 
     <!-- AppSettingScreen -->
     <string name="app_setting_screen_title">このアプリについて</string>
@@ -44,6 +43,7 @@
     <string name="help">ヘルプ（使い方）</string>
     <string name="notification_setting">通知設定</string>
     <string name="inquiry">お問い合わせ</string>
+    <string name="color_theme">テーマカラー変更</string>
     <string name="version">version %s</string>
 
     <!-- Notification -->
@@ -51,10 +51,13 @@
     <string name="notification_content">目の健康を守りましょう！</string>
 
     <!-- レンズ交換確認ダイアログ -->
-    <string name="dialog_title">本当にレンズを交換しますか？</string>
-    <string name="dialog_content">リマインダーはキャンセルされます</string>
+    <string name="reminder_cancel_dialog_title">本当にレンズを交換しますか？</string>
+    <string name="reminder_cancel_dialog_content">リマインダーはキャンセルされます</string>
     <string name="btn_cancel">キャンセル</string>
     <string name="btn_ok">OK</string>
+
+    <!-- カラーテーマ変更ダイアログ -->
+    <string name="color_theme_dialog_title">テーマカラー変更</string>
 
     <!-- ヘルプ（使い方） -->
     <string name="help_1_page">STEP 1</string>
@@ -72,7 +75,7 @@
     <string name="step_2_5">レンズの度数設定</string>
     <string name="step_2_6">コンタクトレンズの度数は、-8.0～-3.0の範囲で設定することができます。</string>
     <string name="step_2_7">設定の保存方法</string>
-    <string name="step_2_8">これまでの設定を保存するにはokボタンを押下してください。</string>
+    <string name="step_2_8">これまでの設定を保存するにはOKボタンを押下してください。</string>
     <string name="step_3_1">リマインダーの設定方法</string>
     <string name="step_3_2">リマインダーを開始するためには、「スタート」ボタン（赤枠）を押下してください。リマインダーをスタートすると、いったんアプリが閉じます。</string>
     <string name="step_3_3">リマインダー開始後</string>
@@ -84,12 +87,14 @@
     <string name="step_4_4">この画面では、「利用規約」「ヘルプ（使い方）」「通知設定」「お問い合わせ」「バージョン」を参照することができます。</string>
     <string name="step_4_5">ライト/ダークモードについて</string>
     <string name="step_4_6">このアプリはトップ画面左上のアイコンを押下することで、ライト/ダークモードを使い分けることができます。</string>
-    <string name="step_4_7">アプリウィジェットについて</string>
-    <string name="step_4_8">アプリウィジェットは「画像タイプ」「プログレスバータイプ」があります。画像タイプはコンタクトレンズの残り使用可能日数を表示します。プログレスバータイプは残り使用可能日数を表すプログレスバーとレンズ交換をする日付が表示されます。</string>
-    <string name="step_4_9">注意事項</string>
-    <string name="step_4_10">アプリのアップデートを行った後、お手数ですがアプリウィジェットを作り直してください。機能しなくなってしまいます。</string>
-    <string name="step_4_11">アプリウィジェットをホーム画面に出すとき「ウィジェットを読み込めません」と表示される場合は、一度アプリをアンインストールし、再度お試しください</string>
-    <string name="step_4_12">問題が解決しない場合は、お問い合わせからご連絡ください</string>
+    <string name="step_4_7">テーマカラー変更について</string>
+    <string name="step_4_8">ヘルプ画面の「テーマカラー変更」押下で出現するダイアログでテーマカラーを変更することができます。</string>
+    <string name="step_4_9">アプリウィジェットについて</string>
+    <string name="step_4_10">アプリウィジェットは「画像タイプ」「プログレスバータイプ」があります。画像タイプはコンタクトレンズの残り使用可能日数を表示します。プログレスバータイプは残り使用可能日数を表すプログレスバーとレンズ交換をする日付が表示されます。</string>
+    <string name="step_4_11">[ 注意事項 ]</string>
+    <string name="step_4_12">1. アプリのアップデートを行った後、お手数ですがアプリウィジェットを作り直してください。</string>
+    <string name="step_4_13">2. アプリウィジェットをホーム画面に出すとき「ウィジェットを読み込めません」と表示される場合は、一度アプリをアンインストールし、再度お試しください。</string>
+    <string name="step_4_14">上記の問題が解決しない場合は、お問い合わせからご連絡ください。</string>
 
     <!-- お問い合わせ -->
     <string name="network_error_message_1">お問い合わせするには</string>
@@ -130,7 +135,8 @@
     <!-- AppWidget -->
     <string name="app_widget_progress_bar">Progress Bar Type</string>
     <string name="app_widget_image">Number Type</string>
-    <string name="text_remaining_day">残り%d日</string>
+    <string name="text_remaining_day_before">残り</string>
+    <string name="text_remaining_day_after">日</string>
     <string name="text_preview_remaining_day">残り14日</string>
     <string name="text_preview_exchange_date">12/10 (水)</string>
     <string name="no_image_description">no image</string>

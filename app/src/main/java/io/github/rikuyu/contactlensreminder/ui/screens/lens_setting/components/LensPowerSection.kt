@@ -11,17 +11,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.chargemap.compose.numberpicker.ListItemPicker
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
-import io.github.rikuyu.contactlensreminder.ui.theme.PaleBlue
-import io.github.rikuyu.contactlensreminder.ui.util.LensPowerPicker
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 
 @Composable
 fun LensPowerSection(
+    isDarkTheme: Boolean,
     modifier: Modifier,
     textColor: Color = MaterialTheme.colors.onSurface,
     fontSize: TextUnit = 18.sp,
@@ -48,6 +48,7 @@ fun LensPowerSection(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 SetOneLensPowerItem(
+                    isDarkTheme = isDarkTheme,
                     textColor = textColor,
                     fontSize = fontSize,
                     lensPower = leftLensPower,
@@ -57,6 +58,7 @@ fun LensPowerSection(
                     setLensPower = { setLeftLensPower(it) }
                 )
                 SetOneLensPowerItem(
+                    isDarkTheme = isDarkTheme,
                     textColor = textColor,
                     fontSize = fontSize,
                     lensPower = rightLensPower,
@@ -68,7 +70,7 @@ fun LensPowerSection(
                 Button(
                     onClick = { isShowLensPowerPicker = !isShowLensPowerPicker },
                     colors = ButtonDefaults.textButtonColors(
-                        backgroundColor = CleanBlue,
+                        backgroundColor = MaterialTheme.colors.primary,
                         contentColor = Color.White,
                         disabledContentColor = Color.LightGray
                     ),
@@ -96,6 +98,7 @@ fun LensPowerSection(
 
 @Composable
 fun SetOneLensPowerItem(
+    isDarkTheme: Boolean,
     textColor: Color,
     fontSize: TextUnit,
     eye: String,
@@ -121,15 +124,39 @@ fun SetOneLensPowerItem(
     } else {
         Box(
             modifier = Modifier
-                .background(PaleBlue, shape = RoundedCornerShape(20))
+                .background(
+                    color = MaterialTheme.colors.primary.copy(alpha = if (isDarkTheme) 0.7f else 0.2f),
+                    shape = RoundedCornerShape(20)
+                )
                 .clickable { changeIsShowLensPowerPicker.invoke() }
                 .padding(vertical = 8.dp, horizontal = 10.dp)
         ) {
             Text(
                 text = lensPower.toString(),
-                color = Color.Black,
+                color = textColor,
                 fontSize = 20.sp
             )
         }
     }
+}
+
+@Composable
+fun LensPowerPicker(
+    modifier: Modifier = Modifier,
+    label: (Double) -> String = { it.toString() },
+    value: Double,
+    onValueChange: (Double) -> Unit,
+    dividersColor: Color = MaterialTheme.colors.primary,
+    range: List<Double>,
+    textStyle: TextStyle = LocalTextStyle.current.copy(color = MaterialTheme.colors.onSurface),
+) {
+    ListItemPicker(
+        modifier = modifier,
+        label = label,
+        value = value,
+        onValueChange = onValueChange,
+        dividersColor = dividersColor,
+        list = range.toList(),
+        textStyle = textStyle
+    )
 }

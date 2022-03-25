@@ -1,6 +1,5 @@
 package io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.components
 
-import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
@@ -12,7 +11,6 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -20,7 +18,7 @@ import androidx.navigation.NavController
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.LensSettingEvent
 import io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.LensSettingViewModel
-import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
+import io.github.rikuyu.contactlensreminder.ui.theme.ThemeColor
 import io.github.rikuyu.contactlensreminder.ui.util.Routes
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
@@ -28,11 +26,11 @@ import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun LensSettingScreen(
+    isDarkTheme: Boolean,
+    themeColor: ThemeColor,
     navController: NavController,
-    viewModelLens: LensSettingViewModel = hiltViewModel()
+    viewModelLens: LensSettingViewModel = hiltViewModel(),
 ) {
-    val context = LocalContext.current
-
     val settingValue = viewModelLens.lensSetting.value
 
     var lensType by remember { mutableStateOf(settingValue.lensType) }
@@ -82,7 +80,7 @@ fun LensSettingScreen(
                         )
                     }
                 },
-                backgroundColor = CleanBlue
+                backgroundColor = MaterialTheme.colors.primary
             )
         },
         content = {
@@ -112,7 +110,8 @@ fun LensSettingScreen(
                     }
                     AnimatedVisibility(visible = !isShowLensPeriodPicker) { SimpleDivider() }
                     AnimatedVisibility(visible = isShowLensPeriodPicker) {
-                        LensPeriodSection(
+                        OtherTypeLensPeriodSection(
+                            isDarkTheme = isDarkTheme,
                             modifier = Modifier.fillMaxWidth(),
                             period = lensPeriod,
                             setLensPeriod = {
@@ -141,6 +140,8 @@ fun LensSettingScreen(
                                 viewModelLens.onEvent(LensSettingEvent.NotificationDay(it))
                             }
                             NotificationTimeSection(
+                                isDarkTheme = isDarkTheme,
+                                themeColor = themeColor,
                                 modifier = Modifier.fillMaxWidth(),
                                 notificationTimeHour = notificationTimeHour,
                                 setNotificationTimeHour = {
@@ -169,6 +170,7 @@ fun LensSettingScreen(
                     SimpleDivider()
                     AnimatedVisibility(visible = isShowLensPowerSection) {
                         LensPowerSection(
+                            isDarkTheme = isDarkTheme,
                             modifier = Modifier.fillMaxWidth(),
                             leftLensPower = leftLensPower.toDouble(),
                             setLeftLensPower = {
@@ -185,13 +187,10 @@ fun LensSettingScreen(
                 }
                 SaveSettingButton(modifier = Modifier.fillMaxWidth()) {
                     isShowLensPeriodPicker = false
-                    Toast.makeText(
-                        context,
-                        context.getString(R.string.success_save_setting),
-                        Toast.LENGTH_SHORT
-                    ).show()
                     viewModelLens.onEvent(LensSettingEvent.SaveLensSetting)
-                    navController.navigate(Routes.TOP)
+                    navController.navigate(Routes.TOP) {
+                        popUpTo(Routes.TOP) { inclusive = true }
+                    }
                 }
             }
         }

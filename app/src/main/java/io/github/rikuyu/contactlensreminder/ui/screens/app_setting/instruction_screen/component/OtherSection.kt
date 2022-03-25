@@ -24,7 +24,7 @@ import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
 fun OtherSection(
     modifier: Modifier,
     textColor: Color = MaterialTheme.colors.onSurface,
-    descFontSize: TextUnit = 14.sp
+    descFontSize: TextUnit = 14.sp,
 ) {
     val screenWidth = LocalConfiguration.current.screenWidthDp
 
@@ -94,6 +94,37 @@ fun OtherSection(
         }
         item { TitleSection(title = stringResource(id = R.string.step_4_7)) }
         item {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.color_picker),
+                    contentDescription = null,
+                    modifier = Modifier.padding(8.dp)
+                )
+            }
+            Text(
+                modifier = Modifier.padding(10.dp),
+                text = stringResource(id = R.string.step_4_8),
+                fontSize = descFontSize,
+                color = textColor
+            )
+        }
+        item {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.theme_color_demo),
+                    contentDescription = null,
+                    modifier = Modifier.padding(8.dp)
+                )
+            }
+        }
+        item { TitleSection(title = stringResource(id = R.string.step_4_9)) }
+        item {
             Row {
                 Image(
                     painter = painterResource(id = R.drawable.app_widget),
@@ -106,7 +137,7 @@ fun OtherSection(
                 )
                 Text(
                     modifier = Modifier.padding(top = 10.dp),
-                    text = stringResource(id = R.string.step_4_8),
+                    text = stringResource(id = R.string.step_4_10),
                     fontSize = descFontSize,
                     color = textColor
                 )
@@ -116,25 +147,25 @@ fun OtherSection(
             SimpleSpacer(height = 20.dp, color = MaterialTheme.colors.background)
             Text(
                 modifier = Modifier.padding(horizontal = 10.dp),
-                text = stringResource(id = R.string.step_4_9),
+                text = stringResource(id = R.string.step_4_11),
                 fontSize = 16.sp,
                 color = Color.Red
             )
             Text(
                 modifier = Modifier.padding(vertical = 10.dp, horizontal = 10.dp),
-                text = stringResource(id = R.string.step_4_10),
-                fontSize = descFontSize,
-                color = textColor
-            )
-            Text(
-                modifier = Modifier.padding(top = 4.dp, start = 10.dp, end = 10.dp),
-                text = stringResource(id = R.string.step_4_11),
-                fontSize = descFontSize,
-                color = textColor
-            )
-            Text(
-                modifier = Modifier.padding(top = 4.dp, start = 10.dp, end = 10.dp),
                 text = stringResource(id = R.string.step_4_12),
+                fontSize = descFontSize,
+                color = textColor
+            )
+            Text(
+                modifier = Modifier.padding(top = 10.dp, start = 10.dp, end = 10.dp),
+                text = stringResource(id = R.string.step_4_13),
+                fontSize = descFontSize,
+                color = textColor
+            )
+            Text(
+                modifier = Modifier.padding(top = 10.dp, start = 10.dp, end = 10.dp),
+                text = stringResource(id = R.string.step_4_14),
                 fontSize = descFontSize,
                 color = textColor
             )

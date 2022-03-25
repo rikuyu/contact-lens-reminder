@@ -105,4 +105,27 @@ class ReminderUseCaseTest {
             repository.saveReminderSetting(any())
         }
     }
+
+    @Test
+    fun `GetIsDarkTheme Test`() {
+        every { repository.getIsDarkTheme() } returns false
+        val darkTheme = reminderUseCase.getIsDarkTheme.invoke()
+
+        assertThat(darkTheme).isFalse()
+
+        verify(exactly = 1) {
+            reminderUseCase.getIsDarkTheme.invoke()
+            repository.getIsDarkTheme()
+        }
+    }
+
+    @Test
+    fun `SwitchIsDarkTheme Test`() {
+        every { repository.switchIsDarkTheme() } returns Unit
+        reminderUseCase.switchIsDarkTheme()
+        verify(exactly = 1) {
+            reminderUseCase.switchIsDarkTheme.invoke()
+            repository.switchIsDarkTheme()
+        }
+    }
 }

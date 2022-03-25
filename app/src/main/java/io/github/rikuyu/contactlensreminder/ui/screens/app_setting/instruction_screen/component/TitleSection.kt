@@ -19,21 +19,19 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
-import io.github.rikuyu.contactlensreminder.ui.theme.SkyBlue
 
 @Composable
 fun TitleSection(
     title: String,
     painter: Painter = painterResource(id = R.drawable.water_drop),
     textColor: Color = MaterialTheme.colors.onSurface,
-    fontSize: TextUnit = 16.sp
+    fontSize: TextUnit = 16.sp,
 ) {
     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 6.dp)) {
         Icon(
             painter = painter,
             contentDescription = null,
-            tint = SkyBlue,
+            tint = MaterialTheme.colors.primaryVariant,
             modifier = Modifier
                 .size(30.dp)
                 .padding(start = 10.dp, end = 4.dp)
@@ -44,7 +42,7 @@ fun TitleSection(
             color = textColor,
             fontWeight = FontWeight.Medium,
             modifier = Modifier
-                .border(1.dp, CleanBlue, RoundedCornerShape(8.dp))
+                .border(1.dp, MaterialTheme.colors.primary, RoundedCornerShape(8.dp))
                 .padding(vertical = 4.dp, horizontal = 6.dp)
         )
     }

@@ -47,6 +47,10 @@ AppWidgetが日付をまたいで変化する様子
 |:---:|:---:|
 | <img src="https://user-images.githubusercontent.com/51118613/158942189-20ff8ba8-8872-4ddd-84bc-9efd4c3153eb.jpg" width=220 > | <img src="https://user-images.githubusercontent.com/51118613/158942244-b96f98c1-c63c-4388-8ded-c8a4f6e89d12.jpg" width=220 > |
 
+### テーマカラー変更機能
+
+<img src="https://user-images.githubusercontent.com/51118613/159910626-b127a561-df51-4dc8-be69-093124730e9e.jpg" >
+
 ### デモ（v2.0.0 から廃止）
 
 本アプリアイコンとGoogleカレンダーのアイコンが日付をまたいで変化する様子

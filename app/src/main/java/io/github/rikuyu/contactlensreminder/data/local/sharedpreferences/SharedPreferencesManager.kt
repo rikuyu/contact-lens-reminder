@@ -205,7 +205,7 @@ class SharedPreferencesManager @Inject constructor(private val context: Context)
     fun getIsShowOnBoarding(): Boolean {
         return getSharedPreferences().getBoolean(
             SharedPreferencesKey.STORED_IS_SHOW_ON_BOARDING,
-            true
+            false
         )
     }
 
@@ -225,5 +225,16 @@ class SharedPreferencesManager @Inject constructor(private val context: Context)
     fun saveIsDarkTheme(isDarkTheme: Boolean) {
         getSharedPreferences().edit()
             .putBoolean(SharedPreferencesKey.STORED_IS_DARK_THEME, isDarkTheme).apply()
+    }
+
+    // Theme Color
+    fun getThemeColor(): String {
+        return getSharedPreferences().getString(SharedPreferencesKey.STORED_IS_THEME_COLOR, "blue")
+            ?: "blue"
+    }
+
+    fun saveThemeColor(color: String) {
+        getSharedPreferences().edit()
+            .putString(SharedPreferencesKey.STORED_IS_THEME_COLOR, color).apply()
     }
 }

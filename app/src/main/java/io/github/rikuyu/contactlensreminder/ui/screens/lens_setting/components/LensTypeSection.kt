@@ -19,7 +19,6 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.ui.theme.CleanBlue
 
 @Composable
 fun LensTypeSection(
@@ -27,7 +26,7 @@ fun LensTypeSection(
     textColor: Color = MaterialTheme.colors.onSurface,
     fontSize: TextUnit = 18.sp,
     lensType: Int,
-    onClick: (Int) -> Unit
+    onClick: (Int) -> Unit,
 ) {
     Row(
         modifier = modifier
@@ -47,39 +46,37 @@ fun LensTypeSection(
             stringResource(id = R.string.two_weeks),
             stringResource(id = R.string.one_month),
             stringResource(id = R.string.other)
-        ).forEachIndexed { index, item ->
+        ).forEachIndexed { index, text ->
             val selected = lensType == index
-
-            val shape = when (index) {
-                0 -> RoundedCornerShape(
-                    topStart = 4.dp,
-                    bottomStart = 4.dp,
-                    topEnd = 0.dp,
-                    bottomEnd = 0.dp
-                )
-                2 -> RoundedCornerShape(
-                    topStart = 0.dp,
-                    bottomStart = 0.dp,
-                    topEnd = 4.dp,
-                    bottomEnd = 4.dp
-                )
-                else -> CutCornerShape(0.dp)
-            }
             OutlinedButton(
                 onClick = { onClick(index) },
-                shape = shape,
+                shape = when (index) {
+                    0 -> RoundedCornerShape(
+                        topStart = 4.dp,
+                        bottomStart = 4.dp,
+                        topEnd = 0.dp,
+                        bottomEnd = 0.dp
+                    )
+                    2 -> RoundedCornerShape(
+                        topStart = 0.dp,
+                        bottomStart = 0.dp,
+                        topEnd = 4.dp,
+                        bottomEnd = 4.dp
+                    )
+                    else -> CutCornerShape(0.dp)
+                },
                 colors = ButtonDefaults.textButtonColors(
-                    backgroundColor = if (selected) CleanBlue else Color.Transparent
+                    backgroundColor = if (selected) MaterialTheme.colors.primary else Color.Transparent
                 ),
                 modifier = Modifier.padding(vertical = 2.dp),
                 border = BorderStroke(
                     width = 1.dp,
-                    color = CleanBlue
+                    color = MaterialTheme.colors.primary
                 )
             ) {
                 Text(
-                    text = item,
-                    color = if (selected) Color.White else CleanBlue,
+                    text = text,
+                    color = if (selected) Color.White else MaterialTheme.colors.primary,
                     modifier = Modifier.padding(vertical = 2.dp),
                     fontSize = 16.sp
                 )
