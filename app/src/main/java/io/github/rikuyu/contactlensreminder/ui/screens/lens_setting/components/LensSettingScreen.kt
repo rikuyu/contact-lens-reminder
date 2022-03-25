@@ -1,6 +1,5 @@
 package io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.components
 
-import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
@@ -12,7 +11,6 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -33,8 +31,6 @@ fun LensSettingScreen(
     navController: NavController,
     viewModelLens: LensSettingViewModel = hiltViewModel(),
 ) {
-    val context = LocalContext.current
-
     val settingValue = viewModelLens.lensSetting.value
 
     var lensType by remember { mutableStateOf(settingValue.lensType) }
@@ -114,7 +110,7 @@ fun LensSettingScreen(
                     }
                     AnimatedVisibility(visible = !isShowLensPeriodPicker) { SimpleDivider() }
                     AnimatedVisibility(visible = isShowLensPeriodPicker) {
-                        LensPeriodOtherTypeSection(
+                        OtherTypeLensPeriodSection(
                             isDarkTheme = isDarkTheme,
                             modifier = Modifier.fillMaxWidth(),
                             period = lensPeriod,
@@ -191,11 +187,6 @@ fun LensSettingScreen(
                 }
                 SaveSettingButton(modifier = Modifier.fillMaxWidth()) {
                     isShowLensPeriodPicker = false
-                    Toast.makeText(
-                        context,
-                        context.getString(R.string.success_save_setting),
-                        Toast.LENGTH_SHORT
-                    ).show()
                     viewModelLens.onEvent(LensSettingEvent.SaveLensSetting)
                     navController.navigate(Routes.TOP) {
                         popUpTo(Routes.TOP) { inclusive = true }

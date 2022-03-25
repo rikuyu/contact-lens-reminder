@@ -43,6 +43,7 @@ fun NotificationTimeSection(
 
     MaterialDialog(
         dialogState = dialogState,
+        onCloseRequest = { },
         buttons = {
             positiveButton(LocalContext.current.getString(R.string.btn_ok))
             negativeButton(LocalContext.current.getString(R.string.cancel))
@@ -84,23 +85,18 @@ fun NotificationTimeSection(
                         MaterialTheme.colors.primary.copy(alpha = if (isDarkTheme) 0.7f else 0.2f),
                         shape = RoundedCornerShape(20)
                     )
+                    .clickable { dialogState.show() }
                     .padding(vertical = 8.dp, horizontal = 10.dp)
             ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.clickable { dialogState.show() }
-                ) {
-                    Text(
-                        text = "$notificationTimeHour : ${
-                        if (notificationTimeMinute < 10)
-                            "0$notificationTimeMinute"
-                        else notificationTimeMinute
-                        }",
-                        color = textColor,
-                        fontSize = 20.sp,
-                        modifier = Modifier.padding(horizontal = 2.dp)
-                    )
-                }
+                Text(
+                    text = "$notificationTimeHour : ${
+                    if (notificationTimeMinute < 10)
+                        "0$notificationTimeMinute"
+                    else notificationTimeMinute
+                    }",
+                    color = textColor,
+                    fontSize = 20.sp
+                )
             }
             Button(
                 onClick = { dialogState.show() },

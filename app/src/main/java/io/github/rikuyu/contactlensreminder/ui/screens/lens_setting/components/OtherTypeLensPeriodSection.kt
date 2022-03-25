@@ -19,7 +19,7 @@ import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 
 @Composable
-fun LensPeriodOtherTypeSection(
+fun OtherTypeLensPeriodSection(
     isDarkTheme: Boolean,
     modifier: Modifier = Modifier,
     textColor: Color = MaterialTheme.colors.onSurface,

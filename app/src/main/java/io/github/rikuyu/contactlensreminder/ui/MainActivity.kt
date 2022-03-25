@@ -44,7 +44,6 @@ class MainActivity : ComponentActivity() {
         appUpdateService.executeAppUpdate(this)
 
         setContent {
-
             var isDarkTheme by remember { reminderViewModel.isDarkTheme }
             var themeColor by remember { appSettingViewModel.themeColor }
             val systemUiController = rememberSystemUiController()

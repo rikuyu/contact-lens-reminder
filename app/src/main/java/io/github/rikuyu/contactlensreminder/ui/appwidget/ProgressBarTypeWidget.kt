@@ -23,7 +23,7 @@ class ProgressBarTypeWidget : AppWidgetProvider() {
     override fun onUpdate(
         context: Context,
         appWidgetManager: AppWidgetManager,
-        appWidgetIds: IntArray
+        appWidgetIds: IntArray,
     ) {
         context.applicationContext.registerReceiver(this, IntentFilter(Intent.ACTION_USER_PRESENT))
 
@@ -58,7 +58,7 @@ class ProgressBarTypeWidget : AppWidgetProvider() {
     fun updateProgressBarTypeWidget(
         context: Context,
         appWidgetManager: AppWidgetManager,
-        appWidgetId: Int
+        appWidgetId: Int,
     ) {
         val sharedPreferencesManager = SharedPreferencesManager(context)
         val remainingDay = sharedPreferencesManager.getContactLensRemainingDays()
@@ -79,7 +79,9 @@ class ProgressBarTypeWidget : AppWidgetProvider() {
                 R.id.widget_progress_bar_type,
                 pendingIntent
             )
-            setTextViewText(R.id.tv_remaining_day, context.getString(R.string.text_remaining_day, remainingDay))
+            setViewVisibility(R.id.tv_remaining_day_before, View.VISIBLE)
+            setTextViewText(R.id.tv_remaining_day, remainingDay.toString())
+            setViewVisibility(R.id.tv_remaining_day_after, View.VISIBLE)
 
             if (remainingDay > 0) {
                 setViewVisibility(R.id.progress_bar, View.VISIBLE)

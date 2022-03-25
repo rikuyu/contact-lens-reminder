@@ -11,11 +11,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.chargemap.compose.numberpicker.ListItemPicker
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.ui.util.LensPowerPicker
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 
 @Composable
@@ -137,4 +138,25 @@ fun SetOneLensPowerItem(
             )
         }
     }
+}
+
+@Composable
+fun LensPowerPicker(
+    modifier: Modifier = Modifier,
+    label: (Double) -> String = { it.toString() },
+    value: Double,
+    onValueChange: (Double) -> Unit,
+    dividersColor: Color = MaterialTheme.colors.primary,
+    range: List<Double>,
+    textStyle: TextStyle = LocalTextStyle.current.copy(color = MaterialTheme.colors.onSurface),
+) {
+    ListItemPicker(
+        modifier = modifier,
+        label = label,
+        value = value,
+        onValueChange = onValueChange,
+        dividersColor = dividersColor,
+        list = range.toList(),
+        textStyle = textStyle
+    )
 }

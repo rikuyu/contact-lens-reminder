@@ -95,7 +95,7 @@ fun RemainingDaysBar(
                     withStyle(
                         style = SpanStyle(
                             color = if (lensRemainingDays > 0 || !isUsingContactLens) color else Color.Red,
-                            fontSize = 36.sp
+                            fontSize = 40.sp
                         )
                     ) {
                         append(lensRemainingDays.toString())

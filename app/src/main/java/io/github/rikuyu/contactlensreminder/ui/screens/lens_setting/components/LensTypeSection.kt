@@ -46,27 +46,25 @@ fun LensTypeSection(
             stringResource(id = R.string.two_weeks),
             stringResource(id = R.string.one_month),
             stringResource(id = R.string.other)
-        ).forEachIndexed { index, item ->
+        ).forEachIndexed { index, text ->
             val selected = lensType == index
-
-            val shape = when (index) {
-                0 -> RoundedCornerShape(
-                    topStart = 4.dp,
-                    bottomStart = 4.dp,
-                    topEnd = 0.dp,
-                    bottomEnd = 0.dp
-                )
-                2 -> RoundedCornerShape(
-                    topStart = 0.dp,
-                    bottomStart = 0.dp,
-                    topEnd = 4.dp,
-                    bottomEnd = 4.dp
-                )
-                else -> CutCornerShape(0.dp)
-            }
             OutlinedButton(
                 onClick = { onClick(index) },
-                shape = shape,
+                shape = when (index) {
+                    0 -> RoundedCornerShape(
+                        topStart = 4.dp,
+                        bottomStart = 4.dp,
+                        topEnd = 0.dp,
+                        bottomEnd = 0.dp
+                    )
+                    2 -> RoundedCornerShape(
+                        topStart = 0.dp,
+                        bottomStart = 0.dp,
+                        topEnd = 4.dp,
+                        bottomEnd = 4.dp
+                    )
+                    else -> CutCornerShape(0.dp)
+                },
                 colors = ButtonDefaults.textButtonColors(
                     backgroundColor = if (selected) MaterialTheme.colors.primary else Color.Transparent
                 ),
@@ -77,7 +75,7 @@ fun LensTypeSection(
                 )
             ) {
                 Text(
-                    text = item,
+                    text = text,
                     color = if (selected) Color.White else MaterialTheme.colors.primary,
                     modifier = Modifier.padding(vertical = 2.dp),
                     fontSize = 16.sp

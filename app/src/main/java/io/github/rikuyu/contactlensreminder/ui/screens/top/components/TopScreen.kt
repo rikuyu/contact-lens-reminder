@@ -74,7 +74,7 @@ fun TopScreen(
                         indication = rememberRipple(
                             color = MaterialTheme.colors.primary,
                             bounded = false,
-                            radius = 30.dp
+                            radius = 28.dp
                         )
                     ) {
                         switchDarkTheme(!isDarkTheme)
@@ -94,7 +94,7 @@ fun TopScreen(
                         indication = rememberRipple(
                             color = MaterialTheme.colors.primary,
                             bounded = false,
-                            radius = 30.dp
+                            radius = 28.dp
                         )
                     ) { navController.navigate(Routes.APP_SETTING) }
             )

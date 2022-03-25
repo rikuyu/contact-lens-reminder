@@ -36,7 +36,6 @@
     <string name="two_weeks">2週間</string>
     <string name="one_month">1ヵ月</string>
     <string name="other">Other</string>
-    <string name="success_save_setting">設定が保存されました</string>
 
     <!-- AppSettingScreen -->
     <string name="app_setting_screen_title">このアプリについて</string>
@@ -76,7 +75,7 @@
     <string name="step_2_5">レンズの度数設定</string>
     <string name="step_2_6">コンタクトレンズの度数は、-8.0～-3.0の範囲で設定することができます。</string>
     <string name="step_2_7">設定の保存方法</string>
-    <string name="step_2_8">これまでの設定を保存するにはokボタンを押下してください。</string>
+    <string name="step_2_8">これまでの設定を保存するにはOKボタンを押下してください。</string>
     <string name="step_3_1">リマインダーの設定方法</string>
     <string name="step_3_2">リマインダーを開始するためには、「スタート」ボタン（赤枠）を押下してください。リマインダーをスタートすると、いったんアプリが閉じます。</string>
     <string name="step_3_3">リマインダー開始後</string>
@@ -93,9 +92,9 @@
     <string name="step_4_9">アプリウィジェットについて</string>
     <string name="step_4_10">アプリウィジェットは「画像タイプ」「プログレスバータイプ」があります。画像タイプはコンタクトレンズの残り使用可能日数を表示します。プログレスバータイプは残り使用可能日数を表すプログレスバーとレンズ交換をする日付が表示されます。</string>
     <string name="step_4_11">[ 注意事項 ]</string>
-    <string name="step_4_12">アプリのアップデートを行った後、お手数ですがアプリウィジェットを作り直してください。機能しなくなってしまいます。</string>
-    <string name="step_4_13">アプリウィジェットをホーム画面に出すとき「ウィジェットを読み込めません」と表示される場合は、一度アプリをアンインストールし、再度お試しください</string>
-    <string name="step_4_14">問題が解決しない場合は、お問い合わせからご連絡ください</string>
+    <string name="step_4_12">1. アプリのアップデートを行った後、お手数ですがアプリウィジェットを作り直してください。</string>
+    <string name="step_4_13">2. アプリウィジェットをホーム画面に出すとき「ウィジェットを読み込めません」と表示される場合は、一度アプリをアンインストールし、再度お試しください。</string>
+    <string name="step_4_14">上記の問題が解決しない場合は、お問い合わせからご連絡ください。</string>
 
     <!-- お問い合わせ -->
     <string name="network_error_message_1">お問い合わせするには</string>
@@ -136,7 +135,8 @@
     <!-- AppWidget -->
     <string name="app_widget_progress_bar">Progress Bar Type</string>
     <string name="app_widget_image">Number Type</string>
-    <string name="text_remaining_day">残り%d日</string>
+    <string name="text_remaining_day_before">残り</string>
+    <string name="text_remaining_day_after">日</string>
     <string name="text_preview_remaining_day">残り14日</string>
     <string name="text_preview_exchange_date">12/10 (水)</string>
     <string name="no_image_description">no image</string>
