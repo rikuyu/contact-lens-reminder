@@ -36,6 +36,7 @@
     <string name="two_weeks">2週間</string>
     <string name="one_month">1ヵ月</string>
     <string name="other">Other</string>
+    <string name="alert_lens_setting">1日用レンズのとき、前日通知を設定できません</string>
 
     <!-- AppSettingScreen -->
     <string name="app_setting_screen_title">このアプリについて</string>

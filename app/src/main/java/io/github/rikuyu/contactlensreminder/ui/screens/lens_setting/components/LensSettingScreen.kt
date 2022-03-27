@@ -1,5 +1,6 @@
 package io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.components
 
+import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
@@ -11,6 +12,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -31,6 +33,8 @@ fun LensSettingScreen(
     navController: NavController,
     viewModelLens: LensSettingViewModel = hiltViewModel(),
 ) {
+    val context = LocalContext.current
+
     val settingValue = viewModelLens.lensSetting.value
 
     var lensType by remember { mutableStateOf(settingValue.lensType) }
@@ -134,11 +138,20 @@ fun LensSettingScreen(
                         Column {
                             NotificationDaySection(
                                 modifier = Modifier.fillMaxWidth(),
-                                notificationType = notificationType
-                            ) {
-                                notificationType = it
-                                viewModelLens.onEvent(LensSettingEvent.NotificationDay(it))
-                            }
+                                lensPeriod = lensPeriod,
+                                showToast = {
+                                    Toast.makeText(
+                                        context,
+                                        context.getString(R.string.alert_lens_setting),
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                },
+                                notificationType = notificationType,
+                                setNotificationType = {
+                                    notificationType = it
+                                    viewModelLens.onEvent(LensSettingEvent.NotificationDay(it))
+                                }
+                            )
                             NotificationTimeSection(
                                 isDarkTheme = isDarkTheme,
                                 themeColor = themeColor,
