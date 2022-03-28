@@ -10,6 +10,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.VISIBILITY_PUBLIC
 import androidx.core.content.ContextCompat
 import io.github.rikuyu.contactlensreminder.R
+import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
 import io.github.rikuyu.contactlensreminder.ui.MainActivity
 
 class NotificationService(val context: Context) {
@@ -20,6 +21,8 @@ class NotificationService(val context: Context) {
     private val intent = Intent(context, MainActivity::class.java).apply {
         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
     }
+
+    private val notificationDay = SharedPreferencesManager(context).getNotificationDay()
 
     private val pendingIntent: PendingIntent =
         PendingIntent.getActivity(
@@ -35,7 +38,15 @@ class NotificationService(val context: Context) {
             BitmapFactory.decodeResource(context.resources, R.drawable.ic_water_drop)
         )
         .setColor(ContextCompat.getColor(context, R.color.light_blue))
-        .setContentTitle(context.getString(R.string.notification_title))
+        .setContentTitle(
+            context.getString(
+                if (notificationDay == 1) {
+                    R.string.notification_before_day_title
+                } else {
+                    R.string.notification_on_the_day_title
+                }
+            )
+        )
         .setContentText(context.getString(R.string.notification_content))
         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
         .setVisibility(VISIBILITY_PUBLIC)

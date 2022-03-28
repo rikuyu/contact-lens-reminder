@@ -48,7 +48,8 @@
     <string name="version">version %s</string>
 
     <!-- Notification -->
-    <string name="notification_title">レンズ交換の日です！</string>
+    <string name="notification_on_the_day_title">レンズ交換の日です！</string>
+    <string name="notification_before_day_title">明日はレンズ交換の日です！</string>
     <string name="notification_content">目の健康を守りましょう！</string>
 
     <!-- レンズ交換確認ダイアログ -->
