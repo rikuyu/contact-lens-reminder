@@ -19,6 +19,7 @@ import io.github.rikuyu.contactlensreminder.domain.local.DataSource
 import io.github.rikuyu.contactlensreminder.domain.repository.AppSettingRepository
 import io.github.rikuyu.contactlensreminder.domain.repository.LensSettingRepository
 import io.github.rikuyu.contactlensreminder.domain.repository.ReminderRepository
+import io.github.rikuyu.contactlensreminder.ui.util.AppReviewService
 import io.github.rikuyu.contactlensreminder.ui.util.AppUpdateService
 import javax.inject.Singleton
 
@@ -50,33 +51,38 @@ abstract class AppModule {
         @Singleton
         fun provideNotificationAlarmManager(
             @ApplicationContext context: Context,
-            sharedPreferencesManager: SharedPreferencesManager
+            sharedPreferencesManager: SharedPreferencesManager,
         ): NotificationAlarmManager = NotificationAlarmManager(context, sharedPreferencesManager)
 
         @Provides
         @Singleton
         fun provideTickDownAlarmManager(
             @ApplicationContext context: Context,
-            firebaseLogEvent: FirebaseLogEvent
+            firebaseLogEvent: FirebaseLogEvent,
         ): TickDownAlarmManager = TickDownAlarmManager(context, firebaseLogEvent)
 
         @Provides
         @Singleton
         fun provideSharedPreferencesManager(
-            @ApplicationContext context: Context
+            @ApplicationContext context: Context,
         ): SharedPreferencesManager = SharedPreferencesManager(context)
 
         @Provides
         @Singleton
         fun provideFirebaseLogEvent(
-            sharedPreferencesManager: SharedPreferencesManager
+            sharedPreferencesManager: SharedPreferencesManager,
         ): FirebaseLogEvent = FirebaseLogEvent(sharedPreferencesManager)
 
         @Provides
         @Singleton
         fun provideAppUpdateService(
-            @ApplicationContext context: Context,
-            firebaseLogEvent: FirebaseLogEvent
-        ): AppUpdateService = AppUpdateService(context, firebaseLogEvent)
+            firebaseLogEvent: FirebaseLogEvent,
+        ): AppUpdateService = AppUpdateService(firebaseLogEvent)
+
+        @Provides
+        @Singleton
+        fun provideAppReviewService(
+            firebaseLogEvent: FirebaseLogEvent,
+        ): AppReviewService = AppReviewService(firebaseLogEvent)
     }
 }

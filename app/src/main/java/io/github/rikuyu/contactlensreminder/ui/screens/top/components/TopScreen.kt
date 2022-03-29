@@ -28,6 +28,7 @@ import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
 fun TopScreen(
     isDarkTheme: Boolean,
     switchDarkTheme: (Boolean) -> Unit,
+    executeAppReview: () -> Unit,
     navController: NavController,
     viewModel: ReminderViewModel = hiltViewModel(),
 ) {
@@ -146,7 +147,8 @@ fun TopScreen(
         )
         CancelReminderDialog(
             dialogState = dialogState,
-            changeDialogState = { dialogState = it }
+            changeDialogState = { dialogState = it },
+            executeAppReview = { executeAppReview() }
         ) {
             isUsingContactLens = it
             viewModel.onEvent(
