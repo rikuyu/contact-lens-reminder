@@ -1,10 +1,16 @@
 <resources>
     <string name="app_name">レンズ交換</string>
 
-    <!-- Update -->
+    <!-- In-App-Update -->
     <string name="update_dialog_title">最新バージョン</string>
     <string name="update_dialog_message">このアプリを引き続き利用するには、最新バージョンにアップデートしてください。</string>
     <string name="update_dialog_positive_button_label">Update</string>
+    <string name="update_success">Update 成功</string>
+
+    <!-- In-App-Review -->
+    <string name="review_request_not_complete">requestReviewFlow().addOnCompleteListener task is NOT isSuccessful</string>
+    <string name="review_launch_complete">launchReviewFlow(a, r).addOnCompleteListener</string>
+    <string name="review_launch_failure">launchReviewFlow(a, r).addOnFailureListener</string>
 
     <!-- TopScreen -->
     <string name="remain">残り</string>
@@ -16,7 +22,6 @@
     <string name="lens_setting">レンズの設定</string>
     <string name="new_line">\n\n</string>
     <string name="time_div">:</string>
-    <string name="confirm_reminder_message">リマインダーがリセットされました</string>
     <string name="alert_toast_message">レンズ使用中は設定を変更できません</string>
 
     <!-- LensSettingScreen -->
@@ -36,6 +41,7 @@
     <string name="two_weeks">2週間</string>
     <string name="one_month">1ヵ月</string>
     <string name="other">Other</string>
+    <string name="alert_lens_setting">1日レンズ設定時は前日通知を利用できません</string>
 
     <!-- AppSettingScreen -->
     <string name="app_setting_screen_title">このアプリについて</string>
@@ -47,7 +53,8 @@
     <string name="version">version %s</string>
 
     <!-- Notification -->
-    <string name="notification_title">レンズ交換の日です！</string>
+    <string name="notification_on_the_day_title">レンズ交換の日です！</string>
+    <string name="notification_before_day_title">明日はレンズ交換の日です！</string>
     <string name="notification_content">目の健康を守りましょう！</string>
 
     <!-- レンズ交換確認ダイアログ -->

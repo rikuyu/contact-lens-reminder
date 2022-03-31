@@ -25,6 +25,7 @@ import io.github.rikuyu.contactlensreminder.ui.screens.top.ReminderViewModel
 import io.github.rikuyu.contactlensreminder.ui.screens.top.components.TopScreen
 import io.github.rikuyu.contactlensreminder.ui.screens.top.components.on_boarding.OnBoardingScreen
 import io.github.rikuyu.contactlensreminder.ui.theme.ContactLensReminderTheme
+import io.github.rikuyu.contactlensreminder.ui.util.AppReviewService
 import io.github.rikuyu.contactlensreminder.ui.util.AppUpdateService
 import io.github.rikuyu.contactlensreminder.ui.util.Routes
 import javax.inject.Inject
@@ -34,6 +35,9 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var appUpdateService: AppUpdateService
+
+    @Inject
+    lateinit var appReviewService: AppReviewService
 
     private val reminderViewModel: ReminderViewModel by viewModels()
     private val appSettingViewModel: AppSettingViewModel by viewModels()
@@ -57,7 +61,12 @@ class MainActivity : ComponentActivity() {
                     startDestination = if (reminderViewModel.isShowOnBoarding.value) Routes.ON_BOARDING else Routes.TOP
                 ) {
                     composable(route = Routes.TOP) {
-                        TopScreen(isDarkTheme, { isDarkTheme = it }, navController)
+                        TopScreen(
+                            isDarkTheme = isDarkTheme,
+                            switchDarkTheme = { isDarkTheme = it },
+                            executeAppReview = { appReviewService.showAppReviewView(this@MainActivity) },
+                            navController = navController
+                        )
                     }
                     composable(route = Routes.ON_BOARDING) {
                         OnBoardingScreen(navController)

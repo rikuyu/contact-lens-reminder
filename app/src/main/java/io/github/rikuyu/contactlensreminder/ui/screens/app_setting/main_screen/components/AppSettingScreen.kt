@@ -170,6 +170,7 @@ fun AppSettingScreen(
             ) {
                 changeThemeColor(it)
                 viewModel.onEvent(AppSettingEvent.SaveThemeColor(it))
+                viewModel.onEvent(AppSettingEvent.LogEvent(it.name))
             }
         }
     }
