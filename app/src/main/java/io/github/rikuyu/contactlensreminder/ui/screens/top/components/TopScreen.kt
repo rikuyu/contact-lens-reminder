@@ -162,11 +162,6 @@ fun TopScreen(
                     )
                 )
             )
-            Toast.makeText(
-                context,
-                context.getString(R.string.confirm_reminder_message),
-                Toast.LENGTH_SHORT
-            ).show()
         }
         LensSettingButtonSection(
             modifier = Modifier
