@@ -3,7 +3,6 @@ package io.github.rikuyu.contactlensreminder.ui.theme
 import androidx.compose.ui.graphics.Color
 
 val SmoothGray = Color(0xFFF7F7F7)
-val WebViewBackground = Color(0xFFBDD4FD)
 
 object ColorPalette {
 
