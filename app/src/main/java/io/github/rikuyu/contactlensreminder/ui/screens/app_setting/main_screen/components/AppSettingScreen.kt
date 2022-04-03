@@ -81,7 +81,7 @@ fun AppSettingScreen(
             5,
             stringResource(id = R.string.color_theme),
             R.drawable.ic_palette,
-            "change_theme_color"
+            null
         ),
     )
 
@@ -120,11 +120,17 @@ fun AppSettingScreen(
                                 .fillMaxWidth()
                                 .background(MaterialTheme.colors.background)
                                 .clickable {
-                                    viewModel.onEvent(AppSettingEvent.LogEvent(it.route))
+                                    if (it.route != null) {
+                                        viewModel.onEvent(AppSettingEvent.LogEvent(it.route))
+                                    }
                                     when (it.id) {
                                         3 -> context.startActivity(makeNotificationSettingIntent(context))
                                         5 -> dialogState = true
-                                        else -> navController.navigate(it.route)
+                                        else -> {
+                                            if (it.route != null) {
+                                                navController.navigate(it.route)
+                                            }
+                                        }
                                     }
                                 }
                                 .padding(all = 16.dp)

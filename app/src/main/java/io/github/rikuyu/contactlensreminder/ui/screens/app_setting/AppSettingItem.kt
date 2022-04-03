@@ -4,5 +4,5 @@ data class AppSettingItem(
     val id: Int,
     val title: String,
     val icon: Int,
-    val route: String
+    val route: String?
 )

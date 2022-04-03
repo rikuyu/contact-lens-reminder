@@ -57,9 +57,8 @@ abstract class AppModule {
         @Provides
         @Singleton
         fun provideTickDownAlarmManager(
-            @ApplicationContext context: Context,
-            firebaseLogEvent: FirebaseLogEvent,
-        ): TickDownAlarmManager = TickDownAlarmManager(context, firebaseLogEvent)
+            @ApplicationContext context: Context
+        ): TickDownAlarmManager = TickDownAlarmManager(context)
 
         @Provides
         @Singleton

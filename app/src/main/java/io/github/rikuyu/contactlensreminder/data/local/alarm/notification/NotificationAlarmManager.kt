@@ -28,8 +28,8 @@ class NotificationAlarmManager @Inject constructor(
             add(Calendar.MINUTE, sharedPreferencesManager.getNotificationTimeMinute() - min)
             add(Calendar.SECOND, -sec)
         }
-        alarmManager.setExact(
-            AlarmManager.RTC,
+        alarmManager.setExactAndAllowWhileIdle(
+            AlarmManager.RTC_WAKEUP,
             calendar.timeInMillis,
             createBroadcastPendingIntent(context, NotificationAlarmReceiver::class.java, REQUEST_CODE)
         )

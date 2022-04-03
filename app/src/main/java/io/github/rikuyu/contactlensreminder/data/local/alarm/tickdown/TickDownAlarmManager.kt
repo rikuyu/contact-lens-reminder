@@ -4,7 +4,6 @@ import android.app.AlarmManager
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Context
-import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEvent
 import io.github.rikuyu.contactlensreminder.data.util.createBroadcastPendingIntent
 import io.github.rikuyu.contactlensreminder.ui.appwidget.ImageTypeWidget
 import io.github.rikuyu.contactlensreminder.ui.appwidget.ProgressBarTypeWidget
@@ -13,8 +12,7 @@ import java.util.*
 import javax.inject.Inject
 
 class TickDownAlarmManager @Inject constructor(
-    private val context: Context,
-    private val firebaseLogEvent: FirebaseLogEvent
+    private val context: Context
 ) {
     private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
@@ -28,31 +26,11 @@ class TickDownAlarmManager @Inject constructor(
             add(Calendar.MINUTE, -min)
             add(Calendar.SECOND, -sec)
         }
-        alarmManager.setExact(
-            AlarmManager.RTC,
+        alarmManager.setExactAndAllowWhileIdle(
+            AlarmManager.RTC_WAKEUP,
             calendar.timeInMillis,
             createBroadcastPendingIntent(context, TickDownAlarmReceiver::class.java, SHARED_PREFERENCE_DATA_CODE)
         )
-        firebaseLogEvent.logInitTickDownEvent()
-        updateAppWidget(context)
-    }
-
-    private fun updateAppWidget(context: Context) {
-        val appWidgetManager = AppWidgetManager.getInstance(context)
-        ProgressBarTypeWidget().apply {
-            cancelUpdateAppWidget(context)
-            val appWidgetIds = appWidgetManager.getAppWidgetIds(ComponentName(context.packageName, javaClass.name))
-            for (id in appWidgetIds) {
-                updateProgressBarTypeWidget(context, appWidgetManager, id)
-            }
-        }
-        ImageTypeWidget().apply {
-            cancelUpdateAppWidget(context)
-            val appWidgetIds = appWidgetManager.getAppWidgetIds(ComponentName(context.packageName, javaClass.name))
-            for (id in appWidgetIds) {
-                updateImageTypeWidget(context, appWidgetManager, id)
-            }
-        }
     }
 
     fun cancelAlarm() {
@@ -63,8 +41,23 @@ class TickDownAlarmManager @Inject constructor(
                 SHARED_PREFERENCE_DATA_CODE
             )
         )
-        updateAppWidget(context)
-        firebaseLogEvent.logEvent("cancel_tick_down_alarm_event")
+        updateAppWidget()
+    }
+
+    fun updateAppWidget() {
+        val appWidgetManager = AppWidgetManager.getInstance(context)
+        ProgressBarTypeWidget().apply {
+            val appWidgetIds = appWidgetManager.getAppWidgetIds(ComponentName(context.packageName, javaClass.name))
+            for (id in appWidgetIds) {
+                updateProgressBarTypeWidget(context, appWidgetManager, id)
+            }
+        }
+        ImageTypeWidget().apply {
+            val appWidgetIds = appWidgetManager.getAppWidgetIds(ComponentName(context.packageName, javaClass.name))
+            for (id in appWidgetIds) {
+                updateImageTypeWidget(context, appWidgetManager, id)
+            }
+        }
     }
 
     companion object {

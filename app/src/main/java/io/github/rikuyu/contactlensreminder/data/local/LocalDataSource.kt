@@ -34,6 +34,7 @@ class LocalDataSource @Inject constructor(
             notificationAlarmManager.initAlarm()
         }
         tickDownAlarmManager.initAlarm()
+        tickDownAlarmManager.updateAppWidget()
     }
 
     override fun getReminderSetting(): ReminderValue {

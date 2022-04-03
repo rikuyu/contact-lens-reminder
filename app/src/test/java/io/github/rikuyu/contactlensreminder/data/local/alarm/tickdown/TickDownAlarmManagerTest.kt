@@ -5,7 +5,6 @@ import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry
 import com.google.common.truth.Truth.assertThat
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
-import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEvent
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -21,7 +20,6 @@ class TickDownAlarmManagerTest {
     private lateinit var shadowAlarmManager: ShadowAlarmManager
     private lateinit var tickDownAlarmManager: TickDownAlarmManager
     private lateinit var sharedPreferencesManager: SharedPreferencesManager
-    private lateinit var firebaseLogEvent: FirebaseLogEvent
 
     @Before
     fun setup() {
@@ -29,8 +27,7 @@ class TickDownAlarmManagerTest {
         alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         shadowAlarmManager = Shadows.shadowOf(alarmManager)
         sharedPreferencesManager = SharedPreferencesManager(context)
-        firebaseLogEvent = FirebaseLogEvent(sharedPreferencesManager)
-        tickDownAlarmManager = TickDownAlarmManager(context, firebaseLogEvent)
+        tickDownAlarmManager = TickDownAlarmManager(context)
     }
 
     @Test
