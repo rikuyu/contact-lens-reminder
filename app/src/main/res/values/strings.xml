@@ -87,7 +87,9 @@
     <string name="step_3_2">リマインダーを開始するためには、「スタート」ボタン（赤枠）を押下してください。リマインダーをスタートすると、いったんアプリが閉じます。</string>
     <string name="step_3_3">リマインダー開始後</string>
     <string name="step_3_4">リマインダーを開始すると、「スタート」ボタンが「レンズの交換」ボタンになります。また、一度リマインダーを開始すると、設定を変更することができなくなります。</string>
-    <string name="step_3_5">その他、アプリの特徴・注意事項（重要）は、Otherをご覧ください。</string>
+    <string name="step_3_5">「残り○日」は午前0時に更新されます。</string>
+    <string name="step_3_6">残り日数が更新されない場合、お手数ですが、任意の日数で再度レンズの設定を行い、リマインダーを起動させてください。</string>
+    <string name="step_3_7">その他、アプリの特徴・注意事項（重要）は、Otherをご覧ください。</string>
     <string name="step_4_1">ヘルプについて</string>
     <string name="step_4_2">トップ画面から「ヘルプ」ボタン（赤枠）を押下すると、ヘルプ画面を見ることができます。</string>
     <string name="step_4_3">このアプリについての画面</string>
