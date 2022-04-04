@@ -25,7 +25,9 @@ class AppUpdateService @Inject constructor(
                         activity,
                         REQUEST_UPDATE_CODE
                     )
-                    firebaseLogEvent.logEvent(activity.getString(R.string.update_success))
+                    firebaseLogEvent.logEvent(
+                        activity.getString(R.string.update_immediate_success)
+                    )
                 } catch (e: Exception) {
                     firebaseLogEvent.logEvent(e.toString())
                 }

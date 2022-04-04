@@ -5,7 +5,7 @@
     <string name="update_dialog_title">最新バージョン</string>
     <string name="update_dialog_message">このアプリを引き続き利用するには、最新バージョンにアップデートしてください。</string>
     <string name="update_dialog_positive_button_label">Update</string>
-    <string name="update_success">強制 Update 成功</string>
+    <string name="update_immediate_success">immediate_update_success</string>
 
     <!-- In-App-Review -->
     <string name="review_request_not_complete">requestReviewFlow().addOnCompleteListener task is NOT isSuccessful</string>
