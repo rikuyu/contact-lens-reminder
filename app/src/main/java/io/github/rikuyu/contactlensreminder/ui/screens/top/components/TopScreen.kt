@@ -29,9 +29,12 @@ fun TopScreen(
     isDarkTheme: Boolean,
     switchDarkTheme: (Boolean) -> Unit,
     executeAppReview: () -> Unit,
+    requestExactAlarmPermission: () -> Unit,
     navController: NavController,
     viewModel: ReminderViewModel = hiltViewModel(),
 ) {
+    requestExactAlarmPermission.invoke()
+
     val context = LocalContext.current
 
     val reminderValue = viewModel.reminder.value

@@ -14,7 +14,7 @@ import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedP
 import io.github.rikuyu.contactlensreminder.data.repository.AppSettingRepositoryImpl
 import io.github.rikuyu.contactlensreminder.data.repository.LensSettingRepositoryImpl
 import io.github.rikuyu.contactlensreminder.data.repository.ReminderRepositoryImpl
-import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEvent
+import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEventService
 import io.github.rikuyu.contactlensreminder.domain.local.DataSource
 import io.github.rikuyu.contactlensreminder.domain.repository.AppSettingRepository
 import io.github.rikuyu.contactlensreminder.domain.repository.LensSettingRepository
@@ -70,18 +70,18 @@ abstract class AppModule {
         @Singleton
         fun provideFirebaseLogEvent(
             sharedPreferencesManager: SharedPreferencesManager,
-        ): FirebaseLogEvent = FirebaseLogEvent(sharedPreferencesManager)
+        ): FirebaseLogEventService = FirebaseLogEventService(sharedPreferencesManager)
 
         @Provides
         @Singleton
         fun provideAppUpdateService(
-            firebaseLogEvent: FirebaseLogEvent,
-        ): AppUpdateService = AppUpdateService(firebaseLogEvent)
+            firebaseLogEventService: FirebaseLogEventService,
+        ): AppUpdateService = AppUpdateService(firebaseLogEventService)
 
         @Provides
         @Singleton
         fun provideAppReviewService(
-            firebaseLogEvent: FirebaseLogEvent,
-        ): AppReviewService = AppReviewService(firebaseLogEvent)
+            firebaseLogEventService: FirebaseLogEventService,
+        ): AppReviewService = AppReviewService(firebaseLogEventService)
     }
 }

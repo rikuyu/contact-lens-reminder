@@ -6,11 +6,21 @@
     <string name="update_dialog_message">このアプリを引き続き利用するには、最新バージョンにアップデートしてください。</string>
     <string name="update_dialog_positive_button_label">Update</string>
     <string name="update_immediate_success">immediate_update_success</string>
+    <string name="update_unknown">UpdateAvailability.UNKNOWN</string>
+    <string name="update_not_available">UpdateAvailability.UPDATE_NOT_AVAILABLE</string>
+    <string name="update_available">UpdateAvailability.UPDATE_AVAILABLE</string>
+    <string name="update_triggered_in_progress">UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS</string>
 
     <!-- In-App-Review -->
     <string name="review_request_not_complete">requestReviewFlow().addOnCompleteListener task is NOT isSuccessful</string>
     <string name="review_launch_complete">launchReviewFlow(a, r).addOnCompleteListener</string>
     <string name="review_launch_failure">launchReviewFlow(a, r).addOnFailureListener</string>
+
+    <!-- SCHEDULE_EXACT_ALARM -->
+    <string name="exact_alarm_dialog_title">設定変更のお願い</string>
+    <string name="exact_alarm_dialog_message">本アプリを使用するためには、設定画面から「アラームとリマインダー」を許可してください（設定をONにしてください）</string>
+    <string name="exact_alarm_dialog_positive_button_label">設定画面を開く</string>
+    <string name="exact_alarm_dialog_event_label">alarmManager.canScheduleExactAlarms() == %s</string>
 
     <!-- TopScreen -->
     <string name="remain">残り</string>

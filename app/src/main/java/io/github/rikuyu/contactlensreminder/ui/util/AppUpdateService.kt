@@ -6,11 +6,11 @@ import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.android.play.core.ktx.isImmediateUpdateAllowed
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEvent
+import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEventService
 import javax.inject.Inject
 
 class AppUpdateService @Inject constructor(
-    private val firebaseLogEvent: FirebaseLogEvent,
+    private val firebaseLogEventService: FirebaseLogEventService,
 ) {
     fun executeAppUpdate(activity: Activity) {
         val appUpdateManager = AppUpdateManagerFactory.create(activity)
@@ -18,6 +18,9 @@ class AppUpdateService @Inject constructor(
             if (info.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE &&
                 info.isImmediateUpdateAllowed
             ) {
+                firebaseLogEventService.logEvent(
+                    activity.getString(R.string.update_available)
+                )
                 try {
                     appUpdateManager.startUpdateFlowForResult(
                         info,
@@ -25,11 +28,32 @@ class AppUpdateService @Inject constructor(
                         activity,
                         REQUEST_UPDATE_CODE
                     )
-                    firebaseLogEvent.logEvent(
+                    firebaseLogEventService.logEvent(
                         activity.getString(R.string.update_immediate_success)
                     )
                 } catch (e: Exception) {
-                    firebaseLogEvent.logEvent(e.toString())
+                    firebaseLogEventService.logEvent(e.toString())
+                }
+            } else {
+                when (info.updateAvailability()) {
+                    UpdateAvailability.UNKNOWN -> {
+                        firebaseLogEventService.logEvent(
+                            activity.getString(R.string.update_unknown)
+                        )
+                    }
+                    UpdateAvailability.UPDATE_NOT_AVAILABLE -> {
+                        firebaseLogEventService.logEvent(
+                            activity.getString(R.string.update_not_available)
+                        )
+                    }
+                    UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS -> {
+                        firebaseLogEventService.logEvent(
+                            activity.getString(R.string.update_triggered_in_progress)
+                        )
+                    }
+                    UpdateAvailability.UPDATE_AVAILABLE -> {
+                        // NOP
+                    }
                 }
             }
         }

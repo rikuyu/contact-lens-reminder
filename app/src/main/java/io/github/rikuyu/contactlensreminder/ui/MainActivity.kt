@@ -1,11 +1,17 @@
 package io.github.rikuyu.contactlensreminder.ui
 
+import android.app.AlarmManager
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -15,6 +21,7 @@ import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.rikuyu.contactlensreminder.R
+import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEventService
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingViewModel
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.inquiry.component.ContactUsScreen
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.instruction_screen.component.InstructionScreen
@@ -38,6 +45,9 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var appReviewService: AppReviewService
+
+    @Inject
+    lateinit var firebaseLogEventService: FirebaseLogEventService
 
     private val reminderViewModel: ReminderViewModel by viewModels()
     private val appSettingViewModel: AppSettingViewModel by viewModels()
@@ -65,26 +75,52 @@ class MainActivity : ComponentActivity() {
                             isDarkTheme = isDarkTheme,
                             switchDarkTheme = { isDarkTheme = it },
                             executeAppReview = { appReviewService.showAppReviewView(this@MainActivity) },
+                            requestExactAlarmPermission = { requestExactAlarmPermission(this@MainActivity) },
                             navController = navController
                         )
                     }
-                    composable(route = Routes.ON_BOARDING) {
-                        OnBoardingScreen(navController)
-                    }
                     composable(route = Routes.LENS_SETTING) {
-                        LensSettingScreen(isDarkTheme, themeColor, navController)
+                        LensSettingScreen(
+                            isDarkTheme,
+                            themeColor,
+                            navController
+                        )
                     }
                     composable(route = Routes.APP_SETTING) {
-                        AppSettingScreen(themeColor, { themeColor = it }, navController)
+                        AppSettingScreen(
+                            themeColor,
+                            { themeColor = it },
+                            navController
+                        )
                     }
-                    composable(route = Routes.TERMS_OF_SERVICE) {
-                        TermsOfServiceScreen(navController)
-                    }
-                    composable(route = Routes.HELP) {
-                        InstructionScreen(navController)
-                    }
-                    composable(route = Routes.INQUIRY) {
-                        ContactUsScreen(navController)
+                    composable(route = Routes.TERMS_OF_SERVICE) { TermsOfServiceScreen(navController) }
+                    composable(route = Routes.HELP) { InstructionScreen(navController) }
+                    composable(route = Routes.INQUIRY) { ContactUsScreen(navController) }
+                    composable(route = Routes.ON_BOARDING) { OnBoardingScreen(navController) }
+                }
+            }
+        }
+    }
+
+    private fun requestExactAlarmPermission(context: Context) {
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            val canScheduleExactAlarms = alarmManager.canScheduleExactAlarms()
+            firebaseLogEventService.logEvent(
+                context.getString(R.string.exact_alarm_dialog_event_label, canScheduleExactAlarms.toString())
+            )
+            if (!canScheduleExactAlarms) {
+                showAlertDialog(
+                    context = context,
+                    title = R.string.exact_alarm_dialog_title,
+                    message = R.string.exact_alarm_dialog_message,
+                    positiveButtonLabel = R.string.exact_alarm_dialog_positive_button_label
+                ) {
+                    Intent().apply {
+                        action = ACTION_REQUEST_SCHEDULE_EXACT_ALARM
+                    }.also {
+                        startActivity(it)
                     }
                 }
             }
@@ -94,18 +130,36 @@ class MainActivity : ComponentActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_UPDATE_CODE) {
-            val dialog = AlertDialog.Builder(this)
-                .setIcon(R.drawable.icon_default)
-                .setTitle(R.string.update_dialog_title)
-                .setMessage(R.string.update_dialog_message)
-                .setPositiveButton(R.string.update_dialog_positive_button_label) { _, _ ->
-                    appUpdateService.executeAppUpdate(this)
-                }
-                .setCancelable(false)
-                .create()
-            dialog.setCanceledOnTouchOutside(false)
-            dialog.show()
+            showAlertDialog(
+                context = this,
+                title = R.string.update_dialog_title,
+                message = R.string.update_dialog_message,
+                positiveButtonLabel = R.string.update_dialog_positive_button_label
+            ) {
+                appUpdateService.executeAppUpdate(this)
+            }
         }
+    }
+
+    private fun showAlertDialog(
+        context: Context,
+        @DrawableRes icon: Int = R.drawable.icon_default,
+        @StringRes title: Int,
+        @StringRes message: Int,
+        @StringRes positiveButtonLabel: Int,
+        event: () -> Unit,
+    ) {
+        val dialog = AlertDialog.Builder(context)
+            .setIcon(icon)
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton(positiveButtonLabel) { _, _ ->
+                event.invoke()
+            }
+            .setCancelable(false)
+            .create()
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.show()
     }
 
     companion object {

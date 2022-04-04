@@ -7,7 +7,7 @@ import com.google.common.truth.Truth.assertThat
 import io.github.rikuyu.contactlensreminder.data.local.alarm.notification.NotificationAlarmManager
 import io.github.rikuyu.contactlensreminder.data.local.alarm.tickdown.TickDownAlarmManager
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
-import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEvent
+import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEventService
 import io.github.rikuyu.contactlensreminder.domain.local.DataSource
 import io.github.rikuyu.contactlensreminder.domain.model.LensSettingValue
 import io.github.rikuyu.contactlensreminder.domain.model.ReminderValue
@@ -29,7 +29,7 @@ class LocalDataSourceTest {
     private lateinit var tickDownAlarmManager: TickDownAlarmManager
     private lateinit var notificationAlarmManager: NotificationAlarmManager
     private lateinit var sharedPreferencesManager: SharedPreferencesManager
-    private lateinit var firebaseLogEvent: FirebaseLogEvent
+    private lateinit var firebaseLogEventService: FirebaseLogEventService
 
     private lateinit var localDataSource: DataSource
 
@@ -62,7 +62,7 @@ class LocalDataSourceTest {
             tickDownAlarmManager = tickDownAlarmManager,
             sharedPreferencesManager = sharedPreferencesManager,
             notificationAlarmManager = notificationAlarmManager,
-            firebaseLogEvent = firebaseLogEvent
+            firebaseLogEventService = firebaseLogEventService
         )
     }
 
@@ -72,7 +72,7 @@ class LocalDataSourceTest {
         alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         sharedPreferencesManager = SharedPreferencesManager(context)
         shadowAlarmManager = Shadows.shadowOf(alarmManager)
-        firebaseLogEvent = FirebaseLogEvent(sharedPreferencesManager)
+        firebaseLogEventService = FirebaseLogEventService(sharedPreferencesManager)
         tickDownAlarmManager = TickDownAlarmManager(context)
         notificationAlarmManager = NotificationAlarmManager(context, sharedPreferencesManager)
     }
