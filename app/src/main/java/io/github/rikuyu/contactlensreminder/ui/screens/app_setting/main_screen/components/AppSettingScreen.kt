@@ -41,6 +41,7 @@ import io.github.rikuyu.contactlensreminder.ui.util.makeNotificationSettingInten
 fun AppSettingScreen(
     themeColor: ThemeColor,
     changeThemeColor: (ThemeColor) -> Unit,
+    executeAppReview: () -> Unit,
     navController: NavController,
     viewModel: AppSettingViewModel = hiltViewModel(),
 ) {
@@ -171,6 +172,7 @@ fun AppSettingScreen(
             )
             ColorPickerDialog(
                 stateColor = themeColor,
+                executeAppReview = executeAppReview,
                 dialogState = dialogState,
                 changeDialogState = { dialogState = it },
             ) {

@@ -74,7 +74,6 @@ class MainActivity : ComponentActivity() {
                         TopScreen(
                             isDarkTheme = isDarkTheme,
                             switchDarkTheme = { isDarkTheme = it },
-                            executeAppReview = { appReviewService.showAppReviewView(this@MainActivity) },
                             requestExactAlarmPermission = { requestExactAlarmPermission(this@MainActivity) },
                             navController = navController
                         )
@@ -88,9 +87,10 @@ class MainActivity : ComponentActivity() {
                     }
                     composable(route = Routes.APP_SETTING) {
                         AppSettingScreen(
-                            themeColor,
-                            { themeColor = it },
-                            navController
+                            themeColor = themeColor,
+                            changeThemeColor = { themeColor = it },
+                            executeAppReview = { appReviewService.showAppReviewBottomSheet(this@MainActivity) },
+                            navController = navController
                         )
                     }
                     composable(route = Routes.TERMS_OF_SERVICE) { TermsOfServiceScreen(navController) }

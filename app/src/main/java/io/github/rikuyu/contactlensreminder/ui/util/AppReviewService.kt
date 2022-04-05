@@ -9,14 +9,14 @@ import javax.inject.Inject
 class AppReviewService @Inject constructor(
     private val firebaseLogEventService: FirebaseLogEventService,
 ) {
-    fun showAppReviewView(activity: Activity) {
+    fun showAppReviewBottomSheet(activity: Activity) {
         val manager = ReviewManagerFactory.create(activity)
         val request = manager.requestReviewFlow()
         request.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val reviewInfo = task.result
                 manager.launchReviewFlow(activity, reviewInfo)
-                    .addOnCompleteListener { _ ->
+                    .addOnCompleteListener {
                         firebaseLogEventService.logEvent(activity.getString(R.string.review_launch_complete))
                     }
                     .addOnFailureListener {

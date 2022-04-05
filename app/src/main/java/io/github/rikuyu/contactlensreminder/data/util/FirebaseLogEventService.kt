@@ -10,8 +10,7 @@ class FirebaseLogEventService @Inject constructor(val sharedPreferencesManager: 
 
     fun logEvent(label: String) {
         val uuid = sharedPreferencesManager.getUuid() ?: return
-        val firebaseAnalytics = Firebase.analytics
-        firebaseAnalytics.logEvent(label) { param(UUID, uuid) }
+        Firebase.analytics.logEvent(label) { param(UUID, uuid) }
     }
 
     companion object {
