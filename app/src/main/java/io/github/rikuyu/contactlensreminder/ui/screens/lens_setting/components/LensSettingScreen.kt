@@ -1,8 +1,6 @@
 package io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.components
 
-import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,8 +22,8 @@ import io.github.rikuyu.contactlensreminder.ui.theme.ThemeColor
 import io.github.rikuyu.contactlensreminder.ui.util.Routes
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
+import io.github.rikuyu.contactlensreminder.ui.util.showToast
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun LensSettingScreen(
     isDarkTheme: Boolean,
@@ -139,13 +137,7 @@ fun LensSettingScreen(
                             NotificationDaySection(
                                 modifier = Modifier.fillMaxWidth(),
                                 lensPeriod = lensPeriod,
-                                showToast = {
-                                    Toast.makeText(
-                                        context,
-                                        context.getString(R.string.alert_lens_setting),
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                },
+                                showToast = { showToast(context, R.string.alert_lens_setting) },
                                 notificationType = notificationType,
                                 setNotificationType = {
                                     notificationType = it

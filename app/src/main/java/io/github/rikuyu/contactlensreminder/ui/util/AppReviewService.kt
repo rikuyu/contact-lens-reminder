@@ -14,8 +14,7 @@ class AppReviewService @Inject constructor(
         val request = manager.requestReviewFlow()
         request.addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                val reviewInfo = task.result
-                manager.launchReviewFlow(activity, reviewInfo)
+                manager.launchReviewFlow(activity, task.result)
                     .addOnCompleteListener {
                         firebaseLogEventService.logEvent(activity.getString(R.string.review_launch_complete))
                     }

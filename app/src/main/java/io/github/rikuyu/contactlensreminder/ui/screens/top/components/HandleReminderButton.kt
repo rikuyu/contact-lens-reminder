@@ -14,6 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
@@ -30,17 +31,35 @@ fun HandleReminderButton(
     isUsingContactLens: Boolean,
     lensRemainingDays: Int,
     startReminder: (Boolean) -> Unit,
-    openDialog: () -> Unit,
+    showDialog: () -> Unit,
 ) {
-    var animate by remember { mutableStateOf(true) }
-
     val onClick: (Boolean) -> Unit = if (isUsingContactLens) {
-        { openDialog() }
+        { showDialog() }
     } else {
         { startReminder(!it) }
     }
 
-    LaunchedEffect(key1 = true) { animate = false }
+    var playedRotate by remember { mutableStateOf(false) }
+
+    val rotateAnimation by animateFloatAsState(
+        targetValue = if (playedRotate) 0f else -360f,
+        animationSpec = tween(durationMillis = 1200)
+    )
+
+    var playedScale by remember { mutableStateOf(false) }
+
+    val scaleAnimation by animateFloatAsState(
+        targetValue = if (playedScale) 1.2f else 1.0f,
+        animationSpec = tween(
+            durationMillis = 1000
+        ),
+        finishedListener = { playedScale = false }
+    )
+
+    LaunchedEffect(key1 = true) {
+        playedRotate = true
+        playedScale = true
+    }
 
     Box(
         modifier = modifier,
@@ -48,7 +67,7 @@ fun HandleReminderButton(
     ) {
         Button(
             onClick = { onClick(isUsingContactLens) },
-            modifier = Modifier.size(240.dp, 60.dp),
+            modifier = Modifier.size(236.dp, 60.dp),
             colors = ButtonDefaults.textButtonColors(
                 backgroundColor = if (lensRemainingDays < 1) ColorPalette.Red.secondaryRed else color,
                 contentColor = Color.White,
@@ -63,7 +82,8 @@ fun HandleReminderButton(
                     tint = Color.White,
                     modifier = Modifier
                         .size(30.dp, 30.dp)
-                        .rotate(animateFloatAsState(if (animate) -360f else 0f, tween(1200)).value)
+                        .rotate(rotateAnimation)
+                        .scale(if (lensRemainingDays == 0) scaleAnimation else 1.0f)
                 )
                 Spacer(modifier = Modifier.width(20.dp))
                 Text(
@@ -79,8 +99,8 @@ fun HandleReminderButton(
                         .size(30.dp, 30.dp)
                         .graphicsLayer(
                             translationX = animateFloatAsState(
-                                if (animate) -30f
-                                else 0f,
+                                if (playedRotate) 0f
+                                else -30f,
                                 tween(1000)
                             ).value
                         )

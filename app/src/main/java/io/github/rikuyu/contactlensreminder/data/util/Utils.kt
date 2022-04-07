@@ -18,14 +18,9 @@ fun <T> createBroadcastPendingIntent(
     context: Context,
     klass: Class<T>,
     requestCode: Int,
-    action: String? = null
-): PendingIntent {
-    val intent = Intent(context, klass)
-    action?.let { intent.action = it }
-    return PendingIntent.getBroadcast(
-        context,
-        requestCode,
-        intent,
-        PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-    )
-}
+): PendingIntent = PendingIntent.getBroadcast(
+    context,
+    requestCode,
+    Intent(context, klass),
+    PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+)

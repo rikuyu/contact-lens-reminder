@@ -13,7 +13,6 @@ import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
 import io.github.rikuyu.contactlensreminder.data.util.getExpirationDate
 import io.github.rikuyu.contactlensreminder.ui.MainActivity
-import java.util.*
 
 class ProgressBarTypeWidget : AppWidgetProvider() {
 
@@ -22,7 +21,10 @@ class ProgressBarTypeWidget : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray,
     ) {
-        context.applicationContext.registerReceiver(this, IntentFilter(Intent.ACTION_USER_PRESENT))
+        context.applicationContext.registerReceiver(
+            this@ProgressBarTypeWidget,
+            IntentFilter(Intent.ACTION_USER_PRESENT)
+        )
 
         for (id in appWidgetIds) {
             updateProgressBarTypeWidget(context, appWidgetManager, id)
@@ -100,7 +102,7 @@ class ProgressBarTypeWidget : AppWidgetProvider() {
     }
 
     companion object {
-        const val ACTION_CODE = "PROGRESS_BAR_TYPE_WIDGET_TICK_DOWN"
+        private const val ACTION_CODE = "PROGRESS_BAR_TYPE_WIDGET_TICK_DOWN"
         private const val REQUEST_CODE_ACTIVITY = 666666
     }
 }

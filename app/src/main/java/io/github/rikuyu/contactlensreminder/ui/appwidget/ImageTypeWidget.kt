@@ -12,7 +12,6 @@ import androidx.annotation.DrawableRes
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
 import io.github.rikuyu.contactlensreminder.ui.MainActivity
-import java.util.*
 
 class ImageTypeWidget : AppWidgetProvider() {
 
@@ -21,7 +20,10 @@ class ImageTypeWidget : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray,
     ) {
-        context.applicationContext.registerReceiver(this, IntentFilter(Intent.ACTION_USER_PRESENT))
+        context.applicationContext.registerReceiver(
+            this@ImageTypeWidget,
+            IntentFilter(Intent.ACTION_USER_PRESENT)
+        )
 
         for (id in appWidgetIds) {
             updateImageTypeWidget(context, appWidgetManager, id)
@@ -113,7 +115,7 @@ class ImageTypeWidget : AppWidgetProvider() {
     }
 
     companion object {
-        const val ACTION_CODE = "IMAGE_TYPE_WIDGET_UPDATE"
+        private const val ACTION_CODE = "IMAGE_TYPE_WIDGET_UPDATE"
         private const val REQUEST_CODE_ACTIVITY = 888888
     }
 }
