@@ -51,7 +51,7 @@ fun HandleReminderButton(
     val scaleAnimation by animateFloatAsState(
         targetValue = if (playedScale) 1.2f else 1.0f,
         animationSpec = tween(
-            durationMillis = 1000
+            durationMillis = 950
         ),
         finishedListener = { playedScale = false }
     )

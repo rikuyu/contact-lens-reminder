@@ -3,10 +3,8 @@ package io.github.rikuyu.contactlensreminder.ui.appwidget
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.widget.RemoteViews
 import androidx.annotation.DrawableRes
 import io.github.rikuyu.contactlensreminder.R
@@ -20,11 +18,6 @@ class ImageTypeWidget : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray,
     ) {
-        context.applicationContext.registerReceiver(
-            this@ImageTypeWidget,
-            IntentFilter(Intent.ACTION_USER_PRESENT)
-        )
-
         for (id in appWidgetIds) {
             updateImageTypeWidget(context, appWidgetManager, id)
         }
@@ -40,16 +33,6 @@ class ImageTypeWidget : AppWidgetProvider() {
 
     override fun onReceive(context: Context, intent: Intent?) {
         super.onReceive(context, intent)
-
-        val action = intent?.action ?: return
-        if (action == ACTION_CODE) {
-            val appWidget = ComponentName(context.packageName, javaClass.name)
-            val appWidgetManager = AppWidgetManager.getInstance(context)
-            val appWidgetIds = appWidgetManager.getAppWidgetIds(appWidget)
-            for (id in appWidgetIds) {
-                updateImageTypeWidget(context, appWidgetManager, id)
-            }
-        }
     }
 
     fun updateImageTypeWidget(
@@ -115,7 +98,6 @@ class ImageTypeWidget : AppWidgetProvider() {
     }
 
     companion object {
-        private const val ACTION_CODE = "IMAGE_TYPE_WIDGET_UPDATE"
         private const val REQUEST_CODE_ACTIVITY = 888888
     }
 }

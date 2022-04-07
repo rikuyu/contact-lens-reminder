@@ -3,10 +3,8 @@ package io.github.rikuyu.contactlensreminder.ui.appwidget
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.view.View
 import android.widget.RemoteViews
 import io.github.rikuyu.contactlensreminder.R
@@ -21,11 +19,6 @@ class ProgressBarTypeWidget : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray,
     ) {
-        context.applicationContext.registerReceiver(
-            this@ProgressBarTypeWidget,
-            IntentFilter(Intent.ACTION_USER_PRESENT)
-        )
-
         for (id in appWidgetIds) {
             updateProgressBarTypeWidget(context, appWidgetManager, id)
         }
@@ -41,16 +34,6 @@ class ProgressBarTypeWidget : AppWidgetProvider() {
 
     override fun onReceive(context: Context, intent: Intent?) {
         super.onReceive(context, intent)
-
-        val action = intent?.action ?: return
-        if (action == ACTION_CODE) {
-            val appWidget = ComponentName(context.packageName, javaClass.name)
-            val appWidgetManager = AppWidgetManager.getInstance(context)
-            val appWidgetIds = appWidgetManager.getAppWidgetIds(appWidget)
-            for (id in appWidgetIds) {
-                updateProgressBarTypeWidget(context, appWidgetManager, id)
-            }
-        }
     }
 
     fun updateProgressBarTypeWidget(
@@ -102,7 +85,6 @@ class ProgressBarTypeWidget : AppWidgetProvider() {
     }
 
     companion object {
-        private const val ACTION_CODE = "PROGRESS_BAR_TYPE_WIDGET_TICK_DOWN"
         private const val REQUEST_CODE_ACTIVITY = 666666
     }
 }

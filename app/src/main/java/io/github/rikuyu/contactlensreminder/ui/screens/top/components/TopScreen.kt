@@ -59,7 +59,7 @@ fun TopScreen(
         TopButtonSection(
             isDarkTheme = isDarkTheme,
             themeButtonEvent = {
-                switchDarkTheme(!it)
+                switchDarkTheme(it)
                 viewModel.onEvent(ReminderEvent.SwitchIsDarkTheme)
             },
             helpButtonEvent = {
