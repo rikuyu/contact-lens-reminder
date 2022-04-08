@@ -20,11 +20,11 @@ import androidx.compose.ui.unit.sp
 import io.github.rikuyu.contactlensreminder.R
 
 @Composable
-fun LensSettingButtonSection(
+fun LensSettingButton(
     modifier: Modifier,
     color: Color = MaterialTheme.colors.primary,
     isUsingContactLens: Boolean,
-    showAlertToast: () -> Unit,
+    showToast: () -> Unit,
     navigate: () -> Unit,
 ) {
     var isFirstTap by remember { mutableStateOf(true) }
@@ -33,7 +33,7 @@ fun LensSettingButtonSection(
 
     val onClick: () -> Unit = {
         if (isUsingContactLens) {
-            if (isFirstTap) showAlertToast()
+            if (isFirstTap) showToast()
             isFirstTap = false
         } else {
             navigate()
@@ -48,7 +48,7 @@ fun LensSettingButtonSection(
     ) {
         Button(
             onClick = onClick,
-            modifier = Modifier.size(240.dp, 60.dp),
+            modifier = Modifier.size(236.dp, 60.dp),
             colors = ButtonDefaults.textButtonColors(
                 backgroundColor = if (!isUsingContactLens) color else Color.LightGray,
                 contentColor = Color.White,

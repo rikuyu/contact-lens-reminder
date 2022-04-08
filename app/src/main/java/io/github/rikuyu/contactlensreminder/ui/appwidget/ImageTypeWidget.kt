@@ -1,31 +1,23 @@
 package io.github.rikuyu.contactlensreminder.ui.appwidget
 
-import android.app.AlarmManager
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.widget.RemoteViews
 import androidx.annotation.DrawableRes
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
-import io.github.rikuyu.contactlensreminder.data.util.createBroadcastPendingIntent
 import io.github.rikuyu.contactlensreminder.ui.MainActivity
-import java.text.SimpleDateFormat
-import java.util.*
 
 class ImageTypeWidget : AppWidgetProvider() {
 
     override fun onUpdate(
         context: Context,
         appWidgetManager: AppWidgetManager,
-        appWidgetIds: IntArray
+        appWidgetIds: IntArray,
     ) {
-        context.applicationContext.registerReceiver(this, IntentFilter(Intent.ACTION_USER_PRESENT))
-
         for (id in appWidgetIds) {
             updateImageTypeWidget(context, appWidgetManager, id)
         }
@@ -37,27 +29,16 @@ class ImageTypeWidget : AppWidgetProvider() {
 
     override fun onDisabled(context: Context) {
         super.onDisabled(context)
-        cancelUpdateAppWidget(context)
     }
 
     override fun onReceive(context: Context, intent: Intent?) {
         super.onReceive(context, intent)
-
-        val action = intent?.action ?: return
-        if (action == ACTION_CODE) {
-            val appWidget = ComponentName(context.packageName, javaClass.name)
-            val appWidgetManager = AppWidgetManager.getInstance(context)
-            val appWidgetIds = appWidgetManager.getAppWidgetIds(appWidget)
-            for (id in appWidgetIds) {
-                updateImageTypeWidget(context, appWidgetManager, id)
-            }
-        }
     }
 
     fun updateImageTypeWidget(
         context: Context,
         appWidgetManager: AppWidgetManager,
-        appWidgetId: Int
+        appWidgetId: Int,
     ) {
         val sharedPreferencesManager = SharedPreferencesManager(context)
         val remainingDay = sharedPreferencesManager.getContactLensRemainingDays()
@@ -73,43 +54,7 @@ class ImageTypeWidget : AppWidgetProvider() {
             setImageViewResource(R.id.widget_image, getRemainingDayDrawable(remainingDay))
             setOnClickPendingIntent(R.id.widget_image_type, pendingIntent)
         }
-        reserveUpdateAppWidget(context)
         appWidgetManager.updateAppWidget(appWidgetId, view)
-    }
-
-    private fun reserveUpdateAppWidget(context: Context) {
-        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val calendar = Calendar.getInstance()
-        val simpleDateFormat = SimpleDateFormat("HH/mm/ss", Locale.ENGLISH)
-        val (hour, min, sec) = simpleDateFormat.format(calendar.time).split("/").map(String::toInt)
-        calendar.apply {
-            timeInMillis = System.currentTimeMillis()
-            add(Calendar.HOUR, 24 - hour)
-            add(Calendar.MINUTE, -min)
-            add(Calendar.SECOND, -sec)
-        }
-        alarmManager.setExact(
-            AlarmManager.RTC,
-            calendar.timeInMillis,
-            createBroadcastPendingIntent(
-                context,
-                ImageTypeWidget::class.java,
-                REQUEST_CODE_BROADCAST,
-                ACTION_CODE
-            )
-        )
-    }
-
-    fun cancelUpdateAppWidget(context: Context) {
-        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarmManager.cancel(
-            createBroadcastPendingIntent(
-                context,
-                ImageTypeWidget::class.java,
-                REQUEST_CODE_BROADCAST,
-                ACTION_CODE
-            )
-        )
     }
 
     private fun getRemainingDayDrawable(remainingDay: Int): Int {
@@ -153,8 +98,6 @@ class ImageTypeWidget : AppWidgetProvider() {
     }
 
     companion object {
-        const val ACTION_CODE = "IMAGE_TYPE_WIDGET_UPDATE"
-        private const val REQUEST_CODE_BROADCAST = 888889
         private const val REQUEST_CODE_ACTIVITY = 888888
     }
 }

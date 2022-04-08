@@ -26,6 +26,7 @@ import io.github.rikuyu.contactlensreminder.ui.theme.ThemeColor
 fun ColorPickerDialog(
     color: Color = MaterialTheme.colors.primary,
     stateColor: ThemeColor,
+    executeAppReview: () -> Unit,
     dialogState: Boolean,
     changeDialogState: (Boolean) -> Unit,
     changeThemeColor: (ThemeColor) -> Unit,
@@ -96,7 +97,10 @@ fun ColorPickerDialog(
                         .padding(top = 10.dp)
                 ) {
                     TextButton(
-                        onClick = { changeDialogState(false) }
+                        onClick = {
+                            changeDialogState(false)
+                            executeAppReview()
+                        }
                     ) {
                         Text(text = stringResource(id = R.string.btn_ok), color = color)
                     }

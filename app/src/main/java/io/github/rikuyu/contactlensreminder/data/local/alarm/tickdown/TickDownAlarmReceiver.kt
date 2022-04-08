@@ -1,26 +1,44 @@
 package io.github.rikuyu.contactlensreminder.data.local.alarm.tickdown
 
+import android.appwidget.AppWidgetManager
 import android.content.BroadcastReceiver
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
-import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEvent
+import io.github.rikuyu.contactlensreminder.ui.appwidget.ImageTypeWidget
+import io.github.rikuyu.contactlensreminder.ui.appwidget.ProgressBarTypeWidget
 
 class TickDownAlarmReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
         context?.let {
             val sharedPreferencesManager = SharedPreferencesManager(it)
-            val firebaseLogEvent = FirebaseLogEvent(sharedPreferencesManager)
-            val tickDownAlarmManager = TickDownAlarmManager(it, firebaseLogEvent)
+            val tickDownAlarmManager = TickDownAlarmManager(it)
             val remainingDay = sharedPreferencesManager.getContactLensRemainingDays()
             if (remainingDay > 0) {
                 val after = remainingDay - 1
                 sharedPreferencesManager.saveContactLensRemainingDays(after)
                 if (after > 0) {
                     tickDownAlarmManager.initAlarm()
-                    firebaseLogEvent.logEvent("receive_tick_down_alarm_event")
                 }
+                updateAppWidget(it)
+            }
+        }
+    }
+
+    private fun updateAppWidget(context: Context) {
+        val appWidgetManager = AppWidgetManager.getInstance(context)
+        ProgressBarTypeWidget().apply {
+            val appWidgetIds = appWidgetManager.getAppWidgetIds(ComponentName(context.packageName, javaClass.name))
+            for (id in appWidgetIds) {
+                updateProgressBarTypeWidget(context, appWidgetManager, id)
+            }
+        }
+        ImageTypeWidget().apply {
+            val appWidgetIds = appWidgetManager.getAppWidgetIds(ComponentName(context.packageName, javaClass.name))
+            for (id in appWidgetIds) {
+                updateImageTypeWidget(context, appWidgetManager, id)
             }
         }
     }

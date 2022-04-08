@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.widget.Toast
+import androidx.annotation.StringRes
 
 fun makeNotificationSettingIntent(context: Context): Intent {
     return Intent().apply {
@@ -26,4 +28,12 @@ fun checkNetworkConnection(context: Context): Boolean {
         actNw.hasTransport(NetworkCapabilities.TRANSPORT_BLUETOOTH) -> true
         else -> false
     }
+}
+
+fun showToast(context: Context, @StringRes label: Int) {
+    Toast.makeText(
+        context,
+        context.getString(label),
+        Toast.LENGTH_LONG
+    ).show()
 }

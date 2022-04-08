@@ -16,7 +16,6 @@ fun CancelReminderDialog(
     dialogState: Boolean,
     color: Color = MaterialTheme.colors.primary,
     changeDialogState: (Boolean) -> Unit,
-    executeAppReview: () -> Unit,
     cancelReminder: (Boolean) -> Unit,
 ) {
     if (dialogState) {
@@ -34,7 +33,6 @@ fun CancelReminderDialog(
                     onClick = {
                         cancelReminder(false)
                         changeDialogState(false)
-                        executeAppReview()
                     }
                 ) {
                     Text(text = stringResource(id = R.string.btn_ok), color = color)

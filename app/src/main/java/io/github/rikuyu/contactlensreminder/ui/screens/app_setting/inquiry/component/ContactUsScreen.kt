@@ -24,7 +24,6 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import io.github.rikuyu.contactlensreminder.BuildConfig
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.ui.theme.WebViewBackground
 import io.github.rikuyu.contactlensreminder.ui.util.checkNetworkConnection
 
 @SuppressLint("SetJavaScriptEnabled")
@@ -57,7 +56,7 @@ fun ContactUsScreen(navController: NavController) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(WebViewBackground)
+                    .background(Color.White)
             ) {
                 Box(modifier = Modifier.fillMaxSize()) {
                     AndroidView(

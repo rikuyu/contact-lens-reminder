@@ -3,7 +3,7 @@ package io.github.rikuyu.contactlensreminder.data.local
 import io.github.rikuyu.contactlensreminder.data.local.alarm.notification.NotificationAlarmManager
 import io.github.rikuyu.contactlensreminder.data.local.alarm.tickdown.TickDownAlarmManager
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
-import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEvent
+import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEventService
 import io.github.rikuyu.contactlensreminder.data.util.getExpirationDate
 import io.github.rikuyu.contactlensreminder.domain.local.DataSource
 import io.github.rikuyu.contactlensreminder.domain.model.LensSettingValue
@@ -15,7 +15,7 @@ class LocalDataSource @Inject constructor(
     private val tickDownAlarmManager: TickDownAlarmManager,
     private val sharedPreferencesManager: SharedPreferencesManager,
     private val notificationAlarmManager: NotificationAlarmManager,
-    private val firebaseLogEvent: FirebaseLogEvent,
+    private val firebaseLogEventService: FirebaseLogEventService,
 ) : DataSource {
 
     override fun saveReminderSetting(reminderValue: ReminderValue) {
@@ -34,6 +34,7 @@ class LocalDataSource @Inject constructor(
             notificationAlarmManager.initAlarm()
         }
         tickDownAlarmManager.initAlarm()
+        tickDownAlarmManager.updateAppWidget()
     }
 
     override fun getReminderSetting(): ReminderValue {
@@ -117,7 +118,7 @@ class LocalDataSource @Inject constructor(
     }
 
     override fun logEvent(label: String) {
-        firebaseLogEvent.logEvent(label)
+        firebaseLogEventService.logEvent(label)
     }
 
     override fun getIsShowOnBoarding(): Boolean {

@@ -183,9 +183,9 @@ class SharedPreferencesManager @Inject constructor(private val context: Context)
         )
     }
 
-    fun saveUuid(exchangeDay: String) {
+    fun saveUuid(uuid: String) {
         getSharedPreferences().edit()
-            .putString(SharedPreferencesKey.STORED_UUID, exchangeDay).apply()
+            .putString(SharedPreferencesKey.STORED_UUID, uuid).apply()
     }
 
     // 初めてリマインダーを使用するかどうか

@@ -17,6 +17,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -27,7 +28,7 @@ import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
 fun ThirdStep(
     modifier: Modifier,
     textColor: Color = MaterialTheme.colors.onSurface,
-    descFontSize: TextUnit = 14.sp
+    descFontSize: TextUnit = 14.sp,
 ) {
     val screenWidth = LocalConfiguration.current.screenWidthDp
 
@@ -78,8 +79,25 @@ fun ThirdStep(
         }
         item {
             Text(
-                modifier = Modifier.padding(top = 16.dp, start = 8.dp),
+                modifier = Modifier.padding(top = 16.dp, start = 8.dp, end = 8.dp),
                 text = stringResource(id = R.string.step_3_5),
+                fontSize = descFontSize,
+                color = textColor
+            )
+        }
+        item {
+            Text(
+                modifier = Modifier.padding(top = 16.dp, start = 10.dp, end = 10.dp),
+                text = stringResource(id = R.string.step_3_6),
+                fontSize = descFontSize,
+                fontWeight = FontWeight.Bold,
+                color = textColor
+            )
+        }
+        item {
+            Text(
+                modifier = Modifier.padding(top = 16.dp, start = 8.dp, end = 8.dp),
+                text = stringResource(id = R.string.step_3_7),
                 fontSize = descFontSize,
                 color = textColor
             )

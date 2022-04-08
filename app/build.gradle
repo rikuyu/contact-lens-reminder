@@ -46,9 +46,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
-
-        // @OptIn(ExperimentalXXXXApi::class) warningを消す
-        freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
     }
     buildFeatures {
         compose true

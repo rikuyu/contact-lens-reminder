@@ -5,12 +5,22 @@
     <string name="update_dialog_title">最新バージョン</string>
     <string name="update_dialog_message">このアプリを引き続き利用するには、最新バージョンにアップデートしてください。</string>
     <string name="update_dialog_positive_button_label">Update</string>
-    <string name="update_success">Update 成功</string>
+    <string name="update_immediate_success">immediate_update_success</string>
+    <string name="update_unknown">UpdateAvailability.UNKNOWN</string>
+    <string name="update_not_available">UpdateAvailability.UPDATE_NOT_AVAILABLE</string>
+    <string name="update_available">UpdateAvailability.UPDATE_AVAILABLE</string>
+    <string name="update_triggered_in_progress">UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS</string>
 
     <!-- In-App-Review -->
     <string name="review_request_not_complete">requestReviewFlow().addOnCompleteListener task is NOT isSuccessful</string>
     <string name="review_launch_complete">launchReviewFlow(a, r).addOnCompleteListener</string>
     <string name="review_launch_failure">launchReviewFlow(a, r).addOnFailureListener</string>
+
+    <!-- SCHEDULE_EXACT_ALARM -->
+    <string name="exact_alarm_dialog_title">設定変更のお願い</string>
+    <string name="exact_alarm_dialog_message">本アプリを使用するためには、設定画面から「アラームとリマインダー」を許可してください（設定をONにしてください）</string>
+    <string name="exact_alarm_dialog_positive_button_label">設定画面を開く</string>
+    <string name="exact_alarm_dialog_event_label">alarmManager.canScheduleExactAlarms() == %s</string>
 
     <!-- TopScreen -->
     <string name="remain">残り</string>
@@ -53,9 +63,9 @@
     <string name="version">version %s</string>
 
     <!-- Notification -->
-    <string name="notification_on_the_day_title">レンズ交換の日です！</string>
-    <string name="notification_before_day_title">明日はレンズ交換の日です！</string>
-    <string name="notification_content">目の健康を守りましょう！</string>
+    <string name="notification_on_the_day_title">レンズ交換日</string>
+    <string name="notification_before_day_title">明日はレンズ交換日</string>
+    <string name="notification_content">コンタクトレンズを正しく使用して目の健康を守りましょう！</string>
 
     <!-- レンズ交換確認ダイアログ -->
     <string name="reminder_cancel_dialog_title">本当にレンズを交換しますか？</string>
@@ -74,24 +84,26 @@
     <string name="step_1_1">レンズと通知の設定について</string>
     <string name="step_1_2">はじめに、「レンズの設定」ボタン（赤枠）を押してコンタクトレンズと通知の設定をしましょう。\nこの設定をせずに「スタート」を押すと、2Week用レンズの設定（通知なし）が適用されます。</string>
     <string name="step_1_3">レンズと通知の設定画面</string>
-    <string name="step_1_4">この画面では、「コンタクトレンズの種類」「使用する期間」「通知日」「通知時刻」「コンタクトレンズの度数」を設定することができます。</string>
+    <string name="step_1_4">この画面では、「コンタクトレンズの種類」「使用期間」「通知日」「通知時刻」「コンタクトレンズの度数」を設定することができます。</string>
     <string name="step_2_1">コンタクトレンズの種類</string>
     <string name="step_2_2">コンタクトレンズの種類は「2週間」「1ヵ月」から選ぶことができます。それ以外に、1～31日の間でレンズの使用期間を指定することもできます。</string>
     <string name="step_2_3">通知の設定</string>
-    <string name="step_2_4">通知日は、当日か前日かを選択することができます。また、通知時刻は15分単位で設定することができます。</string>
+    <string name="step_2_4">通知日は、当日か前日かを選択することができます。また、通知時刻は1分単位で設定することができます。</string>
     <string name="step_2_5">レンズの度数設定</string>
     <string name="step_2_6">コンタクトレンズの度数は、-8.0～-3.0の範囲で設定することができます。</string>
     <string name="step_2_7">設定の保存方法</string>
     <string name="step_2_8">これまでの設定を保存するにはOKボタンを押下してください。</string>
     <string name="step_3_1">リマインダーの設定方法</string>
-    <string name="step_3_2">リマインダーを開始するためには、「スタート」ボタン（赤枠）を押下してください。リマインダーをスタートすると、いったんアプリが閉じます。</string>
+    <string name="step_3_2">リマインダーを開始するためには、「スタート」ボタン（赤枠）を押下してください。</string>
     <string name="step_3_3">リマインダー開始後</string>
-    <string name="step_3_4">リマインダーを開始すると、「スタート」ボタンが「レンズの交換」ボタンになります。また、一度リマインダーを開始すると、設定を変更することができなくなります。</string>
-    <string name="step_3_5">その他、アプリの特徴・注意事項（重要）は、Otherをご覧ください。</string>
+    <string name="step_3_4">リマインダーを開始すると、「スタート」ボタンが「レンズの交換」ボタンになります。また、一度リマインダーを開始すると、レンズの交換をするまで設定を変更することができなくなります。</string>
+    <string name="step_3_5">「残り○日」は毎日午前0時に更新されます。</string>
+    <string name="step_3_6">残り日数が更新されない場合、お手数ですが、任意の日数で再度レンズの設定を行い、再度リマインダーを起動させてください。</string>
+    <string name="step_3_7">その他、アプリの特徴・注意事項（重要）は、Otherをご覧ください。</string>
     <string name="step_4_1">ヘルプについて</string>
     <string name="step_4_2">トップ画面から「ヘルプ」ボタン（赤枠）を押下すると、ヘルプ画面を見ることができます。</string>
     <string name="step_4_3">このアプリについての画面</string>
-    <string name="step_4_4">この画面では、「利用規約」「ヘルプ（使い方）」「通知設定」「お問い合わせ」「バージョン」を参照することができます。</string>
+    <string name="step_4_4">この画面では、「利用規約」「ヘルプ（使い方）」「通知設定」「お問い合わせ」「バージョン」「テーマカラー変更」を参照することができます。</string>
     <string name="step_4_5">ライト/ダークモードについて</string>
     <string name="step_4_6">このアプリはトップ画面左上のアイコンを押下することで、ライト/ダークモードを使い分けることができます。</string>
     <string name="step_4_7">テーマカラー変更について</string>

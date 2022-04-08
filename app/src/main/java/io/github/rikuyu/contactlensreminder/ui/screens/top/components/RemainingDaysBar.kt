@@ -82,6 +82,7 @@ fun RemainingDaysBar(
             )
         }
         Text(
+            textAlign = TextAlign.Center,
             text = buildAnnotatedString {
                 withStyle(style = ParagraphStyle(lineHeight = 20.sp)) {
                     withStyle(
@@ -146,8 +147,7 @@ fun RemainingDaysBar(
                         }
                     }
                 }
-            },
-            textAlign = TextAlign.Center
+            }
         )
     }
 }

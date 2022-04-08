@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ReminderViewModel @Inject constructor(
-    private val usecase: ReminderUseCase
+    private val usecase: ReminderUseCase,
 ) : ViewModel() {
 
     private val _reminder: MutableState<ReminderValue> = mutableStateOf(ReminderValue())
@@ -46,6 +46,7 @@ class ReminderViewModel @Inject constructor(
                 usecase.saveReminderSetting(reminder.value)
                 usecase.cancelReminder()
             }
+            is ReminderEvent.GetReminderSetting -> _reminder.value = usecase.getReminderSetting.invoke()
             is ReminderEvent.SwitchIsDarkTheme -> usecase.switchIsDarkTheme.invoke()
             is ReminderEvent.GetIsDarkTheme -> isDarkTheme.value = usecase.getIsDarkTheme.invoke()
         }

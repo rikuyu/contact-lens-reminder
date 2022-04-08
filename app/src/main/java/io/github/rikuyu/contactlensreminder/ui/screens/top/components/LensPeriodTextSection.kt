@@ -17,7 +17,7 @@ import io.github.rikuyu.contactlensreminder.ui.theme.ColorPalette
 
 @Composable
 fun LensPeriodTextSection(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     lensRemainingDays: Int,
     period: Int,
     color: Color = MaterialTheme.colors.primary,
