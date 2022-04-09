@@ -1,6 +1,7 @@
 package io.github.rikuyu.contactlensreminder.data.local.alarm.tickdown
 
 import android.app.AlarmManager
+import android.app.AlarmManager.AlarmClockInfo
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Context
@@ -11,9 +12,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
-class TickDownAlarmManager @Inject constructor(
-    private val context: Context
-) {
+class TickDownAlarmManager @Inject constructor(private val context: Context) {
+
     private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
     fun initAlarm() {
@@ -26,10 +26,13 @@ class TickDownAlarmManager @Inject constructor(
             add(Calendar.MINUTE, -min)
             add(Calendar.SECOND, -sec)
         }
-        alarmManager.setExactAndAllowWhileIdle(
-            AlarmManager.RTC_WAKEUP,
-            calendar.timeInMillis,
-            createBroadcastPendingIntent(context, TickDownAlarmReceiver::class.java, SHARED_PREFERENCE_DATA_CODE)
+        alarmManager.setAlarmClock(
+            AlarmClockInfo(calendar.timeInMillis, null),
+            createBroadcastPendingIntent(
+                context,
+                TickDownAlarmReceiver::class.java,
+                SHARED_PREFERENCE_DATA_CODE
+            )
         )
     }
 

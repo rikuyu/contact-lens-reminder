@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class NotificationAlarmManager @Inject constructor(
     private val context: Context,
-    private val sharedPreferencesManager: SharedPreferencesManager
+    private val sharedPreferencesManager: SharedPreferencesManager,
 ) {
     private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
@@ -28,10 +28,13 @@ class NotificationAlarmManager @Inject constructor(
             add(Calendar.MINUTE, sharedPreferencesManager.getNotificationTimeMinute() - min)
             add(Calendar.SECOND, -sec)
         }
-        alarmManager.setExactAndAllowWhileIdle(
-            AlarmManager.RTC_WAKEUP,
-            calendar.timeInMillis,
-            createBroadcastPendingIntent(context, NotificationAlarmReceiver::class.java, REQUEST_CODE)
+        alarmManager.setAlarmClock(
+            AlarmManager.AlarmClockInfo(calendar.timeInMillis, null),
+            createBroadcastPendingIntent(
+                context,
+                NotificationAlarmReceiver::class.java,
+                REQUEST_CODE
+            )
         )
     }
 

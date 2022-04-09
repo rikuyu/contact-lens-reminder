@@ -6,6 +6,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
+import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEventService
 import io.github.rikuyu.contactlensreminder.ui.appwidget.ImageTypeWidget
 import io.github.rikuyu.contactlensreminder.ui.appwidget.ProgressBarTypeWidget
 
@@ -17,6 +18,16 @@ class TickDownAlarmReceiver : BroadcastReceiver() {
             val tickDownAlarmManager = TickDownAlarmManager(it)
             val remainingDay = sharedPreferencesManager.getContactLensRemainingDays()
             if (remainingDay > 0) {
+                val after = remainingDay - 1
+                sharedPreferencesManager.saveContactLensRemainingDays(after)
+                if (after > 0) {
+                    tickDownAlarmManager.initAlarm()
+                }
+                updateAppWidget(it)
+            }
+            // 日付をまたぐ際に端末電源OFFだった時の対策
+            if (Intent.ACTION_BOOT_COMPLETED == intent?.action) {
+                FirebaseLogEventService(sharedPreferencesManager).logEvent("RECEIVE_BOOT_COMPLETED_TICKDOWN")
                 val after = remainingDay - 1
                 sharedPreferencesManager.saveContactLensRemainingDays(after)
                 if (after > 0) {
