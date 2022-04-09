@@ -8,11 +8,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.sp
+import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.ui.theme.ColorPalette
 
 @Composable
@@ -30,9 +32,9 @@ fun LensPeriodTextSection(
     ) {
         Text(
             text = buildAnnotatedString {
-                when (period) {
-                    1 -> {
-                        withStyle(style = ParagraphStyle(lineHeight = 20.sp)) {
+                withStyle(style = ParagraphStyle(lineHeight = 20.sp)) {
+                    when (period) {
+                        1 -> {
                             withStyle(
                                 style = SpanStyle(
                                     color = if (lensRemainingDays < 0) expiredColor else color,
@@ -47,36 +49,31 @@ fun LensPeriodTextSection(
                                     fontSize = 24.sp
                                 )
                             ) {
-                                append(" Day レンズ")
+                                append(" ")
+                                append(stringResource(id = R.string.one_day_text))
                             }
                         }
-                    }
-                    14 -> {
-                        withStyle(style = ParagraphStyle(lineHeight = 20.sp)) {
+                        14 -> {
                             withStyle(
                                 style = SpanStyle(
                                     color = if (lensRemainingDays < 0) expiredColor else color,
                                     fontSize = 26.sp
                                 )
                             ) {
-                                append("2Weeks レンズ")
+                                append(stringResource(id = R.string.two_weeks_day_text))
                             }
                         }
-                    }
-                    30, 31 -> {
-                        withStyle(style = ParagraphStyle(lineHeight = 20.sp)) {
+                        30, 31 -> {
                             withStyle(
                                 style = SpanStyle(
                                     color = if (lensRemainingDays < 0) expiredColor else color,
                                     fontSize = 26.sp
                                 )
                             ) {
-                                append("1Month レンズ")
+                                append(stringResource(id = R.string.one_month_text))
                             }
                         }
-                    }
-                    else -> {
-                        withStyle(style = ParagraphStyle(lineHeight = 20.sp)) {
+                        else -> {
                             withStyle(
                                 style = SpanStyle(
                                     color = if (lensRemainingDays < 0) expiredColor else color,
@@ -91,7 +88,8 @@ fun LensPeriodTextSection(
                                     fontSize = 24.sp
                                 )
                             ) {
-                                append(" Days レンズ")
+                                append(" ")
+                                append(stringResource(id = R.string.days_text))
                             }
                         }
                     }

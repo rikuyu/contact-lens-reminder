@@ -37,3 +37,29 @@ fun showToast(context: Context, @StringRes label: Int) {
         Toast.LENGTH_LONG
     ).show()
 }
+
+fun getJapaneseDay(day: String): String {
+    return when (day) {
+        "Mon" -> "月"
+        "Tue" -> "火"
+        "Wed" -> "水"
+        "Thu" -> "木"
+        "Fri" -> "金"
+        "Sat" -> "土"
+        "Sun" -> "日"
+        else -> "月"
+    }
+}
+
+fun getEnglishDay(day: String): String {
+    return when (day) {
+        "月" -> "Mon"
+        "火" -> "Tue"
+        "水" -> "Wed"
+        "木" -> "Thu"
+        "金" -> "Fri"
+        "土" -> "Sat"
+        "日" -> "Sun"
+        else -> "Mon"
+    }
+}

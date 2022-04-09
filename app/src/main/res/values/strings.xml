@@ -33,13 +33,19 @@
     <string name="new_line">\n\n</string>
     <string name="time_div">:</string>
     <string name="alert_toast_message">レンズ使用中は設定を変更できません</string>
+    <string name="one_day_text">Day レンズ</string>
+    <string name="days_text">Days レンズ</string>
+    <string name="two_weeks_day_text">2Weeks レンズ</string>
+    <string name="one_month_text">1Month レンズ</string>
 
     <!-- LensSettingScreen -->
     <string name="lens_setting_screen_title">コンタクトレンズ設定</string>
     <string name="notification">通知</string>
     <string name="notification_day_title">通知日</string>
     <string name="before_day">前日</string>
+    <string name="before_day_lower">前日</string>
     <string name="on_the_day">当日</string>
+    <string name="on_the_day_lower">当日</string>
     <string name="notification_time">通知時刻</string>
     <string name="lens_power">度数</string>
     <string name="left">左</string>
@@ -134,10 +140,10 @@
     <string name="content_5_1">1．本アプリの瑕疵、本アプリの動作に係る不具合（表示情報の誤謬・逸脱を含みます。）、本アプリがスマートフォンに与える影響およびお客さまが本アプリを正常に利用できないことにより被る不利益、データ消失の不利益、その他一切の不利益について、開発者は一切その責任を負いません。</string>
     <string name="content_5_2">2．前項のほか、次の各号に定める場合における本アプリの利用不能、ならびにこれによって生じた損害について、開発者は、一切の責任を負いません。</string>
     <string name="content_5_2_1">（1）天災地変、裁判所等の公的機関の措置等のやむをえない事由が生じた場合</string>
-    <string name="content_5_2_2">（2）当社が相当と認める安全対策を講じたにもかかわらず、通信回線またはシステム等に障害が生じた場合</string>
+    <string name="content_5_2_2">（2）開発者が相当と認める安全対策を講じたにもかかわらず、通信回線またはシステム等に障害が生じた場合</string>
     <string name="content_5_2_3">（3）指紋認証やパスコード認証等が不正に実行された場合</string>
-    <string name="content_5_2_4">（4）当社以外の第三者の責に帰すべき事由による場合</string>
-    <string name="content_5_3">3．お客さまが本アプリを使用して情報のアップロード、ダウンロードその他の授受を行った場合、お客さまは、当該情報の授受を電磁的方法により行うことを当社に対して同意したものとします。</string>
+    <string name="content_5_2_4">（4）開発者以外の第三者の責に帰すべき事由による場合</string>
+    <string name="content_5_3">3．お客さまが本アプリを使用して情報のアップロード、ダウンロードその他の授受を行った場合、お客さまは、当該情報の授受を電磁的方法により行うことを開発者に対して同意したものとします。</string>
     <string name="title_6">第6条　利用環境の整備等</string>
     <string name="content_6_1">1．お客さまは、本アプリの使用（本アプリのダウンロードを含みます。）に必要となる通信機器、ソフトウェア、通信回線その他の環境を、お客さまの責任と負担において準備するものとします。</string>
     <string name="content_6_2">2．本アプリの使用（本アプリのダウンロードを含みます。）に伴い発生する通信料は、お客さまの負担とします。</string>
