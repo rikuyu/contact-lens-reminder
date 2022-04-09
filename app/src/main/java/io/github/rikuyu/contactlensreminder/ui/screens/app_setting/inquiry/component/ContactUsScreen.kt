@@ -25,14 +25,17 @@ import androidx.navigation.NavController
 import io.github.rikuyu.contactlensreminder.BuildConfig
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.ui.util.checkNetworkConnection
+import java.util.*
 
 @SuppressLint("SetJavaScriptEnabled")
 @Composable
 fun ContactUsScreen(navController: NavController) {
 
-    val formId = BuildConfig.GOOGLE_FORM_ID
-
-    val isNetworkConnected = checkNetworkConnection(LocalContext.current)
+    val formId = when (Locale.getDefault().language) {
+        "ja" -> BuildConfig.GOOGLE_FORM_ID_JA
+        "en" -> BuildConfig.GOOGLE_FORM_ID_EN
+        else -> BuildConfig.GOOGLE_FORM_ID_JA
+    }
 
     val visibility = remember { mutableStateOf(false) }
 
@@ -52,7 +55,7 @@ fun ContactUsScreen(navController: NavController) {
             )
         }
     ) {
-        if (isNetworkConnected) {
+        if (checkNetworkConnection(LocalContext.current)) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
