@@ -16,7 +16,7 @@ class NotificationAlarmManager @Inject constructor(
 
     fun initAlarm() {
         val calendar = Calendar.getInstance()
-        val simpleDateFormat = SimpleDateFormat("HH/mm/ss", Locale.ENGLISH)
+        val simpleDateFormat = SimpleDateFormat("HH/mm/ss", Locale.getDefault())
         val (hour, min, sec) = simpleDateFormat.format(calendar.time).split("/").map(String::toInt)
         calendar.apply {
             timeInMillis = System.currentTimeMillis()

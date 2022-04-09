@@ -25,8 +25,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.ui.theme.ColorPalette
-import io.github.rikuyu.contactlensreminder.ui.util.getEnglishDay
-import io.github.rikuyu.contactlensreminder.ui.util.getJapaneseDay
 import java.util.*
 
 @Composable
@@ -82,7 +80,7 @@ fun RemainingDaysBar(
             )
         }
         when (Locale.getDefault().language) {
-            "ja" -> JapaneseReminderText(
+            Locale.JAPANESE.language -> JapaneseReminderText(
                 notificationDay = notificationDay,
                 notificationTimeHour = notificationTimeHour,
                 notificationTimeMinute = notificationTimeMinute,
@@ -91,28 +89,24 @@ fun RemainingDaysBar(
                 exchangeDay = exchangeDay,
                 isUseNotification = isUseNotification
             )
-            "en" -> {
-                EnglishReminderText(
-                    notificationDay = notificationDay,
-                    notificationTimeHour = notificationTimeHour,
-                    notificationTimeMinute = notificationTimeMinute,
-                    isUsingContactLens = isUsingContactLens,
-                    lensRemainingDays = lensRemainingDays,
-                    exchangeDay = exchangeDay,
-                    isUseNotification = isUseNotification
-                )
-            }
-            else -> {
-                JapaneseReminderText(
-                    notificationDay = notificationDay,
-                    notificationTimeHour = notificationTimeHour,
-                    notificationTimeMinute = notificationTimeMinute,
-                    isUsingContactLens = isUsingContactLens,
-                    lensRemainingDays = lensRemainingDays,
-                    exchangeDay = exchangeDay,
-                    isUseNotification = isUseNotification
-                )
-            }
+            Locale.ENGLISH.language -> EnglishReminderText(
+                notificationDay = notificationDay,
+                notificationTimeHour = notificationTimeHour,
+                notificationTimeMinute = notificationTimeMinute,
+                isUsingContactLens = isUsingContactLens,
+                lensRemainingDays = lensRemainingDays,
+                exchangeDay = exchangeDay,
+                isUseNotification = isUseNotification
+            )
+            else -> JapaneseReminderText(
+                notificationDay = notificationDay,
+                notificationTimeHour = notificationTimeHour,
+                notificationTimeMinute = notificationTimeMinute,
+                isUsingContactLens = isUsingContactLens,
+                lensRemainingDays = lensRemainingDays,
+                exchangeDay = exchangeDay,
+                isUseNotification = isUseNotification
+            )
         }
     }
 }
@@ -168,11 +162,7 @@ fun JapaneseReminderText(
                 ) {
                     append(stringResource(id = R.string.change_message))
                     append(" ")
-                    val (date, day) = exchangeDay.split(" ")
-                    append(date)
-                    append(" (")
-                    append(getJapaneseDay(day.replace("(", "").replace(")", "")))
-                    append(")")
+                    append(exchangeDay)
                 }
                 if (isUseNotification) {
                     append(stringResource(id = R.string.new_line))
@@ -258,10 +248,7 @@ fun EnglishReminderText(
                 ) {
                     append(stringResource(id = R.string.change_message))
                     append(" ")
-                    val (date, day) = exchangeDay.split(" ")
-                    append(getEnglishDay(day.replace("(", "").replace(")", "")))
-                    append(" ")
-                    append(date)
+                    append(exchangeDay)
                 }
                 if (isUseNotification) {
                     append(stringResource(id = R.string.new_line))

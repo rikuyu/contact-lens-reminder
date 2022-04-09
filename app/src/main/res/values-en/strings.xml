@@ -47,7 +47,7 @@
     <string name="on_the_day">On the day</string>
     <string name="on_the_day_lower">on the day</string>
     <string name="notification_time">Time</string>
-    <string name="lens_power">Lens Power</string>
+    <string name="lens_power">Lenses Power</string>
     <string name="left">L</string>
     <string name="right">R</string>
     <string name="ok">OK</string>
@@ -74,7 +74,7 @@
     <string name="notification_content">Protect your eye health by using contact lenses properly.</string>
 
     <!-- レンズ交換確認ダイアログ -->
-    <string name="reminder_cancel_dialog_title">Do you really want to replace the lens?</string>
+    <string name="reminder_cancel_dialog_title">Do you really want to exchange the lenses?</string>
     <string name="reminder_cancel_dialog_content">Reminder will be canceled</string>
     <string name="btn_cancel">Cancel</string>
     <string name="btn_ok">OK</string>
@@ -102,7 +102,7 @@
     <string name="step_3_1">How to set up a reminder</string>
     <string name="step_3_2">To start the reminder, press the "Start" button (red frame).</string>
     <string name="step_3_3">After reminder start</string>
-    <string name="step_3_4">Once the reminder is started, the "Start" button becomes the "Change Lens" button. Also, once you start the reminder, you will not be able to change the settings until you replace the lens.</string>
+    <string name="step_3_4">Once the reminder is started, the "Start" button becomes the "Change Lens" button. Also, once you start the reminder, you will not be able to change the settings until you exchange the lenses.</string>
     <string name="step_3_5">The number of days remaining is updated daily at midnight.</string>
     <string name="step_3_6">If the number of days remaining is not updated, please set the lens again with the desired number of days and start the reminder again.</string>
     <string name="step_3_7">For other application features and notes (important), please see Other.</string>
@@ -115,7 +115,7 @@
     <string name="step_4_7">About changing the theme color</string>
     <string name="step_4_8">You can change the theme color in the dialog that appears when you click "Change Theme Color" on the Help screen.</string>
     <string name="step_4_9">About the App Widget</string>
-    <string name="step_4_10">App Widgets are available in "image type" and "progress bar type". The image type displays the number of days remaining for contact lenses. The progress bar type displays a progress bar showing the number of days remaining and the date when the lens will be replaced.</string>
+    <string name="step_4_10">App Widgets are available in "image type" and "progress bar type". The image type displays the number of days remaining for contact lenses. The progress bar type displays a progress bar showing the number of days remaining and the date when the lenses will be exchanged.</string>
     <string name="step_4_11">[ Precautions ]</string>
     <string name="step_4_12">1. After updating the application, please recreate the app widget.</string>
     <string name="step_4_13">2. If the message "Cannot load widget" appears when placing the app widget on the home screen, please uninstall the application and try again.</string>
@@ -127,7 +127,7 @@
 
     <!-- 利用規約 -->
     <string name="title_1">1. Contents of this Application</string>
-    <string name="content_1">This application means this smartphone application currently in use (the "Application"). Contact Lens Replacement Reminder" means the "Contact Lens Exchange Reminder.</string>
+    <string name="content_1">This application means this smartphone application currently in use (the "Application").</string>
     <string name="title_2">2. Acceptance of Terms and Conditions</string>
     <string name="content_2">Customers shall use the Application upon agreeing to these Terms of Use.</string>
     <string name="title_3">3. Vesting of rights, etc.</string>
