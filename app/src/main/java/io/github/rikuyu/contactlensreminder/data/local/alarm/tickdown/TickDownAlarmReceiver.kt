@@ -25,7 +25,8 @@ class TickDownAlarmReceiver : BroadcastReceiver() {
                 }
                 updateAppWidget(it)
             }
-            // 日付をまたぐ際に端末電源OFFだった時の対策
+            // 端末電源OFFにした時の対策
+            // 電源がONになったときにイベントを再登録する
             if (Intent.ACTION_BOOT_COMPLETED == intent?.action) {
                 FirebaseLogEventService(sharedPreferencesManager).logEvent("RECEIVE_BOOT_COMPLETED_TICKDOWN")
                 val after = remainingDay - 1
