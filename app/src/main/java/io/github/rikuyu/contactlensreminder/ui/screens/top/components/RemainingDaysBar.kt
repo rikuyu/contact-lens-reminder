@@ -82,7 +82,7 @@ fun RemainingDaysBar(
             )
         }
         when (Locale.getDefault().language) {
-            "ja" -> JapaneseReminderText(
+            Locale.JAPANESE.language -> JapaneseReminderText(
                 notificationDay = notificationDay,
                 notificationTimeHour = notificationTimeHour,
                 notificationTimeMinute = notificationTimeMinute,
@@ -91,7 +91,7 @@ fun RemainingDaysBar(
                 exchangeDay = exchangeDay,
                 isUseNotification = isUseNotification
             )
-            "en" -> {
+            Locale.ENGLISH.language -> {
                 EnglishReminderText(
                     notificationDay = notificationDay,
                     notificationTimeHour = notificationTimeHour,
