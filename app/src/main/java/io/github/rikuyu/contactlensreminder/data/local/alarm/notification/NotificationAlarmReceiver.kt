@@ -14,10 +14,10 @@ class NotificationAlarmReceiver : BroadcastReceiver() {
 
             // 端末電源OFFにした時の対策
             // 電源がONになったときにイベントを再登録する
+            // ※ 電源OFFの状態で日付をまたぐとバグる実装
             if (Intent.ACTION_BOOT_COMPLETED == intent?.action) {
-                FirebaseLogEventService(SharedPreferencesManager(it))
-                    .logEvent("RECEIVE_BOOT_COMPLETED_NOTIFICATION")
-                NotificationService(it).showNotification()
+                FirebaseLogEventService(SharedPreferencesManager(it)).logEvent("RECEIVE_BOOT_COMPLETED_NOTIFICATION")
+                NotificationAlarmManager(it, SharedPreferencesManager(it)).initAlarm()
             }
         }
     }

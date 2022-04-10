@@ -8,11 +8,18 @@ plugins {
 apply plugin: "com.android.application"
 apply plugin: "com.google.gms.google-services"
 
-def getGoogleFormId() {
+def getGoogleFormIdJa() {
     def propFile = project.rootProject.file('local.properties')
     def properties = new Properties()
     properties.load(propFile.newDataInputStream())
-    return properties['GOOGLE_FORM_ID']
+    return properties['GOOGLE_FORM_ID_JA']
+}
+
+def getGoogleFormIdEn() {
+    def propFile = project.rootProject.file('local.properties')
+    def properties = new Properties()
+    properties.load(propFile.newDataInputStream())
+    return properties['GOOGLE_FORM_ID_EN']
 }
 
 android {
@@ -30,7 +37,8 @@ android {
             useSupportLibrary true
         }
 
-        buildConfigField("String", 'GOOGLE_FORM_ID', getGoogleFormId())
+        buildConfigField("String", 'GOOGLE_FORM_ID_JA', getGoogleFormIdJa())
+        buildConfigField("String", 'GOOGLE_FORM_ID_EN', getGoogleFormIdEn())
     }
 
     buildTypes {
