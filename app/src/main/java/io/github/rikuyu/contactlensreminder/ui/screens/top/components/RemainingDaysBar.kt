@@ -91,28 +91,24 @@ fun RemainingDaysBar(
                 exchangeDay = exchangeDay,
                 isUseNotification = isUseNotification
             )
-            Locale.ENGLISH.language -> {
-                EnglishReminderText(
-                    notificationDay = notificationDay,
-                    notificationTimeHour = notificationTimeHour,
-                    notificationTimeMinute = notificationTimeMinute,
-                    isUsingContactLens = isUsingContactLens,
-                    lensRemainingDays = lensRemainingDays,
-                    exchangeDay = exchangeDay,
-                    isUseNotification = isUseNotification
-                )
-            }
-            else -> {
-                JapaneseReminderText(
-                    notificationDay = notificationDay,
-                    notificationTimeHour = notificationTimeHour,
-                    notificationTimeMinute = notificationTimeMinute,
-                    isUsingContactLens = isUsingContactLens,
-                    lensRemainingDays = lensRemainingDays,
-                    exchangeDay = exchangeDay,
-                    isUseNotification = isUseNotification
-                )
-            }
+            Locale.ENGLISH.language -> EnglishReminderText(
+                notificationDay = notificationDay,
+                notificationTimeHour = notificationTimeHour,
+                notificationTimeMinute = notificationTimeMinute,
+                isUsingContactLens = isUsingContactLens,
+                lensRemainingDays = lensRemainingDays,
+                exchangeDay = exchangeDay,
+                isUseNotification = isUseNotification
+            )
+            else -> JapaneseReminderText(
+                notificationDay = notificationDay,
+                notificationTimeHour = notificationTimeHour,
+                notificationTimeMinute = notificationTimeMinute,
+                isUsingContactLens = isUsingContactLens,
+                lensRemainingDays = lensRemainingDays,
+                exchangeDay = exchangeDay,
+                isUseNotification = isUseNotification
+            )
         }
     }
 }
