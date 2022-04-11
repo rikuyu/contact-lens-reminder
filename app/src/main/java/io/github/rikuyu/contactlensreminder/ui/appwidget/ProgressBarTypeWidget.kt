@@ -5,12 +5,14 @@ import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
+import android.util.TypedValue
 import android.view.View
 import android.widget.RemoteViews
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
 import io.github.rikuyu.contactlensreminder.data.util.getExpirationDate
 import io.github.rikuyu.contactlensreminder.ui.MainActivity
+import java.util.*
 
 class ProgressBarTypeWidget : AppWidgetProvider() {
 
@@ -55,14 +57,42 @@ class ProgressBarTypeWidget : AppWidgetProvider() {
 
         val view = RemoteViews(context.packageName, R.layout.widget_progress_bar_type)
         view.apply {
-            setTextViewText(R.id.tv_exchange_date, exchangeDate)
-            setOnClickPendingIntent(
-                R.id.widget_progress_bar_type,
-                pendingIntent
-            )
-            setViewVisibility(R.id.tv_remaining_day_before, View.VISIBLE)
-            setTextViewText(R.id.tv_remaining_day, remainingDay.toString())
-            setViewVisibility(R.id.tv_remaining_day_after, View.VISIBLE)
+            setOnClickPendingIntent(R.id.widget_progress_bar_type, pendingIntent)
+
+            when (Locale.getDefault().language) {
+                Locale.JAPANESE.language -> {
+                    setTextViewText(R.id.tv_exchange_date, exchangeDate)
+                    setViewVisibility(R.id.tv_remaining_day_before, View.VISIBLE)
+                    setViewVisibility(R.id.tv_remaining_day, View.VISIBLE)
+                    setTextViewText(R.id.tv_remaining_day, remainingDay.toString())
+                    setViewVisibility(R.id.tv_remaining_day_after, View.VISIBLE)
+                }
+                Locale.ENGLISH.language -> {
+                    setTextViewText(R.id.tv_exchange_date, exchangeDate)
+
+                    setViewVisibility(R.id.tv_remaining_day_before, View.VISIBLE)
+                    setTextViewText(R.id.tv_remaining_day_before, remainingDay.toString())
+                    setTextViewTextSize(R.id.tv_remaining_day_before, TypedValue.COMPLEX_UNIT_SP, 16F)
+
+                    setTextViewText(
+                        R.id.tv_remaining_day,
+                        if (remainingDay == 1)
+                            " ${context.getString(R.string.text_remaining_day_after)}"
+                        else
+                            " ${context.getString(R.string.text_remaining_day_after)}s"
+                    )
+                    setTextViewTextSize(R.id.tv_remaining_day, TypedValue.COMPLEX_UNIT_SP, 14F)
+
+                    setViewVisibility(R.id.tv_remaining_day_after, View.GONE)
+                }
+                else -> {
+                    setTextViewText(R.id.tv_exchange_date, exchangeDate)
+                    setViewVisibility(R.id.tv_remaining_day_before, View.VISIBLE)
+                    setViewVisibility(R.id.tv_remaining_day, View.VISIBLE)
+                    setTextViewText(R.id.tv_remaining_day, remainingDay.toString())
+                    setViewVisibility(R.id.tv_remaining_day_after, View.VISIBLE)
+                }
+            }
 
             if (remainingDay > 0) {
                 setViewVisibility(R.id.progress_bar, View.VISIBLE)

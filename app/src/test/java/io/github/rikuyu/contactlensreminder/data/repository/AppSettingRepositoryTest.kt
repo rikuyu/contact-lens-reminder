@@ -3,7 +3,7 @@ package io.github.rikuyu.contactlensreminder.data.repository
 import com.google.common.truth.Truth.assertThat
 import io.github.rikuyu.contactlensreminder.domain.local.DataSource
 import io.github.rikuyu.contactlensreminder.domain.repository.AppSettingRepository
-import io.github.rikuyu.contactlensreminder.ui.theme.ThemeColor
+import io.github.rikuyu.contactlensreminder.ui.util.theme.ThemeColor
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK

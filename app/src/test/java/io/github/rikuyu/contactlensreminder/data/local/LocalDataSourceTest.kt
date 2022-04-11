@@ -11,7 +11,7 @@ import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEventService
 import io.github.rikuyu.contactlensreminder.domain.local.DataSource
 import io.github.rikuyu.contactlensreminder.domain.model.LensSettingValue
 import io.github.rikuyu.contactlensreminder.domain.model.ReminderValue
-import io.github.rikuyu.contactlensreminder.ui.theme.ThemeColor
+import io.github.rikuyu.contactlensreminder.ui.util.theme.ThemeColor
 import io.mockk.*
 import org.junit.Before
 import org.junit.Test

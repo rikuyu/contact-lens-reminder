@@ -24,7 +24,8 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.ui.theme.ColorPalette
+import io.github.rikuyu.contactlensreminder.ui.util.theme.ColorPalette
+import java.util.*
 
 @Composable
 fun RemainingDaysBar(
@@ -36,9 +37,6 @@ fun RemainingDaysBar(
     lensRemainingDays: Int,
     exchangeDay: String,
     isUseNotification: Boolean,
-    supportTextFontSize: TextUnit = 24.sp,
-    periodTextFontSize: TextUnit = 16.sp,
-    supportTextColor: Color = MaterialTheme.colors.onSurface,
     color: Color = MaterialTheme.colors.primary,
     secondColor: Color = MaterialTheme.colors.secondary,
     radius: Dp = 150.dp,
@@ -81,34 +79,92 @@ fun RemainingDaysBar(
                 style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
             )
         }
-        Text(
-            textAlign = TextAlign.Center,
-            text = buildAnnotatedString {
-                withStyle(style = ParagraphStyle(lineHeight = 20.sp)) {
-                    withStyle(
-                        style = SpanStyle(
-                            color = supportTextColor,
-                            fontSize = supportTextFontSize
-                        )
-                    ) {
-                        append(stringResource(R.string.remain))
-                    }
-                    withStyle(
-                        style = SpanStyle(
-                            color = if (lensRemainingDays > 0 || !isUsingContactLens) color else Color.Red,
-                            fontSize = 40.sp
-                        )
-                    ) {
-                        append(lensRemainingDays.toString())
-                    }
-                    withStyle(
-                        style = SpanStyle(
-                            color = supportTextColor,
-                            fontSize = supportTextFontSize
-                        )
-                    ) {
-                        append(stringResource(id = R.string.day))
-                    }
+        when (Locale.getDefault().language) {
+            Locale.JAPANESE.language -> JapaneseReminderText(
+                notificationDay = notificationDay,
+                notificationTimeHour = notificationTimeHour,
+                notificationTimeMinute = notificationTimeMinute,
+                isUsingContactLens = isUsingContactLens,
+                lensRemainingDays = lensRemainingDays,
+                exchangeDay = exchangeDay,
+                isUseNotification = isUseNotification
+            )
+            Locale.ENGLISH.language -> EnglishReminderText(
+                notificationDay = notificationDay,
+                notificationTimeHour = notificationTimeHour,
+                notificationTimeMinute = notificationTimeMinute,
+                isUsingContactLens = isUsingContactLens,
+                lensRemainingDays = lensRemainingDays,
+                exchangeDay = exchangeDay,
+                isUseNotification = isUseNotification
+            )
+            else -> JapaneseReminderText(
+                notificationDay = notificationDay,
+                notificationTimeHour = notificationTimeHour,
+                notificationTimeMinute = notificationTimeMinute,
+                isUsingContactLens = isUsingContactLens,
+                lensRemainingDays = lensRemainingDays,
+                exchangeDay = exchangeDay,
+                isUseNotification = isUseNotification
+            )
+        }
+    }
+}
+
+@Composable
+fun JapaneseReminderText(
+    notificationDay: Int,
+    notificationTimeHour: Int,
+    notificationTimeMinute: Int,
+    isUsingContactLens: Boolean,
+    lensRemainingDays: Int,
+    exchangeDay: String,
+    isUseNotification: Boolean,
+    supportTextFontSize: TextUnit = 24.sp,
+    periodTextFontSize: TextUnit = 16.sp,
+    supportTextColor: Color = MaterialTheme.colors.onSurface,
+    color: Color = MaterialTheme.colors.primary,
+) {
+    Text(
+        textAlign = TextAlign.Center,
+        text = buildAnnotatedString {
+            withStyle(style = ParagraphStyle(lineHeight = 20.sp)) {
+                withStyle(
+                    style = SpanStyle(
+                        color = supportTextColor,
+                        fontSize = supportTextFontSize
+                    )
+                ) {
+                    append(stringResource(R.string.remain))
+                }
+                withStyle(
+                    style = SpanStyle(
+                        color = if (lensRemainingDays > 0 || !isUsingContactLens) color else Color.Red,
+                        fontSize = 40.sp
+                    )
+                ) {
+                    append(lensRemainingDays.toString())
+                }
+                withStyle(
+                    style = SpanStyle(
+                        color = supportTextColor,
+                        fontSize = supportTextFontSize
+                    )
+                ) {
+                    append(stringResource(id = R.string.day))
+                }
+                append(stringResource(id = R.string.new_line))
+                withStyle(
+                    style = SpanStyle(
+                        color = supportTextColor,
+                        fontSize = periodTextFontSize
+                    )
+                ) {
+                    append(stringResource(id = R.string.change_message))
+                    append(" ")
+                    append(exchangeDay)
+                }
+                if (isUseNotification) {
                     append(stringResource(id = R.string.new_line))
                     withStyle(
                         style = SpanStyle(
@@ -116,38 +172,110 @@ fun RemainingDaysBar(
                             fontSize = periodTextFontSize
                         )
                     ) {
-                        append(stringResource(id = R.string.change_message))
+                        append(stringResource(id = R.string.time_message))
                         append(" ")
-                        append(exchangeDay)
-                    }
-                    if (isUseNotification) {
-                        append(stringResource(id = R.string.new_line))
-                        withStyle(
-                            style = SpanStyle(
-                                color = supportTextColor,
-                                fontSize = periodTextFontSize
-                            )
-                        ) {
-                            append(stringResource(id = R.string.time_message))
-                            append(" ")
-                            append(
-                                if (notificationDay == 0)
-                                    stringResource(id = R.string.on_the_day)
-                                else
-                                    stringResource(id = R.string.before_day)
-                            )
-                            append(" ")
-                            append(
-                                "$notificationTimeHour:${
-                                if (notificationTimeMinute < 10)
-                                    "0$notificationTimeMinute"
-                                else notificationTimeMinute.toString()
-                                }"
-                            )
-                        }
+                        append(
+                            if (notificationDay == 0)
+                                stringResource(id = R.string.on_the_day)
+                            else
+                                stringResource(id = R.string.before_day)
+                        )
+                        append(" ")
+                        append(
+                            "$notificationTimeHour:${
+                            if (notificationTimeMinute < 10)
+                                "0$notificationTimeMinute"
+                            else notificationTimeMinute.toString()
+                            }"
+                        )
                     }
                 }
             }
-        )
-    }
+        }
+    )
+}
+
+@Composable
+fun EnglishReminderText(
+    notificationDay: Int,
+    notificationTimeHour: Int,
+    notificationTimeMinute: Int,
+    isUsingContactLens: Boolean,
+    lensRemainingDays: Int,
+    exchangeDay: String,
+    isUseNotification: Boolean,
+    supportTextFontSize: TextUnit = 24.sp,
+    periodTextFontSize: TextUnit = 16.sp,
+    supportTextColor: Color = MaterialTheme.colors.onSurface,
+    color: Color = MaterialTheme.colors.primary,
+) {
+    Text(
+        textAlign = TextAlign.Center,
+        text = buildAnnotatedString {
+            withStyle(style = ParagraphStyle(lineHeight = 20.sp)) {
+                withStyle(
+                    style = SpanStyle(
+                        color = if (lensRemainingDays > 0 || !isUsingContactLens) color else Color.Red,
+                        fontSize = 40.sp
+                    )
+                ) {
+                    append(lensRemainingDays.toString())
+                }
+                append(" ")
+                withStyle(
+                    style = SpanStyle(
+                        color = supportTextColor,
+                        fontSize = supportTextFontSize
+                    )
+                ) {
+                    append(stringResource(id = R.string.day))
+                }
+                append(" ")
+                withStyle(
+                    style = SpanStyle(
+                        color = supportTextColor,
+                        fontSize = supportTextFontSize
+                    )
+                ) {
+                    append(stringResource(R.string.remain))
+                }
+                append(stringResource(id = R.string.new_line))
+                withStyle(
+                    style = SpanStyle(
+                        color = supportTextColor,
+                        fontSize = periodTextFontSize
+                    )
+                ) {
+                    append(stringResource(id = R.string.change_message))
+                    append(" ")
+                    append(exchangeDay)
+                }
+                if (isUseNotification) {
+                    append(stringResource(id = R.string.new_line))
+                    withStyle(
+                        style = SpanStyle(
+                            color = supportTextColor,
+                            fontSize = periodTextFontSize
+                        )
+                    ) {
+                        append(stringResource(id = R.string.time_message))
+                        append(" ")
+                        append(
+                            "$notificationTimeHour:${
+                            if (notificationTimeMinute < 10)
+                                "0$notificationTimeMinute"
+                            else notificationTimeMinute.toString()
+                            }\n"
+                        )
+                        append(
+                            if (notificationDay == 0)
+                                stringResource(id = R.string.on_the_day_lower)
+                            else
+                                stringResource(id = R.string.before_day_lower)
+                        )
+                    }
+                }
+            }
+        }
+    )
 }

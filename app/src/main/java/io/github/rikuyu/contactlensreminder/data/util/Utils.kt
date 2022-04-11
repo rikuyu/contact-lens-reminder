@@ -11,7 +11,11 @@ fun getExpirationDate(lensPeriod: Int): String {
     calendar.add(Calendar.DATE, lensPeriod)
     val simpleDateFormat = SimpleDateFormat("MM/dd/E", Locale.getDefault())
     val (m, d, day) = simpleDateFormat.format(calendar.time).split("/")
-    return "${m.toInt()}/${d.toInt()} ($day)"
+    return when (Locale.getDefault().language) {
+        Locale.JAPANESE.language -> "${m.toInt()}/${d.toInt()} ($day)"
+        Locale.ENGLISH.language -> "$day ${m.toInt()}/${d.toInt()}"
+        else -> "${m.toInt()}/${d.toInt()} ($day)"
+    }
 }
 
 fun <T> createBroadcastPendingIntent(
