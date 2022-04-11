@@ -6,6 +6,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
+import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEventService
 import io.github.rikuyu.contactlensreminder.ui.appwidget.ImageTypeWidget
 import io.github.rikuyu.contactlensreminder.ui.appwidget.ProgressBarTypeWidget
 
@@ -23,6 +24,17 @@ class TickDownAlarmReceiver : BroadcastReceiver() {
                     tickDownAlarmManager.initAlarm()
                 }
                 updateAppWidget(it)
+            }
+
+            // 端末電源OFFにした時の対策
+            // 電源がONになったときにイベントを再登録する
+            // ※ 電源OFFの状態で日付をまたぐとバグる実装
+            if (Intent.ACTION_BOOT_COMPLETED == intent?.action) {
+                FirebaseLogEventService(sharedPreferencesManager).logEvent("RECEIVE_BOOT_COMPLETED_TICKDOWN")
+                if (remainingDay > 0) {
+                    tickDownAlarmManager.initAlarm()
+                    updateAppWidget(it)
+                }
             }
         }
     }
