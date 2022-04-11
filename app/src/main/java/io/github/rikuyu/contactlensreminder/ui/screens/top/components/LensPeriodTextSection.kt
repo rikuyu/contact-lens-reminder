@@ -15,7 +15,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.sp
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.ui.theme.ColorPalette
+import io.github.rikuyu.contactlensreminder.ui.util.theme.ColorPalette
 
 @Composable
 fun LensPeriodTextSection(

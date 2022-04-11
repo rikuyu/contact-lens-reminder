@@ -4,7 +4,7 @@ import io.github.rikuyu.contactlensreminder.domain.usecase.app_setting.AppSettin
 import io.github.rikuyu.contactlensreminder.domain.usecase.app_setting.GetThemeColor
 import io.github.rikuyu.contactlensreminder.domain.usecase.app_setting.LogEvent
 import io.github.rikuyu.contactlensreminder.domain.usecase.app_setting.SaveThemeColor
-import io.github.rikuyu.contactlensreminder.ui.theme.ThemeColor
+import io.github.rikuyu.contactlensreminder.ui.util.theme.ThemeColor
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK

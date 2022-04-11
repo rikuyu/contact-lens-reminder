@@ -18,7 +18,7 @@ import androidx.navigation.NavController
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.LensSettingEvent
 import io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.LensSettingViewModel
-import io.github.rikuyu.contactlensreminder.ui.theme.ThemeColor
+import io.github.rikuyu.contactlensreminder.ui.util.theme.ThemeColor
 import io.github.rikuyu.contactlensreminder.ui.util.Routes
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer

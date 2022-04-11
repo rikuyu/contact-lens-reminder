@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.ui.theme.ColorPalette
+import io.github.rikuyu.contactlensreminder.ui.util.theme.ColorPalette
 import java.util.*
 
 @Composable

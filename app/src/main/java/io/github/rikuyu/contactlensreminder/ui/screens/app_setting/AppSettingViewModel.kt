@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.rikuyu.contactlensreminder.domain.usecase.app_setting.AppSettingUseCase
-import io.github.rikuyu.contactlensreminder.ui.theme.ThemeColor
+import io.github.rikuyu.contactlensreminder.ui.util.theme.ThemeColor
 import javax.inject.Inject
 
 @HiltViewModel

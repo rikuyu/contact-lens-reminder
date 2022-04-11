@@ -23,7 +23,7 @@ import com.vanpra.composematerialdialogs.datetime.time.TimePickerDefaults
 import com.vanpra.composematerialdialogs.datetime.time.timepicker
 import com.vanpra.composematerialdialogs.rememberMaterialDialogState
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.ui.theme.ThemeColor
+import io.github.rikuyu.contactlensreminder.ui.util.theme.ThemeColor
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 import java.time.LocalTime
 

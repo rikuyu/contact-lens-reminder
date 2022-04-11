@@ -72,6 +72,7 @@
     <string name="notification_on_the_day_title">Lens Exchange Date</string>
     <string name="notification_before_day_title">Tomorrow is lens exchange day.</string>
     <string name="notification_content">Protect your eye health by using contact lenses properly.</string>
+    <string name="notification_setting_label">Lenses Exchange Notification</string>
 
     <!-- レンズ交換確認ダイアログ -->
     <string name="reminder_cancel_dialog_title">Do you really want to exchange the lenses?</string>

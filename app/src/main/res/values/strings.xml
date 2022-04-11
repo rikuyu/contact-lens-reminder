@@ -72,6 +72,7 @@
     <string name="notification_on_the_day_title">レンズ交換日</string>
     <string name="notification_before_day_title">明日はレンズ交換日</string>
     <string name="notification_content">コンタクトレンズを正しく使用して目の健康を守りましょう！</string>
+    <string name="notification_setting_label">レンズ交換通知</string>
 
     <!-- レンズ交換確認ダイアログ -->
     <string name="reminder_cancel_dialog_title">本当にレンズを交換しますか？</string>
