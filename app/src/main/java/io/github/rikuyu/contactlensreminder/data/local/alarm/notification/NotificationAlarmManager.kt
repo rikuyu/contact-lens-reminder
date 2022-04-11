@@ -22,7 +22,7 @@ class NotificationAlarmManager @Inject constructor(
             timeInMillis = System.currentTimeMillis()
             add(
                 Calendar.DAY_OF_MONTH,
-                -10
+                sharedPreferencesManager.getContactLensRemainingDays() - sharedPreferencesManager.getNotificationDay()
             )
             add(Calendar.HOUR, sharedPreferencesManager.getNotificationTimeHour() - hour)
             add(Calendar.MINUTE, sharedPreferencesManager.getNotificationTimeMinute() - min)
