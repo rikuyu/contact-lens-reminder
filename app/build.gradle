@@ -8,11 +8,18 @@ plugins {
 apply plugin: "com.android.application"
 apply plugin: "com.google.gms.google-services"
 
-def getGoogleFormId() {
+def getGoogleFormIdJa() {
     def propFile = project.rootProject.file('local.properties')
     def properties = new Properties()
     properties.load(propFile.newDataInputStream())
-    return properties['GOOGLE_FORM_ID']
+    return properties['GOOGLE_FORM_ID_JA']
+}
+
+def getGoogleFormIdEn() {
+    def propFile = project.rootProject.file('local.properties')
+    def properties = new Properties()
+    properties.load(propFile.newDataInputStream())
+    return properties['GOOGLE_FORM_ID_EN']
 }
 
 android {
@@ -30,7 +37,8 @@ android {
             useSupportLibrary true
         }
 
-        buildConfigField("String", 'GOOGLE_FORM_ID', getGoogleFormId())
+        buildConfigField("String", 'GOOGLE_FORM_ID_JA', getGoogleFormIdJa())
+        buildConfigField("String", 'GOOGLE_FORM_ID_EN', getGoogleFormIdEn())
     }
 
     buildTypes {
@@ -90,7 +98,7 @@ dependencies {
     testImplementation "io.mockk:mockk:1.12.2"
     testImplementation "io.mockk:mockk-agent-jvm:1.12.2"
 
-    implementation "androidx.navigation:navigation-compose:2.4.1"
+    implementation "androidx.navigation:navigation-compose:2.4.2"
 
     implementation "io.github.vanpra.compose-material-dialogs:datetime:0.7.0"
     implementation "com.chargemap.compose:numberpicker:0.0.11"

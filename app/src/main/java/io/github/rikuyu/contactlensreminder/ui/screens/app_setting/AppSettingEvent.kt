@@ -1,6 +1,6 @@
 package io.github.rikuyu.contactlensreminder.ui.screens.app_setting
 
-import io.github.rikuyu.contactlensreminder.ui.theme.ThemeColor
+import io.github.rikuyu.contactlensreminder.ui.util.theme.ThemeColor
 
 sealed class AppSettingEvent {
     data class LogEvent(val label: String) : AppSettingEvent()

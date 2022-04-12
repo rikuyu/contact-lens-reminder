@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.sp
 import com.chargemap.compose.numberpicker.NumberPicker
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
+import java.util.*
 
 @Composable
 fun OtherTypeLensPeriodSection(
@@ -61,7 +62,17 @@ fun OtherTypeLensPeriodSection(
                             fontSize = 20.sp
                         )
                         Text(
-                            text = stringResource(id = R.string.lens_period),
+                            text = when (Locale.getDefault().language) {
+                                Locale.JAPANESE.language -> stringResource(id = R.string.lens_period)
+                                Locale.ENGLISH.language -> {
+                                    if (period == 1) {
+                                        stringResource(id = R.string.lens_period)
+                                    } else {
+                                        "days"
+                                    }
+                                }
+                                else -> stringResource(id = R.string.lens_period)
+                            },
                             color = textColor,
                             fontSize = fontSize,
                             modifier = Modifier.padding(start = 4.dp)

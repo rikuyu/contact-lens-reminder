@@ -1,4 +1,4 @@
-package io.github.rikuyu.contactlensreminder.ui.theme
+package io.github.rikuyu.contactlensreminder.ui.util.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -1,4 +1,4 @@
-package io.github.rikuyu.contactlensreminder.ui.theme
+package io.github.rikuyu.contactlensreminder.ui.util.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*

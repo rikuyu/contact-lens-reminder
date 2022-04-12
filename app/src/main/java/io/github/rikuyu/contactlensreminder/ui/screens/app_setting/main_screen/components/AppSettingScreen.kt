@@ -30,8 +30,8 @@ import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingEvent
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingItem
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingViewModel
-import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.color_theme.ColorPickerDialog
-import io.github.rikuyu.contactlensreminder.ui.theme.ThemeColor
+import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.color_theme.component.ColorPickerDialog
+import io.github.rikuyu.contactlensreminder.ui.util.theme.ThemeColor
 import io.github.rikuyu.contactlensreminder.ui.util.Routes
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
@@ -174,11 +174,11 @@ fun AppSettingScreen(
                 stateColor = themeColor,
                 executeAppReview = executeAppReview,
                 dialogState = dialogState,
+                saveThemeColor = { viewModel.onEvent(AppSettingEvent.LogEvent(it.name)) },
                 changeDialogState = { dialogState = it },
             ) {
                 changeThemeColor(it)
                 viewModel.onEvent(AppSettingEvent.SaveThemeColor(it))
-                viewModel.onEvent(AppSettingEvent.LogEvent(it.name))
             }
         }
     }

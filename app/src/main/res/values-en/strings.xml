@@ -1,0 +1,183 @@
+<resources>
+    <string name="app_name">Contact Lens</string>
+
+    <!-- In-App-Update -->
+    <string name="update_dialog_title">Latest Version</string>
+    <string name="update_dialog_message">Please update to the latest version to continue using this application, .</string>
+    <string name="update_dialog_positive_button_label">Update</string>
+    <string name="update_immediate_success">immediate_update_success</string>
+    <string name="update_unknown">UpdateAvailability.UNKNOWN</string>
+    <string name="update_not_available">UpdateAvailability.UPDATE_NOT_AVAILABLE</string>
+    <string name="update_available">UpdateAvailability.UPDATE_AVAILABLE</string>
+    <string name="update_triggered_in_progress">UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS</string>
+
+    <!-- In-App-Review -->
+    <string name="review_request_not_complete">requestReviewFlow().addOnCompleteListener task is NOT isSuccessful</string>
+    <string name="review_launch_complete">launchReviewFlow(a, r).addOnCompleteListener</string>
+    <string name="review_launch_failure">launchReviewFlow(a, r).addOnFailureListener</string>
+
+    <!-- SCHEDULE_EXACT_ALARM -->
+    <string name="exact_alarm_dialog_title">Request to change settings</string>
+    <string name="exact_alarm_dialog_message">To use this application, please allow "Alarms and Reminders" from the Settings screen (please turn the setting ON)</string>
+    <string name="exact_alarm_dialog_positive_button_label">Open Settings</string>
+    <string name="exact_alarm_dialog_event_label">alarmManager.canScheduleExactAlarms() == %s</string>
+
+    <!-- TopScreen -->
+    <string name="remain">left</string>
+    <string name="day">days</string>
+    <string name="change_message">Exchange Date</string>
+    <string name="time_message">Notification Time</string>
+    <string name="start">Start</string>
+    <string name="lens_change">Exchange Lens</string>
+    <string name="lens_setting">Setting Lens</string>
+    <string name="new_line">\n\n</string>
+    <string name="time_div">:</string>
+    <string name="alert_toast_message">Settings cannot be changed while the lens is in use</string>
+    <string name="one_day_text">Day Lens</string>
+    <string name="days_text">Days Lens</string>
+    <string name="two_weeks_day_text">2Weeks Lens</string>
+    <string name="one_month_text">1Month Lens</string>
+
+    <!-- LensSettingScreen -->
+    <string name="lens_setting_screen_title">Contact Lens Settings</string>
+    <string name="notification">Notification</string>
+    <string name="notification_day_title">Date</string>
+    <string name="before_day">The day before</string>
+    <string name="before_day_lower">the day before</string>
+    <string name="on_the_day">On the day</string>
+    <string name="on_the_day_lower">on the day</string>
+    <string name="notification_time">Time</string>
+    <string name="lens_power">Lenses Power</string>
+    <string name="left">L</string>
+    <string name="right">R</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="lens_period">day</string>
+    <string name="period">Period</string>
+    <string name="two_weeks">2Weeks</string>
+    <string name="one_month">1Month</string>
+    <string name="other">Other</string>
+    <string name="alert_lens_setting">Previous day notification is not available when 1-day lens is set.</string>
+
+    <!-- AppSettingScreen -->
+    <string name="app_setting_screen_title">About this app</string>
+    <string name="terms_of_service">Terms of service</string>
+    <string name="help">Help (How to use)</string>
+    <string name="notification_setting">Notification Setting</string>
+    <string name="inquiry">Contact Us</string>
+    <string name="color_theme">Change theme color</string>
+    <string name="version">version %s</string>
+
+    <!-- Notification -->
+    <string name="notification_on_the_day_title">Lens Exchange Date</string>
+    <string name="notification_before_day_title">Tomorrow is lens exchange day.</string>
+    <string name="notification_content">Protect your eye health by using contact lenses properly.</string>
+    <string name="notification_setting_label">Lenses Exchange Notification</string>
+
+    <!-- レンズ交換確認ダイアログ -->
+    <string name="reminder_cancel_dialog_title">Do you really want to exchange the lenses?</string>
+    <string name="reminder_cancel_dialog_content">Reminder will be canceled</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_ok">OK</string>
+
+    <!-- カラーテーマ変更ダイアログ -->
+    <string name="color_theme_dialog_title">Change theme color</string>
+
+    <!-- ヘルプ（使い方） -->
+    <string name="help_1_page">STEP 1</string>
+    <string name="help_2_page">STEP 2</string>
+    <string name="help_3_page">STEP 3</string>
+    <string name="other_page">Other</string>
+    <string name="step_1_1">About Lens and Notification Settings</string>
+    <string name="step_1_2">To begin, set up your contact lenses and notifications by pressing the "Lens Settings" button (red frame).\n If you press "Start" without these settings, the settings for 2-Week lenses (no notifications) will be applied.</string>
+    <string name="step_1_3">Lens and notification settings screen</string>
+    <string name="step_1_4">On this screen, you can set the "contact lens type," "period of use," "notification date," "notification time," and "contact lens power.</string>
+    <string name="step_2_1">Types of Contact Lenses</string>
+    <string name="step_2_2">You can choose from "2-week" and "1-month" contact lenses. In addition, you can also specify the length of time you would like to use the lenses between 1 and 31 days.</string>
+    <string name="step_2_3">Notification Settings</string>
+    <string name="step_2_4">he notification date can be selected as either the day of the event or the day before. The notification time can be set in 1-minute increments.</string>
+    <string name="step_2_5">Lens power setting</string>
+    <string name="step_2_6">Contact lens power can range from -8.0 to -3.0.</string>
+    <string name="step_2_7">How to save settings</string>
+    <string name="step_2_8">Click the OK button to save the settings so far.</string>
+    <string name="step_3_1">How to set up a reminder</string>
+    <string name="step_3_2">To start the reminder, press the "Start" button (red frame).</string>
+    <string name="step_3_3">After reminder start</string>
+    <string name="step_3_4">Once the reminder is started, the "Start" button becomes the "Change Lens" button. Also, once you start the reminder, you will not be able to change the settings until you exchange the lenses.</string>
+    <string name="step_3_5">The number of days remaining is updated daily at midnight.</string>
+    <string name="step_3_6">If the number of days remaining is not updated, please set the lens again with the desired number of days and start the reminder again.</string>
+    <string name="step_3_7">For other application features and notes (important), please see Other.</string>
+    <string name="step_4_1">About Help</string>
+    <string name="step_4_2">Click the "Help" button (red frame) from the top screen to view the help screen.</string>
+    <string name="step_4_3">About this app screen</string>
+    <string name="step_4_4">On this screen, you can refer to "Terms of Use," "Help (How to use)," "Notification Settings," "Contact Us," "Version," and "Change Theme Color".</string>
+    <string name="step_4_5">About light/dark mode</string>
+    <string name="step_4_6">This application can be used in different light/dark modes by pressing the icon in the upper left corner of the top screen.</string>
+    <string name="step_4_7">About changing the theme color</string>
+    <string name="step_4_8">You can change the theme color in the dialog that appears when you click "Change Theme Color" on the Help screen.</string>
+    <string name="step_4_9">About the App Widget</string>
+    <string name="step_4_10">App Widgets are available in "image type" and "progress bar type". The image type displays the number of days remaining for contact lenses. The progress bar type displays a progress bar showing the number of days remaining and the date when the lenses will be exchanged.</string>
+    <string name="step_4_11">[ Precautions ]</string>
+    <string name="step_4_12">1. After updating the application, please recreate the app widget.</string>
+    <string name="step_4_13">2. If the message "Cannot load widget" appears when placing the app widget on the home screen, please uninstall the application and try again.</string>
+    <string name="step_4_14">If the above problems persist, please contact us.</string>
+
+    <!-- お問い合わせ -->
+    <string name="network_error_message_1">Connect to the network</string>
+    <string name="network_error_message_2">To contact us</string>
+
+    <!-- 利用規約 -->
+    <string name="title_1">1. Contents of this Application</string>
+    <string name="content_1">This application means this smartphone application currently in use (the "Application").</string>
+    <string name="title_2">2. Acceptance of Terms and Conditions</string>
+    <string name="content_2">Customers shall use the Application upon agreeing to these Terms of Use.</string>
+    <string name="title_3">3. Vesting of rights, etc.</string>
+    <string name="content_3_1">1．All copyrights and other rights related to this application belong to the developer of this application (hereinafter referred to as the "Developer") or the right holder who is licensed by the Developer.</string>
+    <string name="content_3_2">2．You may use the Application only for the purpose designated by the Developer. Upon request from the developer of the application, the customer shall promptly cease use of the application or delete the application from the smartphone of customer.</string>
+    <string name="content_3_3">3．You shall not reproduce, duplicate, transfer, modify, or reverse engineer the information downloaded to your smartphone through the Application or the Service, and you shall not allow any third party to perform such acts.</string>
+    <string name="title_4">4. 　Suspension, change, etc. of the provision of this app</string>
+    <string name="content_4">The developer may suspend or terminate the provision of this application, change the contents of this service, or modify this application at any time without the notice to the customer.</string>
+    <string name="title_5">5. Disclaimer, etc.</string>
+    <string name="content_5_1">1．Defects in this application, defects related to the operation of this application (including errors and deviations in the displayed information) The developer shall not be liable for any disadvantage, disadvantage of data loss, or any other disadvantage incurred by the customer due to the impact of this application on the smartphone, or the inability of the customers to use this application normally.</string>
+    <string name="content_5_2">2．In addition to the preceding paragraph, the Developer shall not be liable for the unavailability of this application in any of the following cases, or for any damages resulting from such unavailability</string>
+    <string name="content_5_2_1">（1）In the case of unavoidable circumstances such as natural disasters, measures taken by courts of law or other public authorities, etc.</string>
+    <string name="content_5_2_2">（2）In the case of a communication line or system failure despite the reasonable security measures</string>
+    <string name="content_5_2_3">（3）In the case of fingerprint authentication, passcode authentication, etc. were illegally executed.</string>
+    <string name="content_5_2_4">（4）If the reason is attributable to a third party other than the Developer</string>
+    <string name="content_5_3">3．When you upload, download, or otherwise transfer information using this Application, you agree to allow us to transfer such information by electromagnetic means.</string>
+    <string name="title_6">6. Improvement of the environment for use, etc.</string>
+    <string name="content_6_1">1．The customer shall use this application (including the downloading of this application). The customer shall prepare, at the responsibility of customer and expense, the telecommunications equipment, software, telecommunications lines, and other environment necessary for the use of the Application (including the downloading of the Application).</string>
+    <string name="content_6_2">2．Use of this application (including downloading of this application) The customer shall be responsible for communication charges incurred in connection with the use of this application (including downloading of this application).</string>
+    <string name="content_6_3">3．Customers shall maintain appropriate information security, including the prevention of computer virus infection, unauthorized access, and information leakage, in accordance with their own usage environment, by referring to the information provided by the Developer.</string>
+    <string name="content_6_4">4．When disposing of the smartphone on which this application is installed or otherwise terminating the use of this application, the customer shall be sure to delete this application.</string>
+    <string name="title_7">7. Mutatis mutandis application of the Code</string>
+    <string name="content_7">With respect to this application, matters not set forth in these Terms and Conditions shall be governed by the other terms of developer and conditions.</string>
+    <string name="title_8">8. Change of Terms of Service</string>
+    <string name="content_8_1">1．Each provision and other conditions of this Agreement shall be subject to change in accordance with the provisions of Article 548–4 of the Civil Code (Japanese law) when there are deemed to be reasonable grounds, such as changes in financial or other circumstances.</string>
+    <string name="content_8_2">2．Any change in the preceding paragraph shall be made known to the public by publicly announcing the change, the content of the revised provisions, and the effective date of the change via the Internet or other appropriate means.</string>
+    <string name="content_8_3">3．The changes in the preceding two paragraphs shall apply from the effective date specified at the time of publication, and a reasonable period of time shall be allowed between the date of publication and the effective date, depending on the content of the changes.</string>
+    <string name="title_that_all">that is all</string>
+
+    <!-- AppWidget -->
+    <string name="app_widget_progress_bar">Progress Bar Type</string>
+    <string name="app_widget_image">Number Type</string>
+    <string name="text_remaining_day_before">left</string>
+    <string name="text_remaining_day_after">day</string>
+    <string name="text_preview_remaining_day">14 days left</string>
+    <string name="text_preview_exchange_date">12/10 (Wed)</string>
+    <string name="no_image_description">no image</string>
+
+    <!-- OnBoarding -->
+    <string name="label_version_up">アップデート情報 Ver %s</string>
+    <string name="title_launch_app_widget">新機能 アプリウィジェット</string>
+    <string name="description_1_launch_app__widget">Ver 2.0.0 からアプリウィジェットが使えるようになりました。</string>
+    <string name="description_2_launch_app__widget">アプリウィジェットには「画像タイプ」「プログレスバータイプ」の2種類があります。</string>
+    <string name="description_3_launch_app__widget">画像タイプ…コンタクトレンズの残り使用可能日数を表示</string>
+    <string name="description_4_launch_app__widget">プログレスバータイプ…残り使用可能日数を表すプログレスバーとレンズ交換日を表示</string>
+    <string name="title_abolish_app_icon_change">アプリアイコン変更機能の廃止</string>
+    <string name="description_1_abolish_app_icon_change">本アプリの使いやすさを考えて、Ver 2.0.0 からこれまで利用可能だったアプリアイコン変更機能を廃止させていただきました。</string>
+    <string name="description_2_abolish_app_icon_change">この機能の代わりにアプリウィジェット機能をお使いください。</string>
+    <string name="description_3_abolish_app_icon_change">今後とも本アプリをよろしくお願いいたします。</string>
+    <string name="btn_start">Start</string>
+
+</resources>

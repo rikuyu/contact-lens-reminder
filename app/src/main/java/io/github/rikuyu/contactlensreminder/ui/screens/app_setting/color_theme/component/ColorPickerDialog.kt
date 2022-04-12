@@ -1,4 +1,4 @@
-package io.github.rikuyu.contactlensreminder.ui.screens.app_setting.color_theme
+package io.github.rikuyu.contactlensreminder.ui.screens.app_setting.color_theme.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.ui.theme.ThemeColor
+import io.github.rikuyu.contactlensreminder.ui.util.theme.ThemeColor
 
 @Composable
 fun ColorPickerDialog(
@@ -29,6 +29,7 @@ fun ColorPickerDialog(
     executeAppReview: () -> Unit,
     dialogState: Boolean,
     changeDialogState: (Boolean) -> Unit,
+    saveThemeColor: (ThemeColor) -> Unit,
     changeThemeColor: (ThemeColor) -> Unit,
 ) {
     if (dialogState) {
@@ -99,6 +100,7 @@ fun ColorPickerDialog(
                     TextButton(
                         onClick = {
                             changeDialogState(false)
+                            saveThemeColor(stateColor)
                             executeAppReview()
                         }
                     ) {

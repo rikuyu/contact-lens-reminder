@@ -10,28 +10,31 @@ import javax.inject.Inject
 
 class NotificationAlarmManager @Inject constructor(
     private val context: Context,
-    private val sharedPreferencesManager: SharedPreferencesManager
+    private val sharedPreferencesManager: SharedPreferencesManager,
 ) {
     private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
     fun initAlarm() {
         val calendar = Calendar.getInstance()
-        val simpleDateFormat = SimpleDateFormat("HH/mm/ss", Locale.ENGLISH)
+        val simpleDateFormat = SimpleDateFormat("HH/mm/ss", Locale.getDefault())
         val (hour, min, sec) = simpleDateFormat.format(calendar.time).split("/").map(String::toInt)
         calendar.apply {
             timeInMillis = System.currentTimeMillis()
             add(
                 Calendar.DAY_OF_MONTH,
-                sharedPreferencesManager.getContactLensPeriod() - sharedPreferencesManager.getNotificationDay()
+                sharedPreferencesManager.getContactLensRemainingDays() - sharedPreferencesManager.getNotificationDay()
             )
             add(Calendar.HOUR, sharedPreferencesManager.getNotificationTimeHour() - hour)
             add(Calendar.MINUTE, sharedPreferencesManager.getNotificationTimeMinute() - min)
             add(Calendar.SECOND, -sec)
         }
-        alarmManager.setExactAndAllowWhileIdle(
-            AlarmManager.RTC_WAKEUP,
-            calendar.timeInMillis,
-            createBroadcastPendingIntent(context, NotificationAlarmReceiver::class.java, REQUEST_CODE)
+        alarmManager.setAlarmClock(
+            AlarmManager.AlarmClockInfo(calendar.timeInMillis, null),
+            createBroadcastPendingIntent(
+                context,
+                NotificationAlarmReceiver::class.java,
+                REQUEST_CODE
+            )
         )
     }
 

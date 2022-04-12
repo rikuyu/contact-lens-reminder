@@ -37,14 +37,15 @@ class NotificationAlarmManagerTest {
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
 
         notificationAlarmManager.initAlarm()
+        val expectedNotificationTime = getNotificationTime()
+
         val scheduledAlarm = shadowAlarmManager.nextScheduledAlarm
         assertThat(scheduledAlarm).isNotNull()
 
         val actualScheduledTime = scheduledAlarm.triggerAtTime
-        val expectedNotificationTime = getNotificationTime()
 
-        val before = expectedNotificationTime - 100L
-        val after = expectedNotificationTime + 100L
+        val before = expectedNotificationTime - 5000L
+        val after = expectedNotificationTime + 5000L
 
         assertThat(actualScheduledTime).isGreaterThan(before)
         assertThat(actualScheduledTime).isLessThan(after)
@@ -60,7 +61,7 @@ class NotificationAlarmManagerTest {
 
     private fun getNotificationTime(): Long {
         val calendar = Calendar.getInstance()
-        val simpleDateFormat = SimpleDateFormat("HH/mm/ss", Locale.ENGLISH)
+        val simpleDateFormat = SimpleDateFormat("HH/mm/ss", Locale.getDefault())
         val (hour, min, sec) = simpleDateFormat.format(calendar.time).split("/").map(String::toInt)
         calendar.apply {
             timeInMillis = System.currentTimeMillis()

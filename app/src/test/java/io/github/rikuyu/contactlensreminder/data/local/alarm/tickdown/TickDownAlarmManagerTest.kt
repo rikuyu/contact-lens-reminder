@@ -37,19 +37,19 @@ class TickDownAlarmManagerTest {
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
 
         tickDownAlarmManager.initAlarm()
+        val dateChangeTime = getDateChangeTime()
 
         val scheduledAlarm = shadowAlarmManager.nextScheduledAlarm
         assertThat(scheduledAlarm).isNotNull()
 
         val actualScheduledTime = scheduledAlarm.triggerAtTime
-        val dateChangeTime = getDateChangeTime()
 
         // initAlarm() 内で取得した Calendar#getTtimeInMillis()
         // と等しい 秒数を取得するのは無理なので
         // before < actualScheduledTime < after と
         // になっていれば指定時刻に通知がスケジュールされたとする。
-        val before = dateChangeTime - 100L
-        val after = dateChangeTime + 100L
+        val before = dateChangeTime - 5000L
+        val after = dateChangeTime + 5000L
 
         assertThat(actualScheduledTime).isGreaterThan(before)
         assertThat(actualScheduledTime).isLessThan(after)
@@ -65,7 +65,7 @@ class TickDownAlarmManagerTest {
 
     private fun getDateChangeTime(): Long {
         val calendar = Calendar.getInstance()
-        val simpleDateFormat = SimpleDateFormat("HH/mm/ss", Locale.ENGLISH)
+        val simpleDateFormat = SimpleDateFormat("HH/mm/ss", Locale.getDefault())
         val (hour, min, sec) = simpleDateFormat.format(calendar.time).split("/").map(String::toInt)
         calendar.apply {
             timeInMillis = System.currentTimeMillis()
