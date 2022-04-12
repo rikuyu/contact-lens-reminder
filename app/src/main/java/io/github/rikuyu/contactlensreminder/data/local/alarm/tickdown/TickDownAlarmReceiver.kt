@@ -17,23 +17,26 @@ class TickDownAlarmReceiver : BroadcastReceiver() {
             val sharedPreferencesManager = SharedPreferencesManager(it)
             val tickDownAlarmManager = TickDownAlarmManager(it)
             val remainingDay = sharedPreferencesManager.getContactLensRemainingDays()
-            if (remainingDay > 0) {
-                val after = remainingDay - 1
-                sharedPreferencesManager.saveContactLensRemainingDays(after)
-                if (after > 0) {
-                    tickDownAlarmManager.initAlarm()
-                }
-                updateAppWidget(it)
-            }
 
             // 端末電源OFFにした時の対策
             // 電源がONになったときにイベントを再登録する
-            // ※ 電源OFFの状態で日付をまたぐとバグる実装
-            if (Intent.ACTION_BOOT_COMPLETED == intent?.action) {
+            if (intent?.action == Intent.ACTION_BOOT_COMPLETED) {
                 FirebaseLogEventService(sharedPreferencesManager).logEvent("RECEIVE_BOOT_COMPLETED_TICKDOWN")
+                // ※ 電源OFFの状態で日付をまたぐとバグる実装
                 if (remainingDay > 0) {
                     tickDownAlarmManager.initAlarm()
                     updateAppWidget(it)
+                }
+            } else {
+                if (remainingDay > 0) {
+                    val after = remainingDay - 1
+                    sharedPreferencesManager.saveContactLensRemainingDays(after)
+                    if (after > 0) {
+                        tickDownAlarmManager.initAlarm()
+                    }
+                    updateAppWidget(it)
+                } else {
+                    // NOP
                 }
             }
         }
