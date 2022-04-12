@@ -29,8 +29,8 @@ android {
         applicationId "io.github.rikuyu.contactlensreminder"
         minSdk 26
         targetSdk 31
-        versionCode 9
-        versionName "2.2.1"
+        versionCode 10
+        versionName "2.3.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
