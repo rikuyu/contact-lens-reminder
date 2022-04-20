@@ -82,10 +82,10 @@ fun HandleReminderButton(
                     tint = Color.White,
                     modifier = Modifier
                         .size(30.dp, 30.dp)
-                        .rotate(rotateAnimation)
+                        .rotate(if (lensRemainingDays == 0) rotateAnimation else 0f)
                         .scale(if (lensRemainingDays == 0) scaleAnimation else 1.0f)
                 )
-                Spacer(modifier = Modifier.width(20.dp))
+                Spacer(modifier = Modifier.width(16.dp))
                 Text(
                     text = stringResource(id = R.string.lens_change),
                     fontSize = 20.sp
