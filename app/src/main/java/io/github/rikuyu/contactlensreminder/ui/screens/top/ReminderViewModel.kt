@@ -38,7 +38,7 @@ class ReminderViewModel @Inject constructor(
                 usecase.saveReminderSetting(reminder.value)
                 usecase.startReminder()
             }
-            is ReminderEvent.CancelReminder -> {
+            is ReminderEvent.ResetReminder -> {
                 _reminder.value = reminder.value.copy(
                     isUsingContactLens = event.data.isUsingContactLens,
                     lensRemainingDays = event.data.lensPeriod

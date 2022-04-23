@@ -12,11 +12,11 @@ import androidx.compose.ui.unit.dp
 import io.github.rikuyu.contactlensreminder.R
 
 @Composable
-fun CancelReminderDialog(
+fun ResetReminderDialog(
     dialogState: Boolean,
     color: Color = MaterialTheme.colors.primary,
     changeDialogState: (Boolean) -> Unit,
-    cancelReminder: (Boolean) -> Unit,
+    resetReminder: (Boolean) -> Unit,
 ) {
     if (dialogState) {
         AlertDialog(
@@ -31,7 +31,7 @@ fun CancelReminderDialog(
             confirmButton = {
                 TextButton(
                     onClick = {
-                        cancelReminder(false)
+                        resetReminder(false)
                         changeDialogState(false)
                     }
                 ) {

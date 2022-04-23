@@ -229,12 +229,23 @@ class SharedPreferencesManager @Inject constructor(private val context: Context)
 
     // Theme Color
     fun getThemeColor(): String {
-        return getSharedPreferences().getString(SharedPreferencesKey.STORED_IS_THEME_COLOR, "blue")
-            ?: "blue"
+        return getSharedPreferences()
+            .getString(SharedPreferencesKey.STORED_IS_THEME_COLOR, "blue") ?: "blue"
     }
 
     fun saveThemeColor(color: String) {
         getSharedPreferences().edit()
             .putString(SharedPreferencesKey.STORED_IS_THEME_COLOR, color).apply()
+    }
+
+    // 通知が鳴ったか（再起動時の再予約に使用）
+    fun getIsExecuteNotification(): Boolean {
+        return getSharedPreferences()
+            .getBoolean(SharedPreferencesKey.STORED_IS_EXECUTE_NOTIFICATION, false)
+    }
+
+    fun saveIsExecuteNotification(isExecuteNotification: Boolean) {
+        getSharedPreferences().edit()
+            .putBoolean(SharedPreferencesKey.STORED_IS_EXECUTE_NOTIFICATION, isExecuteNotification).apply()
     }
 }

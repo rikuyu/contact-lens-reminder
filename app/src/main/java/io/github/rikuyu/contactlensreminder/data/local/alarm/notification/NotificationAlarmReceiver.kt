@@ -17,7 +17,8 @@ class NotificationAlarmReceiver : BroadcastReceiver() {
             // 電源がONになったときにイベントを再登録する
             if (isUsingContactLens) {
                 if (intent?.action == Intent.ACTION_BOOT_COMPLETED) {
-                    FirebaseLogEventService(SharedPreferencesManager(it)).logEvent("RECEIVE_BOOT_COMPLETED_NOTIFICATION")
+                    FirebaseLogEventService(SharedPreferencesManager(it))
+                        .logEvent("RECEIVE_BOOT_COMPLETED_NOTIFICATION")
                     // ※ 電源OFFの状態で日付をまたぐとバグる実装
                     NotificationAlarmManager(it, sharedPreferencesManager).initAlarm()
                 } else {
