@@ -46,7 +46,7 @@ class ProgressBarTypeWidget : AppWidgetProvider() {
         val sharedPreferencesManager = SharedPreferencesManager(context)
         val remainingDay = sharedPreferencesManager.getContactLensRemainingDays()
         val lensPeriod = sharedPreferencesManager.getContactLensPeriod()
-        val exchangeDate = sharedPreferencesManager.getLensExchangeDay() ?: getExpirationDate(lensPeriod)
+        val exchangeDate = sharedPreferencesManager.getLensExchangeDate() ?: getExpirationDate(lensPeriod)
         val isUsingContactLens = sharedPreferencesManager.getIsUsingContactLens()
         val pendingIntent: PendingIntent = PendingIntent.getActivity(
             context,

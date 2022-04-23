@@ -25,7 +25,7 @@ class LocalDataSource @Inject constructor(
             saveNotificationTimeHour(reminderValue.notificationTimeHour)
             saveNotificationTimeMinute(reminderValue.notificationTimeMinute)
             saveIsUsingContactLens(reminderValue.isUsingContactLens)
-            saveLensExchangeDay(getExpirationDate(reminderValue.lensPeriod))
+            saveLensExchangeDate(getExpirationDate(reminderValue.lensPeriod))
         }
     }
 
@@ -46,7 +46,7 @@ class LocalDataSource @Inject constructor(
             val lensRemainingDays = getContactLensRemainingDays()
             val isUsingContactLens = getIsUsingContactLens()
             val isUseNotification = getIsUseNotification()
-            val exchangeDay = getLensExchangeDay() ?: getExpirationDate(lensPeriod)
+            val exchangeDay = getLensExchangeDate() ?: getExpirationDate(lensPeriod)
 
             return ReminderValue(
                 lensPeriod = lensPeriod,
@@ -82,7 +82,7 @@ class LocalDataSource @Inject constructor(
             saveLeftContactLensPower(lensSettingValue.leftLensPower)
             saveRightContactLensPower(lensSettingValue.rightLensPower)
             saveContactLensRemainingDays(remainingRay)
-            saveLensExchangeDay(getExpirationDate(remainingRay))
+            saveLensExchangeDate(getExpirationDate(remainingRay))
 
             if (getIsFirstUse()) {
                 saveIsFirstUse()

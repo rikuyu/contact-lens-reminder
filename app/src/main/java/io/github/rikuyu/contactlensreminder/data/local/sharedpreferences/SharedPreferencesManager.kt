@@ -163,14 +163,14 @@ class SharedPreferencesManager @Inject constructor(private val context: Context)
     }
 
     // レンズ交換日
-    fun getLensExchangeDay(): String? {
+    fun getLensExchangeDate(): String? {
         return getSharedPreferences().getString(
             SharedPreferencesKey.STORED_CONTACT_LENS_EXCHANGE_DAY,
             null
         )
     }
 
-    fun saveLensExchangeDay(exchangeDay: String) {
+    fun saveLensExchangeDate(exchangeDay: String) {
         getSharedPreferences().edit()
             .putString(SharedPreferencesKey.STORED_CONTACT_LENS_EXCHANGE_DAY, exchangeDay).apply()
     }

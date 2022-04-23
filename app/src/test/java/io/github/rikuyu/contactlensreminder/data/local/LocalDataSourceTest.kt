@@ -88,7 +88,7 @@ class LocalDataSourceTest {
         every { sharedPreferencesManager.getContactLensRemainingDays() } returns 19
         every { sharedPreferencesManager.getIsUsingContactLens() } returns false
         every { sharedPreferencesManager.getIsUseNotification() } returns true
-        every { sharedPreferencesManager.getLensExchangeDay() } returns "2022/02/11"
+        every { sharedPreferencesManager.getLensExchangeDate() } returns "2022/02/11"
 
         val actual = localDataSource.getReminderSetting()
 
@@ -100,7 +100,7 @@ class LocalDataSourceTest {
             sharedPreferencesManager.getContactLensRemainingDays()
             sharedPreferencesManager.getIsUsingContactLens()
             sharedPreferencesManager.getIsUseNotification()
-            sharedPreferencesManager.getLensExchangeDay()
+            sharedPreferencesManager.getLensExchangeDate()
         }
 
         confirmVerified(sharedPreferencesManager)

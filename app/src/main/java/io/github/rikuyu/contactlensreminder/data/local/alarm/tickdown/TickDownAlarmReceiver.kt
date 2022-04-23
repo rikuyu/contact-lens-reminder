@@ -15,28 +15,31 @@ class TickDownAlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         context?.let {
             val sharedPreferencesManager = SharedPreferencesManager(it)
+            val isUsingContactLens = sharedPreferencesManager.getIsUsingContactLens()
             val tickDownAlarmManager = TickDownAlarmManager(it)
             val remainingDay = sharedPreferencesManager.getContactLensRemainingDays()
 
             // 端末電源OFFにした時の対策
             // 電源がONになったときにイベントを再登録する
-            if (intent?.action == Intent.ACTION_BOOT_COMPLETED) {
-                FirebaseLogEventService(sharedPreferencesManager).logEvent("RECEIVE_BOOT_COMPLETED_TICKDOWN")
-                // ※ 電源OFFの状態で日付をまたぐとバグる実装
-                if (remainingDay > 0) {
-                    tickDownAlarmManager.initAlarm()
-                    updateAppWidget(it)
-                }
-            } else {
-                if (remainingDay > 0) {
-                    val after = remainingDay - 1
-                    sharedPreferencesManager.saveContactLensRemainingDays(after)
-                    if (after > 0) {
+            if (isUsingContactLens) {
+                if (intent?.action == Intent.ACTION_BOOT_COMPLETED) {
+                    FirebaseLogEventService(sharedPreferencesManager).logEvent("RECEIVE_BOOT_COMPLETED_TICKDOWN")
+                    // ※ 電源OFFの状態で日付をまたぐとバグる実装
+                    if (remainingDay > 0) {
                         tickDownAlarmManager.initAlarm()
+                        updateAppWidget(it)
                     }
-                    updateAppWidget(it)
                 } else {
-                    // NOP
+                    if (remainingDay > 0) {
+                        val after = remainingDay - 1
+                        sharedPreferencesManager.saveContactLensRemainingDays(after)
+                        if (after > 0) {
+                            tickDownAlarmManager.initAlarm()
+                        }
+                        updateAppWidget(it)
+                    } else {
+                        // NOP
+                    }
                 }
             }
         }
