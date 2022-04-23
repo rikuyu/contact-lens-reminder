@@ -34,6 +34,8 @@ fun ContactUsScreen(navController: NavController) {
     val formId = when (Locale.getDefault().language) {
         Locale.JAPANESE.language -> BuildConfig.GOOGLE_FORM_ID_JA
         Locale.ENGLISH.language -> BuildConfig.GOOGLE_FORM_ID_EN
+        Locale.KOREAN.language -> BuildConfig.GOOGLE_FORM_ID_EN
+        Locale.CHINESE.language -> BuildConfig.GOOGLE_FORM_ID_EN
         else -> BuildConfig.GOOGLE_FORM_ID_JA
     }
 
@@ -74,7 +76,7 @@ fun ContactUsScreen(navController: NavController) {
                                 override fun onPageStarted(
                                     view: WebView,
                                     url: String,
-                                    favicon: Bitmap?
+                                    favicon: Bitmap?,
                                 ) {
                                     visibility.value = true
                                 }
@@ -109,11 +111,13 @@ fun ContactUsScreen(navController: NavController) {
                     color = MaterialTheme.colors.primary,
                     fontSize = 18.sp
                 )
-                Text(
-                    text = stringResource(id = R.string.network_error_message_2),
-                    color = MaterialTheme.colors.primary,
-                    fontSize = 18.sp
-                )
+                if (Locale.getDefault().language == Locale.JAPANESE.language) {
+                    Text(
+                        text = stringResource(id = R.string.network_error_message_2),
+                        color = MaterialTheme.colors.primary,
+                        fontSize = 18.sp
+                    )
+                }
             }
         }
     }

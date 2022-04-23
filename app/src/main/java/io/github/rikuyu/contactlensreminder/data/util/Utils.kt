@@ -12,7 +12,7 @@ fun getExpirationDate(lensPeriod: Int): String {
     val simpleDateFormat = SimpleDateFormat("MM/dd/E", Locale.getDefault())
     val (m, d, day) = simpleDateFormat.format(calendar.time).split("/")
     return when (Locale.getDefault().language) {
-        Locale.JAPANESE.language -> "${m.toInt()}/${d.toInt()} ($day)"
+        Locale.JAPANESE.language, Locale.KOREAN.language, Locale.CHINESE.language -> "${m.toInt()}/${d.toInt()} ($day)"
         Locale.ENGLISH.language -> "$day ${m.toInt()}/${d.toInt()}"
         else -> "${m.toInt()}/${d.toInt()} ($day)"
     }
