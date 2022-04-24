@@ -44,7 +44,7 @@ class ReminderViewModel @Inject constructor(
                     lensRemainingDays = event.data.lensPeriod
                 )
                 usecase.saveReminderSetting(reminder.value)
-                usecase.cancelReminder()
+                usecase.resetReminder()
             }
             is ReminderEvent.GetReminderSetting -> _reminder.value = usecase.getReminderSetting.invoke()
             is ReminderEvent.SwitchIsDarkTheme -> usecase.switchIsDarkTheme.invoke()

@@ -32,6 +32,7 @@ class LocalDataSource @Inject constructor(
     override fun startReminder() {
         if (sharedPreferencesManager.getIsUseNotification()) {
             notificationAlarmManager.initAlarm()
+            sharedPreferencesManager.saveIsExecuteNotification(false)
         }
         tickDownAlarmManager.initAlarm()
         tickDownAlarmManager.updateAppWidget()
@@ -61,9 +62,10 @@ class LocalDataSource @Inject constructor(
         }
     }
 
-    override fun cancelReminder() {
+    override fun resetReminder() {
         if (sharedPreferencesManager.getIsUseNotification()) {
             notificationAlarmManager.cancelAlarm()
+            sharedPreferencesManager.saveIsExecuteNotification(true)
         }
         tickDownAlarmManager.cancelAlarm()
     }

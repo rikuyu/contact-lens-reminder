@@ -15,7 +15,7 @@ class ReminderUseCaseTest {
     lateinit var saveReminderSetting: SaveReminderSetting
     lateinit var startReminder: StartReminder
     lateinit var getReminderSetting: GetReminderSetting
-    lateinit var cancelReminder: CancelReminder
+    lateinit var resetReminder: ResetReminder
     lateinit var reminderUseCase: ReminderUseCase
     lateinit var getIsShowOnBoarding: GetIsShowOnBoarding
     lateinit var getIsDarkTheme: GetIsDarkTheme
@@ -43,7 +43,7 @@ class ReminderUseCaseTest {
         saveReminderSetting = SaveReminderSetting(repository)
         startReminder = StartReminder(repository)
         getReminderSetting = GetReminderSetting(repository)
-        cancelReminder = CancelReminder(repository)
+        resetReminder = ResetReminder(repository)
         getIsShowOnBoarding = GetIsShowOnBoarding(repository)
         getIsDarkTheme = GetIsDarkTheme(repository)
         switchIsDarkTheme = SwitchIsDarkTheme(repository)
@@ -51,7 +51,7 @@ class ReminderUseCaseTest {
             saveReminderSetting,
             startReminder,
             getReminderSetting,
-            cancelReminder,
+            resetReminder,
             getIsShowOnBoarding,
             getIsDarkTheme,
             switchIsDarkTheme
@@ -87,12 +87,12 @@ class ReminderUseCaseTest {
     }
 
     @Test
-    fun `CancelReminder Test`() {
-        every { repository.cancelReminder() } returns Unit
-        reminderUseCase.cancelReminder.invoke()
+    fun `ResetReminder Test`() {
+        every { repository.resetReminder() } returns Unit
+        reminderUseCase.resetReminder.invoke()
         verify(exactly = 1) {
-            reminderUseCase.cancelReminder.invoke()
-            repository.cancelReminder()
+            reminderUseCase.resetReminder.invoke()
+            repository.resetReminder()
         }
     }
 

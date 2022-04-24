@@ -241,7 +241,7 @@ class SharedPreferencesManager @Inject constructor(private val context: Context)
     // 通知が鳴ったか（再起動時の再予約に使用）
     fun getIsExecuteNotification(): Boolean {
         return getSharedPreferences()
-            .getBoolean(SharedPreferencesKey.STORED_IS_EXECUTE_NOTIFICATION, false)
+            .getBoolean(SharedPreferencesKey.STORED_IS_EXECUTE_NOTIFICATION, true)
     }
 
     fun saveIsExecuteNotification(isExecuteNotification: Boolean) {

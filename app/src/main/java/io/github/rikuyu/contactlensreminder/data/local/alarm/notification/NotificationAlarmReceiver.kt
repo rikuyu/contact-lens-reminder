@@ -20,9 +20,14 @@ class NotificationAlarmReceiver : BroadcastReceiver() {
                     FirebaseLogEventService(SharedPreferencesManager(it))
                         .logEvent("RECEIVE_BOOT_COMPLETED_NOTIFICATION")
                     // ※ 電源OFFの状態で日付をまたぐとバグる実装
-                    NotificationAlarmManager(it, sharedPreferencesManager).initAlarm()
+                    if (!sharedPreferencesManager.getIsExecuteNotification() &&
+                        sharedPreferencesManager.getIsUseNotification()
+                    ) {
+                        NotificationAlarmManager(it, sharedPreferencesManager).initAlarm()
+                    }
                 } else {
                     NotificationService(it).showNotification()
+                    sharedPreferencesManager.saveIsExecuteNotification(true)
                 }
             }
         }

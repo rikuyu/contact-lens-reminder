@@ -161,6 +161,7 @@ class LocalDataSourceTest {
         initLocalDataSource()
 
         every { sharedPreferencesManager.getIsUseNotification() } returns true
+        every { sharedPreferencesManager.saveIsExecuteNotification(any()) } returns Unit
 
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
         localDataSource.startReminder()
@@ -177,6 +178,7 @@ class LocalDataSourceTest {
         initLocalDataSource()
 
         every { sharedPreferencesManager.getIsUseNotification() } returns false
+        every { sharedPreferencesManager.saveIsExecuteNotification(any()) } returns Unit
 
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
         localDataSource.startReminder()
@@ -193,17 +195,19 @@ class LocalDataSourceTest {
         initLocalDataSource()
 
         every { sharedPreferencesManager.getIsUseNotification() } returns true
+        every { sharedPreferencesManager.saveIsExecuteNotification(any()) } returns Unit
 
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
         localDataSource.startReminder()
         assertThat(shadowAlarmManager.scheduledAlarms.size).isEqualTo(2)
-        localDataSource.cancelReminder()
+        localDataSource.resetReminder()
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
 
         verifyAll {
             sharedPreferencesManager.getIsUseNotification()
+            sharedPreferencesManager.saveIsExecuteNotification(any())
             localDataSource.startReminder()
-            localDataSource.cancelReminder()
+            localDataSource.resetReminder()
         }
     }
 
@@ -212,17 +216,18 @@ class LocalDataSourceTest {
         initLocalDataSource()
 
         every { sharedPreferencesManager.getIsUseNotification() } returns false
+        every { sharedPreferencesManager.saveIsExecuteNotification(any()) } returns Unit
 
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
         localDataSource.startReminder()
         assertThat(shadowAlarmManager.scheduledAlarms.size).isEqualTo(1)
-        localDataSource.cancelReminder()
+        localDataSource.resetReminder()
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
 
         verifyAll {
             sharedPreferencesManager.getIsUseNotification()
             localDataSource.startReminder()
-            localDataSource.cancelReminder()
+            localDataSource.resetReminder()
         }
     }
 
