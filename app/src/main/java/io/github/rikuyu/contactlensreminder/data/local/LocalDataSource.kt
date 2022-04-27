@@ -123,13 +123,7 @@ class LocalDataSource @Inject constructor(
         firebaseLogEventService.logEvent(label)
     }
 
-    override fun getIsShowOnBoarding(): Boolean {
-        val isShowOnBoarding = sharedPreferencesManager.getIsShowOnBoarding()
-        if (isShowOnBoarding) {
-            sharedPreferencesManager.saveIsShowOnBoarding()
-        }
-        return isShowOnBoarding
-    }
+    override fun getIsShowOnBoarding(): Boolean = false
 
     override fun getIsDarkTheme(): Boolean = sharedPreferencesManager.getIsDarkTheme()
 

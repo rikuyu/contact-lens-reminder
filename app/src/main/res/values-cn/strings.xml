@@ -171,17 +171,4 @@
     <string name="log_enable_progressbar_widget">enabled_progressbar_widget_cn</string>
     <string name="log_disable_progressbar_widget">disabled_progressbar_widget_cn</string>
 
-    <!-- OnBoarding -->
-    <string name="label_version_up">アップデート情報 Ver %s</string>
-    <string name="title_launch_app_widget">新機能 アプリウィジェット</string>
-    <string name="description_1_launch_app__widget">Ver 2.0.0 からアプリウィジェットが使えるようになりました。</string>
-    <string name="description_2_launch_app__widget">アプリウィジェットには「画像タイプ」「プログレスバータイプ」の2種類があります。</string>
-    <string name="description_3_launch_app__widget">画像タイプ…コンタクトレンズの残り使用可能日数を表示</string>
-    <string name="description_4_launch_app__widget">プログレスバータイプ…残り使用可能日数を表すプログレスバーとレンズ交換日を表示</string>
-    <string name="title_abolish_app_icon_change">アプリアイコン変更機能の廃止</string>
-    <string name="description_1_abolish_app_icon_change">本アプリの使いやすさを考えて、Ver 2.0.0 からこれまで利用可能だったアプリアイコン変更機能を廃止させていただきました。</string>
-    <string name="description_2_abolish_app_icon_change">この機能の代わりにアプリウィジェット機能をお使いください。</string>
-    <string name="description_3_abolish_app_icon_change">今後とも本アプリをよろしくお願いいたします。</string>
-    <string name="btn_start">Start</string>
-
 </resources>

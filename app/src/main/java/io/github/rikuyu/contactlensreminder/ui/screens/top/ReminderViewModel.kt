@@ -17,7 +17,7 @@ class ReminderViewModel @Inject constructor(
     private val _reminder: MutableState<ReminderValue> = mutableStateOf(ReminderValue())
     val reminder: State<ReminderValue> = _reminder
 
-    private val _isShowOnBoarding: MutableState<Boolean> = mutableStateOf(true)
+    private val _isShowOnBoarding: MutableState<Boolean> = mutableStateOf(false)
     val isShowOnBoarding: State<Boolean> = _isShowOnBoarding
 
     val isDarkTheme: MutableState<Boolean> = mutableStateOf(false)
