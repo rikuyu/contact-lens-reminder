@@ -30,10 +30,10 @@ import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.terms_of_serv
 import io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.components.LensSettingScreen
 import io.github.rikuyu.contactlensreminder.ui.screens.top.ReminderViewModel
 import io.github.rikuyu.contactlensreminder.ui.screens.top.components.TopScreen
-import io.github.rikuyu.contactlensreminder.ui.util.theme.ContactLensReminderTheme
 import io.github.rikuyu.contactlensreminder.ui.util.AppReviewService
 import io.github.rikuyu.contactlensreminder.ui.util.AppUpdateService
 import io.github.rikuyu.contactlensreminder.ui.util.Routes
+import io.github.rikuyu.contactlensreminder.ui.util.theme.ContactLensReminderTheme
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -95,7 +95,7 @@ class MainActivity : ComponentActivity() {
                     composable(route = Routes.TERMS_OF_SERVICE) { TermsOfServiceScreen(navController) }
                     composable(route = Routes.HELP) { InstructionScreen(navController) }
                     composable(route = Routes.INQUIRY) { ContactUsScreen(navController) }
-                    composable(route = Routes.ON_BOARDING) {  }
+                    composable(route = Routes.ON_BOARDING) { }
                 }
             }
         }
