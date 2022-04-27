@@ -1,0 +1,187 @@
+<resources>
+    <string name="app_name">Contact Lens</string>
+
+    <!-- In-App-Update -->
+    <string name="update_dialog_title">Latest Version</string>
+    <string name="update_dialog_message">Please update to the latest version to continue using this application, .</string>
+    <string name="update_dialog_positive_button_label">Update</string>
+    <string name="update_immediate_success">immediate_update_success_cn</string>
+    <string name="update_unknown">UpdateAvailability.UNKNOWN_cn</string>
+    <string name="update_not_available">UpdateAvailability.UPDATE_NOT_AVAILABLE_cn</string>
+    <string name="update_available">UpdateAvailability.UPDATE_AVAILABLE_cn</string>
+    <string name="update_triggered_in_progress">UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS_cn</string>
+
+    <!-- In-App-Review -->
+    <string name="review_request_not_complete">requestReviewFlow().addOnCompleteListener task is NOT isSuccessful_cn</string>
+    <string name="review_launch_complete">launchReviewFlow(a, r).addOnCompleteListener_cn</string>
+    <string name="review_launch_failure">launchReviewFlow(a, r).addOnFailureListener_cn</string>
+
+    <!-- SCHEDULE_EXACT_ALARM -->
+    <string name="exact_alarm_dialog_title">要求改变设置</string>
+    <string name="exact_alarm_dialog_message">要使用这个应用程序，请在设置屏幕上允许 "警报和提醒"（请打开设置）</string>
+    <string name="exact_alarm_dialog_positive_button_label">打开设置屏幕</string>
+    <string name="exact_alarm_dialog_event_label">alarmManager.canScheduleExactAlarms() == %s</string>
+
+    <!-- TopScreen -->
+    <string name="remain">还剩</string>
+    <string name="day">天</string>
+    <string name="change_message">交换日期</string>
+    <string name="time_message">通知時間</string>
+    <string name="start">开始</string>
+    <string name="lens_change">交换隐形眼镜</string>
+    <string name="lens_setting">设置隐形眼镜</string>
+    <string name="new_line">\n\n</string>
+    <string name="time_div">:</string>
+    <string name="alert_toast_message">隐形眼镜在使用过程中不能改变设置</string>
+    <string name="one_day_text">日隐形眼镜</string>
+    <string name="days_text">日隐形眼镜</string>
+    <string name="two_weeks_day_text">2周隐形眼镜</string>
+    <string name="one_month_text">1个月隐形眼镜</string>
+
+    <!-- LensSettingScreen -->
+    <string name="lens_setting_screen_title">隐形眼镜设置</string>
+    <string name="notification">通知</string>
+    <string name="notification_day_title">日期</string>
+    <string name="before_day">前一天</string>
+    <string name="before_day_lower">前一天</string>
+    <string name="on_the_day">当天</string>
+    <string name="on_the_day_lower">当天</string>
+    <string name="notification_time">时间</string>
+    <string name="lens_power">隐形眼镜功率</string>
+    <string name="left">左眼</string>
+    <string name="right">右眼</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="lens_period">天</string>
+    <string name="period">Period</string>
+    <string name="two_weeks">2周</string>
+    <string name="one_month">1个月</string>
+    <string name="other">其他</string>
+    <string name="alert_lens_setting">设置1天镜头时，前一天的通知不可用</string>
+
+    <!-- AppSettingScreen -->
+    <string name="app_setting_screen_title">关于此应用程序</string>
+    <string name="terms_of_service">服务条款</string>
+    <string name="help">帮助（如何使用）</string>
+    <string name="notification_setting">通知设置</string>
+    <string name="inquiry">联系我们</string>
+    <string name="color_theme">改变主题颜色</string>
+    <string name="version">version %s</string>
+
+    <!-- Notification -->
+    <string name="notification_on_the_day_title">隐形眼镜更换日期</string>
+    <string name="notification_before_day_title">明日是隐形眼镜交换日.</string>
+    <string name="notification_content">正确使用隐形眼镜，保护你的眼睛健康</string>
+    <string name="notification_setting_label">镜片更换通知书</string>
+
+    <!-- レンズ交換確認ダイアログ -->
+    <string name="reminder_cancel_dialog_title">你真的会交换隐形眼镜吗？</string>
+    <string name="reminder_cancel_dialog_content">提醒将被取消</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_ok">OK</string>
+
+    <!-- カラーテーマ変更ダイアログ -->
+    <string name="color_theme_dialog_title">改变主题颜色</string>
+
+    <!-- ヘルプ（使い方） -->
+    <string name="help_1_page">STEP 1</string>
+    <string name="help_2_page">STEP 2</string>
+    <string name="help_3_page">STEP 3</string>
+    <string name="other_page">Other</string>
+    <string name="step_1_1">关于接触镜和通知设置</string>
+    <string name="step_1_2">要开始，通过按 "设置隐形眼镜 "按钮（红色框）来设置你的隐形眼镜和通知。如果你在没有这些设置的情况下按下 "开始"，2周隐形眼镜（无通知）的设置将被应用。</string>
+    <string name="step_1_3">隐形眼镜和通知设置屏幕</string>
+    <string name="step_1_4">在这个屏幕上，你可以设置 "隐形眼镜类型"、"使用期限"、"通知日期"、"通知时间"、"隐形眼镜电量"。</string>
+    <string name="step_2_1">隐形眼镜的类型</string>
+    <string name="step_2_2">你可以选择 "2周 "和 "1个月 "的隐形眼镜。此外，你还可以指定你想使用的时间长度，在1到31日之间。</string>
+    <string name="step_2_3">通知设置</string>
+    <string name="step_2_4">通知日期可以选择事件发生的当日或前一日。通知时间可以以1分钟为单位设置。</string>
+    <string name="step_2_5">隐形眼镜的功率设置</string>
+    <string name="step_2_6">隐形眼镜的功率可以从-8.0到-3.0。</string>
+    <string name="step_2_7">如何保存设置</string>
+    <string name="step_2_8">按 "OK" 保存到目前为止的设置</string>
+    <string name="step_3_1">如何设置提醒事项</string>
+    <string name="step_3_2">要开始提醒，请按 "开始 "按钮（红框）</string>
+    <string name="step_3_3">提醒开始后</string>
+    <string name="step_3_4">一旦开始提醒，"开始 "按钮就变成了 "换镜头 "按钮。另外，一旦你开始提醒，你将不能改变设置，直到你交换隐形眼镜。</string>
+    <string name="step_3_5">还剩日数每日在午夜时分更新。</string>
+    <string name="step_3_6">如果还剩日数没有更新，请将隐形眼镜重新设置为所需日数并重新开始提醒。</string>
+    <string name="step_3_7">其他应用功能和注意事项（重要），请参见其他。</string>
+    <string name="step_4_1">关于帮助</string>
+    <string name="step_4_2">从顶部屏幕点击 "帮助" 按钮（红框），查看帮助屏幕。</string>
+    <string name="step_4_3">关于此应用程序屏幕</string>
+    <string name="step_4_4">在这个屏幕上, 你可以参考 "使用条款"、"帮助（如何使用）"、"通知设置"、"联系我们"、"版本"、"改变主题颜色"。</string>
+    <string name="step_4_5">关于光明/黑暗模式</string>
+    <string name="step_4_6">这个应用程序可以在不同的光照/黑暗模式下使用，按顶屏左上角的图标即可。</string>
+    <string name="step_4_7">关于改变主题颜色</string>
+    <string name="step_4_8">你可以在帮助屏幕上点击 "改变主题颜色 "时出现的对话框中改变主题颜色。</string>
+    <string name="step_4_9">关于App Widget</string>
+    <string name="step_4_10">App Widgets有 "image type"、 "progress bar type"。图像类型显示隐形眼镜的还剩日数。进度条类型显示一个进度条，显示还剩日数和交换隐形眼镜的日期。</string>
+    <string name="step_4_11">[ 注意事项 ]</string>
+    <string name="step_4_12">1. 更新应用程序后，请重新创建应用程序的小部件。</string>
+    <string name="step_4_13">2. 如果在主屏幕上放置应用小部件时出现 "无法加载小部件 "的信息，请卸载该应用并重新尝试。</string>
+    <string name="step_4_14">如果上述问题持续存在，请联系开发者。</string>
+
+    <!-- お問い合わせ -->
+    <string name="network_error_message_1">要联系我们，请连接到互联网。</string>
+    <string name="network_error_message_2">null</string>
+
+    <!-- 利用規約 -->
+    <string name="title_1">第1条 本申请书的内容</string>
+    <string name="content_1">"本应用 "是指目前正在使用的这个智能手机应用（"本应用"）。</string>
+    <string name="title_2">第2条　对条款和条件的同意</string>
+    <string name="content_2">在使用应用程序之前，您同意这些条款和条件。</string>
+    <string name="title_3">第3条 权利的归属等</string>
+    <string name="content_3_1">1．本应用程序的版权和与本应用程序有关的所有其他权利属于本应用程序的开发者（以下简称 "开发者"）或开发者已授予许可的权利人。</string>
+    <string name="content_3_2">2．您只能为开发者指定的目的使用本应用。 此外，本应用发商的要求，客户应及时停止使用本应用或从客户的智能手机上删除本应用。</string>
+    <string name="content_3_3">3．您不得复制、抄袭、转让、修改或逆向工程通过应用程序或服务下载到您的智能手机的信息，并且您不得允许任何第三方实施此类行为。</string>
+    <string name="title_4">4. 暂停、改变等本应用程序的规定</string>
+    <string name="content_4">开发商可以在不通知客户的情况下，随时暂停或终止本应用的提供，改变本服务的内容，或修改本应用。</string>
+    <string name="title_5">5. 免责声明，等等</string>
+    <string name="content_5_1">1．本应用的缺陷，与本应用操作有关的缺陷（包括显示信息的错误和偏差） 开发商对客户因本应用对智能手机的影响而产生的任何不利因素、数据丢失的不利因素，或客户无法正常使用本应用的不利因素不承担责任。</string>
+    <string name="content_5_2">2．除前款规定外，在下列情况下，开发商不对该应用程序的不可用性负责，也不对该不可用性造成的任何损失负责。</string>
+    <string name="content_5_2_1">（1）在不可避免的情况下，如自然灾害、法院或其他公共当局采取的措施，等等</string>
+    <string name="content_5_2_2">（2）尽管采取了合理的安全措施，但在通信线路或系统出现故障的情况下</string>
+    <string name="content_5_2_3">（3）在指纹认证、密码认证等被非法执行的情况下</string>
+    <string name="content_5_2_4">（4）如果原因是由开发商以外的第三方造成的</string>
+    <string name="content_5_3">3．当你使用本应用程序上传、下载或以其他方式传输信息时，你同意允许我们通过电磁方式传输这些信息。</string>
+    <string name="title_6">6. 改善使用环境，等等。</string>
+    <string name="content_6_1">1．客户应使用本应用（包括下载本应用）。客户应准备好使用本应用（包括下载本应用）所需的电信设备、软件、电信线路和其他环境，由客户负责并承担费用。</string>
+    <string name="content_6_2">2．使用本应用（包括下载本应用） 客户应负责与使用本应用（包括下载本应用）有关的通信费用。</string>
+    <string name="content_6_3">3．客户应根据自己的使用环境，参照开发者提供的信息，保持适当的信息安全，包括防止计算机病毒感染、未经授权的访问和信息泄漏。</string>
+    <string name="content_6_4">4．在处置安装了本应用程序的智能手机或以其他方式终止使用本应用程序时，客户应确保删除本应用程序。</string>
+    <string name="title_7">7. 准则的比照适用</string>
+    <string name="content_7">本条款和条件中未规定的与本申请有关的事项应受开发商的其他条款和条件的约束。。</string>
+    <string name="title_8">8.服务条款的变更</string>
+    <string name="content_8_1">1．本协议的每项规定和其他条件，在被认为有合理理由时，如财务或其他情况的变化，可根据《民法》（日本法律）第548–4条的规定进行修改。</string>
+    <string name="content_8_2">2．前款的任何变化都应通过互联网或其他适当方式公开宣布该变化、修订后的条款内容以及该变化的生效日期，使公众了解。</string>
+    <string name="content_8_3">3．前两段中的变化应从公布时规定的生效日期开始适用，根据变化的内容，在公布日期和生效日期之间应允许有一段合理的时间。</string>
+    <string name="title_that_all">仅此而已</string>
+
+    <!-- AppWidget -->
+    <string name="app_widget_progress_bar">Progress Bar Type</string>
+    <string name="app_widget_image">Number 还剩</string>
+    <string name="text_remaining_day_before">null</string>
+    <string name="text_remaining_day_after">天</string>
+    <string name="text_preview_remaining_day">14 天</string>
+    <string name="text_preview_exchange_date">12/10 (周三)</string>
+    <string name="no_image_description">no image</string>
+    <string name="log_enable_image_widget">enabled_image_widget_cn</string>
+    <string name="log_disable_image_widget">disabled_image_widget_cn</string>
+    <string name="log_enable_progressbar_widget">enabled_progressbar_widget_cn</string>
+    <string name="log_disable_progressbar_widget">disabled_progressbar_widget_cn</string>
+
+    <!-- OnBoarding -->
+    <string name="label_version_up">アップデート情報 Ver %s</string>
+    <string name="title_launch_app_widget">新機能 アプリウィジェット</string>
+    <string name="description_1_launch_app__widget">Ver 2.0.0 からアプリウィジェットが使えるようになりました。</string>
+    <string name="description_2_launch_app__widget">アプリウィジェットには「画像タイプ」「プログレスバータイプ」の2種類があります。</string>
+    <string name="description_3_launch_app__widget">画像タイプ…コンタクトレンズの残り使用可能日数を表示</string>
+    <string name="description_4_launch_app__widget">プログレスバータイプ…残り使用可能日数を表すプログレスバーとレンズ交換日を表示</string>
+    <string name="title_abolish_app_icon_change">アプリアイコン変更機能の廃止</string>
+    <string name="description_1_abolish_app_icon_change">本アプリの使いやすさを考えて、Ver 2.0.0 からこれまで利用可能だったアプリアイコン変更機能を廃止させていただきました。</string>
+    <string name="description_2_abolish_app_icon_change">この機能の代わりにアプリウィジェット機能をお使いください。</string>
+    <string name="description_3_abolish_app_icon_change">今後とも本アプリをよろしくお願いいたします。</string>
+    <string name="btn_start">Start</string>
+
+</resources>

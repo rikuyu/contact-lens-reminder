@@ -63,8 +63,10 @@ fun OtherTypeLensPeriodSection(
                         )
                         Text(
                             text = when (Locale.getDefault().language) {
-                                Locale.JAPANESE.language -> stringResource(id = R.string.lens_period)
-                                Locale.ENGLISH.language -> {
+                                Locale.JAPANESE.language, Locale.KOREAN.language, Locale.CHINESE.language,
+                                -> stringResource(id = R.string.lens_period)
+                                Locale.ENGLISH.language,
+                                -> {
                                     if (period == 1) {
                                         stringResource(id = R.string.lens_period)
                                     } else {

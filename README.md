@@ -56,8 +56,8 @@ AppWidgetが日付をまたいで変化する様子
 ### :earth_asia: 多言語対応
 - 日本語
 - 英語
-- 韓国語 (Coming Soon)
-- 中国語 (Coming Soon)
+- 韓国語
+- 中国語
 
 ### :memo: 関連ブログ記事
 

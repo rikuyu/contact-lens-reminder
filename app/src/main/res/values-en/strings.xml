@@ -5,16 +5,16 @@
     <string name="update_dialog_title">Latest Version</string>
     <string name="update_dialog_message">Please update to the latest version to continue using this application, .</string>
     <string name="update_dialog_positive_button_label">Update</string>
-    <string name="update_immediate_success">immediate_update_success</string>
-    <string name="update_unknown">UpdateAvailability.UNKNOWN</string>
-    <string name="update_not_available">UpdateAvailability.UPDATE_NOT_AVAILABLE</string>
-    <string name="update_available">UpdateAvailability.UPDATE_AVAILABLE</string>
-    <string name="update_triggered_in_progress">UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS</string>
+    <string name="update_immediate_success">immediate_update_success_en</string>
+    <string name="update_unknown">UpdateAvailability.UNKNOWN_en</string>
+    <string name="update_not_available">UpdateAvailability.UPDATE_NOT_AVAILABLE_en</string>
+    <string name="update_available">UpdateAvailability.UPDATE_AVAILABLE_en</string>
+    <string name="update_triggered_in_progress">UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS_en</string>
 
     <!-- In-App-Review -->
-    <string name="review_request_not_complete">requestReviewFlow().addOnCompleteListener task is NOT isSuccessful</string>
-    <string name="review_launch_complete">launchReviewFlow(a, r).addOnCompleteListener</string>
-    <string name="review_launch_failure">launchReviewFlow(a, r).addOnFailureListener</string>
+    <string name="review_request_not_complete">requestReviewFlow().addOnCompleteListener task is NOT isSuccessful_en</string>
+    <string name="review_launch_complete">launchReviewFlow(a, r).addOnCompleteListener_en</string>
+    <string name="review_launch_failure">launchReviewFlow(a, r).addOnFailureListener_en</string>
 
     <!-- SCHEDULE_EXACT_ALARM -->
     <string name="exact_alarm_dialog_title">Request to change settings</string>
@@ -75,7 +75,7 @@
     <string name="notification_setting_label">Lenses Exchange Notification</string>
 
     <!-- レンズ交換確認ダイアログ -->
-    <string name="reminder_cancel_dialog_title">Do you really want to exchange the lenses?</string>
+    <string name="reminder_cancel_dialog_title">Do you really exchange the lenses?</string>
     <string name="reminder_cancel_dialog_content">Reminder will be canceled</string>
     <string name="btn_cancel">Cancel</string>
     <string name="btn_ok">OK</string>
@@ -91,11 +91,11 @@
     <string name="step_1_1">About Lens and Notification Settings</string>
     <string name="step_1_2">To begin, set up your contact lenses and notifications by pressing the "Lens Settings" button (red frame).\n If you press "Start" without these settings, the settings for 2-Week lenses (no notifications) will be applied.</string>
     <string name="step_1_3">Lens and notification settings screen</string>
-    <string name="step_1_4">On this screen, you can set the "contact lens type," "period of use," "notification date," "notification time," and "contact lens power.</string>
+    <string name="step_1_4">On this screen, you can set the "contact lens type", "period of use", "notification date", "notification time" and "contact lens power".</string>
     <string name="step_2_1">Types of Contact Lenses</string>
-    <string name="step_2_2">You can choose from "2-week" and "1-month" contact lenses. In addition, you can also specify the length of time you would like to use the lenses between 1 and 31 days.</string>
+    <string name="step_2_2">You can choose from "2weeks" and "1month" contact lenses. In addition, you can also specify the length of time you would like to use the lenses between 1 and 31 days.</string>
     <string name="step_2_3">Notification Settings</string>
-    <string name="step_2_4">he notification date can be selected as either the day of the event or the day before. The notification time can be set in 1-minute increments.</string>
+    <string name="step_2_4">The notification date can be selected as either the day of the event or the day before. The notification time can be set in 1minute increments.</string>
     <string name="step_2_5">Lens power setting</string>
     <string name="step_2_6">Contact lens power can range from -8.0 to -3.0.</string>
     <string name="step_2_7">How to save settings</string>
@@ -110,7 +110,7 @@
     <string name="step_4_1">About Help</string>
     <string name="step_4_2">Click the "Help" button (red frame) from the top screen to view the help screen.</string>
     <string name="step_4_3">About this app screen</string>
-    <string name="step_4_4">On this screen, you can refer to "Terms of Use," "Help (How to use)," "Notification Settings," "Contact Us," "Version," and "Change Theme Color".</string>
+    <string name="step_4_4">On this screen, you can refer to "Terms of service," "Help (How to use)," "Notification Settings," "Contact Us," "Version," and "Change Theme Color".</string>
     <string name="step_4_5">About light/dark mode</string>
     <string name="step_4_6">This application can be used in different light/dark modes by pressing the icon in the upper left corner of the top screen.</string>
     <string name="step_4_7">About changing the theme color</string>
@@ -123,23 +123,23 @@
     <string name="step_4_14">If the above problems persist, please contact us.</string>
 
     <!-- お問い合わせ -->
-    <string name="network_error_message_1">Connect to the network</string>
-    <string name="network_error_message_2">To contact us</string>
+    <string name="network_error_message_1">Connect to the network to contact us.</string>
+    <string name="network_error_message_2">null</string>
 
     <!-- 利用規約 -->
     <string name="title_1">1. Contents of this Application</string>
-    <string name="content_1">This application means this smartphone application currently in use (the "Application").</string>
+    <string name="content_1">"This application" means this smartphone application currently in use (the "Application").</string>
     <string name="title_2">2. Acceptance of Terms and Conditions</string>
     <string name="content_2">Customers shall use the Application upon agreeing to these Terms of Use.</string>
-    <string name="title_3">3. Vesting of rights, etc.</string>
+    <string name="title_3">3. Vesting of rights, etc</string>
     <string name="content_3_1">1．All copyrights and other rights related to this application belong to the developer of this application (hereinafter referred to as the "Developer") or the right holder who is licensed by the Developer.</string>
     <string name="content_3_2">2．You may use the Application only for the purpose designated by the Developer. Upon request from the developer of the application, the customer shall promptly cease use of the application or delete the application from the smartphone of customer.</string>
     <string name="content_3_3">3．You shall not reproduce, duplicate, transfer, modify, or reverse engineer the information downloaded to your smartphone through the Application or the Service, and you shall not allow any third party to perform such acts.</string>
-    <string name="title_4">4. 　Suspension, change, etc. of the provision of this app</string>
+    <string name="title_4">4. Suspension, change, etc. of the provision of this app</string>
     <string name="content_4">The developer may suspend or terminate the provision of this application, change the contents of this service, or modify this application at any time without the notice to the customer.</string>
     <string name="title_5">5. Disclaimer, etc.</string>
     <string name="content_5_1">1．Defects in this application, defects related to the operation of this application (including errors and deviations in the displayed information) The developer shall not be liable for any disadvantage, disadvantage of data loss, or any other disadvantage incurred by the customer due to the impact of this application on the smartphone, or the inability of the customers to use this application normally.</string>
-    <string name="content_5_2">2．In addition to the preceding paragraph, the Developer shall not be liable for the unavailability of this application in any of the following cases, or for any damages resulting from such unavailability</string>
+    <string name="content_5_2">2．In addition to the preceding paragraph, the Developer shall not be liable for the unavailability of this application in any of the following cases, or for any damages resulting from such unavailability.</string>
     <string name="content_5_2_1">（1）In the case of unavoidable circumstances such as natural disasters, measures taken by courts of law or other public authorities, etc.</string>
     <string name="content_5_2_2">（2）In the case of a communication line or system failure despite the reasonable security measures</string>
     <string name="content_5_2_3">（3）In the case of fingerprint authentication, passcode authentication, etc. were illegally executed.</string>
@@ -161,11 +161,15 @@
     <!-- AppWidget -->
     <string name="app_widget_progress_bar">Progress Bar Type</string>
     <string name="app_widget_image">Number Type</string>
-    <string name="text_remaining_day_before">left</string>
+    <string name="text_remaining_day_before">null</string>
     <string name="text_remaining_day_after">day</string>
     <string name="text_preview_remaining_day">14 days left</string>
     <string name="text_preview_exchange_date">12/10 (Wed)</string>
     <string name="no_image_description">no image</string>
+    <string name="log_enable_image_widget">enabled_image_widget_en</string>
+    <string name="log_disable_image_widget">disabled_image_widget_en</string>
+    <string name="log_enable_progressbar_widget">enabled_progressbar_widget_en</string>
+    <string name="log_disable_progressbar_widget">disabled_progressbar_widget_en</string>
 
     <!-- OnBoarding -->
     <string name="label_version_up">アップデート情報 Ver %s</string>
