@@ -67,7 +67,7 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(
                     navController = navController,
-                    startDestination = if (reminderViewModel.isShowOnBoarding.value) Routes.ON_BOARDING else Routes.TOP
+                    startDestination = Routes.TOP
                 ) {
                     composable(route = Routes.TOP) {
                         TopScreen(
@@ -95,7 +95,6 @@ class MainActivity : ComponentActivity() {
                     composable(route = Routes.TERMS_OF_SERVICE) { TermsOfServiceScreen(navController) }
                     composable(route = Routes.HELP) { InstructionScreen(navController) }
                     composable(route = Routes.INQUIRY) { ContactUsScreen(navController) }
-                    composable(route = Routes.ON_BOARDING) { }
                 }
             }
         }
