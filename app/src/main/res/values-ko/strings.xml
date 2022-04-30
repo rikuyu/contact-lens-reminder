@@ -63,7 +63,7 @@
     <string name="app_setting_screen_title">이 앱 정보</string>
     <string name="terms_of_service">이용약관</string>
     <string name="help">도움말 (사용법)</string>
-    <string name="notification_setting">通知設定</string>
+    <string name="notification_setting">통지 설정</string>
     <string name="inquiry">문의</string>
     <string name="color_theme">테마 색상 변경</string>
     <string name="version">version %s</string>
