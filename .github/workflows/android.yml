@@ -39,15 +39,15 @@ jobs:
           GOOGLE_FORM_ID_EN: ${{ secrets.GOOGLE_FORM_ID_EN }}
         run: echo GOOGLE_FORM_ID_EN=\"$GOOGLE_FORM_ID_EN\" >> ./local.properties
 
-      - name: Access GOOGLE_FORM_ID_KR
+      - name: Access GOOGLE_FORM_ID_KO
         env:
-          GOOGLE_FORM_ID_KR: ${{ secrets.GOOGLE_FORM_ID_KR }}
-        run: echo GOOGLE_FORM_ID_KR=\"$GOOGLE_FORM_ID_KR\" >> ./local.properties
+          GOOGLE_FORM_ID_KO: ${{ secrets.GOOGLE_FORM_ID_KO }}
+        run: echo GOOGLE_FORM_ID_KO=\"$GOOGLE_FORM_ID_KO\" >> ./local.properties
 
-      - name: Access GOOGLE_FORM_ID_CN
+      - name: Access GOOGLE_FORM_ID_ZH
         env:
-          GOOGLE_FORM_ID_CN: ${{ secrets.GOOGLE_FORM_ID_CN }}
-        run: echo GOOGLE_FORM_ID_CN=\"$GOOGLE_FORM_ID_CN\" >> ./local.properties
+          GOOGLE_FORM_ID_ZH: ${{ secrets.GOOGLE_FORM_ID_ZH }}
+        run: echo GOOGLE_FORM_ID_ZH=\"$GOOGLE_FORM_ID_ZH\" >> ./local.properties
 
       - name: Generate google-services.json
         env:

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Contact Lens</string>
+    <string name="app_name">콘택트렌즈</string>
 
     <!-- In-App-Update -->
     <string name="update_dialog_title">Latest Version</string>
@@ -27,7 +27,7 @@
     <string name="day">일</string>
     <string name="change_message">교환일</string>
     <string name="time_message">통지시간</string>
-    <string name="start">Start</string>
+    <string name="start">사용 시작</string>
     <string name="lens_change">콘택트렌즈 교체</string>
     <string name="lens_setting">콘택트렌즈 설정</string>
     <string name="new_line">\n\n</string>

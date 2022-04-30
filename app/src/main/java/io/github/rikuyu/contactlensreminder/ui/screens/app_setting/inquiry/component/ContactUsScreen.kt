@@ -34,8 +34,8 @@ fun ContactUsScreen(navController: NavController) {
     val formId = when (Locale.getDefault().language) {
         Locale.JAPANESE.language -> BuildConfig.GOOGLE_FORM_ID_JA
         Locale.ENGLISH.language -> BuildConfig.GOOGLE_FORM_ID_EN
-        Locale.KOREAN.language -> BuildConfig.GOOGLE_FORM_ID_KR
-        Locale.CHINESE.language -> BuildConfig.GOOGLE_FORM_ID_CN
+        Locale.KOREAN.language -> BuildConfig.GOOGLE_FORM_ID_KO
+        Locale.CHINESE.language -> BuildConfig.GOOGLE_FORM_ID_ZH
         else -> BuildConfig.GOOGLE_FORM_ID_JA
     }
 
