@@ -22,18 +22,18 @@ def getGoogleFormIdEn() {
     return properties['GOOGLE_FORM_ID_EN']
 }
 
-def getGoogleFormIdKr() {
+def getGoogleFormIdKo() {
     def propFile = project.rootProject.file('local.properties')
     def properties = new Properties()
     properties.load(propFile.newDataInputStream())
-    return properties['GOOGLE_FORM_ID_KR']
+    return properties['GOOGLE_FORM_ID_KO']
 }
 
-def getGoogleFormIdCn() {
+def getGoogleFormIdZh() {
     def propFile = project.rootProject.file('local.properties')
     def properties = new Properties()
     properties.load(propFile.newDataInputStream())
-    return properties['GOOGLE_FORM_ID_CN']
+    return properties['GOOGLE_FORM_ID_ZH']
 }
 
 android {
@@ -53,8 +53,8 @@ android {
 
         buildConfigField("String", 'GOOGLE_FORM_ID_JA', getGoogleFormIdJa())
         buildConfigField("String", 'GOOGLE_FORM_ID_EN', getGoogleFormIdEn())
-        buildConfigField("String", 'GOOGLE_FORM_ID_KR', getGoogleFormIdKr())
-        buildConfigField("String", 'GOOGLE_FORM_ID_CN', getGoogleFormIdCn())
+        buildConfigField("String", 'GOOGLE_FORM_ID_KO', getGoogleFormIdKo())
+        buildConfigField("String", 'GOOGLE_FORM_ID_ZH', getGoogleFormIdZh())
     }
 
     buildTypes {

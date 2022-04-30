@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Contact Lens</string>
+    <string name="app_name">隐形眼镜</string>
 
     <!-- In-App-Update -->
     <string name="update_dialog_title">Latest Version</string>
