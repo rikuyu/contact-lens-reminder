@@ -9,6 +9,7 @@ import android.widget.RemoteViews
 import androidx.annotation.DrawableRes
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
+import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEventService
 import io.github.rikuyu.contactlensreminder.ui.MainActivity
 
 class ImageTypeWidget : AppWidgetProvider() {
@@ -25,10 +26,14 @@ class ImageTypeWidget : AppWidgetProvider() {
 
     override fun onEnabled(context: Context) {
         super.onEnabled(context)
+        FirebaseLogEventService(SharedPreferencesManager(context))
+            .logEvent(context.getString(R.string.log_enable_image_widget))
     }
 
     override fun onDisabled(context: Context) {
         super.onDisabled(context)
+        FirebaseLogEventService(SharedPreferencesManager(context))
+            .logEvent(context.getString(R.string.log_disable_image_widget))
     }
 
     override fun onReceive(context: Context, intent: Intent?) {

@@ -10,7 +10,7 @@ data class ReminderUseCase @Inject constructor(
 
     val getReminderSetting: GetReminderSetting,
 
-    val cancelReminder: CancelReminder,
+    val resetReminder: ResetReminder,
 
     val getIsShowOnBoarding: GetIsShowOnBoarding,
 

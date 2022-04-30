@@ -1,18 +1,9 @@
 ### 概要
 
-<!---
-関連するissueがあれば、その番号を書いてください。
-
-issueを閉じる場合
-close #999999
--->
-
 ### スクリーンショット
-
-<!---
-デザインを修正した時にはスクショを貼ってください。
--->
 
 |before|after|
 |------|-----|
-|null|null|
+|<img src="" width=220 alt="null">|<img src="" width=220 alt="null">|
+
+### 関連issue

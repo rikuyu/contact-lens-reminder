@@ -11,7 +11,7 @@ interface DataSource {
 
     fun getReminderSetting(): ReminderValue
 
-    fun cancelReminder()
+    fun resetReminder()
 
     fun saveAllLensSetting(lensSettingValue: LensSettingValue)
 

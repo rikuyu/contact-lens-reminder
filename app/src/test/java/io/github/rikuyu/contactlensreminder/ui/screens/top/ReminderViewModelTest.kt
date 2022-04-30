@@ -25,7 +25,7 @@ class ReminderViewModelTest {
     lateinit var getReminderSetting: GetReminderSetting
 
     @MockK
-    lateinit var cancelReminder: CancelReminder
+    lateinit var resetReminder: ResetReminder
 
     @MockK
     lateinit var getIsShowOnBoarding: GetIsShowOnBoarding
@@ -43,7 +43,7 @@ class ReminderViewModelTest {
             saveReminderSetting,
             startReminder,
             getReminderSetting,
-            cancelReminder,
+            resetReminder,
             getIsShowOnBoarding,
             getIsDarkTheme,
             switchIsDarkTheme

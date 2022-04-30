@@ -17,7 +17,7 @@ class ReminderViewModel @Inject constructor(
     private val _reminder: MutableState<ReminderValue> = mutableStateOf(ReminderValue())
     val reminder: State<ReminderValue> = _reminder
 
-    private val _isShowOnBoarding: MutableState<Boolean> = mutableStateOf(true)
+    private val _isShowOnBoarding: MutableState<Boolean> = mutableStateOf(false)
     val isShowOnBoarding: State<Boolean> = _isShowOnBoarding
 
     val isDarkTheme: MutableState<Boolean> = mutableStateOf(false)
@@ -38,13 +38,13 @@ class ReminderViewModel @Inject constructor(
                 usecase.saveReminderSetting(reminder.value)
                 usecase.startReminder()
             }
-            is ReminderEvent.CancelReminder -> {
+            is ReminderEvent.ResetReminder -> {
                 _reminder.value = reminder.value.copy(
                     isUsingContactLens = event.data.isUsingContactLens,
                     lensRemainingDays = event.data.lensPeriod
                 )
                 usecase.saveReminderSetting(reminder.value)
-                usecase.cancelReminder()
+                usecase.resetReminder()
             }
             is ReminderEvent.GetReminderSetting -> _reminder.value = usecase.getReminderSetting.invoke()
             is ReminderEvent.SwitchIsDarkTheme -> usecase.switchIsDarkTheme.invoke()

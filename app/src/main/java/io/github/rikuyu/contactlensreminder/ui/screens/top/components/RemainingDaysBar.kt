@@ -80,7 +80,8 @@ fun RemainingDaysBar(
             )
         }
         when (Locale.getDefault().language) {
-            Locale.JAPANESE.language -> JapaneseReminderText(
+            Locale.JAPANESE.language, Locale.KOREAN.language, Locale.CHINESE.language,
+            -> JaKrCnReminderText(
                 notificationDay = notificationDay,
                 notificationTimeHour = notificationTimeHour,
                 notificationTimeMinute = notificationTimeMinute,
@@ -89,7 +90,8 @@ fun RemainingDaysBar(
                 exchangeDay = exchangeDay,
                 isUseNotification = isUseNotification
             )
-            Locale.ENGLISH.language -> EnglishReminderText(
+            Locale.ENGLISH.language,
+            -> EnReminderText(
                 notificationDay = notificationDay,
                 notificationTimeHour = notificationTimeHour,
                 notificationTimeMinute = notificationTimeMinute,
@@ -98,7 +100,8 @@ fun RemainingDaysBar(
                 exchangeDay = exchangeDay,
                 isUseNotification = isUseNotification
             )
-            else -> JapaneseReminderText(
+            else
+            -> JaKrCnReminderText(
                 notificationDay = notificationDay,
                 notificationTimeHour = notificationTimeHour,
                 notificationTimeMinute = notificationTimeMinute,
@@ -112,7 +115,7 @@ fun RemainingDaysBar(
 }
 
 @Composable
-fun JapaneseReminderText(
+fun JaKrCnReminderText(
     notificationDay: Int,
     notificationTimeHour: Int,
     notificationTimeMinute: Int,
@@ -196,7 +199,7 @@ fun JapaneseReminderText(
 }
 
 @Composable
-fun EnglishReminderText(
+fun EnReminderText(
     notificationDay: Int,
     notificationTimeHour: Int,
     notificationTimeMinute: Int,

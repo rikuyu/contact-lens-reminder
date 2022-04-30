@@ -25,13 +25,14 @@ class LocalDataSource @Inject constructor(
             saveNotificationTimeHour(reminderValue.notificationTimeHour)
             saveNotificationTimeMinute(reminderValue.notificationTimeMinute)
             saveIsUsingContactLens(reminderValue.isUsingContactLens)
-            saveLensExchangeDay(getExpirationDate(reminderValue.lensPeriod))
+            saveLensExchangeDate(getExpirationDate(reminderValue.lensPeriod))
         }
     }
 
     override fun startReminder() {
         if (sharedPreferencesManager.getIsUseNotification()) {
             notificationAlarmManager.initAlarm()
+            sharedPreferencesManager.saveIsExecuteNotification(false)
         }
         tickDownAlarmManager.initAlarm()
         tickDownAlarmManager.updateAppWidget()
@@ -46,7 +47,7 @@ class LocalDataSource @Inject constructor(
             val lensRemainingDays = getContactLensRemainingDays()
             val isUsingContactLens = getIsUsingContactLens()
             val isUseNotification = getIsUseNotification()
-            val exchangeDay = getLensExchangeDay() ?: getExpirationDate(lensPeriod)
+            val exchangeDay = getLensExchangeDate() ?: getExpirationDate(lensPeriod)
 
             return ReminderValue(
                 lensPeriod = lensPeriod,
@@ -61,9 +62,10 @@ class LocalDataSource @Inject constructor(
         }
     }
 
-    override fun cancelReminder() {
+    override fun resetReminder() {
         if (sharedPreferencesManager.getIsUseNotification()) {
             notificationAlarmManager.cancelAlarm()
+            sharedPreferencesManager.saveIsExecuteNotification(true)
         }
         tickDownAlarmManager.cancelAlarm()
     }
@@ -82,7 +84,7 @@ class LocalDataSource @Inject constructor(
             saveLeftContactLensPower(lensSettingValue.leftLensPower)
             saveRightContactLensPower(lensSettingValue.rightLensPower)
             saveContactLensRemainingDays(remainingRay)
-            saveLensExchangeDay(getExpirationDate(remainingRay))
+            saveLensExchangeDate(getExpirationDate(remainingRay))
 
             if (getIsFirstUse()) {
                 saveIsFirstUse()
@@ -121,13 +123,7 @@ class LocalDataSource @Inject constructor(
         firebaseLogEventService.logEvent(label)
     }
 
-    override fun getIsShowOnBoarding(): Boolean {
-        val isShowOnBoarding = sharedPreferencesManager.getIsShowOnBoarding()
-        if (isShowOnBoarding) {
-            sharedPreferencesManager.saveIsShowOnBoarding()
-        }
-        return isShowOnBoarding
-    }
+    override fun getIsShowOnBoarding(): Boolean = false
 
     override fun getIsDarkTheme(): Boolean = sharedPreferencesManager.getIsDarkTheme()
 

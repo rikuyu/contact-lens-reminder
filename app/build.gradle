@@ -22,6 +22,20 @@ def getGoogleFormIdEn() {
     return properties['GOOGLE_FORM_ID_EN']
 }
 
+def getGoogleFormIdKr() {
+    def propFile = project.rootProject.file('local.properties')
+    def properties = new Properties()
+    properties.load(propFile.newDataInputStream())
+    return properties['GOOGLE_FORM_ID_KR']
+}
+
+def getGoogleFormIdCn() {
+    def propFile = project.rootProject.file('local.properties')
+    def properties = new Properties()
+    properties.load(propFile.newDataInputStream())
+    return properties['GOOGLE_FORM_ID_CN']
+}
+
 android {
     compileSdk 31
 
@@ -39,6 +53,8 @@ android {
 
         buildConfigField("String", 'GOOGLE_FORM_ID_JA', getGoogleFormIdJa())
         buildConfigField("String", 'GOOGLE_FORM_ID_EN', getGoogleFormIdEn())
+        buildConfigField("String", 'GOOGLE_FORM_ID_KR', getGoogleFormIdKr())
+        buildConfigField("String", 'GOOGLE_FORM_ID_CN', getGoogleFormIdCn())
     }
 
     buildTypes {

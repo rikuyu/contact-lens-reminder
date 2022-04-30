@@ -110,13 +110,13 @@ fun TopScreen(
             },
             showDialog = { dialogState = true }
         )
-        CancelReminderDialog(
+        ResetReminderDialog(
             dialogState = dialogState,
             changeDialogState = { dialogState = it }
         ) {
             isUsingContactLens = it
             viewModel.onEvent(
-                ReminderEvent.CancelReminder(
+                ReminderEvent.ResetReminder(
                     ReminderValue(
                         lensPeriod = lensPeriod,
                         notificationTimeHour = notificationTimeHour,

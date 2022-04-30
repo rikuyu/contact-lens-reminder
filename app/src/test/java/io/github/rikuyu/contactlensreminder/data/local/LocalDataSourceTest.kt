@@ -88,7 +88,7 @@ class LocalDataSourceTest {
         every { sharedPreferencesManager.getContactLensRemainingDays() } returns 19
         every { sharedPreferencesManager.getIsUsingContactLens() } returns false
         every { sharedPreferencesManager.getIsUseNotification() } returns true
-        every { sharedPreferencesManager.getLensExchangeDay() } returns "2022/02/11"
+        every { sharedPreferencesManager.getLensExchangeDate() } returns "2022/02/11"
 
         val actual = localDataSource.getReminderSetting()
 
@@ -100,7 +100,7 @@ class LocalDataSourceTest {
             sharedPreferencesManager.getContactLensRemainingDays()
             sharedPreferencesManager.getIsUsingContactLens()
             sharedPreferencesManager.getIsUseNotification()
-            sharedPreferencesManager.getLensExchangeDay()
+            sharedPreferencesManager.getLensExchangeDate()
         }
 
         confirmVerified(sharedPreferencesManager)
@@ -161,6 +161,7 @@ class LocalDataSourceTest {
         initLocalDataSource()
 
         every { sharedPreferencesManager.getIsUseNotification() } returns true
+        every { sharedPreferencesManager.saveIsExecuteNotification(any()) } returns Unit
 
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
         localDataSource.startReminder()
@@ -177,6 +178,7 @@ class LocalDataSourceTest {
         initLocalDataSource()
 
         every { sharedPreferencesManager.getIsUseNotification() } returns false
+        every { sharedPreferencesManager.saveIsExecuteNotification(any()) } returns Unit
 
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
         localDataSource.startReminder()
@@ -193,17 +195,19 @@ class LocalDataSourceTest {
         initLocalDataSource()
 
         every { sharedPreferencesManager.getIsUseNotification() } returns true
+        every { sharedPreferencesManager.saveIsExecuteNotification(any()) } returns Unit
 
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
         localDataSource.startReminder()
         assertThat(shadowAlarmManager.scheduledAlarms.size).isEqualTo(2)
-        localDataSource.cancelReminder()
+        localDataSource.resetReminder()
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
 
         verifyAll {
             sharedPreferencesManager.getIsUseNotification()
+            sharedPreferencesManager.saveIsExecuteNotification(any())
             localDataSource.startReminder()
-            localDataSource.cancelReminder()
+            localDataSource.resetReminder()
         }
     }
 
@@ -212,17 +216,18 @@ class LocalDataSourceTest {
         initLocalDataSource()
 
         every { sharedPreferencesManager.getIsUseNotification() } returns false
+        every { sharedPreferencesManager.saveIsExecuteNotification(any()) } returns Unit
 
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
         localDataSource.startReminder()
         assertThat(shadowAlarmManager.scheduledAlarms.size).isEqualTo(1)
-        localDataSource.cancelReminder()
+        localDataSource.resetReminder()
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
 
         verifyAll {
             sharedPreferencesManager.getIsUseNotification()
             localDataSource.startReminder()
-            localDataSource.cancelReminder()
+            localDataSource.resetReminder()
         }
     }
 

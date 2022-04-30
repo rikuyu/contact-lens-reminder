@@ -87,14 +87,14 @@ class ReminderRepositoryTest {
     }
 
     @Test
-    fun `cancelReminder test`() {
-        every { localDataSource.cancelReminder() } returns Unit
+    fun `resetReminder test`() {
+        every { localDataSource.resetReminder() } returns Unit
 
-        reminderRepository.cancelReminder()
+        reminderRepository.resetReminder()
 
         verify(exactly = 1) {
-            localDataSource.cancelReminder()
-            reminderRepository.cancelReminder()
+            localDataSource.resetReminder()
+            reminderRepository.resetReminder()
         }
     }
 }

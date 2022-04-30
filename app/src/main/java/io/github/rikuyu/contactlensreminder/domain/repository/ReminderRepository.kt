@@ -10,7 +10,7 @@ interface ReminderRepository {
 
     fun getReminderSetting(): ReminderValue
 
-    fun cancelReminder()
+    fun resetReminder()
 
     fun getIsShowOnBoarding(): Boolean
 

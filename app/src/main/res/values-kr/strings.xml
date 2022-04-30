@@ -1,0 +1,174 @@
+<resources>
+    <string name="app_name">Contact Lens</string>
+
+    <!-- In-App-Update -->
+    <string name="update_dialog_title">Latest Version</string>
+    <string name="update_dialog_message">Please update to the latest version to continue using this application, .</string>
+    <string name="update_dialog_positive_button_label">Update</string>
+    <string name="update_immediate_success">immediate_update_success_kr</string>
+    <string name="update_unknown">UpdateAvailability.UNKNOWN_kr</string>
+    <string name="update_not_available">UpdateAvailability.UPDATE_NOT_AVAILABLE_kr</string>
+    <string name="update_available">UpdateAvailability.UPDATE_AVAILABLE_kr</string>
+    <string name="update_triggered_in_progress">UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS_kr</string>
+
+    <!-- In-App-Review -->
+    <string name="review_request_not_complete">requestReviewFlow().addOnCompleteListener task is NOT isSuccessful_kr</string>
+    <string name="review_launch_complete">launchReviewFlow(a, r).addOnCompleteListener_kr</string>
+    <string name="review_launch_failure">launchReviewFlow(a, r).addOnFailureListener_kr</string>
+
+    <!-- SCHEDULE_EXACT_ALARM -->
+    <string name="exact_alarm_dialog_title">설정 변경 요청</string>
+    <string name="exact_alarm_dialog_message">이 앱을 사용하려면 설정 화면에서 통지을 허가해야합니다. (설정을 ON으로 설정)</string>
+    <string name="exact_alarm_dialog_positive_button_label">設定を開く</string>
+    <string name="exact_alarm_dialog_event_label">alarmManager.canScheduleExactAlarms() == %s</string>
+
+    <!-- TopScreen -->
+    <string name="remain">남은</string>
+    <string name="day">일</string>
+    <string name="change_message">교환일</string>
+    <string name="time_message">통지시간</string>
+    <string name="start">Start</string>
+    <string name="lens_change">콘택트렌즈 교체</string>
+    <string name="lens_setting">콘택트렌즈 설정</string>
+    <string name="new_line">\n\n</string>
+    <string name="time_div">:</string>
+    <string name="alert_toast_message">렌즈 사용 중에는 설정을 변경할 수 없습니다.</string>
+    <string name="one_day_text">일 콘택트렌즈</string>
+    <string name="days_text">일 콘택트렌즈</string>
+    <string name="two_weeks_day_text">2주간 콘택트렌즈</string>
+    <string name="one_month_text">1개월 콘택트렌즈</string>
+
+    <!-- LensSettingScreen -->
+    <string name="lens_setting_screen_title">콘택트렌즈 설정</string>
+    <string name="notification">통지</string>
+    <string name="notification_day_title">날짜</string>
+    <string name="before_day">전날</string>
+    <string name="before_day_lower">전날</string>
+    <string name="on_the_day">당일</string>
+    <string name="on_the_day_lower">당일</string>
+    <string name="notification_time">시간</string>
+    <string name="lens_power">콘택트 렌즈의 도수</string>
+    <string name="left">L</string>
+    <string name="right">R</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="lens_period">일</string>
+    <string name="period">기간</string>
+    <string name="two_weeks">2주간</string>
+    <string name="one_month">1개월</string>
+    <string name="other">기타</string>
+    <string name="alert_lens_setting">1일 콘택트 렌즈 설정 시 전일 통지을 사용할 수 없습니다.</string>
+
+    <!-- AppSettingScreen -->
+    <string name="app_setting_screen_title">이 앱 정보</string>
+    <string name="terms_of_service">이용약관</string>
+    <string name="help">도움말 (사용법)</string>
+    <string name="notification_setting">通知設定</string>
+    <string name="inquiry">문의</string>
+    <string name="color_theme">테마 색상 변경</string>
+    <string name="version">version %s</string>
+
+    <!-- Notification -->
+    <string name="notification_on_the_day_title">콘택트 렌즈 교환일</string>
+    <string name="notification_before_day_title">콘택트렌즈 교환일은 내일</string>
+    <string name="notification_content">콘택트 렌즈를 올바르게 사용하여 눈 건강을 지키세요!</string>
+    <string name="notification_setting_label">콘택트 렌즈 통지 설정</string>
+
+    <!-- レンズ交換確認ダイアログ -->
+    <string name="reminder_cancel_dialog_title">정말 당신은 콘택트 렌즈를 교체합니까?</string>
+    <string name="reminder_cancel_dialog_content">통지이 취소됩니다.</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_ok">OK</string>
+
+    <!-- カラーテーマ変更ダイアログ -->
+    <string name="color_theme_dialog_title">테마 색상 변경</string>
+
+    <!-- ヘルプ（使い方） -->
+    <string name="help_1_page">STEP 1</string>
+    <string name="help_2_page">STEP 2</string>
+    <string name="help_3_page">STEP 3</string>
+    <string name="other_page">Other</string>
+    <string name="step_1_1">콘택트 렌즈 및 통지 설정 정보</string>
+    <string name="step_1_2">시작하기 전에 "렌즈 설정" 버튼(빨간색 프레임)을 눌러 콘택트 렌즈와 통지을 설정합니다. \n 이 설정 없이 "시작"을 누르면 2Week용 렌즈 설정(통지 없음)이 적용됩니다.</string>
+    <string name="step_1_3">렌즈 및 통지 설정 화면</string>
+    <string name="step_1_4">이 화면에서 "콘택트 렌즈 유형", "사용 기간", "통지 날짜", "통지 시간", "콘택트 렌즈의 빈도"를 설정할 수 있습니다.</string>
+    <string name="step_2_1">콘택트 렌즈의 종류</string>
+    <string name="step_2_2">콘택트 렌즈의 종류는 "2주간"」" "1개월"」" 중에서 선택할 수 있습니다. 그 외에 1~31일 사이에 렌즈의 사용 기간을 지정할 수도 있습니다.</string>
+    <string name="step_2_3">통지 설정</string>
+    <string name="step_2_4">통지일은 당일 또는 전날을 선택할 수 있습니다. 또한 통지 시간은 1분 단위로 설정할 수 있습니다.</string>
+    <string name="step_2_5">콘택트 렌즈의 도수 설정</string>
+    <string name="step_2_6">콘택트 렌즈의 빈도는 -8.0 ~ -3.0 범위에서 설정할 수 있습니다.</string>
+    <string name="step_2_7">설정 저장 방법</string>
+    <string name="step_2_8">설정을 저장하려면 OK 버튼을 누릅니다.</string>
+    <string name="step_3_1">통지 설정 방법</string>
+    <string name="step_3_2">통지을 시작하려면 "시작"」" 버튼(빨간색 테두리)을 누릅니다.</string>
+    <string name="step_3_3">통지 시작 후</string>
+    <string name="step_3_4">통지을 시작하면 "시작"」" 버튼이 "렌즈 교체"」" 버튼이 됩니다. 또한 한 번 통지을 시작하면 렌즈를 교체할 때까지 설정을 변경할 수 없습니다.</string>
+    <string name="step_3_5">매일 오전 0시에 업데이트됩니다.</string>
+    <string name="step_3_6">남은 일수가 갱신되지 않는 경우는, 수고스럽지만, 임의의 일수로 다시 렌즈의 설정을 실시해, 재차 리마인더를 기동시켜 주세요.</string>
+    <string name="step_3_7">그 외, 앱의 특징・주의사항(중요)은, Other를 봐 주세요.</string>
+    <string name="step_4_1">도움말 정보</string>
+    <string name="step_4_2">상단 화면에서 "도움말" 버튼(빨간색 테두리)을 누르면 도움말 화면을 볼 수 있습니다.</string>
+    <string name="step_4_3">"앱 정보"화면</string>
+    <string name="step_4_4">이 화면에서 "이용 약관", "도움말(사용법)", "통지 설정", "문의", "버전", "테마 색상 변경"을 참조할 수 있습니다.</string>
+    <string name="step_4_5">라이트/다크 모드에 대하여</string>
+    <string name="step_4_6">이 앱은 상단 화면 왼쪽 상단의 아이콘을 눌러 라이트 / 다크 모드를 구분할 수 있습니다.</string>
+    <string name="step_4_7">테마 컬러 변경에 대해</string>
+    <string name="step_4_8">도움말 화면의 "테마 색상 변경"을 눌러 나타나는 대화상자에서 테마 색상을 변경할 수 있습니다.</string>
+    <string name="step_4_9">앱 위젯 정보</string>
+    <string name="step_4_10">앱 위젯에는 "이미지 유형"과 "프로그레스 바 유형"이 있습니다. 이미지 유형은 콘택트 렌즈의 남은 사용 가능한 일 수를 표시합니다. 프로그레스 바 타입은 남은 사용 가능 일수를 나타내는 프로그레스 바와 렌즈 교환을 하는 날짜가 표시됩니다.</string>
+    <string name="step_4_11">[ 주의사항 ]</string>
+    <string name="step_4_12">1. 앱 버전 업데이트를 수행한 후 앱 위젯을 다시 작성하세요.</string>
+    <string name="step_4_13">2. 앱 위젯을 홈 화면으로 가져올 때 앱 위젯을 로드할 수 없는 경우 앱을 제거한 후 다시 시도하세요.</string>
+    <string name="step_4_14">위의 문제가 해결되지 않으면 문의하시기 바랍니다.</string>
+
+    <!-- お問い合わせ -->
+    <string name="network_error_message_1">문의하려면 인터넷에 연결하십시오.</string>
+    <string name="network_error_message_2">null</string>
+
+    <!-- 利用規約 -->
+    <string name="title_1">1. 본 앱의 내용</string>
+    <string name="content_1">「본 앱」이란, 현재 사용하고 있는 이 스마트폰용 어플리케이션(이하 「본 앱」이라고 합니다.) 「콘택트 렌즈 교환 리마인더」를 말합니다.</string>
+    <string name="title_2">2. 약관에 동의</string>
+    <string name="content_2">귀하는 본 약관에 동의한 후 본 앱을 사용해야 합니다.</string>
+    <string name="title_3">3. 권리의 귀속 등</string>
+    <string name="content_3_1">1．본 앱의 저작권 기타 본 앱에 관한 일체의 권리는 본 앱 개발자(이하 "개발자") 또는 개발자가 허락을 받을 권리자에게 귀속됩니다.</string>
+    <string name="content_3_2">2．고객은 개발자 지정의 용도에 한하여 본 앱을 사용할 수 있는 것으로 합니다. 덧붙여 본 앱 개발자로부터 청구가 있었을 경우, 고객은, 신속하게 본 앱의 사용을 중지해, 또는 본 앱을 고객의 스마트폰으로부터 삭제하는 것으로 합니다.</string>
+    <string name="content_3_3">3．고객은 본 앱 및 본 서비스에 있어서 고객의 스마트폰에 다운로드된 정보의 전재·복제·전송·개변 또는 리버스 엔지니어링 등을 스스로 실시해서는 안 되며, 제3자에게 해당 행위를 하지 말아야 합니다.</string>
+    <string name="title_4">4. 본 앱 제공의 휴지, 변경 등</string>
+    <string name="content_4">개발자는 고객의 승낙 및 고객의 통지 없이 언제든지 본 앱 제공의 일시 중지 또는 종료, 본 서비스의 내용 변경 및 본 앱의 변경 등을 할 수 있는 것으로 합니다.</string>
+    <string name="title_5">5. 면책사항 등</string>
+    <string name="content_5_1">1．본 어플의 하자, 본 어플의 동작에 관련된 불편(표시 정보의 오차·일탈을 포함합니다.) 소실의 불이익, 기타 일체의 불이익에 대해서는, 개발자는 일절 그 책임을 지지 않습니다.</string>
+    <string name="content_5_2">2．전항 외에, 다음 각 호에 정하는 경우에 있어서의 본어플리의 이용 불능, 및 이것에 의해 생긴 손해에 대해서, 개발자는, 일절의 책임을 지지 않습니다.</string>
+    <string name="content_5_2_1">（1）천재지변, 법원 등 공적기관의 조치 등 부득이한 사유가 발생한 경우</string>
+    <string name="content_5_2_2">（2）개발자가 상당하다고 인정하는 안전 대책을 강구했음에도 불구하고 통신 회선 또는 시스템 등에 장애가 발생한 경우</string>
+    <string name="content_5_2_3">（3）지문인증이나 패스코드 인증 등이 부정하게 실행되었을 경우</string>
+    <string name="content_5_2_4">（4）개발자 이외의 제3자의 책임으로 돌아가야 할 사유에 의한 경우</string>
+    <string name="content_5_3">3．고객이 본 앱을 사용하여 정보의 업로드, 다운로드 및 기타 수수를 실시한 경우, 고객은 해당 정보의 수수를 전자적 방법으로 실시하는 것을 개발자에게 동의한 것으로 합니다.</string>
+    <string name="title_6">6. 이용 환경의 정비 등</string>
+    <string name="content_6_1">1．고객은 본 어플리케이션의 사용(본 어플리케이션의 다운로드를 포함합니다.)에 필요한 통신 기기, 소프트웨어, 통신 회선 그 외의 환경을 고객의 책임과 부담에 있어서 준비하는 것으로 합니다.</string>
+    <string name="content_6_2">2．본 어플리케이션의 사용(본 어플리케이션의 다운로드를 포함합니다.)에 수반해 발생하는 통신료는, 손님의 부담으로 합니다.</string>
+    <string name="content_6_3">3．고객은 개발자가 제공하는 정보를 참고하여 자신의 이용 환경에 따라 컴퓨터 바이러스의 감염, 무단 액세스 및 정보 유출 방지 등의 적절한 정보 보안을 유지하는 것으로 합니다.</string>
+    <string name="content_6_4">4．고객은 본 앱을 설치한 스마트폰을 처분하는 경우, 기타 본 앱의 사용을 종료할 경우, 본 앱을 반드시 삭제하는 것으로 합니다.</string>
+    <string name="title_7">7. 규약의 준용</string>
+    <string name="content_7">본 앱에 관하여 본 약관에 규정되지 않은 사항에 대해서는 개발자의 다른 약관의 규정을 준용합니다.</string>
+    <string name="title_8">8. 약관 변경</string>
+    <string name="content_8_1">1．본 규약의 각 조항 그 외의 조건은, 금융 정세 그 외 상황의 변화 등 상응의 사유가 있다고 인정되는 경우에는, 민법 548조의 4의 (일본 법률) 규정에 근거해, 변경하는 것으로 합니다.</string>
+    <string name="content_8_2">2．전항의 변경은, 변경을 실시하는 취지, 변경 후의 규정의 내용, 그 효력 발생 시기를, 인터넷, 또는 그 외 상당한 방법으로 공표하는 것으로 주지합니다.</string>
+    <string name="content_8_3">3．전2항의 변경은, 공표시에 정하는 적용 개시일부터 적용되는 것으로 하고, 공표의 날부터 적용 개시일까지는 변경의 내용에 따라서 상당한 기간을 둔 것으로 합니다.</string>
+    <string name="title_that_all">그게 다야</string>
+
+    <!-- AppWidget -->
+    <string name="app_widget_progress_bar">Progress Bar Type</string>
+    <string name="app_widget_image">Number Type</string>
+    <string name="text_remaining_day_before">null</string>
+    <string name="text_remaining_day_after">일</string>
+    <string name="text_preview_remaining_day">14 일</string>
+    <string name="text_preview_exchange_date">12/10 (수)</string>
+    <string name="no_image_description">no image</string>
+    <string name="log_enable_image_widget">enabled_image_widget_kr</string>
+    <string name="log_disable_image_widget">disabled_image_widget_kr</string>
+    <string name="log_enable_progressbar_widget">enabled_progressbar_widget_kr</string>
+    <string name="log_disable_progressbar_widget">disabled_progressbar_widget_kr</string>
+
+</resources>

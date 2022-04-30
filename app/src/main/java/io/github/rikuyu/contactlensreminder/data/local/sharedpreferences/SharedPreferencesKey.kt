@@ -56,4 +56,7 @@ object SharedPreferencesKey {
 
     // テーマカラーを使うかどうか
     const val STORED_IS_THEME_COLOR = "contact_lens_reminder_theme_color"
+
+    // 通知が鳴ったか（再起動時の再予約に使用）
+    const val STORED_IS_EXECUTE_NOTIFICATION = "is_execute_notification"
 }
