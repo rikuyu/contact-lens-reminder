@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.*
+
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
@@ -7,32 +10,55 @@ plugins {
     id("com.google.firebase.crashlytics")
 }
 
-def getGoogleFormIdJa() {
-    def propFile = project.rootProject.file("local.properties")
-    def properties = new Properties()
-    properties.load(propFile.newDataInputStream())
-    return properties["GOOGLE_FORM_ID_JA"]
-}
+//def getGoogleFormIdJa() {
+//    def propFile = project.rootProject.file("local.properties")
+//    def properties = new Properties()
+//    properties.load(propFile.newDataInputStream())
+//    return properties["GOOGLE_FORM_ID_JA"]
+//}
+//
+//def getGoogleFormIdEn() {
+//    def propFile = project.rootProject.file("local.properties")
+//    def properties = new Properties()
+//    properties.load(propFile.newDataInputStream())
+//    return properties["GOOGLE_FORM_ID_EN"]
+//}
+//
+//def getGoogleFormIdKo() {
+//    def propFile = project.rootProject.file("local.properties")
+//    def properties = new Properties()
+//    properties.load(propFile.newDataInputStream())
+//    return properties["GOOGLE_FORM_ID_KO"]
+//}
+//
+//def getGoogleFormIdZh() {
+//    def propFile = project.rootProject.file("local.properties")
+//    def properties = new Properties()
+//    properties.load(propFile.newDataInputStream())
+//    return properties["GOOGLE_FORM_ID_ZH"]
+//}
 
-def getGoogleFormIdEn() {
-    def propFile = project.rootProject.file("local.properties")
-    def properties = new Properties()
-    properties.load(propFile.newDataInputStream())
-    return properties["GOOGLE_FORM_ID_EN"]
-}
+//def versionPropertiesFile = file("${project.rootDir.absolutePath}/ci_config/version.properties")
+//def versionProperties = new Properties()
+//if (versionPropertiesFile.exists()) {
+//    versionProperties.load(versionPropertiesFile.newReader())
+//}
+//
+//final
+//def generatedVersionCode = versionProperties.getProperty("versionCode", project.defaultVersionCode).toInteger()
+//final
+//def generatedVersionName = versionProperties.getProperty("versionName", project.defaultVersionName)
+//
+//val fis = FileInputStream("YOUR_PROPERTIES_FILE_PATH")
+//val prop = Properties()
+//prop.load(fis)
+//println("Value is =" + prop.getProperty("propertyName"))
 
-def getGoogleFormIdKo() {
-    def propFile = project.rootProject.file("local.properties")
-    def properties = new Properties()
-    properties.load(propFile.newDataInputStream())
-    return properties["GOOGLE_FORM_ID_KO"]
-}
-
-def getGoogleFormIdZh() {
-    def propFile = project.rootProject.file("local.properties")
-    def properties = new Properties()
-    properties.load(propFile.newDataInputStream())
-    return properties["GOOGLE_FORM_ID_ZH"]
+fun getGoogleFormId(countryCode: String): String {
+    val fis = FileInputStream(project.rootProject.file("local.properties"))
+    val prop = Properties()
+    prop.load(fis)
+    return prop.getProperty("GOOGLE_FORM_ID_$countryCode")
 }
 
 android {
@@ -50,16 +76,16 @@ android {
             useSupportLibrary = true
         }
 
-        buildConfigField("String", "GOOGLE_FORM_ID_JA", getGoogleFormIdJa())
-        buildConfigField("String", "GOOGLE_FORM_ID_EN", getGoogleFormIdEn())
-        buildConfigField("String", "GOOGLE_FORM_ID_KO", getGoogleFormIdKo())
-        buildConfigField("String", "GOOGLE_FORM_ID_ZH", getGoogleFormIdZh())
+        buildConfigField("String", "GOOGLE_FORM_ID_JA", getGoogleFormId("JA"))
+        buildConfigField("String", "GOOGLE_FORM_ID_EN", getGoogleFormId("EN"))
+        buildConfigField("String", "GOOGLE_FORM_ID_KO", getGoogleFormId("KO"))
+        buildConfigField("String", "GOOGLE_FORM_ID_ZH", getGoogleFormId("ZH"))
     }
 
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -74,7 +100,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion "1.1.1"
+        kotlinCompilerExtensionVersion = "1.1.1"
     }
     packagingOptions {
         resources {
@@ -84,11 +110,7 @@ android {
     lintOptions {
         xmlReport = true
     }
-    testOptions {
-        unitTests {
-            includeAndroidResources = true
-        }
-    }
+    testOptions.unitTests.isIncludeAndroidResources = true
 }
 
 //configurations {
@@ -123,14 +145,14 @@ dependencies {
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.23.1")
 
     implementation("com.google.dagger:hilt-android:2.40")
-    kapt "com.google.dagger:hilt-android-compiler:2.40"
+    kapt("com.google.dagger:hilt-android-compiler:2.40")
     implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha01")
-    kapt "androidx.hilt:hilt-compiler:1.0.0"
+    kapt("androidx.hilt:hilt-compiler:1.0.0")
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
     implementation(platform("com.google.firebase:firebase-bom:29.0.3"))
-    implementation('com.google.firebase:firebase-analytics-ktx')
-    implementation('com.google.firebase:firebase-crashlytics-ktx')
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-crashlytics-ktx")
 
     implementation("com.google.android.play:core:1.10.3")
     implementation("com.google.android.play:core-ktx:1.8.1")
