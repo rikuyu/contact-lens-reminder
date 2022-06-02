@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "ContactLensReminder"
-include ":app"
+include(":app")
