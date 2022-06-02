@@ -129,7 +129,12 @@ val ktlintCheck by tasks.creating(JavaExec::class) {
     description = "Check Kotlin code style."
     classpath = ktlint
     mainClass.set("com.pinterest.ktlint.Main")
-    args = listOf("src/**/*.kt")
+    args = listOf("--android",
+        "--color",
+        "--reporter=plain",
+        "--reporter=checkstyle,output=${buildDir}/reports/ktlint-result.xml",
+        "src/**/*.kt")
+    isIgnoreExitValue = true
 }
 
 val ktlintFormat by tasks.creating(JavaExec::class) {
@@ -140,4 +145,5 @@ val ktlintFormat by tasks.creating(JavaExec::class) {
     classpath = ktlint
     mainClass.set("com.pinterest.ktlint.Main")
     args = listOf("-F", "src/**/*.kt")
+    isIgnoreExitValue = true
 }
