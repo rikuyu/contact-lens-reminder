@@ -10,50 +10,6 @@ plugins {
     id("com.google.firebase.crashlytics")
 }
 
-//def getGoogleFormIdJa() {
-//    def propFile = project.rootProject.file("local.properties")
-//    def properties = new Properties()
-//    properties.load(propFile.newDataInputStream())
-//    return properties["GOOGLE_FORM_ID_JA"]
-//}
-//
-//def getGoogleFormIdEn() {
-//    def propFile = project.rootProject.file("local.properties")
-//    def properties = new Properties()
-//    properties.load(propFile.newDataInputStream())
-//    return properties["GOOGLE_FORM_ID_EN"]
-//}
-//
-//def getGoogleFormIdKo() {
-//    def propFile = project.rootProject.file("local.properties")
-//    def properties = new Properties()
-//    properties.load(propFile.newDataInputStream())
-//    return properties["GOOGLE_FORM_ID_KO"]
-//}
-//
-//def getGoogleFormIdZh() {
-//    def propFile = project.rootProject.file("local.properties")
-//    def properties = new Properties()
-//    properties.load(propFile.newDataInputStream())
-//    return properties["GOOGLE_FORM_ID_ZH"]
-//}
-
-//def versionPropertiesFile = file("${project.rootDir.absolutePath}/ci_config/version.properties")
-//def versionProperties = new Properties()
-//if (versionPropertiesFile.exists()) {
-//    versionProperties.load(versionPropertiesFile.newReader())
-//}
-//
-//final
-//def generatedVersionCode = versionProperties.getProperty("versionCode", project.defaultVersionCode).toInteger()
-//final
-//def generatedVersionName = versionProperties.getProperty("versionName", project.defaultVersionName)
-//
-//val fis = FileInputStream("YOUR_PROPERTIES_FILE_PATH")
-//val prop = Properties()
-//prop.load(fis)
-//println("Value is =" + prop.getProperty("propertyName"))
-
 fun getGoogleFormId(countryCode: String): String {
     val fis = FileInputStream(project.rootProject.file("local.properties"))
     val prop = Properties()
@@ -72,6 +28,7 @@ android {
         versionName = "2.3.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -113,9 +70,7 @@ android {
     testOptions.unitTests.isIncludeAndroidResources = true
 }
 
-//configurations {
-//    ktlint
-//}
+val ktlint by configurations.creating
 
 dependencies {
 
@@ -157,22 +112,32 @@ dependencies {
     implementation("com.google.android.play:core:1.10.3")
     implementation("com.google.android.play:core-ktx:1.8.1")
 
-//    ktlint("com.pinterest:ktlint:0.42.1")
+    ktlint("com.pinterest:ktlint:0.45.2") {
+        attributes {
+            attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling.EXTERNAL))
+        }
+    }
 }
 
-//task ktlint(type: JavaExec, group: "verification") {
-//    description = "Check Kotlin code style."
-//    classpath = configurations.ktlint
-//    main = "com.pinterest.ktlint.Main"
-//    args "--android", "--color", "--reporter=plain", "--reporter=checkstyle,output=${buildDir}/reports/ktlint-result.xml", "src/**/*.kt"
-//    ignoreExitValue true
-//}
-//check.dependsOn ktlint
-//
-//task ktlintFormat(type: JavaExec, group: "formatting") {
-//    description = "Fix Kotlin code style deviations."
-//    classpath = configurations.ktlint
-//    main = "com.pinterest.ktlint.Main"
-//    args "-F", "src/**/*.kt"
-//    ignoreExitValue true
-//}
+val outputDir = "${project.buildDir}/reports/ktlint/"
+val inputFiles = project.fileTree(mapOf("dir" to "src", "include" to "**/*.kt"))
+
+val ktlintCheck by tasks.creating(JavaExec::class) {
+    inputs.files(inputFiles)
+    outputs.dir(outputDir)
+
+    description = "Check Kotlin code style."
+    classpath = ktlint
+    mainClass.set("com.pinterest.ktlint.Main")
+    args = listOf("src/**/*.kt")
+}
+
+val ktlintFormat by tasks.creating(JavaExec::class) {
+    inputs.files(inputFiles)
+    outputs.dir(outputDir)
+
+    description = "Fix Kotlin code style deviations."
+    classpath = ktlint
+    mainClass.set("com.pinterest.ktlint.Main")
+    args = listOf("-F", "src/**/*.kt")
+}
