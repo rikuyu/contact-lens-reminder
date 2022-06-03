@@ -4,7 +4,7 @@ import io.github.rikuyu.contactlensreminder.domain.repository.LensSettingReposit
 import io.github.rikuyu.contactlensreminder.domain.model.LensSettingValue
 import javax.inject.Inject
 
-class SaveAllLensSetting @Inject constructor (
+class SaveAllLensSetting @Inject constructor(
     private val repository: LensSettingRepository
 ) {
     operator fun invoke(lensSetting: LensSettingValue) {

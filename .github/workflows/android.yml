@@ -70,7 +70,7 @@ jobs:
           bundle install
 
       - name: run ktlint
-        run: ./gradlew ktlint
+        run: ./gradlew ktlintCheck
 
       - name: run danger
         env:
