@@ -18,12 +18,12 @@ fun getGoogleFormId(countryCode: String): String {
 }
 
 android {
-    compileSdk = 31
+    compileSdk = 32
 
     defaultConfig {
         applicationId = "io.github.rikuyu.contactlensreminder"
         minSdk = 26
-        targetSdk = 31
+        targetSdk = 32
         versionCode = 11
         versionName = "2.3.1"
 
