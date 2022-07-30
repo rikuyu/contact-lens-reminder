@@ -90,7 +90,7 @@ dependencies {
     testImplementation("io.mockk:mockk:1.12.2")
     testImplementation("io.mockk:mockk-agent-jvm:1.12.2")
 
-    implementation("androidx.navigation:navigation-compose:2.4.2")
+    implementation("androidx.navigation:navigation-compose:2.5.1")
 
     implementation("io.github.vanpra.compose-material-dialogs:datetime:0.7.2")
     implementation("com.chargemap.compose:numberpicker:0.0.12")
