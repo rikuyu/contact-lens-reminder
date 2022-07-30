@@ -95,7 +95,7 @@ dependencies {
     implementation("io.github.vanpra.compose-material-dialogs:datetime:0.7.2")
     implementation("com.chargemap.compose:numberpicker:0.0.12")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1")
-    implementation("com.google.accompanist:accompanist-pager:0.23.1")
+    implementation("com.google.accompanist:accompanist-pager:0.25.0")
     implementation("com.google.accompanist:accompanist-pager-indicators:0.23.1")
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.23.1")
 
