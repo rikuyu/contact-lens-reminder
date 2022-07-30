@@ -3,5 +3,161 @@
   "extends": [
     "config:base"
   ],
-  "baseBranches": ["develop"]
+  "baseBranches": ["develop"],
+  "packageRules": [
+    {
+      "groupName": "Accompanist",
+      "matchPackagePatterns": [
+        "^com\\.google\\.accompanist:"
+      ]
+    },
+    {
+      "groupName": "android-junit4",
+      "matchPackagePatterns": [
+        "^de\\.mannodermaus\\.gradle\\.plugins:android-junit4",
+        "^de\\.mannodermaus\\.junit4:"
+      ]
+    },
+    {
+      "groupName": "androidx.activity",
+      "matchPackagePatterns": [
+        "^androidx\\.activity:"
+      ],
+      "prBodyNotes": [
+        "### Release Notes\n\nhttps://developer.android.com/jetpack/androidx/releases/activity#{{{newVersion}}}"
+      ]
+    },
+    {
+      "groupName": "androidx.appcompat",
+      "matchPackagePatterns": [
+        "^androidx\\.appcompat:"
+      ],
+      "prBodyNotes": [
+        "### Release Notes\n\nhttps://developer.android.com/jetpack/androidx/releases/appcompat#{{{newVersion}}}"
+      ]
+    },
+    {
+      "groupName": "androidx.core",
+      "matchPackagePatterns": [
+        "^androidx\\.core:"
+      ],
+      "prBodyNotes": [
+        "### Release Notes\n\nhttps://developer.android.com/jetpack/androidx/releases/core#{{{newVersion}}}"
+      ]
+    },
+    {
+      "groupName": "androidx.constraintlayout",
+      "matchPackagePatterns": [
+        "^androidx\\.constraintlayout:"
+      ],
+      "prBodyNotes": [
+        "### Release Notes\n\nhttps://developer.android.com/jetpack/androidx/releases/constraintlayout#{{{newVersion}}}"
+      ]
+    },
+    {
+      "groupName": "androidx.fragment",
+      "matchPackagePatterns": [
+        "^androidx\\.fragment:"
+      ],
+      "prBodyNotes": [
+        "### Release Notes\n\nhttps://developer.android.com/jetpack/androidx/releases/fragment#{{{newVersion}}}"
+      ]
+    },
+    {
+      "groupName": "androidx.lifecycle",
+      "matchPackagePatterns": [
+        "^androidx\\.lifecycle:"
+      ],
+      "prBodyNotes": [
+        "### Release Notes\n\nhttps://developer.android.com/jetpack/androidx/releases/lifecycle#{{{newVersion}}}"
+      ]
+    },
+    {
+      "groupName": "androidx.navigation",
+      "matchPackagePatterns": [
+        "^androidx\\.navigation:"
+      ],
+      "prBodyNotes": [
+        "### Release Notes\n\nhttps://developer.android.com/jetpack/androidx/releases/navigation#{{{newVersion}}}"
+      ]
+    },
+    {
+      "groupName": "androidx.test",
+      "matchPackagePatterns": [
+        "^androidx\\.test:",
+        "^androidx\\.test\\.ext:",
+        "^androidx\\.test\\.espresso:"
+      ],
+      "prBodyNotes": [
+        "### Release Notes\n\nhttps://developer.android.com/jetpack/androidx/releases/test#{{{newVersion}}}"
+      ]
+    },
+    {
+      "groupName": "Coil",
+      "matchPackagePatterns": [
+        "^io\\.coil-kt:"
+      ]
+    },
+    {
+      "groupName": "Dagger and Hilt",
+      "matchPackagePatterns": [
+        "^com\\.google\\.dagger:"
+      ]
+    },
+    {
+      "groupName": "Crashlytics",
+      "matchPackageNames": [
+        "io.fabric.tools:gradle",
+        "com.crashlytics.sdk.android:crashlytics"
+      ]
+    },
+    {
+      "groupName": "Firebase Android",
+      "matchPackageNames": [
+        "com.google.android.gms:play-services-tagmanager"
+      ],
+      "matchPackagePatterns": [
+        "^com\\.google\\.firebase:"
+      ],
+      "prBodyNotes": [
+        "### Release Notes\n\nhttps://firebase.google.com/support/release-notes/android#bom_v{{{replace '\\.' '-' newVersion}}}"
+      ]
+    },
+    {
+      "groupName": "Jetpack Compose",
+      "matchPackagePatterns": [
+        "^androidx\\.compose:",
+        "^androidx\\.compose\\.animation:",
+        "^androidx\\.compose\\.compiler:",
+        "^androidx\\.compose\\.foundation:",
+        "^androidx\\.compose\\.material:",
+        "^androidx\\.compose\\.runtime:",
+        "^androidx\\.compose\\.ui:"
+      ]
+    },
+    {
+      "groupName": "Kotlin",
+      "matchPackagePatterns": [
+        "^org\\.jetbrains\\.kotlin:"
+      ]
+    },
+    {
+      "groupName": "kotlinx.coroutines",
+      "matchPackagePatterns": [
+        "^org\\.jetbrains\\.kotlinx:kotlinx-coroutines"
+      ]
+    },
+    {
+      "groupName": "MockK",
+      "matchPackagePatterns": [
+        "^io\\.mockk:mockk"
+      ]
+    },
+    {
+      "groupName": "Play Services",
+      "matchPackagePatterns": [
+        "^com\\.google\\.android\\.gms:play-services-"
+      ]
+    }
+  ]
 }

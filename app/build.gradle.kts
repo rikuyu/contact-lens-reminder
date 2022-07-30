@@ -18,12 +18,12 @@ fun getGoogleFormId(countryCode: String): String {
 }
 
 android {
-    compileSdk = 31
+    compileSdk = 32
 
     defaultConfig {
         applicationId = "io.github.rikuyu.contactlensreminder"
         minSdk = 26
-        targetSdk = 31
+        targetSdk = 32
         versionCode = 11
         versionName = "2.3.1"
 
@@ -76,11 +76,11 @@ dependencies {
 
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.compose.ui:ui:1.1.1")
-    implementation("androidx.appcompat:appcompat:1.4.1")
+    implementation("androidx.appcompat:appcompat:1.4.2")
     implementation("com.google.android.material:material:1.5.0")
     implementation("androidx.compose.material:material:1.1.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.1")
-    implementation("androidx.activity:activity-compose:1.4.0")
+    implementation("androidx.activity:activity-compose:1.5.1")
 
     testImplementation("androidx.test.ext:junit-ktx:1.1.3")
     testImplementation("androidx.test:core-ktx:1.4.0")
@@ -92,8 +92,8 @@ dependencies {
 
     implementation("androidx.navigation:navigation-compose:2.4.2")
 
-    implementation("io.github.vanpra.compose-material-dialogs:datetime:0.7.0")
-    implementation("com.chargemap.compose:numberpicker:0.0.11")
+    implementation("io.github.vanpra.compose-material-dialogs:datetime:0.7.2")
+    implementation("com.chargemap.compose:numberpicker:0.0.12")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1")
     implementation("com.google.accompanist:accompanist-pager:0.23.1")
     implementation("com.google.accompanist:accompanist-pager-indicators:0.23.1")
@@ -101,7 +101,7 @@ dependencies {
 
     implementation("com.google.dagger:hilt-android:2.40")
     kapt("com.google.dagger:hilt-android-compiler:2.40")
-    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha01")
+    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
     kapt("androidx.hilt:hilt-compiler:1.0.0")
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
