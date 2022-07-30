@@ -93,7 +93,7 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.4.2")
 
     implementation("io.github.vanpra.compose-material-dialogs:datetime:0.7.0")
-    implementation("com.chargemap.compose:numberpicker:0.0.11")
+    implementation("com.chargemap.compose:numberpicker:0.0.12")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1")
     implementation("com.google.accompanist:accompanist-pager:0.23.1")
     implementation("com.google.accompanist:accompanist-pager-indicators:0.23.1")
