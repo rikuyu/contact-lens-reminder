@@ -97,7 +97,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1")
     implementation("com.google.accompanist:accompanist-pager:0.23.1")
     implementation("com.google.accompanist:accompanist-pager-indicators:0.23.1")
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.23.1")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.25.0")
 
     implementation("com.google.dagger:hilt-android:2.40")
     kapt("com.google.dagger:hilt-android-compiler:2.40")
