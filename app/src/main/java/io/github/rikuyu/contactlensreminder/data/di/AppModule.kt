@@ -57,7 +57,7 @@ abstract class AppModule {
         @Provides
         @Singleton
         fun provideTickDownAlarmManager(
-            @ApplicationContext context: Context
+            @ApplicationContext context: Context,
         ): TickDownAlarmManager = TickDownAlarmManager(context)
 
         @Provides
