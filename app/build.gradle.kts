@@ -79,7 +79,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.4.2")
     implementation("com.google.android.material:material:1.5.0")
     implementation("androidx.compose.material:material:1.1.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
     implementation("androidx.activity:activity-compose:1.5.1")
 
     testImplementation("androidx.test.ext:junit-ktx:1.1.3")
@@ -94,7 +94,7 @@ dependencies {
 
     implementation("io.github.vanpra.compose-material-dialogs:datetime:0.7.2")
     implementation("com.chargemap.compose:numberpicker:0.0.12")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
     implementation("com.google.accompanist:accompanist-pager:0.23.1")
     implementation("com.google.accompanist:accompanist-pager-indicators:0.23.1")
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.23.1")
