@@ -74,27 +74,27 @@ val ktlint by configurations.creating
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.7.0")
+    implementation("androidx.core:core-ktx:1.8.0")
     implementation("androidx.compose.ui:ui:1.1.1")
     implementation("androidx.appcompat:appcompat:1.4.2")
     implementation("com.google.android.material:material:1.5.0")
     implementation("androidx.compose.material:material:1.1.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
     implementation("androidx.activity:activity-compose:1.5.1")
 
     testImplementation("androidx.test.ext:junit-ktx:1.1.3")
     testImplementation("androidx.test:core-ktx:1.4.0")
     testImplementation("androidx.arch.core:core-testing:2.1.0")
     testImplementation("com.google.truth:truth:1.1.3")
-    testImplementation("org.robolectric:robolectric:4.7.3")
-    testImplementation("io.mockk:mockk:1.12.2")
-    testImplementation("io.mockk:mockk-agent-jvm:1.12.2")
+    testImplementation("org.robolectric:robolectric:4.8.1")
+    testImplementation("io.mockk:mockk:1.12.5")
+    testImplementation("io.mockk:mockk-agent-jvm:1.12.5")
 
-    implementation("androidx.navigation:navigation-compose:2.4.2")
+    implementation("androidx.navigation:navigation-compose:2.5.1")
 
     implementation("io.github.vanpra.compose-material-dialogs:datetime:0.7.2")
-    implementation("com.chargemap.compose:numberpicker:0.0.12")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1")
+    implementation("com.chargemap.compose:numberpicker:1.0.3")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
     implementation("com.google.accompanist:accompanist-pager:0.23.1")
     implementation("com.google.accompanist:accompanist-pager-indicators:0.23.1")
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.23.1")
@@ -105,14 +105,14 @@ dependencies {
     kapt("androidx.hilt:hilt-compiler:1.0.0")
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
-    implementation(platform("com.google.firebase:firebase-bom:29.0.3"))
+    implementation(platform("com.google.firebase:firebase-bom:30.3.1"))
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-crashlytics-ktx")
 
     implementation("com.google.android.play:core:1.10.3")
     implementation("com.google.android.play:core-ktx:1.8.1")
 
-    ktlint("com.pinterest:ktlint:0.45.2") {
+    ktlint("com.pinterest:ktlint:0.46.1") {
         attributes {
             attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling.EXTERNAL))
         }
