@@ -31,23 +31,7 @@ fun TopScreen(
 
     val context = LocalContext.current
 
-    val reminderValue = viewModel.reminder.value
-
-    val isUseNotification = reminderValue.isUseNotification
-
-    val lensPeriod = reminderValue.lensPeriod
-
-    val lensRemainingDays = reminderValue.lensRemainingDays
-
-    val exchangeDay = reminderValue.exchangeDay
-
-    val notificationTimeHour = reminderValue.notificationTimeHour
-
-    val notificationTimeMinute = reminderValue.notificationTimeMinute
-
-    val notificationDay = reminderValue.notificationDay
-
-    var isUsingContactLens = reminderValue.isUsingContactLens
+    val reminderValue by viewModel.reminder
 
     var dialogState by remember { mutableStateOf(false) }
 
@@ -68,8 +52,8 @@ fun TopScreen(
         )
         LensPeriodTextSection(
             modifier = Modifier.fillMaxWidth(),
-            lensRemainingDays = lensRemainingDays,
-            period = lensPeriod
+            lensRemainingDays = reminderValue.lensRemainingDays,
+            period = reminderValue.lensPeriod
         )
         Box(
             contentAlignment = Alignment.Center,
@@ -78,31 +62,30 @@ fun TopScreen(
                 .weight(3f)
         ) {
             RemainingDaysBar(
-                lensPeriod = lensPeriod,
-                exchangeDay = exchangeDay,
-                isUsingContactLens = isUsingContactLens,
-                notificationDay = notificationDay,
-                notificationTimeHour = notificationTimeHour,
-                notificationTimeMinute = notificationTimeMinute,
-                lensRemainingDays = lensRemainingDays,
-                isUseNotification = isUseNotification
+                lensPeriod = reminderValue.lensPeriod,
+                exchangeDay = reminderValue.exchangeDay,
+                isUsingContactLens = reminderValue.isUsingContactLens,
+                notificationDay = reminderValue.notificationDay,
+                notificationTimeHour = reminderValue.notificationTimeHour,
+                notificationTimeMinute = reminderValue.notificationTimeMinute,
+                lensRemainingDays = reminderValue.lensRemainingDays,
+                isUseNotification = reminderValue.isUseNotification
             )
         }
         HandleReminderButton(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f),
-            lensRemainingDays = lensRemainingDays,
-            isUsingContactLens = isUsingContactLens,
+            lensRemainingDays = reminderValue.lensRemainingDays,
+            isUsingContactLens = reminderValue.isUsingContactLens,
             startReminder = {
-                isUsingContactLens = it
                 viewModel.onEvent(
                     ReminderEvent.StartReminder(
                         ReminderValue(
-                            lensPeriod = lensPeriod,
-                            notificationTimeHour = notificationTimeHour,
-                            notificationTimeMinute = notificationTimeMinute,
-                            lensRemainingDays = lensRemainingDays,
+                            lensPeriod = reminderValue.lensPeriod,
+                            notificationTimeHour = reminderValue.notificationTimeHour,
+                            notificationTimeMinute = reminderValue.notificationTimeMinute,
+                            lensRemainingDays = reminderValue.lensRemainingDays,
                             isUsingContactLens = it
                         )
                     )
@@ -114,14 +97,13 @@ fun TopScreen(
             dialogState = dialogState,
             changeDialogState = { dialogState = it }
         ) {
-            isUsingContactLens = it
             viewModel.onEvent(
                 ReminderEvent.ResetReminder(
                     ReminderValue(
-                        lensPeriod = lensPeriod,
-                        notificationTimeHour = notificationTimeHour,
-                        notificationTimeMinute = notificationTimeMinute,
-                        lensRemainingDays = lensRemainingDays,
+                        lensPeriod = reminderValue.lensPeriod,
+                        notificationTimeHour = reminderValue.notificationTimeHour,
+                        notificationTimeMinute = reminderValue.notificationTimeMinute,
+                        lensRemainingDays = reminderValue.lensRemainingDays,
                         isUsingContactLens = it
                     )
                 )
@@ -133,7 +115,7 @@ fun TopScreen(
                 .fillMaxWidth()
                 .weight(1f),
             showToast = { showToast(context, R.string.alert_toast_message) },
-            isUsingContactLens = isUsingContactLens,
+            isUsingContactLens = reminderValue.isUsingContactLens,
             navigate = { navController.navigate(Routes.LENS_SETTING) }
         )
     }
