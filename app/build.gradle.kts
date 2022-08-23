@@ -96,9 +96,9 @@ dependencies {
     implementation("io.github.vanpra.compose-material-dialogs:datetime:0.7.2")
     implementation("com.chargemap.compose:numberpicker:1.0.3")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
-    implementation("com.google.accompanist:accompanist-pager:0.23.1")
-    implementation("com.google.accompanist:accompanist-pager-indicators:0.23.1")
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.23.1")
+    implementation("com.google.accompanist:accompanist-pager:0.25.1")
+    implementation("com.google.accompanist:accompanist-pager-indicators:0.25.1")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.25.1")
 
     implementation("com.google.dagger:hilt-android:2.40")
     kapt("com.google.dagger:hilt-android-compiler:2.40")
