@@ -64,8 +64,9 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-    lintOptions {
+    lint {
         xmlReport = true
+        baseline = file("lint-baseline.xml")
     }
     testOptions.unitTests.isIncludeAndroidResources = true
 }
@@ -76,7 +77,7 @@ dependencies {
 
     implementation("androidx.core:core-ktx:1.8.0")
     implementation("androidx.compose.ui:ui:1.1.1")
-    implementation("androidx.appcompat:appcompat:1.4.2")
+    implementation("androidx.appcompat:appcompat:1.5.0")
     implementation("com.google.android.material:material:1.5.0")
     implementation("androidx.compose.material:material:1.1.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
@@ -86,9 +87,9 @@ dependencies {
     testImplementation("androidx.test:core-ktx:1.4.0")
     testImplementation("androidx.arch.core:core-testing:2.1.0")
     testImplementation("com.google.truth:truth:1.1.3")
-    testImplementation("org.robolectric:robolectric:4.8.1")
-    testImplementation("io.mockk:mockk:1.12.5")
-    testImplementation("io.mockk:mockk-agent-jvm:1.12.5")
+    testImplementation("org.robolectric:robolectric:4.8.2")
+    testImplementation("io.mockk:mockk:1.12.7")
+    testImplementation("io.mockk:mockk-agent-jvm:1.12.7")
 
     implementation("androidx.navigation:navigation-compose:2.5.1")
 
@@ -112,7 +113,7 @@ dependencies {
     implementation("com.google.android.play:core:1.10.3")
     implementation("com.google.android.play:core-ktx:1.8.1")
 
-    ktlint("com.pinterest:ktlint:0.46.1") {
+    ktlint("com.pinterest:ktlint:0.47.0") {
         attributes {
             attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling.EXTERNAL))
         }

@@ -62,7 +62,7 @@ jobs:
         if: ${{ always() }}
 
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./gradlew assembleDebug
 
       - name: install danger
         run: |

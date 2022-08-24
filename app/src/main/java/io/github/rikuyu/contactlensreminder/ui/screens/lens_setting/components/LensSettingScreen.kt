@@ -18,42 +18,24 @@ import androidx.navigation.NavController
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.LensSettingEvent
 import io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.LensSettingViewModel
-import io.github.rikuyu.contactlensreminder.ui.util.theme.ThemeColor
 import io.github.rikuyu.contactlensreminder.ui.util.Routes
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
 import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
 import io.github.rikuyu.contactlensreminder.ui.util.showToast
+import io.github.rikuyu.contactlensreminder.ui.util.theme.ThemeColor
 
 @Composable
 fun LensSettingScreen(
     isDarkTheme: Boolean,
     themeColor: ThemeColor,
     navController: NavController,
-    viewModelLens: LensSettingViewModel = hiltViewModel(),
+    viewModel: LensSettingViewModel = hiltViewModel(),
 ) {
     val context = LocalContext.current
 
-    val settingValue = viewModelLens.lensSetting.value
-
-    var lensType by remember { mutableStateOf(settingValue.lensType) }
-
-    var isUseNotification by remember { mutableStateOf(settingValue.isUseNotification) }
+    val settingValue by viewModel.lensSetting
 
     var lensPeriod by remember { mutableStateOf(settingValue.lensPeriod) }
-
-    var notificationType by remember { mutableStateOf(settingValue.notificationDay) }
-
-    var notificationTimeHour by remember { mutableStateOf(settingValue.notificationTimeHour) }
-
-    var notificationTimeMinute by remember { mutableStateOf(settingValue.notificationTimeMinute) }
-
-    var leftLensPower by remember { mutableStateOf(settingValue.leftLensPower) }
-
-    var isShowLensPowerSection by remember { mutableStateOf(settingValue.isShowLensPowerSection) }
-
-    var rightLensPower by remember { mutableStateOf(settingValue.rightLensPower) }
-
-    var isShowLensPeriodPicker by remember { mutableStateOf(settingValue.lensType == 2) }
 
     val setLensPeriod: (Int) -> Unit = { index ->
         when (index) {
@@ -102,61 +84,55 @@ fun LensSettingScreen(
                     SimpleDivider()
                     LensTypeSection(
                         modifier = Modifier.fillMaxWidth(),
-                        lensType = lensType
+                        lensType = settingValue.lensType
                     ) {
                         setLensPeriod(it)
-                        lensType = it
-                        viewModelLens.onEvent(LensSettingEvent.LensType(it))
-                        viewModelLens.onEvent(LensSettingEvent.LensPeriod(lensPeriod))
-                        isShowLensPeriodPicker = lensType == 2
+                        viewModel.onEvent(LensSettingEvent.LensType(it))
+                        viewModel.onEvent(LensSettingEvent.LensPeriod(lensPeriod))
                     }
-                    AnimatedVisibility(visible = !isShowLensPeriodPicker) { SimpleDivider() }
-                    AnimatedVisibility(visible = isShowLensPeriodPicker) {
+                    AnimatedVisibility(visible = settingValue.lensType != 2) { SimpleDivider() }
+                    AnimatedVisibility(visible = settingValue.lensType == 2) {
                         OtherTypeLensPeriodSection(
                             isDarkTheme = isDarkTheme,
                             modifier = Modifier.fillMaxWidth(),
                             period = lensPeriod,
                             setLensPeriod = {
                                 lensPeriod = it
-                                viewModelLens.onEvent(LensSettingEvent.LensPeriod(it))
+                                viewModel.onEvent(LensSettingEvent.LensPeriod(it))
                             }
                         )
                     }
                     ToggleButtonSection(
                         modifier = Modifier.fillMaxWidth(),
                         text = stringResource(id = R.string.notification),
-                        isUseNotification = isUseNotification,
-                        flag = isUseNotification
+                        isUseNotification = settingValue.isUseNotification,
+                        flag = settingValue.isUseNotification
                     ) {
-                        isUseNotification = !isUseNotification
-                        viewModelLens.onEvent(LensSettingEvent.IsUseNotification(isUseNotification))
+                        viewModel.onEvent(LensSettingEvent.IsUseNotification(!settingValue.isUseNotification))
                     }
                     SimpleDivider()
-                    AnimatedVisibility(visible = isUseNotification) {
+                    AnimatedVisibility(visible = settingValue.isUseNotification) {
                         Column {
                             NotificationDaySection(
                                 modifier = Modifier.fillMaxWidth(),
                                 lensPeriod = lensPeriod,
                                 showToast = { showToast(context, R.string.alert_lens_setting) },
-                                notificationType = notificationType,
+                                notificationType = settingValue.notificationDay,
                                 setNotificationType = {
-                                    notificationType = it
-                                    viewModelLens.onEvent(LensSettingEvent.NotificationDay(it))
+                                    viewModel.onEvent(LensSettingEvent.NotificationDay(it))
                                 }
                             )
                             NotificationTimeSection(
                                 isDarkTheme = isDarkTheme,
                                 themeColor = themeColor,
                                 modifier = Modifier.fillMaxWidth(),
-                                notificationTimeHour = notificationTimeHour,
+                                notificationTimeHour = settingValue.notificationTimeHour,
                                 setNotificationTimeHour = {
-                                    notificationTimeHour = it
-                                    viewModelLens.onEvent(LensSettingEvent.NotificationTimeHour(it))
+                                    viewModel.onEvent(LensSettingEvent.NotificationTimeHour(it))
                                 },
-                                notificationTimeMinute = notificationTimeMinute,
+                                notificationTimeMinute = settingValue.notificationTimeMinute,
                                 setNotificationTimeMinute = {
-                                    notificationTimeMinute = it
-                                    viewModelLens.onEvent(LensSettingEvent.NotificationTimeMinute(it))
+                                    viewModel.onEvent(LensSettingEvent.NotificationTimeMinute(it))
                                 }
                             )
                         }
@@ -165,34 +141,30 @@ fun LensSettingScreen(
                         modifier = Modifier.fillMaxWidth(),
                         text = stringResource(id = R.string.lens_power),
                         isUseNotification = null,
-                        flag = isShowLensPowerSection
+                        flag = settingValue.isShowLensPowerSection
                     ) {
-                        isShowLensPowerSection = !isShowLensPowerSection
-                        viewModelLens.onEvent(
-                            LensSettingEvent.IsShowLensPowerSection(isShowLensPowerSection)
+                        viewModel.onEvent(
+                            LensSettingEvent.IsShowLensPowerSection(!settingValue.isShowLensPowerSection)
                         )
                     }
                     SimpleDivider()
-                    AnimatedVisibility(visible = isShowLensPowerSection) {
+                    AnimatedVisibility(visible = settingValue.isShowLensPowerSection) {
                         LensPowerSection(
                             isDarkTheme = isDarkTheme,
                             modifier = Modifier.fillMaxWidth(),
-                            leftLensPower = leftLensPower.toDouble(),
+                            leftLensPower = settingValue.leftLensPower.toDouble(),
                             setLeftLensPower = {
-                                leftLensPower = it.toString()
-                                viewModelLens.onEvent(LensSettingEvent.LeftPower(it.toString()))
+                                viewModel.onEvent(LensSettingEvent.LeftPower(it.toString()))
                             },
-                            rightLensPower = rightLensPower.toDouble(),
+                            rightLensPower = settingValue.rightLensPower.toDouble(),
                             setRightLensPower = {
-                                rightLensPower = it.toString()
-                                viewModelLens.onEvent(LensSettingEvent.RightPower(it.toString()))
+                                viewModel.onEvent(LensSettingEvent.RightPower(it.toString()))
                             }
                         )
                     }
                 }
                 SaveSettingButton(modifier = Modifier.fillMaxWidth()) {
-                    isShowLensPeriodPicker = false
-                    viewModelLens.onEvent(LensSettingEvent.SaveLensSetting)
+                    viewModel.onEvent(LensSettingEvent.SaveLensSetting)
                     navController.navigate(Routes.TOP) {
                         popUpTo(Routes.TOP) { inclusive = true }
                     }
