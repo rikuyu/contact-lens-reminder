@@ -14,7 +14,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
@@ -129,33 +128,45 @@ fun JaKrCnReminderText(
     color: Color = MaterialTheme.colors.primary,
 ) {
     Text(
+        lineHeight = 20.sp,
         textAlign = TextAlign.Center,
         text = buildAnnotatedString {
-            withStyle(style = ParagraphStyle(lineHeight = 20.sp)) {
-                withStyle(
-                    style = SpanStyle(
-                        color = supportTextColor,
-                        fontSize = supportTextFontSize
-                    )
-                ) {
-                    append(stringResource(R.string.remain))
-                }
-                withStyle(
-                    style = SpanStyle(
-                        color = if (lensRemainingDays > 0 || !isUsingContactLens) color else Color.Red,
-                        fontSize = 40.sp
-                    )
-                ) {
-                    append(lensRemainingDays.toString())
-                }
-                withStyle(
-                    style = SpanStyle(
-                        color = supportTextColor,
-                        fontSize = supportTextFontSize
-                    )
-                ) {
-                    append(stringResource(id = R.string.day))
-                }
+            withStyle(
+                style = SpanStyle(
+                    color = supportTextColor,
+                    fontSize = supportTextFontSize
+                )
+            ) {
+                append(stringResource(R.string.remain))
+            }
+            withStyle(
+                style = SpanStyle(
+                    color = if (lensRemainingDays > 0 || !isUsingContactLens) color else Color.Red,
+                    fontSize = 40.sp
+                )
+            ) {
+                append(lensRemainingDays.toString())
+            }
+            withStyle(
+                style = SpanStyle(
+                    color = supportTextColor,
+                    fontSize = supportTextFontSize
+                )
+            ) {
+                append(stringResource(id = R.string.day))
+            }
+            append(stringResource(id = R.string.new_line))
+            withStyle(
+                style = SpanStyle(
+                    color = supportTextColor,
+                    fontSize = periodTextFontSize
+                )
+            ) {
+                append(stringResource(id = R.string.change_message))
+                append(" ")
+                append(exchangeDay)
+            }
+            if (isUseNotification) {
                 append(stringResource(id = R.string.new_line))
                 withStyle(
                     style = SpanStyle(
@@ -163,35 +174,22 @@ fun JaKrCnReminderText(
                         fontSize = periodTextFontSize
                     )
                 ) {
-                    append(stringResource(id = R.string.change_message))
+                    append(stringResource(id = R.string.time_message))
                     append(" ")
-                    append(exchangeDay)
-                }
-                if (isUseNotification) {
-                    append(stringResource(id = R.string.new_line))
-                    withStyle(
-                        style = SpanStyle(
-                            color = supportTextColor,
-                            fontSize = periodTextFontSize
-                        )
-                    ) {
-                        append(stringResource(id = R.string.time_message))
-                        append(" ")
-                        append(
-                            if (notificationDay == 0)
-                                stringResource(id = R.string.on_the_day)
-                            else
-                                stringResource(id = R.string.before_day)
-                        )
-                        append(" ")
-                        append(
-                            "$notificationTimeHour:${
-                            if (notificationTimeMinute < 10)
-                                "0$notificationTimeMinute"
-                            else notificationTimeMinute.toString()
-                            }"
-                        )
-                    }
+                    append(
+                        if (notificationDay == 0)
+                            stringResource(id = R.string.on_the_day)
+                        else
+                            stringResource(id = R.string.before_day)
+                    )
+                    append(" ")
+                    append(
+                        "$notificationTimeHour:${
+                        if (notificationTimeMinute < 10)
+                            "0$notificationTimeMinute"
+                        else notificationTimeMinute.toString()
+                        }"
+                    )
                 }
             }
         }
@@ -213,35 +211,47 @@ fun EnReminderText(
     color: Color = MaterialTheme.colors.primary,
 ) {
     Text(
+        lineHeight = 20.sp,
         textAlign = TextAlign.Center,
         text = buildAnnotatedString {
-            withStyle(style = ParagraphStyle(lineHeight = 20.sp)) {
-                withStyle(
-                    style = SpanStyle(
-                        color = if (lensRemainingDays > 0 || !isUsingContactLens) color else Color.Red,
-                        fontSize = 40.sp
-                    )
-                ) {
-                    append(lensRemainingDays.toString())
-                }
+            withStyle(
+                style = SpanStyle(
+                    color = if (lensRemainingDays > 0 || !isUsingContactLens) color else Color.Red,
+                    fontSize = 40.sp
+                )
+            ) {
+                append(lensRemainingDays.toString())
+            }
+            append(" ")
+            withStyle(
+                style = SpanStyle(
+                    color = supportTextColor,
+                    fontSize = supportTextFontSize
+                )
+            ) {
+                append(stringResource(id = R.string.day))
+            }
+            append(" ")
+            withStyle(
+                style = SpanStyle(
+                    color = supportTextColor,
+                    fontSize = supportTextFontSize
+                )
+            ) {
+                append(stringResource(R.string.remain))
+            }
+            append(stringResource(id = R.string.new_line))
+            withStyle(
+                style = SpanStyle(
+                    color = supportTextColor,
+                    fontSize = periodTextFontSize
+                )
+            ) {
+                append(stringResource(id = R.string.change_message))
                 append(" ")
-                withStyle(
-                    style = SpanStyle(
-                        color = supportTextColor,
-                        fontSize = supportTextFontSize
-                    )
-                ) {
-                    append(stringResource(id = R.string.day))
-                }
-                append(" ")
-                withStyle(
-                    style = SpanStyle(
-                        color = supportTextColor,
-                        fontSize = supportTextFontSize
-                    )
-                ) {
-                    append(stringResource(R.string.remain))
-                }
+                append(exchangeDay)
+            }
+            if (isUseNotification) {
                 append(stringResource(id = R.string.new_line))
                 withStyle(
                     style = SpanStyle(
@@ -249,34 +259,21 @@ fun EnReminderText(
                         fontSize = periodTextFontSize
                     )
                 ) {
-                    append(stringResource(id = R.string.change_message))
+                    append(stringResource(id = R.string.time_message))
                     append(" ")
-                    append(exchangeDay)
-                }
-                if (isUseNotification) {
-                    append(stringResource(id = R.string.new_line))
-                    withStyle(
-                        style = SpanStyle(
-                            color = supportTextColor,
-                            fontSize = periodTextFontSize
-                        )
-                    ) {
-                        append(stringResource(id = R.string.time_message))
-                        append(" ")
-                        append(
-                            "$notificationTimeHour:${
-                            if (notificationTimeMinute < 10)
-                                "0$notificationTimeMinute"
-                            else notificationTimeMinute.toString()
-                            }\n"
-                        )
-                        append(
-                            if (notificationDay == 0)
-                                stringResource(id = R.string.on_the_day_lower)
-                            else
-                                stringResource(id = R.string.before_day_lower)
-                        )
-                    }
+                    append(
+                        "$notificationTimeHour:${
+                        if (notificationTimeMinute < 10)
+                            "0$notificationTimeMinute"
+                        else notificationTimeMinute.toString()
+                        }\n"
+                    )
+                    append(
+                        if (notificationDay == 0)
+                            stringResource(id = R.string.on_the_day_lower)
+                        else
+                            stringResource(id = R.string.before_day_lower)
+                    )
                 }
             }
         }
