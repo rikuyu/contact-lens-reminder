@@ -124,7 +124,7 @@
       ]
     },
     {
-      "groupName": "Jetpack Compose",
+      "groupName": "Jetpack Compose UI Libraries",
       "matchPackagePatterns": [
         "^androidx\\.compose:",
         "^androidx\\.compose\\.animation:",
