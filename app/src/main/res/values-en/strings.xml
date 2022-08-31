@@ -77,6 +77,8 @@
     <!-- レンズ交換確認ダイアログ -->
     <string name="reminder_cancel_dialog_title">Do you really exchange the lenses?</string>
     <string name="reminder_cancel_dialog_content">Reminder will be canceled</string>
+    <string name="notification_dialog_title">Allow Notification</string>
+    <string name="notification_dialog_content">The notification setting for this app is turned off. To use notifications, please turn the setting ON.</string>
     <string name="btn_cancel">Cancel</string>
     <string name="btn_ok">OK</string>
 

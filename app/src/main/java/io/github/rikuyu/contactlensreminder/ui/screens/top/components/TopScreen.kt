@@ -23,12 +23,9 @@ import io.github.rikuyu.contactlensreminder.ui.util.showToast
 fun TopScreen(
     isDarkTheme: Boolean,
     switchDarkTheme: (Boolean) -> Unit,
-    requestExactAlarmPermission: () -> Unit,
     navController: NavController,
     viewModel: ReminderViewModel = hiltViewModel(),
 ) {
-    requestExactAlarmPermission.invoke()
-
     val context = LocalContext.current
 
     val reminderValue by viewModel.reminder

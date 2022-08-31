@@ -1,7 +1,7 @@
 package io.github.rikuyu.contactlensreminder.ui
 
+import android.app.Activity
 import android.app.AlarmManager
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -9,9 +9,8 @@ import android.os.Bundle
 import android.provider.Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -19,6 +18,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.google.android.play.core.install.model.ActivityResult.RESULT_IN_APP_UPDATE_FAILED
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEventService
@@ -33,6 +33,7 @@ import io.github.rikuyu.contactlensreminder.ui.screens.top.components.TopScreen
 import io.github.rikuyu.contactlensreminder.ui.util.AppReviewService
 import io.github.rikuyu.contactlensreminder.ui.util.AppUpdateService
 import io.github.rikuyu.contactlensreminder.ui.util.Routes
+import io.github.rikuyu.contactlensreminder.ui.util.showAlertDialog
 import io.github.rikuyu.contactlensreminder.ui.util.theme.ContactLensReminderTheme
 import javax.inject.Inject
 
@@ -51,6 +52,12 @@ class MainActivity : ComponentActivity() {
     private val reminderViewModel: ReminderViewModel by viewModels()
     private val appSettingViewModel: AppSettingViewModel by viewModels()
 
+    private var activityResultListener: (() -> Unit)? = null
+
+    private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        activityResultListener?.invoke()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -62,6 +69,7 @@ class MainActivity : ComponentActivity() {
             val systemUiController = rememberSystemUiController()
 
             systemUiController.setStatusBarColor(themeColor.color)
+            requestExactAlarmPermission(this)
 
             ContactLensReminderTheme(isDarkTheme, themeColor) {
                 val navController = rememberNavController()
@@ -73,15 +81,16 @@ class MainActivity : ComponentActivity() {
                         TopScreen(
                             isDarkTheme = isDarkTheme,
                             switchDarkTheme = { isDarkTheme = it },
-                            requestExactAlarmPermission = { requestExactAlarmPermission(this@MainActivity) },
                             navController = navController
                         )
                     }
                     composable(route = Routes.LENS_SETTING) {
                         LensSettingScreen(
-                            isDarkTheme,
-                            themeColor,
-                            navController
+                            isDarkTheme = isDarkTheme,
+                            themeColor = themeColor,
+                            navController = navController,
+                            launcher = launcher,
+                            setActivityResultLauncher = ::setOnActivityResultListener,
                         )
                     }
                     composable(route = Routes.APP_SETTING) {
@@ -128,36 +137,25 @@ class MainActivity : ComponentActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_UPDATE_CODE) {
-            showAlertDialog(
-                context = this,
-                title = R.string.update_dialog_title,
-                message = R.string.update_dialog_message,
-                positiveButtonLabel = R.string.update_dialog_positive_button_label
-            ) {
-                appUpdateService.executeAppUpdate(this)
+            when (resultCode) {
+                Activity.RESULT_CANCELED ->
+                    showAlertDialog(
+                        context = this,
+                        title = R.string.update_dialog_title,
+                        message = R.string.update_dialog_message,
+                        positiveButtonLabel = R.string.update_dialog_positive_button_label
+                    ) {
+                        appUpdateService.executeAppUpdate(this)
+                    }
+                Activity.RESULT_OK, RESULT_IN_APP_UPDATE_FAILED -> {
+                    // NOP
+                }
             }
         }
     }
 
-    private fun showAlertDialog(
-        context: Context,
-        @DrawableRes icon: Int = R.drawable.icon_default,
-        @StringRes title: Int,
-        @StringRes message: Int,
-        @StringRes positiveButtonLabel: Int,
-        event: () -> Unit,
-    ) {
-        val dialog = AlertDialog.Builder(context)
-            .setIcon(icon)
-            .setTitle(title)
-            .setMessage(message)
-            .setPositiveButton(positiveButtonLabel) { _, _ ->
-                event.invoke()
-            }
-            .setCancelable(false)
-            .create()
-        dialog.setCanceledOnTouchOutside(false)
-        dialog.show()
+    private fun setOnActivityResultListener(listener: () -> Unit) {
+        activityResultListener = listener
     }
 
     companion object {
