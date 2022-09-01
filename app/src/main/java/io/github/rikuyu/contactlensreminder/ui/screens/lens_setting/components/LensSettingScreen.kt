@@ -34,7 +34,7 @@ fun LensSettingScreen(
     navController: NavController,
     alertNotificationLauncher: ActivityResultLauncher<Intent>,
     requestPermissionLauncher: ActivityResultLauncher<String>,
-    setActivityResultLauncher: (() -> Unit) -> Unit,
+    setActivityResultLauncher: (() -> Unit, () -> Unit) -> Unit,
     viewModel: LensSettingViewModel = hiltViewModel(),
 ) {
     val context = LocalContext.current
@@ -122,13 +122,15 @@ fun LensSettingScreen(
                             TextButton(onClick = {
                                 dialogState = false
                                 alertNotificationLauncher.launch(makeNotificationSettingIntent(context))
-                                setActivityResultLauncher {
-                                    viewModel.onEvent(
-                                        LensSettingEvent.IsUseNotification(
-                                            isUseNotification = notificationManager.areNotificationsEnabled()
+                                setActivityResultLauncher(
+                                    {
+                                        viewModel.onEvent(
+                                            LensSettingEvent.IsUseNotification(
+                                                isUseNotification = notificationManager.areNotificationsEnabled()
+                                            )
                                         )
-                                    )
-                                }
+                                    }, {}
+                                )
                             }) {
                                 Text(
                                     text = stringResource(id = R.string.btn_ok), color = MaterialTheme.colors.primary
@@ -198,11 +200,23 @@ fun LensSettingScreen(
                 if (settingValue.isUseNotification) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                         requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-                        setActivityResultLauncher {
-                            viewModel.onEvent(LensSettingEvent.IsUseNotification(false))
-                        }
+                        setActivityResultLauncher(
+                            {
+                                viewModel.onEvent(LensSettingEvent.IsUseNotification(true))
+                                viewModel.onEvent(LensSettingEvent.SaveLensSetting)
+                                navController.navigate(Routes.TOP) {
+                                    popUpTo(Routes.TOP) { inclusive = true }
+                                }
+                            },
+                            { viewModel.onEvent(LensSettingEvent.IsUseNotification(false)) }
+                        )
                     } else {
-                        if (!notificationManager.areNotificationsEnabled()) {
+                        if (notificationManager.areNotificationsEnabled()) {
+                            viewModel.onEvent(LensSettingEvent.SaveLensSetting)
+                            navController.navigate(Routes.TOP) {
+                                popUpTo(Routes.TOP) { inclusive = true }
+                            }
+                        } else {
                             dialogState = true
                         }
                     }

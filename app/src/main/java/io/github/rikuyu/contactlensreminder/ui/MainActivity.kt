@@ -52,15 +52,20 @@ class MainActivity : ComponentActivity() {
     private val reminderViewModel: ReminderViewModel by viewModels()
     private val appSettingViewModel: AppSettingViewModel by viewModels()
 
-    private var activityResultListener: (() -> Unit)? = null
+    private var activityOkResultListener: (() -> Unit)? = null
 
-    private val alertNotificationLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        activityResultListener?.invoke()
-    }
+    private var activityCancelResultListener: (() -> Unit)? = null
+
+    private val alertNotificationLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            activityOkResultListener?.invoke()
+        }
 
     private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
-        if (!it) {
-            activityResultListener?.invoke()
+        if (it) {
+            activityOkResultListener?.invoke()
+        } else {
+            activityCancelResultListener?.invoke()
         }
     }
 
@@ -161,8 +166,9 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun setOnActivityResultListener(listener: () -> Unit) {
-        activityResultListener = listener
+    private fun setOnActivityResultListener(okListener: () -> Unit, cancelListener: () -> Unit) {
+        activityOkResultListener = okListener
+        activityCancelResultListener = cancelListener
     }
 
     companion object {
