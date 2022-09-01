@@ -16,5 +16,7 @@ data class ReminderUseCase @Inject constructor(
 
     val getIsDarkTheme: GetIsDarkTheme,
 
-    val switchIsDarkTheme: SwitchIsDarkTheme
+    val switchIsDarkTheme: SwitchIsDarkTheme,
+
+    val createChannel: CreateChannel,
 )

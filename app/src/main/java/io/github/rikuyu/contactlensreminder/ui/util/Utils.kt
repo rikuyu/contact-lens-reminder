@@ -1,6 +1,7 @@
 package io.github.rikuyu.contactlensreminder.ui.util
 
 import android.app.AlertDialog
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
@@ -9,6 +10,7 @@ import android.provider.Settings
 import android.widget.Toast
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.core.app.NotificationManagerCompat
 import io.github.rikuyu.contactlensreminder.R
 
 fun makeNotificationSettingIntent(context: Context): Intent {
@@ -61,4 +63,10 @@ fun showAlertDialog(
         .create()
     dialog.setCanceledOnTouchOutside(false)
     dialog.show()
+}
+
+fun isEnableNotificationChannel(context: Context, notificationId: String): Boolean {
+    val manager: NotificationManagerCompat = NotificationManagerCompat.from(context)
+    val channel = manager.getNotificationChannel(notificationId)
+    return channel?.importance != NotificationManager.IMPORTANCE_NONE && manager.areNotificationsEnabled()
 }

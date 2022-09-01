@@ -12,8 +12,9 @@ import androidx.core.content.ContextCompat
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
 import io.github.rikuyu.contactlensreminder.ui.MainActivity
+import javax.inject.Inject
 
-class NotificationService(val context: Context) {
+class NotificationService @Inject constructor(val context: Context) {
 
     private val notificationManager =
         context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -54,7 +55,7 @@ class NotificationService(val context: Context) {
         .setAutoCancel(true)
 
     // Build.VERSION.SDK_INT >= Build.VERSION_CODES.O always true. min SDK 26
-    private fun createChannel() {
+    fun createChannel() {
         val channel = NotificationChannel(
             CHANNEL_ID,
             context.getString(R.string.notification_setting_label),
@@ -66,13 +67,12 @@ class NotificationService(val context: Context) {
     }
 
     fun showNotification() {
-        createChannel()
         notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build())
     }
 
     companion object {
-        private const val NOTIFICATION_ID = 111111
         private const val CHANNEL_ID = "contact_lens_reminder_channel_id"
+        private const val NOTIFICATION_ID = 111111
         private const val CHANNEL_DESCRIPTION = "contact_lens_reminder_channel_description "
     }
 }

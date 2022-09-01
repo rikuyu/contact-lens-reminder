@@ -126,7 +126,10 @@ fun LensSettingScreen(
                                     {
                                         viewModel.onEvent(
                                             LensSettingEvent.IsUseNotification(
-                                                isUseNotification = notificationManager.areNotificationsEnabled()
+                                                isUseNotification = isEnableNotificationChannel(
+                                                    context,
+                                                    "contact_lens_reminder_channel_id"
+                                                )
                                             )
                                         )
                                     }, {}
@@ -211,7 +214,7 @@ fun LensSettingScreen(
                             { viewModel.onEvent(LensSettingEvent.IsUseNotification(false)) }
                         )
                     } else {
-                        if (notificationManager.areNotificationsEnabled()) {
+                        if (isEnableNotificationChannel(context, "contact_lens_reminder_channel_id")) {
                             viewModel.onEvent(LensSettingEvent.SaveLensSetting)
                             navController.navigate(Routes.TOP) {
                                 popUpTo(Routes.TOP) { inclusive = true }

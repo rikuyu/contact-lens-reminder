@@ -36,6 +36,9 @@ class ReminderViewModelTest {
     @MockK
     lateinit var switchIsDarkTheme: SwitchIsDarkTheme
 
+    @MockK
+    lateinit var createChannel: CreateChannel
+
     @Before
     fun setup() {
         MockKAnnotations.init(this)
@@ -46,7 +49,8 @@ class ReminderViewModelTest {
             resetReminder,
             getIsShowOnBoarding,
             getIsDarkTheme,
-            switchIsDarkTheme
+            switchIsDarkTheme,
+            createChannel
         )
     }
 
