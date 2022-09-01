@@ -54,8 +54,14 @@ class MainActivity : ComponentActivity() {
 
     private var activityResultListener: (() -> Unit)? = null
 
-    private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+    private val alertNotificationLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         activityResultListener?.invoke()
+    }
+
+    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+        if (!it) {
+            activityResultListener?.invoke()
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -89,7 +95,8 @@ class MainActivity : ComponentActivity() {
                             isDarkTheme = isDarkTheme,
                             themeColor = themeColor,
                             navController = navController,
-                            launcher = launcher,
+                            alertNotificationLauncher = alertNotificationLauncher,
+                            requestPermissionLauncher = requestPermissionLauncher,
                             setActivityResultLauncher = ::setOnActivityResultListener,
                         )
                     }
