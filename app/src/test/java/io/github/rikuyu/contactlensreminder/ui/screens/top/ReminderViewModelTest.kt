@@ -73,6 +73,7 @@ class ReminderViewModelTest {
         every { getReminderSetting.invoke() } returns defaultReminderValue
         every { saveReminderSetting.invoke(any()) } returns Unit
         every { startReminder.invoke() } returns Unit
+        every { createChannel.invoke() } returns Unit
         every { getIsShowOnBoarding.invoke() } returns true
         every { getIsDarkTheme.invoke() } returns false
 
@@ -91,6 +92,7 @@ class ReminderViewModelTest {
             viewModel.onEvent(event)
             saveReminderSetting.invoke(any())
             startReminder.invoke()
+            createChannel.invoke()
         }
     }
 }

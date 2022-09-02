@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry
 import com.google.common.truth.Truth.assertThat
 import io.github.rikuyu.contactlensreminder.data.local.alarm.notification.NotificationAlarmManager
+import io.github.rikuyu.contactlensreminder.data.local.alarm.notification.NotificationService
 import io.github.rikuyu.contactlensreminder.data.local.alarm.tickdown.TickDownAlarmManager
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
 import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEventService
@@ -30,6 +31,7 @@ class LocalDataSourceTest {
     private lateinit var notificationAlarmManager: NotificationAlarmManager
     private lateinit var sharedPreferencesManager: SharedPreferencesManager
     private lateinit var firebaseLogEventService: FirebaseLogEventService
+    private lateinit var notificationService: NotificationService
 
     private lateinit var localDataSource: DataSource
 
@@ -62,7 +64,8 @@ class LocalDataSourceTest {
             tickDownAlarmManager = tickDownAlarmManager,
             sharedPreferencesManager = sharedPreferencesManager,
             notificationAlarmManager = notificationAlarmManager,
-            firebaseLogEventService = firebaseLogEventService
+            firebaseLogEventService = firebaseLogEventService,
+            notificationService = notificationService,
         )
     }
 
@@ -75,6 +78,7 @@ class LocalDataSourceTest {
         firebaseLogEventService = FirebaseLogEventService(sharedPreferencesManager)
         tickDownAlarmManager = TickDownAlarmManager(context)
         notificationAlarmManager = NotificationAlarmManager(context, sharedPreferencesManager)
+        notificationService = NotificationService(context)
     }
 
     @Test
