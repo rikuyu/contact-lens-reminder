@@ -30,8 +30,4 @@ class ReminderRepositoryImpl @Inject constructor(
     override fun switchIsDarkTheme() {
         localDataSource.saveIsDarkTheme()
     }
-
-    override fun createChannel() {
-        localDataSource.createChannel()
-    }
 }

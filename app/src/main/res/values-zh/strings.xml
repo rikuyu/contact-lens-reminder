@@ -16,12 +16,6 @@
     <string name="review_launch_complete">launchReviewFlow(a, r).addOnCompleteListener_cn</string>
     <string name="review_launch_failure">launchReviewFlow(a, r).addOnFailureListener_cn</string>
 
-    <!-- SCHEDULE_EXACT_ALARM -->
-    <string name="exact_alarm_dialog_title">要求改变设置</string>
-    <string name="exact_alarm_dialog_message">要使用这个应用程序，请在设置屏幕上允许 "警报和提醒"（请打开设置）</string>
-    <string name="exact_alarm_dialog_positive_button_label">打开设置屏幕</string>
-    <string name="exact_alarm_dialog_event_label">alarmManager.canScheduleExactAlarms() == %s</string>
-
     <!-- TopScreen -->
     <string name="remain">还剩</string>
     <string name="day">天</string>

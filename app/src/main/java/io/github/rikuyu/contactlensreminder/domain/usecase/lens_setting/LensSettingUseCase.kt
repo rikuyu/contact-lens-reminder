@@ -6,5 +6,7 @@ data class LensSettingUseCase @Inject constructor(
 
     val saveAllLensSetting: SaveAllLensSetting,
 
-    val getAllLensSetting: GetAllLensSetting
+    val getAllLensSetting: GetAllLensSetting,
+
+    val createChannel: CreateChannel
 )

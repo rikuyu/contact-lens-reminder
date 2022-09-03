@@ -1,4 +1,4 @@
-package io.github.rikuyu.contactlensreminder.domain.usecase.reminder
+package io.github.rikuyu.contactlensreminder.domain.usecase.lens_setting
 
 import io.github.rikuyu.contactlensreminder.domain.repository.LensSettingRepository
 import javax.inject.Inject

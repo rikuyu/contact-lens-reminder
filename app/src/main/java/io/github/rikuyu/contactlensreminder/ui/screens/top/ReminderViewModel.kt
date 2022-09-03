@@ -26,7 +26,6 @@ class ReminderViewModel @Inject constructor(
         _reminder.value = usecase.getReminderSetting.invoke()
         _isShowOnBoarding.value = usecase.getIsShowOnBoarding.invoke()
         isDarkTheme.value = usecase.getIsDarkTheme.invoke()
-        usecase.createChannel.invoke()
     }
 
     fun onEvent(event: ReminderEvent) {

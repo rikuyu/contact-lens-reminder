@@ -17,6 +17,4 @@ interface ReminderRepository {
     fun getIsDarkTheme(): Boolean
 
     fun switchIsDarkTheme()
-
-    fun createChannel()
 }

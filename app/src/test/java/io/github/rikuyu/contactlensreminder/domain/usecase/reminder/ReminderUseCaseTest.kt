@@ -20,7 +20,6 @@ class ReminderUseCaseTest {
     private lateinit var getIsShowOnBoarding: GetIsShowOnBoarding
     private lateinit var getIsDarkTheme: GetIsDarkTheme
     private lateinit var switchIsDarkTheme: SwitchIsDarkTheme
-    private lateinit var createChannel: CreateChannel
 
     @MockK
     lateinit var repository: ReminderRepository
@@ -48,7 +47,6 @@ class ReminderUseCaseTest {
         getIsShowOnBoarding = GetIsShowOnBoarding(repository)
         getIsDarkTheme = GetIsDarkTheme(repository)
         switchIsDarkTheme = SwitchIsDarkTheme(repository)
-        createChannel = CreateChannel(repository)
         reminderUseCase = ReminderUseCase(
             saveReminderSetting,
             startReminder,
@@ -56,8 +54,7 @@ class ReminderUseCaseTest {
             resetReminder,
             getIsShowOnBoarding,
             getIsDarkTheme,
-            switchIsDarkTheme,
-            createChannel
+            switchIsDarkTheme
         )
     }
 

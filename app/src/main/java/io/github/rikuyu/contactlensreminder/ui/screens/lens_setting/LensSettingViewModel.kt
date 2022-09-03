@@ -19,6 +19,7 @@ class LensSettingViewModel @Inject constructor(
 
     init {
         _lensSetting.value = usecase.getAllLensSetting.invoke()
+        usecase.createChannel.invoke()
     }
 
     fun onEvent(event: LensSettingEvent) {
