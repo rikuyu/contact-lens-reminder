@@ -16,6 +16,12 @@
     <string name="review_launch_complete">launchReviewFlow(a_r)_addOnCompleteListener_ja</string>
     <string name="review_launch_failure">launchReviewFlow(a_r)_addOnFailureListener_ja</string>
 
+    <!-- SCHEDULE_EXACT_ALARM -->
+    <string name="exact_alarm_dialog_title">設定変更のお願い</string>
+    <string name="exact_alarm_dialog_message">本アプリを使用するためには、設定画面から「アラームとリマインダー」を許可してください（設定をONにしてください）</string>
+    <string name="exact_alarm_dialog_positive_button_label">設定画面を開く</string>
+    <string name="exact_alarm_dialog_event_label">alarmManager_canScheduleExactAlarms()==%s</string>
+
     <!-- TopScreen -->
     <string name="remain">残り</string>
     <string name="day">日</string>

@@ -1,6 +1,12 @@
 package io.github.rikuyu.contactlensreminder.ui
 
+import android.app.Activity
+import android.app.AlarmManager
+import android.content.Context
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
@@ -12,7 +18,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.google.android.play.core.install.model.ActivityResult.RESULT_IN_APP_UPDATE_FAILED
 import dagger.hilt.android.AndroidEntryPoint
+import io.github.rikuyu.contactlensreminder.R
+
 import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEventService
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingViewModel
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.inquiry.component.ContactUsScreen
@@ -25,6 +34,7 @@ import io.github.rikuyu.contactlensreminder.ui.screens.top.components.TopScreen
 import io.github.rikuyu.contactlensreminder.ui.util.AppReviewService
 import io.github.rikuyu.contactlensreminder.ui.util.AppUpdateService
 import io.github.rikuyu.contactlensreminder.ui.util.Routes
+import io.github.rikuyu.contactlensreminder.ui.util.showAlertDialog
 import io.github.rikuyu.contactlensreminder.ui.util.theme.ContactLensReminderTheme
 import javax.inject.Inject
 
@@ -64,6 +74,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         appUpdateService.executeAppUpdate(this)
+        requestExactAlarmPermission(this)
 
         setContent {
             var isDarkTheme by remember { reminderViewModel.isDarkTheme }
@@ -111,8 +122,57 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    private fun requestExactAlarmPermission(context: Context) {
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            val canScheduleExactAlarms = alarmManager.canScheduleExactAlarms()
+            firebaseLogEventService.logEvent(
+                context.getString(R.string.exact_alarm_dialog_event_label, canScheduleExactAlarms.toString())
+            )
+            if (!canScheduleExactAlarms) {
+                showAlertDialog(
+                    context = context,
+                    title = R.string.exact_alarm_dialog_title,
+                    message = R.string.exact_alarm_dialog_message,
+                    positiveButtonLabel = R.string.exact_alarm_dialog_positive_button_label
+                ) {
+                    Intent().apply {
+                        action = ACTION_REQUEST_SCHEDULE_EXACT_ALARM
+                    }.also {
+                        startActivity(it)
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_UPDATE_CODE) {
+            when (resultCode) {
+                Activity.RESULT_CANCELED ->
+                    showAlertDialog(
+                        context = this,
+                        title = R.string.update_dialog_title,
+                        message = R.string.update_dialog_message,
+                        positiveButtonLabel = R.string.update_dialog_positive_button_label
+                    ) {
+                        appUpdateService.executeAppUpdate(this)
+                    }
+                Activity.RESULT_OK, RESULT_IN_APP_UPDATE_FAILED -> {
+                    // NOP
+                }
+            }
+        }
+    }
+
     private fun setOnActivityResultListener(okListener: () -> Unit, cancelListener: () -> Unit) {
         activityOkResultListener = okListener
         activityCancelResultListener = cancelListener
+    }
+
+    companion object {
+        const val REQUEST_UPDATE_CODE = 11111111
     }
 }

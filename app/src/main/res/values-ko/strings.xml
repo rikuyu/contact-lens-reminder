@@ -16,6 +16,12 @@
     <string name="review_launch_complete">launchReviewFlow(a, r).addOnCompleteListener_kr</string>
     <string name="review_launch_failure">launchReviewFlow(a, r).addOnFailureListener_kr</string>
 
+    <!-- SCHEDULE_EXACT_ALARM -->
+    <string name="exact_alarm_dialog_title">설정 변경 요청</string>
+    <string name="exact_alarm_dialog_message">이 앱을 사용하려면 설정 화면에서 통지을 허가해야합니다. (설정을 ON으로 설정)</string>
+    <string name="exact_alarm_dialog_positive_button_label">設定を開く</string>
+    <string name="exact_alarm_dialog_event_label">alarmManager.canScheduleExactAlarms() == %s</string>
+
     <!-- TopScreen -->
     <string name="remain">남은</string>
     <string name="day">일</string>

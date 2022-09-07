@@ -25,9 +25,8 @@ class TickDownAlarmManager @Inject constructor(private val context: Context) {
             add(Calendar.MINUTE, -min)
             add(Calendar.SECOND, -sec)
         }
-        alarmManager.set(
-            AlarmManager.RTC_WAKEUP,
-            calendar.timeInMillis,
+        alarmManager.setAlarmClock(
+            AlarmManager.AlarmClockInfo(calendar.timeInMillis, null),
             createBroadcastPendingIntent(
                 context,
                 TickDownAlarmReceiver::class.java,
