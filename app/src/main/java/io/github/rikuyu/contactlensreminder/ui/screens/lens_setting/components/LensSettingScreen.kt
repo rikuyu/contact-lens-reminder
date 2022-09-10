@@ -2,6 +2,7 @@ package io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.components
 
 import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.animation.AnimatedVisibility
@@ -18,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import io.github.rikuyu.contactlensreminder.R
@@ -199,17 +201,28 @@ fun LensSettingScreen(
             SaveSettingButton(modifier = Modifier.fillMaxWidth()) {
                 if (settingValue.isUseNotification) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                        requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-                        setActivityResultLauncher(
-                            {
-                                viewModel.onEvent(LensSettingEvent.IsUseNotification(true))
-                                viewModel.onEvent(LensSettingEvent.SaveLensSetting)
-                                navController.navigate(Routes.TOP) {
-                                    popUpTo(Routes.TOP) { inclusive = true }
-                                }
-                            },
-                            { viewModel.onEvent(LensSettingEvent.IsUseNotification(false)) }
-                        )
+                        if (ContextCompat.checkSelfPermission(
+                                context,
+                                Manifest.permission.POST_NOTIFICATIONS,
+                            ) != PackageManager.PERMISSION_GRANTED
+                        ) {
+                            requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                            setActivityResultLauncher(
+                                {
+                                    viewModel.onEvent(LensSettingEvent.IsUseNotification(true))
+                                    viewModel.onEvent(LensSettingEvent.SaveLensSetting)
+                                    navController.navigate(Routes.TOP) {
+                                        popUpTo(Routes.TOP) { inclusive = true }
+                                    }
+                                },
+                                { viewModel.onEvent(LensSettingEvent.IsUseNotification(false)) }
+                            )
+                        } else {
+                            viewModel.onEvent(LensSettingEvent.SaveLensSetting)
+                            navController.navigate(Routes.TOP) {
+                                popUpTo(Routes.TOP) { inclusive = true }
+                            }
+                        }
                     } else {
                         if (isEnableNotificationChannel(context, "contact_lens_reminder_channel_id")) {
                             viewModel.onEvent(LensSettingEvent.SaveLensSetting)
