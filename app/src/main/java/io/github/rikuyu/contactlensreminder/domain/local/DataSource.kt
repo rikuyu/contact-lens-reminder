@@ -28,4 +28,6 @@ interface DataSource {
     fun getThemeColor(): String
 
     fun saveThemeColor(color: String)
+
+    fun createChannel()
 }

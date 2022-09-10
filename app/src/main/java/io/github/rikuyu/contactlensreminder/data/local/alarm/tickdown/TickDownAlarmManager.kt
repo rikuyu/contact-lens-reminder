@@ -1,7 +1,6 @@
 package io.github.rikuyu.contactlensreminder.data.local.alarm.tickdown
 
 import android.app.AlarmManager
-import android.app.AlarmManager.AlarmClockInfo
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Context
@@ -27,7 +26,7 @@ class TickDownAlarmManager @Inject constructor(private val context: Context) {
             add(Calendar.SECOND, -sec)
         }
         alarmManager.setAlarmClock(
-            AlarmClockInfo(calendar.timeInMillis, null),
+            AlarmManager.AlarmClockInfo(calendar.timeInMillis, null),
             createBroadcastPendingIntent(
                 context,
                 TickDownAlarmReceiver::class.java,

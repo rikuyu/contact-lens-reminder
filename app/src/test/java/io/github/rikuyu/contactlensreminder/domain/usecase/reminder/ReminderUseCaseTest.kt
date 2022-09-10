@@ -12,14 +12,14 @@ import org.junit.Test
 
 class ReminderUseCaseTest {
 
-    lateinit var saveReminderSetting: SaveReminderSetting
-    lateinit var startReminder: StartReminder
-    lateinit var getReminderSetting: GetReminderSetting
-    lateinit var resetReminder: ResetReminder
-    lateinit var reminderUseCase: ReminderUseCase
-    lateinit var getIsShowOnBoarding: GetIsShowOnBoarding
-    lateinit var getIsDarkTheme: GetIsDarkTheme
-    lateinit var switchIsDarkTheme: SwitchIsDarkTheme
+    private lateinit var saveReminderSetting: SaveReminderSetting
+    private lateinit var startReminder: StartReminder
+    private lateinit var getReminderSetting: GetReminderSetting
+    private lateinit var resetReminder: ResetReminder
+    private lateinit var reminderUseCase: ReminderUseCase
+    private lateinit var getIsShowOnBoarding: GetIsShowOnBoarding
+    private lateinit var getIsDarkTheme: GetIsDarkTheme
+    private lateinit var switchIsDarkTheme: SwitchIsDarkTheme
 
     @MockK
     lateinit var repository: ReminderRepository

@@ -21,6 +21,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.google.android.play.core.install.model.ActivityResult.RESULT_IN_APP_UPDATE_FAILED
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.rikuyu.contactlensreminder.R
+
 import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEventService
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.AppSettingViewModel
 import io.github.rikuyu.contactlensreminder.ui.screens.app_setting.inquiry.component.ContactUsScreen
@@ -52,16 +53,28 @@ class MainActivity : ComponentActivity() {
     private val reminderViewModel: ReminderViewModel by viewModels()
     private val appSettingViewModel: AppSettingViewModel by viewModels()
 
-    private var activityResultListener: (() -> Unit)? = null
+    private var activityOkResultListener: (() -> Unit)? = null
 
-    private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        activityResultListener?.invoke()
+    private var activityCancelResultListener: (() -> Unit)? = null
+
+    private val alertNotificationLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            activityOkResultListener?.invoke()
+        }
+
+    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+        if (it) {
+            activityOkResultListener?.invoke()
+        } else {
+            activityCancelResultListener?.invoke()
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         appUpdateService.executeAppUpdate(this)
+        requestExactAlarmPermission(this)
 
         setContent {
             var isDarkTheme by remember { reminderViewModel.isDarkTheme }
@@ -69,7 +82,6 @@ class MainActivity : ComponentActivity() {
             val systemUiController = rememberSystemUiController()
 
             systemUiController.setStatusBarColor(themeColor.color)
-            requestExactAlarmPermission(this)
 
             ContactLensReminderTheme(isDarkTheme, themeColor) {
                 val navController = rememberNavController()
@@ -89,7 +101,8 @@ class MainActivity : ComponentActivity() {
                             isDarkTheme = isDarkTheme,
                             themeColor = themeColor,
                             navController = navController,
-                            launcher = launcher,
+                            alertNotificationLauncher = alertNotificationLauncher,
+                            requestPermissionLauncher = requestPermissionLauncher,
                             setActivityResultLauncher = ::setOnActivityResultListener,
                         )
                     }
@@ -154,8 +167,9 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun setOnActivityResultListener(listener: () -> Unit) {
-        activityResultListener = listener
+    private fun setOnActivityResultListener(okListener: () -> Unit, cancelListener: () -> Unit) {
+        activityOkResultListener = okListener
+        activityCancelResultListener = cancelListener
     }
 
     companion object {

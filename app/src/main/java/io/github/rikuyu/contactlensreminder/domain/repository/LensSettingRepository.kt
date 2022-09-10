@@ -7,4 +7,6 @@ interface LensSettingRepository {
     fun saveAllLensSetting(lensSettingValue: LensSettingValue)
 
     fun getAllLensSetting(): LensSettingValue
+
+    fun createChannel()
 }

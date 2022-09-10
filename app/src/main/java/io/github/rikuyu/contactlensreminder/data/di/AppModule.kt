@@ -9,6 +9,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import io.github.rikuyu.contactlensreminder.data.local.LocalDataSource
 import io.github.rikuyu.contactlensreminder.data.local.alarm.notification.NotificationAlarmManager
+import io.github.rikuyu.contactlensreminder.data.local.alarm.notification.NotificationService
 import io.github.rikuyu.contactlensreminder.data.local.alarm.tickdown.TickDownAlarmManager
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
 import io.github.rikuyu.contactlensreminder.data.repository.AppSettingRepositoryImpl
@@ -83,5 +84,11 @@ abstract class AppModule {
         fun provideAppReviewService(
             firebaseLogEventService: FirebaseLogEventService,
         ): AppReviewService = AppReviewService(firebaseLogEventService)
+
+        @Provides
+        @Singleton
+        fun provideNotificationService(
+            @ApplicationContext context: Context,
+        ): NotificationService = NotificationService(context)
     }
 }

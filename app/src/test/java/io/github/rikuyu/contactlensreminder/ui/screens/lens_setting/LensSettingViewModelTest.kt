@@ -2,6 +2,7 @@ package io.github.rikuyu.contactlensreminder.ui.screens.lens_setting
 
 import com.google.common.truth.Truth.assertThat
 import io.github.rikuyu.contactlensreminder.domain.model.LensSettingValue
+import io.github.rikuyu.contactlensreminder.domain.usecase.lens_setting.CreateChannel
 import io.github.rikuyu.contactlensreminder.domain.usecase.lens_setting.GetAllLensSetting
 import io.github.rikuyu.contactlensreminder.domain.usecase.lens_setting.LensSettingUseCase
 import io.github.rikuyu.contactlensreminder.domain.usecase.lens_setting.SaveAllLensSetting
@@ -23,17 +24,21 @@ class LensSettingViewModelTest {
     @MockK
     lateinit var getAllLensSetting: GetAllLensSetting
 
+    @MockK
+    lateinit var createChannel: CreateChannel
+
     @Before
     fun setup() {
         MockKAnnotations.init(this)
-        useCase = LensSettingUseCase(saveAllLensSetting, getAllLensSetting)
+        useCase = LensSettingUseCase(saveAllLensSetting, getAllLensSetting, createChannel)
     }
 
     private val defaultSettingValue = LensSettingValue()
 
     @Test
-    fun `onEvent SettingEvent LensType `() {
+    fun `onEvent SettingEvent LensType`() {
         every { getAllLensSetting.invoke() } returns defaultSettingValue
+        every { createChannel.invoke() } returns Unit
         viewModelLens = LensSettingViewModel(useCase)
 
         val expected = defaultSettingValue.copy(lensType = 1)
@@ -42,12 +47,16 @@ class LensSettingViewModelTest {
         viewModelLens.onEvent(LensSettingEvent.LensType(1))
         assertThat(viewModelLens.lensSetting.value).isEqualTo(expected)
 
-        verify(exactly = 1) { getAllLensSetting.invoke() }
+        verify(exactly = 1) {
+            getAllLensSetting.invoke()
+            createChannel.invoke()
+        }
     }
 
     @Test
     fun `onEvent SettingEvent LensPeriod `() {
         every { getAllLensSetting.invoke() } returns defaultSettingValue
+        every { createChannel.invoke() } returns Unit
         viewModelLens = LensSettingViewModel(useCase)
 
         val expected = defaultSettingValue.copy(lensPeriod = 20)
@@ -56,12 +65,16 @@ class LensSettingViewModelTest {
         viewModelLens.onEvent(LensSettingEvent.LensPeriod(20))
         assertThat(viewModelLens.lensSetting.value).isEqualTo(expected)
 
-        verify(exactly = 1) { getAllLensSetting.invoke() }
+        verify(exactly = 1) {
+            getAllLensSetting.invoke()
+            createChannel.invoke()
+        }
     }
 
     @Test
     fun `onEvent SettingEvent IsUseNotification `() {
         every { getAllLensSetting.invoke() } returns defaultSettingValue
+        every { createChannel.invoke() } returns Unit
         viewModelLens = LensSettingViewModel(useCase)
 
         val expected = defaultSettingValue.copy(isUseNotification = false)
@@ -70,12 +83,16 @@ class LensSettingViewModelTest {
         viewModelLens.onEvent(LensSettingEvent.IsUseNotification(false))
         assertThat(viewModelLens.lensSetting.value).isEqualTo(expected)
 
-        verify(exactly = 1) { getAllLensSetting.invoke() }
+        verify(exactly = 1) {
+            getAllLensSetting.invoke()
+            createChannel.invoke()
+        }
     }
 
     @Test
     fun `onEvent SettingEvent NotificationDay `() {
         every { getAllLensSetting.invoke() } returns defaultSettingValue
+        every { createChannel.invoke() } returns Unit
         viewModelLens = LensSettingViewModel(useCase)
 
         val expected = defaultSettingValue.copy(notificationDay = 1)
@@ -84,12 +101,16 @@ class LensSettingViewModelTest {
         viewModelLens.onEvent(LensSettingEvent.NotificationDay(1))
         assertThat(viewModelLens.lensSetting.value).isEqualTo(expected)
 
-        verify(exactly = 1) { getAllLensSetting.invoke() }
+        verify(exactly = 1) {
+            getAllLensSetting.invoke()
+            createChannel.invoke()
+        }
     }
 
     @Test
     fun `onEvent SettingEvent NotificationTimeHour `() {
         every { getAllLensSetting.invoke() } returns defaultSettingValue
+        every { createChannel.invoke() } returns Unit
         viewModelLens = LensSettingViewModel(useCase)
 
         val expected = defaultSettingValue.copy(notificationTimeHour = 9)
@@ -98,12 +119,16 @@ class LensSettingViewModelTest {
         viewModelLens.onEvent(LensSettingEvent.NotificationTimeHour(9))
         assertThat(viewModelLens.lensSetting.value).isEqualTo(expected)
 
-        verify(exactly = 1) { getAllLensSetting.invoke() }
+        verify(exactly = 1) {
+            getAllLensSetting.invoke()
+            createChannel.invoke()
+        }
     }
 
     @Test
     fun `onEvent SettingEvent NotificationTimeMinute `() {
         every { getAllLensSetting.invoke() } returns defaultSettingValue
+        every { createChannel.invoke() } returns Unit
         viewModelLens = LensSettingViewModel(useCase)
 
         val expected = defaultSettingValue.copy(notificationTimeMinute = 45)
@@ -112,12 +137,16 @@ class LensSettingViewModelTest {
         viewModelLens.onEvent(LensSettingEvent.NotificationTimeMinute(45))
         assertThat(viewModelLens.lensSetting.value).isEqualTo(expected)
 
-        verify(exactly = 1) { getAllLensSetting.invoke() }
+        verify(exactly = 1) {
+            getAllLensSetting.invoke()
+            createChannel.invoke()
+        }
     }
 
     @Test
     fun `onEvent SettingEvent IsShowLensPowerSection `() {
         every { getAllLensSetting.invoke() } returns defaultSettingValue
+        every { createChannel.invoke() } returns Unit
         viewModelLens = LensSettingViewModel(useCase)
 
         val expected = defaultSettingValue.copy(isShowLensPowerSection = true)
@@ -126,12 +155,16 @@ class LensSettingViewModelTest {
         viewModelLens.onEvent(LensSettingEvent.IsShowLensPowerSection(true))
         assertThat(viewModelLens.lensSetting.value).isEqualTo(expected)
 
-        verify(exactly = 1) { getAllLensSetting.invoke() }
+        verify(exactly = 1) {
+            getAllLensSetting.invoke()
+            createChannel.invoke()
+        }
     }
 
     @Test
     fun `onEvent SettingEvent LeftPower `() {
         every { getAllLensSetting.invoke() } returns defaultSettingValue
+        every { createChannel.invoke() } returns Unit
         viewModelLens = LensSettingViewModel(useCase)
 
         val expected = defaultSettingValue.copy(leftLensPower = "-4.75")
@@ -140,12 +173,16 @@ class LensSettingViewModelTest {
         viewModelLens.onEvent(LensSettingEvent.LeftPower("-4.75"))
         assertThat(viewModelLens.lensSetting.value).isEqualTo(expected)
 
-        verify(exactly = 1) { getAllLensSetting.invoke() }
+        verify(exactly = 1) {
+            getAllLensSetting.invoke()
+            createChannel.invoke()
+        }
     }
 
     @Test
     fun `onEvent SettingEvent RightPower `() {
         every { getAllLensSetting.invoke() } returns defaultSettingValue
+        every { createChannel.invoke() } returns Unit
         viewModelLens = LensSettingViewModel(useCase)
 
         val expected = defaultSettingValue.copy(rightLensPower = "5.00")
@@ -154,6 +191,9 @@ class LensSettingViewModelTest {
         viewModelLens.onEvent(LensSettingEvent.RightPower("5.00"))
         assertThat(viewModelLens.lensSetting.value).isEqualTo(expected)
 
-        verify(exactly = 1) { getAllLensSetting.invoke() }
+        verify(exactly = 1) {
+            getAllLensSetting.invoke()
+            createChannel.invoke()
+        }
     }
 }

@@ -11,16 +11,16 @@
     <string name="update_available">UpdateAvailability.UPDATE_AVAILABLE_en</string>
     <string name="update_triggered_in_progress">UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS_en</string>
 
-    <!-- In-App-Review -->
-    <string name="review_request_not_complete">requestReviewFlow().addOnCompleteListener task is NOT isSuccessful_en</string>
-    <string name="review_launch_complete">launchReviewFlow(a, r).addOnCompleteListener_en</string>
-    <string name="review_launch_failure">launchReviewFlow(a, r).addOnFailureListener_en</string>
-
     <!-- SCHEDULE_EXACT_ALARM -->
     <string name="exact_alarm_dialog_title">Request to change settings</string>
     <string name="exact_alarm_dialog_message">To use this application, please allow "Alarms and Reminders" from the Settings screen (please turn the setting ON)</string>
     <string name="exact_alarm_dialog_positive_button_label">Open Settings</string>
     <string name="exact_alarm_dialog_event_label">alarmManager.canScheduleExactAlarms() == %s</string>
+
+    <!-- In-App-Review -->
+    <string name="review_request_not_complete">requestReviewFlow().addOnCompleteListener task is NOT isSuccessful_en</string>
+    <string name="review_launch_complete">launchReviewFlow(a, r).addOnCompleteListener_en</string>
+    <string name="review_launch_failure">launchReviewFlow(a, r).addOnFailureListener_en</string>
 
     <!-- TopScreen -->
     <string name="remain">left</string>

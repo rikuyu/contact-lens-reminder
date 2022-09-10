@@ -1,6 +1,9 @@
 package io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.components
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
@@ -16,7 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import io.github.rikuyu.contactlensreminder.R
@@ -30,8 +33,9 @@ fun LensSettingScreen(
     isDarkTheme: Boolean,
     themeColor: ThemeColor,
     navController: NavController,
-    launcher: ActivityResultLauncher<Intent>,
-    setActivityResultLauncher: (() -> Unit) -> Unit,
+    alertNotificationLauncher: ActivityResultLauncher<Intent>,
+    requestPermissionLauncher: ActivityResultLauncher<String>,
+    setActivityResultLauncher: (() -> Unit, () -> Unit) -> Unit,
     viewModel: LensSettingViewModel = hiltViewModel(),
 ) {
     val context = LocalContext.current
@@ -51,44 +55,21 @@ fun LensSettingScreen(
 
     var dialogState by remember { mutableStateOf(false) }
 
-    val notificationManager = NotificationManagerCompat.from(context)
-
-    LaunchedEffect(Unit) {
-        if (settingValue.isUseNotification && !notificationManager.areNotificationsEnabled()) {
-            dialogState = true
-        }
-        setActivityResultLauncher {
-            if (notificationManager.areNotificationsEnabled()) {
-                viewModel.onEvent(LensSettingEvent.IsUseNotification(true))
-            } else {
-                dialogState = true
-                viewModel.onEvent(LensSettingEvent.IsUseNotification(false))
-            }
-        }
-    }
-
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = stringResource(id = R.string.lens_setting_screen_title),
-                        color = Color.White
+    Scaffold(topBar = {
+        TopAppBar(
+            title = {
+                Text(
+                    text = stringResource(id = R.string.lens_setting_screen_title), color = Color.White
+                )
+            }, navigationIcon = {
+                IconButton(onClick = { navController.popBackStack() }) {
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack, contentDescription = null, tint = Color.White
                     )
-                },
-                navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(
-                            imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = null,
-                            tint = Color.White
-                        )
-                    }
-                },
-                backgroundColor = MaterialTheme.colors.primary
-            )
-        }
-    ) {
+                }
+            }, backgroundColor = MaterialTheme.colors.primary
+        )
+    }) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -104,8 +85,7 @@ fun LensSettingScreen(
                 SimpleSpacer(height = 20.dp, color = MaterialTheme.colors.surface)
                 SimpleDivider()
                 LensTypeSection(
-                    modifier = Modifier.fillMaxWidth(),
-                    lensType = settingValue.lensType
+                    modifier = Modifier.fillMaxWidth(), lensType = settingValue.lensType
                 ) {
                     setLensPeriod(it)
                     viewModel.onEvent(LensSettingEvent.LensType(it))
@@ -130,48 +110,44 @@ fun LensSettingScreen(
                     flag = settingValue.isUseNotification
                 ) {
                     viewModel.onEvent(LensSettingEvent.IsUseNotification(!settingValue.isUseNotification))
-                    if (settingValue.isUseNotification && !notificationManager.areNotificationsEnabled()) {
-                        dialogState = true
-                    }
                 }
                 SimpleDivider()
                 if (dialogState) {
-                    AlertDialog(
-                        onDismissRequest = { },
-                        shape = RoundedCornerShape(10.dp),
-                        title = {
-                            Text(text = stringResource(id = R.string.notification_dialog_title))
-                        },
-                        text = {
+                    AlertDialog(onDismissRequest = { }, shape = RoundedCornerShape(10.dp), title = {
+                        Text(text = stringResource(id = R.string.notification_dialog_title))
+                    }, text = {
                             Text(text = stringResource(id = R.string.notification_dialog_content))
-                        },
-                        confirmButton = {
-                            TextButton(
-                                onClick = {
-                                    dialogState = false
-                                    launcher.launch(makeNotificationSettingIntent(context))
-                                }
-                            ) {
+                        }, confirmButton = {
+                            TextButton(onClick = {
+                                dialogState = false
+                                alertNotificationLauncher.launch(makeNotificationSettingIntent(context))
+                                setActivityResultLauncher(
+                                    {
+                                        viewModel.onEvent(
+                                            LensSettingEvent.IsUseNotification(
+                                                isUseNotification = isEnableNotificationChannel(
+                                                    context,
+                                                    "contact_lens_reminder_channel_id"
+                                                )
+                                            )
+                                        )
+                                    }, {}
+                                )
+                            }) {
                                 Text(
-                                    text = stringResource(id = R.string.btn_ok),
-                                    color = MaterialTheme.colors.primary
+                                    text = stringResource(id = R.string.btn_ok), color = MaterialTheme.colors.primary
                                 )
                             }
-                        },
-                        dismissButton = {
-                            TextButton(
-                                onClick = {
-                                    dialogState = false
-                                    viewModel.onEvent(LensSettingEvent.IsUseNotification(false))
-                                }
-                            ) {
+                        }, dismissButton = {
+                            TextButton(onClick = {
+                                dialogState = false
+                                viewModel.onEvent(LensSettingEvent.IsUseNotification(false))
+                            }) {
                                 Text(
-                                    text = stringResource(id = R.string.btn_cancel),
-                                    color = MaterialTheme.colors.primary
+                                    text = stringResource(id = R.string.btn_cancel), color = MaterialTheme.colors.primary
                                 )
                             }
-                        }
-                    )
+                        })
                 }
                 AnimatedVisibility(visible = settingValue.isUseNotification) {
                     Column {
@@ -223,9 +199,45 @@ fun LensSettingScreen(
                 }
             }
             SaveSettingButton(modifier = Modifier.fillMaxWidth()) {
-                viewModel.onEvent(LensSettingEvent.SaveLensSetting)
-                navController.navigate(Routes.TOP) {
-                    popUpTo(Routes.TOP) { inclusive = true }
+                if (settingValue.isUseNotification) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        if (ContextCompat.checkSelfPermission(
+                                context,
+                                Manifest.permission.POST_NOTIFICATIONS,
+                            ) != PackageManager.PERMISSION_GRANTED
+                        ) {
+                            requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                            setActivityResultLauncher(
+                                {
+                                    viewModel.onEvent(LensSettingEvent.IsUseNotification(true))
+                                    viewModel.onEvent(LensSettingEvent.SaveLensSetting)
+                                    navController.navigate(Routes.TOP) {
+                                        popUpTo(Routes.TOP) { inclusive = true }
+                                    }
+                                },
+                                { viewModel.onEvent(LensSettingEvent.IsUseNotification(false)) }
+                            )
+                        } else {
+                            viewModel.onEvent(LensSettingEvent.SaveLensSetting)
+                            navController.navigate(Routes.TOP) {
+                                popUpTo(Routes.TOP) { inclusive = true }
+                            }
+                        }
+                    } else {
+                        if (isEnableNotificationChannel(context, "contact_lens_reminder_channel_id")) {
+                            viewModel.onEvent(LensSettingEvent.SaveLensSetting)
+                            navController.navigate(Routes.TOP) {
+                                popUpTo(Routes.TOP) { inclusive = true }
+                            }
+                        } else {
+                            dialogState = true
+                        }
+                    }
+                } else {
+                    viewModel.onEvent(LensSettingEvent.SaveLensSetting)
+                    navController.navigate(Routes.TOP) {
+                        popUpTo(Routes.TOP) { inclusive = true }
+                    }
                 }
             }
         }

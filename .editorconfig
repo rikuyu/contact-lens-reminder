@@ -1,4 +1,4 @@
 [*.{kt,kts}]
 disabled_rules = no-wildcard-imports, import-ordering, trailing-comma, package-name, multiline-if-else, no-empty-first-line-in-method-block, argument-list-wrapping, trailing-comma-on-declaration-site, trailing-comma-on-call-site
 insert_final_newline = false
-max_line_length = 120
+max_line_length = 130

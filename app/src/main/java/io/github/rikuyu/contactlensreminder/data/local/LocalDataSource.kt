@@ -1,6 +1,7 @@
 package io.github.rikuyu.contactlensreminder.data.local
 
 import io.github.rikuyu.contactlensreminder.data.local.alarm.notification.NotificationAlarmManager
+import io.github.rikuyu.contactlensreminder.data.local.alarm.notification.NotificationService
 import io.github.rikuyu.contactlensreminder.data.local.alarm.tickdown.TickDownAlarmManager
 import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
 import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEventService
@@ -16,6 +17,7 @@ class LocalDataSource @Inject constructor(
     private val sharedPreferencesManager: SharedPreferencesManager,
     private val notificationAlarmManager: NotificationAlarmManager,
     private val firebaseLogEventService: FirebaseLogEventService,
+    private val notificationService: NotificationService,
 ) : DataSource {
 
     override fun saveReminderSetting(reminderValue: ReminderValue) {
@@ -135,5 +137,9 @@ class LocalDataSource @Inject constructor(
 
     override fun saveThemeColor(color: String) {
         sharedPreferencesManager.saveThemeColor(color)
+    }
+
+    override fun createChannel() {
+        notificationService.createChannel()
     }
 }
