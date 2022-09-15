@@ -77,6 +77,8 @@
     <!-- レンズ交換確認ダイアログ -->
     <string name="reminder_cancel_dialog_title">정말 당신은 콘택트 렌즈를 교체합니까?</string>
     <string name="reminder_cancel_dialog_content">통지이 취소됩니다.</string>
+    <string name="notification_dialog_title">알림 허용</string>
+    <string name="notification_dialog_content">이 앱의 알림 설정이 OFF로 설정되어 있습니다. 알림을 사용하려면 설정을 ON으로 설정하십시오.</string>
     <string name="btn_cancel">Cancel</string>
     <string name="btn_ok">OK</string>
 

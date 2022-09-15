@@ -74,9 +74,11 @@
     <string name="notification_content">コンタクトレンズを正しく使用し、目の健康を守りましょう！</string>
     <string name="notification_setting_label">レンズ交換通知</string>
 
-    <!-- レンズ交換確認ダイアログ -->
+    <!-- ダイアログ -->
     <string name="reminder_cancel_dialog_title">本当にレンズを交換しますか？</string>
     <string name="reminder_cancel_dialog_content">リマインダーはキャンセルされます</string>
+    <string name="notification_dialog_title">通知の許可</string>
+    <string name="notification_dialog_content">本アプリの通知の設定がOFFになっています。通知を使用するには設定をONにしてください。</string>
     <string name="btn_cancel">キャンセル</string>
     <string name="btn_ok">OK</string>
 

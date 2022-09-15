@@ -18,12 +18,12 @@ fun getGoogleFormId(countryCode: String): String {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 33
 
     defaultConfig {
         applicationId = "io.github.rikuyu.contactlensreminder"
         minSdk = 26
-        targetSdk = 32
+        targetSdk = 33
         versionCode = 11
         versionName = "2.3.1"
 
@@ -81,6 +81,7 @@ dependencies {
     implementation("androidx.compose.material:material:1.2.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
     implementation("androidx.activity:activity-compose:1.5.1")
+    implementation("androidx.activity:activity-ktx:1.5.1")
 
     testImplementation("androidx.test.ext:junit-ktx:1.1.3")
     testImplementation("androidx.test:core-ktx:1.4.0")
@@ -103,14 +104,14 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.43.2")
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
-    implementation(platform("com.google.firebase:firebase-bom:30.3.2"))
+    implementation(platform("com.google.firebase:firebase-bom:30.4.1"))
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-crashlytics-ktx")
 
     implementation("com.google.android.play:core:1.10.3")
     implementation("com.google.android.play:core-ktx:1.8.1")
 
-    ktlint("com.pinterest:ktlint:0.47.0") {
+    ktlint("com.pinterest:ktlint:0.47.1") {
         attributes {
             attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling.EXTERNAL))
         }

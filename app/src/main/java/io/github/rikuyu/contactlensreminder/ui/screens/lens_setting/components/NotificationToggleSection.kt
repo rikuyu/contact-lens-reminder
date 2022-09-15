@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.sp
 import io.github.rikuyu.contactlensreminder.R
 
 @Composable
-fun ToggleButtonSection(
+fun NotificationToggleSection(
     modifier: Modifier = Modifier,
     text: String,
     textColor: Color = MaterialTheme.colors.onSurface,
@@ -25,7 +25,7 @@ fun ToggleButtonSection(
     flag: Boolean,
     checkedColor: Color = MaterialTheme.colors.primary,
     unCheckedColor: Color = MaterialTheme.colors.secondary,
-    isUseNotification: Boolean?,
+    isUseNotification: Boolean,
     changeSwitch: () -> Unit,
 ) {
     Row(
@@ -42,22 +42,20 @@ fun ToggleButtonSection(
                 .padding(start = 12.dp),
             color = textColor, fontSize = fontSize
         )
-        if (isUseNotification != null) {
-            Icon(
-                painter = painterResource(
-                    id =
-                    if (isUseNotification)
-                        R.drawable.ic_notify
-                    else
-                        R.drawable.ic_notify_off
-                ),
-                contentDescription = null,
-                tint = MaterialTheme.colors.primaryVariant,
-                modifier = Modifier
-                    .size(50.dp, 50.dp)
-                    .padding(end = 20.dp)
-            )
-        }
+        Icon(
+            painter = painterResource(
+                id =
+                if (isUseNotification)
+                    R.drawable.ic_notify
+                else
+                    R.drawable.ic_notify_off
+            ),
+            contentDescription = null,
+            tint = MaterialTheme.colors.primaryVariant,
+            modifier = Modifier
+                .size(50.dp, 50.dp)
+                .padding(end = 20.dp)
+        )
         Switch(
             checked = flag,
             modifier = Modifier

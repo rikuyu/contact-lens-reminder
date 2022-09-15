@@ -1,9 +1,15 @@
 package io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.components
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -13,15 +19,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import io.github.rikuyu.contactlensreminder.R
 import io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.LensSettingEvent
 import io.github.rikuyu.contactlensreminder.ui.screens.lens_setting.LensSettingViewModel
-import io.github.rikuyu.contactlensreminder.ui.util.Routes
-import io.github.rikuyu.contactlensreminder.ui.util.SimpleDivider
-import io.github.rikuyu.contactlensreminder.ui.util.SimpleSpacer
-import io.github.rikuyu.contactlensreminder.ui.util.showToast
+import io.github.rikuyu.contactlensreminder.ui.util.*
 import io.github.rikuyu.contactlensreminder.ui.util.theme.ThemeColor
 
 @Composable
@@ -29,6 +33,9 @@ fun LensSettingScreen(
     isDarkTheme: Boolean,
     themeColor: ThemeColor,
     navController: NavController,
+    alertNotificationLauncher: ActivityResultLauncher<Intent>,
+    requestPermissionLauncher: ActivityResultLauncher<String>,
+    setActivityResultLauncher: (() -> Unit, () -> Unit) -> Unit,
     viewModel: LensSettingViewModel = hiltViewModel(),
 ) {
     val context = LocalContext.current
@@ -46,124 +53,187 @@ fun LensSettingScreen(
         }
     }
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = stringResource(id = R.string.lens_setting_screen_title),
-                        color = Color.White
+    var dialogState by remember { mutableStateOf(false) }
+
+    Scaffold(topBar = {
+        TopAppBar(
+            title = {
+                Text(
+                    text = stringResource(id = R.string.lens_setting_screen_title), color = Color.White
+                )
+            }, navigationIcon = {
+                IconButton(onClick = { navController.popBackStack() }) {
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack, contentDescription = null, tint = Color.White
                     )
-                },
-                navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(
-                            imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = null,
-                            tint = Color.White
-                        )
-                    }
-                },
-                backgroundColor = MaterialTheme.colors.primary
-            )
-        },
-        content = {
+                }
+            }, backgroundColor = MaterialTheme.colors.primary
+        )
+    }) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colors.surface)
+        ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(MaterialTheme.colors.surface)
+                    .background(MaterialTheme.colors.background)
+                    .weight(1f)
             ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(MaterialTheme.colors.background)
-                        .weight(1f)
+                SimpleDivider()
+                SimpleSpacer(height = 20.dp, color = MaterialTheme.colors.surface)
+                SimpleDivider()
+                LensTypeSection(
+                    modifier = Modifier.fillMaxWidth(), lensType = settingValue.lensType
                 ) {
-                    SimpleDivider()
-                    SimpleSpacer(height = 20.dp, color = MaterialTheme.colors.surface)
-                    SimpleDivider()
-                    LensTypeSection(
+                    setLensPeriod(it)
+                    viewModel.onEvent(LensSettingEvent.LensType(it))
+                    viewModel.onEvent(LensSettingEvent.LensPeriod(lensPeriod))
+                }
+                AnimatedVisibility(visible = settingValue.lensType != 2) { SimpleDivider() }
+                AnimatedVisibility(visible = settingValue.lensType == 2) {
+                    OtherTypeLensPeriodSection(
+                        isDarkTheme = isDarkTheme,
                         modifier = Modifier.fillMaxWidth(),
-                        lensType = settingValue.lensType
-                    ) {
-                        setLensPeriod(it)
-                        viewModel.onEvent(LensSettingEvent.LensType(it))
-                        viewModel.onEvent(LensSettingEvent.LensPeriod(lensPeriod))
-                    }
-                    AnimatedVisibility(visible = settingValue.lensType != 2) { SimpleDivider() }
-                    AnimatedVisibility(visible = settingValue.lensType == 2) {
-                        OtherTypeLensPeriodSection(
-                            isDarkTheme = isDarkTheme,
+                        period = lensPeriod,
+                        setLensPeriod = {
+                            lensPeriod = it
+                            viewModel.onEvent(LensSettingEvent.LensPeriod(it))
+                        }
+                    )
+                }
+                NotificationToggleSection(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = stringResource(id = R.string.notification),
+                    isUseNotification = settingValue.isUseNotification,
+                    flag = settingValue.isUseNotification
+                ) {
+                    viewModel.onEvent(LensSettingEvent.IsUseNotification(!settingValue.isUseNotification))
+                }
+                SimpleDivider()
+                if (dialogState) {
+                    AlertDialog(onDismissRequest = { }, shape = RoundedCornerShape(10.dp), title = {
+                        Text(text = stringResource(id = R.string.notification_dialog_title))
+                    }, text = {
+                            Text(text = stringResource(id = R.string.notification_dialog_content))
+                        }, confirmButton = {
+                            TextButton(onClick = {
+                                dialogState = false
+                                alertNotificationLauncher.launch(makeNotificationSettingIntent(context))
+                                setActivityResultLauncher(
+                                    {
+                                        viewModel.onEvent(
+                                            LensSettingEvent.IsUseNotification(
+                                                isUseNotification = isEnableNotificationChannel(
+                                                    context,
+                                                    "contact_lens_reminder_channel_id"
+                                                )
+                                            )
+                                        )
+                                    }, {}
+                                )
+                            }) {
+                                Text(
+                                    text = stringResource(id = R.string.btn_ok), color = MaterialTheme.colors.primary
+                                )
+                            }
+                        }, dismissButton = {
+                            TextButton(onClick = {
+                                dialogState = false
+                                viewModel.onEvent(LensSettingEvent.IsUseNotification(false))
+                            }) {
+                                Text(
+                                    text = stringResource(id = R.string.btn_cancel), color = MaterialTheme.colors.primary
+                                )
+                            }
+                        })
+                }
+                AnimatedVisibility(visible = settingValue.isUseNotification) {
+                    Column {
+                        NotificationDaySection(
                             modifier = Modifier.fillMaxWidth(),
-                            period = lensPeriod,
-                            setLensPeriod = {
-                                lensPeriod = it
-                                viewModel.onEvent(LensSettingEvent.LensPeriod(it))
+                            lensPeriod = lensPeriod,
+                            showToast = { showToast(context, R.string.alert_lens_setting) },
+                            notificationType = settingValue.notificationDay,
+                            setNotificationType = {
+                                viewModel.onEvent(LensSettingEvent.NotificationDay(it))
                             }
                         )
-                    }
-                    ToggleButtonSection(
-                        modifier = Modifier.fillMaxWidth(),
-                        text = stringResource(id = R.string.notification),
-                        isUseNotification = settingValue.isUseNotification,
-                        flag = settingValue.isUseNotification
-                    ) {
-                        viewModel.onEvent(LensSettingEvent.IsUseNotification(!settingValue.isUseNotification))
-                    }
-                    SimpleDivider()
-                    AnimatedVisibility(visible = settingValue.isUseNotification) {
-                        Column {
-                            NotificationDaySection(
-                                modifier = Modifier.fillMaxWidth(),
-                                lensPeriod = lensPeriod,
-                                showToast = { showToast(context, R.string.alert_lens_setting) },
-                                notificationType = settingValue.notificationDay,
-                                setNotificationType = {
-                                    viewModel.onEvent(LensSettingEvent.NotificationDay(it))
-                                }
-                            )
-                            NotificationTimeSection(
-                                isDarkTheme = isDarkTheme,
-                                themeColor = themeColor,
-                                modifier = Modifier.fillMaxWidth(),
-                                notificationTimeHour = settingValue.notificationTimeHour,
-                                setNotificationTimeHour = {
-                                    viewModel.onEvent(LensSettingEvent.NotificationTimeHour(it))
-                                },
-                                notificationTimeMinute = settingValue.notificationTimeMinute,
-                                setNotificationTimeMinute = {
-                                    viewModel.onEvent(LensSettingEvent.NotificationTimeMinute(it))
-                                }
-                            )
-                        }
-                    }
-                    ToggleButtonSection(
-                        modifier = Modifier.fillMaxWidth(),
-                        text = stringResource(id = R.string.lens_power),
-                        isUseNotification = null,
-                        flag = settingValue.isShowLensPowerSection
-                    ) {
-                        viewModel.onEvent(
-                            LensSettingEvent.IsShowLensPowerSection(!settingValue.isShowLensPowerSection)
-                        )
-                    }
-                    SimpleDivider()
-                    AnimatedVisibility(visible = settingValue.isShowLensPowerSection) {
-                        LensPowerSection(
+                        NotificationTimeSection(
                             isDarkTheme = isDarkTheme,
+                            themeColor = themeColor,
                             modifier = Modifier.fillMaxWidth(),
-                            leftLensPower = settingValue.leftLensPower.toDouble(),
-                            setLeftLensPower = {
-                                viewModel.onEvent(LensSettingEvent.LeftPower(it.toString()))
+                            notificationTimeHour = settingValue.notificationTimeHour,
+                            setNotificationTimeHour = {
+                                viewModel.onEvent(LensSettingEvent.NotificationTimeHour(it))
                             },
-                            rightLensPower = settingValue.rightLensPower.toDouble(),
-                            setRightLensPower = {
-                                viewModel.onEvent(LensSettingEvent.RightPower(it.toString()))
+                            notificationTimeMinute = settingValue.notificationTimeMinute,
+                            setNotificationTimeMinute = {
+                                viewModel.onEvent(LensSettingEvent.NotificationTimeMinute(it))
                             }
                         )
                     }
                 }
-                SaveSettingButton(modifier = Modifier.fillMaxWidth()) {
+                LensPowerToggleSection(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = stringResource(id = R.string.notification),
+                    flag = settingValue.isShowLensPowerSection
+                ) {
+                    viewModel.onEvent(LensSettingEvent.IsShowLensPowerSection(!settingValue.isShowLensPowerSection))
+                }
+                SimpleDivider()
+                AnimatedVisibility(visible = settingValue.isShowLensPowerSection) {
+                    LensPowerSection(
+                        isDarkTheme = isDarkTheme,
+                        modifier = Modifier.fillMaxWidth(),
+                        leftLensPower = settingValue.leftLensPower.toDouble(),
+                        setLeftLensPower = {
+                            viewModel.onEvent(LensSettingEvent.LeftPower(it.toString()))
+                        },
+                        rightLensPower = settingValue.rightLensPower.toDouble(),
+                        setRightLensPower = {
+                            viewModel.onEvent(LensSettingEvent.RightPower(it.toString()))
+                        }
+                    )
+                }
+            }
+            SaveSettingButton(modifier = Modifier.fillMaxWidth()) {
+                if (settingValue.isUseNotification) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        if (ContextCompat.checkSelfPermission(
+                                context,
+                                Manifest.permission.POST_NOTIFICATIONS,
+                            ) != PackageManager.PERMISSION_GRANTED
+                        ) {
+                            requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                            setActivityResultLauncher(
+                                {
+                                    viewModel.onEvent(LensSettingEvent.IsUseNotification(true))
+                                    viewModel.onEvent(LensSettingEvent.SaveLensSetting)
+                                    navController.navigate(Routes.TOP) {
+                                        popUpTo(Routes.TOP) { inclusive = true }
+                                    }
+                                },
+                                { viewModel.onEvent(LensSettingEvent.IsUseNotification(false)) }
+                            )
+                        } else {
+                            viewModel.onEvent(LensSettingEvent.SaveLensSetting)
+                            navController.navigate(Routes.TOP) {
+                                popUpTo(Routes.TOP) { inclusive = true }
+                            }
+                        }
+                    } else {
+                        if (isEnableNotificationChannel(context, "contact_lens_reminder_channel_id")) {
+                            viewModel.onEvent(LensSettingEvent.SaveLensSetting)
+                            navController.navigate(Routes.TOP) {
+                                popUpTo(Routes.TOP) { inclusive = true }
+                            }
+                        } else {
+                            dialogState = true
+                        }
+                    }
+                } else {
                     viewModel.onEvent(LensSettingEvent.SaveLensSetting)
                     navController.navigate(Routes.TOP) {
                         popUpTo(Routes.TOP) { inclusive = true }
@@ -171,5 +241,5 @@ fun LensSettingScreen(
                 }
             }
         }
-    )
+    }
 }

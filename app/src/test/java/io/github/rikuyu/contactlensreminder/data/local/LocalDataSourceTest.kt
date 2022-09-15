@@ -4,9 +4,10 @@ import android.app.AlarmManager
 import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry
 import com.google.common.truth.Truth.assertThat
-import io.github.rikuyu.contactlensreminder.data.local.alarm.notification.NotificationAlarmManager
-import io.github.rikuyu.contactlensreminder.data.local.alarm.tickdown.TickDownAlarmManager
-import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
+import io.github.rikuyu.contactlensreminder.data.local.alarm.notification.NotificationAlarmService
+import io.github.rikuyu.contactlensreminder.data.local.alarm.notification.NotificationService
+import io.github.rikuyu.contactlensreminder.data.local.alarm.tickdown.TickDownAlarmService
+import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesService
 import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEventService
 import io.github.rikuyu.contactlensreminder.domain.local.DataSource
 import io.github.rikuyu.contactlensreminder.domain.model.LensSettingValue
@@ -26,10 +27,11 @@ class LocalDataSourceTest {
     private lateinit var context: Context
     private lateinit var alarmManager: AlarmManager
     private lateinit var shadowAlarmManager: ShadowAlarmManager
-    private lateinit var tickDownAlarmManager: TickDownAlarmManager
-    private lateinit var notificationAlarmManager: NotificationAlarmManager
-    private lateinit var sharedPreferencesManager: SharedPreferencesManager
+    private lateinit var tickDownAlarmService: TickDownAlarmService
+    private lateinit var notificationAlarmService: NotificationAlarmService
+    private lateinit var sharedPreferencesService: SharedPreferencesService
     private lateinit var firebaseLogEventService: FirebaseLogEventService
+    private lateinit var notificationService: NotificationService
 
     private lateinit var localDataSource: DataSource
 
@@ -57,12 +59,13 @@ class LocalDataSourceTest {
     )
 
     private fun initLocalDataSource() {
-        sharedPreferencesManager = mockk()
+        sharedPreferencesService = mockk()
         localDataSource = LocalDataSource(
-            tickDownAlarmManager = tickDownAlarmManager,
-            sharedPreferencesManager = sharedPreferencesManager,
-            notificationAlarmManager = notificationAlarmManager,
-            firebaseLogEventService = firebaseLogEventService
+            tickDownAlarmService = tickDownAlarmService,
+            sharedPreferencesService = sharedPreferencesService,
+            notificationAlarmService = notificationAlarmService,
+            firebaseLogEventService = firebaseLogEventService,
+            notificationService = notificationService,
         )
     }
 
@@ -70,40 +73,41 @@ class LocalDataSourceTest {
     fun setup() {
         context = InstrumentationRegistry.getInstrumentation().context
         alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        sharedPreferencesManager = SharedPreferencesManager(context)
+        sharedPreferencesService = SharedPreferencesService(context)
         shadowAlarmManager = Shadows.shadowOf(alarmManager)
-        firebaseLogEventService = FirebaseLogEventService(sharedPreferencesManager)
-        tickDownAlarmManager = TickDownAlarmManager(context)
-        notificationAlarmManager = NotificationAlarmManager(context, sharedPreferencesManager)
+        firebaseLogEventService = FirebaseLogEventService(sharedPreferencesService)
+        tickDownAlarmService = TickDownAlarmService(context)
+        notificationAlarmService = NotificationAlarmService(context, sharedPreferencesService)
+        notificationService = NotificationService(context)
     }
 
     @Test
     fun `リマインダーの設定を保存できるか`() {
         initLocalDataSource()
 
-        every { sharedPreferencesManager.getContactLensPeriod() } returns 22
-        every { sharedPreferencesManager.getNotificationDay() } returns 0
-        every { sharedPreferencesManager.getNotificationTimeHour() } returns 21
-        every { sharedPreferencesManager.getNotificationTimeMinute() } returns 7
-        every { sharedPreferencesManager.getContactLensRemainingDays() } returns 19
-        every { sharedPreferencesManager.getIsUsingContactLens() } returns false
-        every { sharedPreferencesManager.getIsUseNotification() } returns true
-        every { sharedPreferencesManager.getLensExchangeDate() } returns "2022/02/11"
+        every { sharedPreferencesService.getContactLensPeriod() } returns 22
+        every { sharedPreferencesService.getNotificationDay() } returns 0
+        every { sharedPreferencesService.getNotificationTimeHour() } returns 21
+        every { sharedPreferencesService.getNotificationTimeMinute() } returns 7
+        every { sharedPreferencesService.getContactLensRemainingDays() } returns 19
+        every { sharedPreferencesService.getIsUsingContactLens() } returns false
+        every { sharedPreferencesService.getIsUseNotification() } returns true
+        every { sharedPreferencesService.getLensExchangeDate() } returns "2022/02/11"
 
         val actual = localDataSource.getReminderSetting()
 
         verify(exactly = 1) {
-            sharedPreferencesManager.getContactLensPeriod()
-            sharedPreferencesManager.getNotificationDay()
-            sharedPreferencesManager.getNotificationTimeHour()
-            sharedPreferencesManager.getNotificationTimeMinute()
-            sharedPreferencesManager.getContactLensRemainingDays()
-            sharedPreferencesManager.getIsUsingContactLens()
-            sharedPreferencesManager.getIsUseNotification()
-            sharedPreferencesManager.getLensExchangeDate()
+            sharedPreferencesService.getContactLensPeriod()
+            sharedPreferencesService.getNotificationDay()
+            sharedPreferencesService.getNotificationTimeHour()
+            sharedPreferencesService.getNotificationTimeMinute()
+            sharedPreferencesService.getContactLensRemainingDays()
+            sharedPreferencesService.getIsUsingContactLens()
+            sharedPreferencesService.getIsUseNotification()
+            sharedPreferencesService.getLensExchangeDate()
         }
 
-        confirmVerified(sharedPreferencesManager)
+        confirmVerified(sharedPreferencesService)
 
         assertThat(actual.lensPeriod).isEqualTo(expectedReminderValue.lensPeriod)
         assertThat(actual.notificationDay).isEqualTo(expectedReminderValue.notificationDay)
@@ -119,31 +123,31 @@ class LocalDataSourceTest {
     fun `コンタクトレンズの設定を保存できるか`() {
         initLocalDataSource()
 
-        every { sharedPreferencesManager.getContactLensType() } returns 2
-        every { sharedPreferencesManager.getContactLensPeriod() } returns 31
-        every { sharedPreferencesManager.getIsUseNotification() } returns true
-        every { sharedPreferencesManager.getNotificationDay() } returns 1
-        every { sharedPreferencesManager.getNotificationTimeHour() } returns 12
-        every { sharedPreferencesManager.getNotificationTimeMinute() } returns 48
-        every { sharedPreferencesManager.getIsShowContactLensPowerSection() } returns false
-        every { sharedPreferencesManager.getLeftContactLensPower() } returns "-4.75"
-        every { sharedPreferencesManager.getRightContactLensPower() } returns "-5.00"
+        every { sharedPreferencesService.getContactLensType() } returns 2
+        every { sharedPreferencesService.getContactLensPeriod() } returns 31
+        every { sharedPreferencesService.getIsUseNotification() } returns true
+        every { sharedPreferencesService.getNotificationDay() } returns 1
+        every { sharedPreferencesService.getNotificationTimeHour() } returns 12
+        every { sharedPreferencesService.getNotificationTimeMinute() } returns 48
+        every { sharedPreferencesService.getIsShowContactLensPowerSection() } returns false
+        every { sharedPreferencesService.getLeftContactLensPower() } returns "-4.75"
+        every { sharedPreferencesService.getRightContactLensPower() } returns "-5.00"
 
         val actual = localDataSource.getAllLensSetting()
 
         verify(exactly = 1) {
-            sharedPreferencesManager.getContactLensType()
-            sharedPreferencesManager.getContactLensPeriod()
-            sharedPreferencesManager.getIsUseNotification()
-            sharedPreferencesManager.getNotificationDay()
-            sharedPreferencesManager.getNotificationTimeHour()
-            sharedPreferencesManager.getNotificationTimeMinute()
-            sharedPreferencesManager.getIsShowContactLensPowerSection()
-            sharedPreferencesManager.getRightContactLensPower()
-            sharedPreferencesManager.getLeftContactLensPower()
+            sharedPreferencesService.getContactLensType()
+            sharedPreferencesService.getContactLensPeriod()
+            sharedPreferencesService.getIsUseNotification()
+            sharedPreferencesService.getNotificationDay()
+            sharedPreferencesService.getNotificationTimeHour()
+            sharedPreferencesService.getNotificationTimeMinute()
+            sharedPreferencesService.getIsShowContactLensPowerSection()
+            sharedPreferencesService.getRightContactLensPower()
+            sharedPreferencesService.getLeftContactLensPower()
         }
 
-        confirmVerified(sharedPreferencesManager)
+        confirmVerified(sharedPreferencesService)
 
         assertThat(actual.lensType).isEqualTo(expectedSettingValue.lensType)
         assertThat(actual.lensPeriod).isEqualTo(expectedSettingValue.lensPeriod)
@@ -160,15 +164,15 @@ class LocalDataSourceTest {
     fun `isUseNotification == true のとき通知, AppWidget更新が予約されるかどうか`() {
         initLocalDataSource()
 
-        every { sharedPreferencesManager.getIsUseNotification() } returns true
-        every { sharedPreferencesManager.saveIsExecuteNotification(any()) } returns Unit
+        every { sharedPreferencesService.getIsUseNotification() } returns true
+        every { sharedPreferencesService.saveIsExecuteNotification(any()) } returns Unit
 
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
         localDataSource.startReminder()
         assertThat(shadowAlarmManager.scheduledAlarms.size).isEqualTo(2)
 
         verify(exactly = 1) {
-            sharedPreferencesManager.getIsUseNotification()
+            sharedPreferencesService.getIsUseNotification()
             localDataSource.startReminder()
         }
     }
@@ -177,15 +181,15 @@ class LocalDataSourceTest {
     fun `isUseNotification == false のとき通知, AppWidget更新が予約されるかどうか`() {
         initLocalDataSource()
 
-        every { sharedPreferencesManager.getIsUseNotification() } returns false
-        every { sharedPreferencesManager.saveIsExecuteNotification(any()) } returns Unit
+        every { sharedPreferencesService.getIsUseNotification() } returns false
+        every { sharedPreferencesService.saveIsExecuteNotification(any()) } returns Unit
 
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
         localDataSource.startReminder()
         assertThat(shadowAlarmManager.scheduledAlarms.size).isEqualTo(1)
 
         verify(exactly = 1) {
-            sharedPreferencesManager.getIsUseNotification()
+            sharedPreferencesService.getIsUseNotification()
             localDataSource.startReminder()
         }
     }
@@ -194,8 +198,8 @@ class LocalDataSourceTest {
     fun `isUseNotification == true のとき通知, AppWidget更新がキャンセルされるかどうか`() {
         initLocalDataSource()
 
-        every { sharedPreferencesManager.getIsUseNotification() } returns true
-        every { sharedPreferencesManager.saveIsExecuteNotification(any()) } returns Unit
+        every { sharedPreferencesService.getIsUseNotification() } returns true
+        every { sharedPreferencesService.saveIsExecuteNotification(any()) } returns Unit
 
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
         localDataSource.startReminder()
@@ -204,8 +208,8 @@ class LocalDataSourceTest {
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
 
         verifyAll {
-            sharedPreferencesManager.getIsUseNotification()
-            sharedPreferencesManager.saveIsExecuteNotification(any())
+            sharedPreferencesService.getIsUseNotification()
+            sharedPreferencesService.saveIsExecuteNotification(any())
             localDataSource.startReminder()
             localDataSource.resetReminder()
         }
@@ -215,8 +219,8 @@ class LocalDataSourceTest {
     fun `isUseNotification == false のとき通知, AppWidget更新が変更がキャンセルされるかどうか`() {
         initLocalDataSource()
 
-        every { sharedPreferencesManager.getIsUseNotification() } returns false
-        every { sharedPreferencesManager.saveIsExecuteNotification(any()) } returns Unit
+        every { sharedPreferencesService.getIsUseNotification() } returns false
+        every { sharedPreferencesService.saveIsExecuteNotification(any()) } returns Unit
 
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
         localDataSource.startReminder()
@@ -225,7 +229,7 @@ class LocalDataSourceTest {
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
 
         verifyAll {
-            sharedPreferencesManager.getIsUseNotification()
+            sharedPreferencesService.getIsUseNotification()
             localDataSource.startReminder()
             localDataSource.resetReminder()
         }
@@ -235,11 +239,11 @@ class LocalDataSourceTest {
     fun `テーマカラーを取得できるか`() {
         initLocalDataSource()
 
-        every { sharedPreferencesManager.getThemeColor() } returns ThemeColor.Blue.name.lowercase()
+        every { sharedPreferencesService.getThemeColor() } returns ThemeColor.Blue.name.lowercase()
         assertThat(localDataSource.getThemeColor()).isEqualTo(ThemeColor.Blue.name.lowercase())
 
         verify(exactly = 1) {
-            sharedPreferencesManager.getThemeColor()
+            sharedPreferencesService.getThemeColor()
             localDataSource.getThemeColor()
         }
     }

@@ -14,4 +14,8 @@ class LensSettingRepositoryImpl @Inject constructor(
     }
 
     override fun getAllLensSetting(): LensSettingValue = localDataSource.getAllLensSetting()
+
+    override fun createChannel() {
+        localDataSource.createChannel()
+    }
 }

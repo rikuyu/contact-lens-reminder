@@ -9,7 +9,7 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.RemoteViews
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
+import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesService
 import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEventService
 import io.github.rikuyu.contactlensreminder.data.util.getExpirationDate
 import io.github.rikuyu.contactlensreminder.ui.MainActivity
@@ -29,13 +29,13 @@ class ProgressBarTypeWidget : AppWidgetProvider() {
 
     override fun onEnabled(context: Context) {
         super.onEnabled(context)
-        FirebaseLogEventService(SharedPreferencesManager(context))
+        FirebaseLogEventService(SharedPreferencesService(context))
             .logEvent(context.getString(R.string.log_enable_progressbar_widget))
     }
 
     override fun onDisabled(context: Context) {
         super.onDisabled(context)
-        FirebaseLogEventService(SharedPreferencesManager(context))
+        FirebaseLogEventService(SharedPreferencesService(context))
             .logEvent(context.getString(R.string.log_disable_progressbar_widget))
     }
 
@@ -48,11 +48,11 @@ class ProgressBarTypeWidget : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetId: Int,
     ) {
-        val sharedPreferencesManager = SharedPreferencesManager(context)
-        val remainingDay = sharedPreferencesManager.getContactLensRemainingDays()
-        val lensPeriod = sharedPreferencesManager.getContactLensPeriod()
-        val exchangeDate = sharedPreferencesManager.getLensExchangeDate() ?: getExpirationDate(lensPeriod)
-        val isUsingContactLens = sharedPreferencesManager.getIsUsingContactLens()
+        val sharedPreferencesService = SharedPreferencesService(context)
+        val remainingDay = sharedPreferencesService.getContactLensRemainingDays()
+        val lensPeriod = sharedPreferencesService.getContactLensPeriod()
+        val exchangeDate = sharedPreferencesService.getLensExchangeDate() ?: getExpirationDate(lensPeriod)
+        val isUsingContactLens = sharedPreferencesService.getIsUsingContactLens()
         val pendingIntent: PendingIntent = PendingIntent.getActivity(
             context,
             REQUEST_CODE_ACTIVITY,

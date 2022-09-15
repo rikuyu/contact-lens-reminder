@@ -14,6 +14,7 @@ class LensSettingUseCaseTest {
 
     lateinit var saveAllLensSetting: SaveAllLensSetting
     lateinit var getAllLensSetting: GetAllLensSetting
+    lateinit var createChannel: CreateChannel
     lateinit var lensSettingUseCase: LensSettingUseCase
 
     @MockK
@@ -38,7 +39,8 @@ class LensSettingUseCaseTest {
         MockKAnnotations.init(this)
         saveAllLensSetting = SaveAllLensSetting(repository)
         getAllLensSetting = GetAllLensSetting(repository)
-        lensSettingUseCase = LensSettingUseCase(saveAllLensSetting, getAllLensSetting)
+        createChannel = CreateChannel(repository)
+        lensSettingUseCase = LensSettingUseCase(saveAllLensSetting, getAllLensSetting, createChannel)
     }
 
     @Test

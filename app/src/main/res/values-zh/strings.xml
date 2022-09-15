@@ -77,6 +77,8 @@
     <!-- レンズ交換確認ダイアログ -->
     <string name="reminder_cancel_dialog_title">你真的会交换隐形眼镜吗？</string>
     <string name="reminder_cancel_dialog_content">提醒将被取消</string>
+    <string name="notification_dialog_title">通知权限</string>
+    <string name="notification_dialog_content">此应用程序的通知设置已关闭. 请打开设置以使用通知.</string>
     <string name="btn_cancel">Cancel</string>
     <string name="btn_ok">OK</string>
 
