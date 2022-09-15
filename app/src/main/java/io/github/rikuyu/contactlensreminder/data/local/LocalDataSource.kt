@@ -1,9 +1,9 @@
 package io.github.rikuyu.contactlensreminder.data.local
 
-import io.github.rikuyu.contactlensreminder.data.local.alarm.notification.NotificationAlarmManager
+import io.github.rikuyu.contactlensreminder.data.local.alarm.notification.NotificationAlarmService
 import io.github.rikuyu.contactlensreminder.data.local.alarm.notification.NotificationService
-import io.github.rikuyu.contactlensreminder.data.local.alarm.tickdown.TickDownAlarmManager
-import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
+import io.github.rikuyu.contactlensreminder.data.local.alarm.tickdown.TickDownAlarmService
+import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesService
 import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEventService
 import io.github.rikuyu.contactlensreminder.data.util.getExpirationDate
 import io.github.rikuyu.contactlensreminder.domain.local.DataSource
@@ -13,15 +13,15 @@ import java.util.*
 import javax.inject.Inject
 
 class LocalDataSource @Inject constructor(
-    private val tickDownAlarmManager: TickDownAlarmManager,
-    private val sharedPreferencesManager: SharedPreferencesManager,
-    private val notificationAlarmManager: NotificationAlarmManager,
+    private val tickDownAlarmService: TickDownAlarmService,
+    private val sharedPreferencesService: SharedPreferencesService,
+    private val notificationAlarmService: NotificationAlarmService,
     private val firebaseLogEventService: FirebaseLogEventService,
     private val notificationService: NotificationService,
 ) : DataSource {
 
     override fun saveReminderSetting(reminderValue: ReminderValue) {
-        sharedPreferencesManager.apply {
+        sharedPreferencesService.apply {
             saveContactLensRemainingDays(reminderValue.lensRemainingDays)
             saveContactLensPeriod(reminderValue.lensPeriod)
             saveNotificationTimeHour(reminderValue.notificationTimeHour)
@@ -32,16 +32,16 @@ class LocalDataSource @Inject constructor(
     }
 
     override fun startReminder() {
-        if (sharedPreferencesManager.getIsUseNotification()) {
-            notificationAlarmManager.initAlarm()
-            sharedPreferencesManager.saveIsExecuteNotification(false)
+        if (sharedPreferencesService.getIsUseNotification()) {
+            notificationAlarmService.initAlarm()
+            sharedPreferencesService.saveIsExecuteNotification(false)
         }
-        tickDownAlarmManager.initAlarm()
-        tickDownAlarmManager.updateAppWidget()
+        tickDownAlarmService.initAlarm()
+        tickDownAlarmService.updateAppWidget()
     }
 
     override fun getReminderSetting(): ReminderValue {
-        sharedPreferencesManager.apply {
+        sharedPreferencesService.apply {
             val lensPeriod = getContactLensPeriod()
             val notificationDay = getNotificationDay()
             val notificationTimeHour = getNotificationTimeHour()
@@ -65,17 +65,17 @@ class LocalDataSource @Inject constructor(
     }
 
     override fun resetReminder() {
-        if (sharedPreferencesManager.getIsUseNotification()) {
-            notificationAlarmManager.cancelAlarm()
-            sharedPreferencesManager.saveIsExecuteNotification(true)
+        if (sharedPreferencesService.getIsUseNotification()) {
+            notificationAlarmService.cancelAlarm()
+            sharedPreferencesService.saveIsExecuteNotification(true)
         }
-        tickDownAlarmManager.cancelAlarm()
+        tickDownAlarmService.cancelAlarm()
     }
 
     override fun saveAllLensSetting(lensSettingValue: LensSettingValue) {
         val remainingRay = lensSettingValue.lensPeriod
 
-        sharedPreferencesManager.apply {
+        sharedPreferencesService.apply {
             saveContactLensType(lensSettingValue.lensType)
             saveContactLensPeriod(lensSettingValue.lensPeriod)
             saveIsUseNotification(lensSettingValue.isUseNotification)
@@ -96,7 +96,7 @@ class LocalDataSource @Inject constructor(
     }
 
     override fun getAllLensSetting(): LensSettingValue {
-        sharedPreferencesManager.apply {
+        sharedPreferencesService.apply {
             val lensType = getContactLensType()
             val lensPeriod = getContactLensPeriod()
             val isUseNotification = getIsUseNotification()
@@ -127,16 +127,16 @@ class LocalDataSource @Inject constructor(
 
     override fun getIsShowOnBoarding(): Boolean = false
 
-    override fun getIsDarkTheme(): Boolean = sharedPreferencesManager.getIsDarkTheme()
+    override fun getIsDarkTheme(): Boolean = sharedPreferencesService.getIsDarkTheme()
 
     override fun saveIsDarkTheme() {
-        sharedPreferencesManager.saveIsDarkTheme(!getIsDarkTheme())
+        sharedPreferencesService.saveIsDarkTheme(!getIsDarkTheme())
     }
 
-    override fun getThemeColor(): String = sharedPreferencesManager.getThemeColor()
+    override fun getThemeColor(): String = sharedPreferencesService.getThemeColor()
 
     override fun saveThemeColor(color: String) {
-        sharedPreferencesManager.saveThemeColor(color)
+        sharedPreferencesService.saveThemeColor(color)
     }
 
     override fun createChannel() {

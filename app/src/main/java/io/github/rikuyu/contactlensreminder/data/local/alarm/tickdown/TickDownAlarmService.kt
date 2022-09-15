@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
-class TickDownAlarmManager @Inject constructor(private val context: Context) {
+class TickDownAlarmService @Inject constructor(private val context: Context) {
 
     private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 

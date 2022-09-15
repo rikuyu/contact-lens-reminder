@@ -8,10 +8,10 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import io.github.rikuyu.contactlensreminder.data.local.LocalDataSource
-import io.github.rikuyu.contactlensreminder.data.local.alarm.notification.NotificationAlarmManager
+import io.github.rikuyu.contactlensreminder.data.local.alarm.notification.NotificationAlarmService
 import io.github.rikuyu.contactlensreminder.data.local.alarm.notification.NotificationService
-import io.github.rikuyu.contactlensreminder.data.local.alarm.tickdown.TickDownAlarmManager
-import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
+import io.github.rikuyu.contactlensreminder.data.local.alarm.tickdown.TickDownAlarmService
+import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesService
 import io.github.rikuyu.contactlensreminder.data.repository.AppSettingRepositoryImpl
 import io.github.rikuyu.contactlensreminder.data.repository.LensSettingRepositoryImpl
 import io.github.rikuyu.contactlensreminder.data.repository.ReminderRepositoryImpl
@@ -52,26 +52,26 @@ abstract class AppModule {
         @Singleton
         fun provideNotificationAlarmManager(
             @ApplicationContext context: Context,
-            sharedPreferencesManager: SharedPreferencesManager,
-        ): NotificationAlarmManager = NotificationAlarmManager(context, sharedPreferencesManager)
+            sharedPreferencesService: SharedPreferencesService,
+        ): NotificationAlarmService = NotificationAlarmService(context, sharedPreferencesService)
 
         @Provides
         @Singleton
         fun provideTickDownAlarmManager(
             @ApplicationContext context: Context,
-        ): TickDownAlarmManager = TickDownAlarmManager(context)
+        ): TickDownAlarmService = TickDownAlarmService(context)
 
         @Provides
         @Singleton
         fun provideSharedPreferencesManager(
             @ApplicationContext context: Context,
-        ): SharedPreferencesManager = SharedPreferencesManager(context)
+        ): SharedPreferencesService = SharedPreferencesService(context)
 
         @Provides
         @Singleton
         fun provideFirebaseLogEvent(
-            sharedPreferencesManager: SharedPreferencesManager,
-        ): FirebaseLogEventService = FirebaseLogEventService(sharedPreferencesManager)
+            sharedPreferencesService: SharedPreferencesService,
+        ): FirebaseLogEventService = FirebaseLogEventService(sharedPreferencesService)
 
         @Provides
         @Singleton

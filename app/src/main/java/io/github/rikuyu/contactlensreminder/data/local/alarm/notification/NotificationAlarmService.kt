@@ -2,15 +2,15 @@ package io.github.rikuyu.contactlensreminder.data.local.alarm.notification
 
 import android.app.AlarmManager
 import android.content.Context
-import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
+import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesService
 import io.github.rikuyu.contactlensreminder.data.util.createBroadcastPendingIntent
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
-class NotificationAlarmManager @Inject constructor(
+class NotificationAlarmService @Inject constructor(
     private val context: Context,
-    private val sharedPreferencesManager: SharedPreferencesManager,
+    private val sharedPreferencesService: SharedPreferencesService,
 ) {
     private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
@@ -22,10 +22,10 @@ class NotificationAlarmManager @Inject constructor(
             timeInMillis = System.currentTimeMillis()
             add(
                 Calendar.DAY_OF_MONTH,
-                sharedPreferencesManager.getContactLensRemainingDays() - sharedPreferencesManager.getNotificationDay()
+                sharedPreferencesService.getContactLensRemainingDays() - sharedPreferencesService.getNotificationDay()
             )
-            add(Calendar.HOUR, sharedPreferencesManager.getNotificationTimeHour() - hour)
-            add(Calendar.MINUTE, sharedPreferencesManager.getNotificationTimeMinute() - min)
+            add(Calendar.HOUR, sharedPreferencesService.getNotificationTimeHour() - hour)
+            add(Calendar.MINUTE, sharedPreferencesService.getNotificationTimeMinute() - min)
             add(Calendar.SECOND, -sec)
         }
         alarmManager.setAlarmClock(

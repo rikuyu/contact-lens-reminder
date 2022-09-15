@@ -1,10 +1,10 @@
-package io.github.rikuyu.contactlensreminder.data.local.alarm.tickdown
+package io.github.rikuyu.contactlensreminder.data.local.alarm.notification
 
 import android.app.AlarmManager
 import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry
 import com.google.common.truth.Truth.assertThat
-import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
+import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesService
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -15,62 +15,62 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @RunWith(RobolectricTestRunner::class)
-class TickDownAlarmManagerTest {
+class NotificationAlarmServiceTest {
 
     private lateinit var context: Context
     private lateinit var alarmManager: AlarmManager
     private lateinit var shadowAlarmManager: ShadowAlarmManager
-    private lateinit var tickDownAlarmManager: TickDownAlarmManager
-    private lateinit var sharedPreferencesManager: SharedPreferencesManager
+    private lateinit var sharedPreferencesService: SharedPreferencesService
+    private lateinit var notificationAlarmService: NotificationAlarmService
 
     @Before
     fun setup() {
         context = InstrumentationRegistry.getInstrumentation().context
         alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         shadowAlarmManager = shadowOf(alarmManager)
-        sharedPreferencesManager = SharedPreferencesManager(context)
-        tickDownAlarmManager = TickDownAlarmManager(context)
+        sharedPreferencesService = SharedPreferencesService(context)
+        notificationAlarmService = NotificationAlarmService(context, sharedPreferencesService)
     }
 
     @Test
-    fun `AppWidget更新タスクを予約できるかどうか`() {
+    fun `通知を予約できるかどうか`() {
         assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
 
-        tickDownAlarmManager.initAlarm()
-        val dateChangeTime = getDateChangeTime()
+        notificationAlarmService.initAlarm()
+        val expectedNotificationTime = getNotificationTime()
 
         val scheduledAlarm = shadowAlarmManager.nextScheduledAlarm
         assertThat(scheduledAlarm).isNotNull()
 
         val actualScheduledTime = scheduledAlarm.triggerAtTime
 
-        // initAlarm() 内で取得した Calendar#getTtimeInMillis()
-        // と等しい 秒数を取得するのは無理なので
-        // before < actualScheduledTime < after と
-        // になっていれば指定時刻に通知がスケジュールされたとする。
-        val before = dateChangeTime - 5000L
-        val after = dateChangeTime + 5000L
+        val before = expectedNotificationTime - 5000L
+        val after = expectedNotificationTime + 5000L
 
         assertThat(actualScheduledTime).isGreaterThan(before)
         assertThat(actualScheduledTime).isLessThan(after)
     }
 
     @Test
-    fun `AppWidget更新タスクをキャンセルできるかどうか`() {
-        tickDownAlarmManager.initAlarm()
-        assertThat(shadowAlarmManager.nextScheduledAlarm).isNotNull()
-        tickDownAlarmManager.cancelAlarm()
-        assertThat(shadowAlarmManager.nextScheduledAlarm).isNull()
+    fun `通知をキャンセルできるかどうか`() {
+        notificationAlarmService.initAlarm()
+        assertThat(shadowAlarmManager.scheduledAlarms.size).isEqualTo(1)
+        notificationAlarmService.cancelAlarm()
+        assertThat(shadowAlarmManager.scheduledAlarms.size).isEqualTo(0)
     }
 
-    private fun getDateChangeTime(): Long {
+    private fun getNotificationTime(): Long {
         val calendar = Calendar.getInstance()
         val simpleDateFormat = SimpleDateFormat("HH/mm/ss", Locale.getDefault())
         val (hour, min, sec) = simpleDateFormat.format(calendar.time).split("/").map(String::toInt)
         calendar.apply {
             timeInMillis = System.currentTimeMillis()
-            add(Calendar.HOUR, 24 - hour)
-            add(Calendar.MINUTE, -min)
+            add(
+                Calendar.DAY_OF_MONTH,
+                sharedPreferencesService.getContactLensPeriod() - sharedPreferencesService.getNotificationDay()
+            )
+            add(Calendar.HOUR, sharedPreferencesService.getNotificationTimeHour() - hour)
+            add(Calendar.MINUTE, sharedPreferencesService.getNotificationTimeMinute() - min)
             add(Calendar.SECOND, -sec)
         }
         return calendar.timeInMillis

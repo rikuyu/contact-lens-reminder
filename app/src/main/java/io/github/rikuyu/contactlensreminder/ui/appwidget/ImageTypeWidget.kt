@@ -8,7 +8,7 @@ import android.content.Intent
 import android.widget.RemoteViews
 import androidx.annotation.DrawableRes
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
+import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesService
 import io.github.rikuyu.contactlensreminder.data.util.FirebaseLogEventService
 import io.github.rikuyu.contactlensreminder.ui.MainActivity
 
@@ -26,13 +26,13 @@ class ImageTypeWidget : AppWidgetProvider() {
 
     override fun onEnabled(context: Context) {
         super.onEnabled(context)
-        FirebaseLogEventService(SharedPreferencesManager(context))
+        FirebaseLogEventService(SharedPreferencesService(context))
             .logEvent(context.getString(R.string.log_enable_image_widget))
     }
 
     override fun onDisabled(context: Context) {
         super.onDisabled(context)
-        FirebaseLogEventService(SharedPreferencesManager(context))
+        FirebaseLogEventService(SharedPreferencesService(context))
             .logEvent(context.getString(R.string.log_disable_image_widget))
     }
 
@@ -45,8 +45,8 @@ class ImageTypeWidget : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetId: Int,
     ) {
-        val sharedPreferencesManager = SharedPreferencesManager(context)
-        val remainingDay = sharedPreferencesManager.getContactLensRemainingDays()
+        val sharedPreferencesService = SharedPreferencesService(context)
+        val remainingDay = sharedPreferencesService.getContactLensRemainingDays()
         val pendingIntent: PendingIntent = PendingIntent.getActivity(
             context,
             REQUEST_CODE_ACTIVITY,

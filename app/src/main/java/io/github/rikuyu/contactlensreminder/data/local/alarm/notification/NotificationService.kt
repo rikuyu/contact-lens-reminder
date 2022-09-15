@@ -11,7 +11,7 @@ import androidx.core.app.NotificationCompat.VISIBILITY_PUBLIC
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import io.github.rikuyu.contactlensreminder.R
-import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesManager
+import io.github.rikuyu.contactlensreminder.data.local.sharedpreferences.SharedPreferencesService
 import io.github.rikuyu.contactlensreminder.ui.MainActivity
 import javax.inject.Inject
 
@@ -23,7 +23,7 @@ class NotificationService @Inject constructor(val context: Context) {
         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
     }
 
-    private val notificationDay = SharedPreferencesManager(context).getNotificationDay()
+    private val notificationDay = SharedPreferencesService(context).getNotificationDay()
 
     private val pendingIntent: PendingIntent =
         PendingIntent.getActivity(
