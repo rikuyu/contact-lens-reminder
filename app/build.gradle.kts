@@ -88,8 +88,8 @@ dependencies {
     testImplementation("androidx.arch.core:core-testing:2.1.0")
     testImplementation("com.google.truth:truth:1.1.3")
     testImplementation("org.robolectric:robolectric:4.8.2")
-    testImplementation("io.mockk:mockk:1.13.1")
-    testImplementation("io.mockk:mockk-agent-jvm:1.13.1")
+    testImplementation("io.mockk:mockk:1.13.2")
+    testImplementation("io.mockk:mockk-agent-jvm:1.13.2")
 
     implementation("androidx.navigation:navigation-compose:2.5.2")
 
