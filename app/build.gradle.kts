@@ -104,7 +104,7 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.44")
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
-    implementation(platform("com.google.firebase:firebase-bom:30.5.0"))
+    implementation(platform("com.google.firebase:firebase-bom:31.0.0"))
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-crashlytics-ktx")
 
