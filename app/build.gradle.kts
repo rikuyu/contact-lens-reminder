@@ -83,8 +83,8 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.6.1")
     implementation("androidx.activity:activity-ktx:1.6.1")
 
-    testImplementation("androidx.test.ext:junit-ktx:1.1.3")
-    testImplementation("androidx.test:core-ktx:1.4.0")
+    testImplementation("androidx.test.ext:junit-ktx:1.1.4")
+    testImplementation("androidx.test:core-ktx:1.5.0")
     testImplementation("androidx.arch.core:core-testing:2.1.0")
     testImplementation("com.google.truth:truth:1.1.3")
     testImplementation("org.robolectric:robolectric:4.9")
