@@ -1,8 +1,8 @@
 ## コンタクトレンズ交換リマインダー
 
-:gift: [Play Store](https://play.google.com/store/apps/details?id=io.github.rikuyu.contactlensreminder)
+:gift: ~~Play Store~~
 
-<img src="https://user-images.githubusercontent.com/51118613/156141489-3ee61042-3608-449b-ba34-076bd071f040.png">
+<img src="https://user-images.githubusercontent.com/51118613/223745032-54f0b64a-7134-4809-b1de-b8966879dd1f.png" width="800">
 
 ### :wrench: 使用技術・ツール等
 * Main
