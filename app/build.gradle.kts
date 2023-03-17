@@ -85,7 +85,7 @@ dependencies {
 
     testImplementation("androidx.test.ext:junit-ktx:1.1.5")
     testImplementation("androidx.test:core-ktx:1.5.0")
-    testImplementation("androidx.arch.core:core-testing:2.1.0")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
     testImplementation("com.google.truth:truth:1.1.3")
     testImplementation("org.robolectric:robolectric:4.9.2")
     testImplementation("io.mockk:mockk:1.13.4")
